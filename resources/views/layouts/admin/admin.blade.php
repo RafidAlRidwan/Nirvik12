@@ -27,6 +27,9 @@
   <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/plugins/summernote/summernote-bs4.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/admin/plugins/toastr/toastr.min.css')}}">
   <!-- DATA TABLE -->
+  <link rel="stylesheet" href="{{asset('assets/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+
   <style type="text/css">
             
         .right ul{
@@ -299,6 +302,10 @@
 <script src="{{asset('assets/admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <script src="{{asset('assets/admin/plugins/toastr/toastr.min.js')}}"></script>
 <!-- DATA TABLES -->
+<script src="{{asset('assets/admin/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
 <script type="text/javascript">
     // $(document).on('click' , 'ul li', function(){
     //     alert('Hi');
