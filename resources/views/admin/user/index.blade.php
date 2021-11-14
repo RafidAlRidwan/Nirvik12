@@ -17,9 +17,9 @@
       </div>
     </div>
 
-    <section class="content p-2">
+    <section class="content p-2 ">
       <div class="container-fluid">
-        <div class="row m-t-25">
+        <div class="row m-t-25 card p-3">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         
                 
@@ -28,10 +28,12 @@
                         <tr>
                             <th>Serial</th>
                             <th>Profile Picture</th>
+                            <th>User Name</th>
                             <th>Name</th>
                             <th>Current City</th>
                             <th>Section</th>
                             <th>Shift</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,10 +45,12 @@
                         <tr>
                             <th>Serial</th>
                             <th>Profile Picture</th>
+                            <th>User Name</th>
                             <th>Name</th>
                             <th>Current City</th>
                             <th>Section</th>
                             <th>Shift</th>
+                            <th>Action</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -96,6 +100,38 @@
 	  </div>
 	</div>
 <!-- END MODAL ADD -->
+<!-- Modal Delete-->
+  <div class="modal fade" id="user-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title font_s" id="exampleModalLongTitle">Delete</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        
+        {{ Form::open(array('url' => 'admin/user/delete', 'id'=>'delete_form', 'method' => 'POST')) }}
+      <div class="modal-body">
+      
+        <p>Are you sure?</p>
+        <div class="modal-footer">
+          <input type="hidden" name="user_id"  id="delete">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button type="submit" class="btn btn-primary border-0 btn_submit">Yes</button>
+        </div>
+
+      </div>
+      {{ Form::close() }}
+
+          
+      </div>
+    </div>
+  </div>
+  </div>
+<!-- Modal Delete-->
+</section>
 @endsection
 
 @section('script')
@@ -114,7 +150,7 @@
                                 [ '10 rows', '25 rows', '50 rows', '100 rows', '200 rows', '250 rows' ]],
                     "buttons": ['pageLength' , 'copy', 'csv', 'excel', 'pdf', 'print'],
                     "ajax": {
-                        "url": "{{URL::to('/admin/getdt')}}",
+                        "url": "{{URL::to('/admin/getdata')}}",
                         "type": "POST",
                         "data": function (d) {
                             $.extend(d, postData);
@@ -128,19 +164,26 @@
                     "columns": [
                         {"data": "serial"},
                         {"data": "pp"},
+                        {"data": "username"},
                         {"data": "name"},
                         {"data": "city"},
                         {"data": "section"},
                         {"data": "shift"},
+                        {"data": "action"},
                         
 
                     ]
                 });
 
                 new $.fn.dataTable.FixedHeader( table );
-             } );
+              } );
 
-
+  // Delete Form
+  $('#index_datatable').on('click', '.user_delete', function() {
+        
+        var id = $(this).attr('href');
+        $('#delete').val(id);
+    });
           
 </script>
 @endsection
