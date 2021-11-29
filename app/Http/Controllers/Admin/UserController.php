@@ -127,6 +127,13 @@ class UserController extends Controller
         }
     }
     public function edit($id){
-        return view('admin/user.edit'); 
+        $user = User::findOrFail($id);
+        $data = User::getMasterData($user);
+        $data['user'] = $user;
+        
+        $data['user_details'] = $user->userDetails()->get();
+        $data['mobile_details'] = $user->mobileNumberDetails()->get();
+        // dd($data['user_details']);
+        return view('admin/user.edit' , $data); 
     }
 }

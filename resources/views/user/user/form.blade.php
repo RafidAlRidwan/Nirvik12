@@ -14,7 +14,7 @@
 
         </div>
 
-        <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+        <!-- <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <label>Password<strong style="color: red"> *</strong></label>
             <div class="inputBox">
                 <input type="password" name="password" value="" autocomplete="off" required="">
@@ -23,7 +23,7 @@
             <div class="invalid-feedback">{{ $errors->first('password') }}</div>
             @endif
 
-        </div>
+        </div> -->
 
         <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <label>Full Name</label>

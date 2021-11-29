@@ -192,7 +192,6 @@ class UserController extends Controller
 
             $this->validate($request, [
             'name' => 'required',
-            'password' => 'required'
                 
         ]);
             DB::beginTransaction();

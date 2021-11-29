@@ -214,15 +214,15 @@
         </div>
         @endif
         
-        @if($value -> no_of_children != '')
+        @if($value -> number_of_child != '')
         <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                     <label>No of Children</label>
                     <div class="inputBox">
-                        {!! Form::number('no_of_children', $value->no_of_children, [($errors->has('no_of_children') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
+                        {!! Form::number('number_of_child', $value->number_of_child, [($errors->has('number_of_child') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
 
                     </div>
-                    @if ($errors->has('no_of_children'))
-                    <div class="invalid-feedback">{{ $errors->first('no_of_children') }}</div>
+                    @if ($errors->has('number_of_child'))
+                    <div class="invalid-feedback">{{ $errors->first('number_of_child') }}</div>
                     @endif
         </div>
         @endif
