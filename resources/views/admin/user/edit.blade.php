@@ -69,25 +69,13 @@
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">          
                     <div class="form-group">
                         <label for="section">Section</label>
-                        <select class="form-control" id="section">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        </select>
+                        {!! Form::select('section', $section, ($user_details[0]['section']) ,['placeholder'=>__('Select a Section') , 'class'=>'form-control', ($errors->has('section') ? 'is-invalid' : ''), 'required']) !!}
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">          
                     <div class="form-group">
                             <label for="shift">Shift</label>
-                            <select class="form-control" id="shift">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            </select>
+                            {!! Form::select('shift', $shift, ($user_details[0]['shift']) ,['placeholder'=>__('Select a Shift') , 'class'=>'form-control', ($errors->has('shift') ? 'is-invalid' : ''), 'required']) !!}
                     </div>
                 </div>
             </div>
@@ -95,13 +83,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">          
                     <div class="form-group">
                         <label for="religion">Religion</label>
-                        <select class="form-control" id="religion">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        </select>
+                        {!! Form::select('religion', $religion, ($user_details[0]['religion']) ,['placeholder'=>__('Select a Religion') , 'class'=>'form-control', ($errors->has('religion') ? 'is-invalid' : ''), 'required']) !!}
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">          
@@ -127,13 +109,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">          
                     <div class="form-group">
                             <label for="marital_status">Marital Status</label>
-                            <select class="form-control" id="marital_status">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            </select>
+                            {!! Form::select('marital_status', $marital_status,($user_details[0]['marital_status']) , ['placeholder'=>__('Select a Status') , 'class'=>'form-control', ($errors->has('marital_status') ? 'is-invalid' : ''), 'required']) !!}
                     </div>
                 </div>
                 @if(!empty($user_details[0]['spouse_name']))

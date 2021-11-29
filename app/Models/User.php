@@ -63,6 +63,8 @@ class User extends Authenticatable
     {
 
         $data['shift_all'] = Shift::all();
+        $data['religion'] = [1 => 'Islam' , 2 => 'Hinduism' , 3 =>'Buddhism' , 4 => 'Christianity' ];    
+        $data['marital_status'] = [1 => 'Bachelor' , 2 => 'Married']; 
         $data['shift'] = Shift::pluck('name','id');
         $data['section_all'] = Section::all();
         $data['section'] = Section::pluck('name','id');

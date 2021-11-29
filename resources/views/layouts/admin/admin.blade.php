@@ -213,8 +213,9 @@
               </li>
             </ul> -->
           </li>
+          @php $id = Auth::user()->id; @endphp
           <li class="nav-item">
-            <a href="{{URL::to('/admin/user_management')}}" class="nav-link <?php if($path == 'admin/user_management'){ echo "active"; }else{ echo ""; } ?>">
+            <a href="{{URL::to('/admin/user_management')}}" class="nav-link <?php if($path == 'admin/user_management' || $path == 'admin/user/edit/'.$id){ echo "active"; }else{ echo ""; } ?>">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User Management

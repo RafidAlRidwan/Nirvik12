@@ -187,7 +187,7 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        // return $request->all();
+        return $request->all();
         try {
 
             $this->validate($request, [

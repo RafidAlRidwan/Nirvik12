@@ -125,9 +125,6 @@
         </div>
 
         <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            @php
-                $religion = [1 => 'Islam' , 2 => 'Hinduism' , 3 =>'Buddhism' , 4 => 'Christianity' ];    
-            @endphp
           <label>Religion</label>
           {!! Form::select('religion', $religion, null, ['placeholder'=>__('Select a Religion') , 'class'=>'wide', ($errors->has('religion') ? 'is-invalid' : ''), 'required']) !!}
           @if ($errors->has('religion'))
@@ -172,9 +169,6 @@
         
 
         <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            @php
-                $marital_status = [1 => 'Bachelor' , 2 => 'Married'];    
-            @endphp
           <label>Marital Status</label>
           {!! Form::select('marital_status', $marital_status, null, ['placeholder'=>__('Select a Status') , 'class'=>'wide changeStatus', ($errors->has('marital_status') ? 'is-invalid' : ''), 'required']) !!}
           @if ($errors->has('marital_status'))
