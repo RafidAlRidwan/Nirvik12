@@ -31,6 +31,7 @@ class UserController extends Controller
                             "users.id as uid",
                             "users.type",
                             "users.name",
+                            "users.type as userType",
                             "sections.name AS section_name",
                             "shifts.name AS shift_name",
                         );
@@ -96,9 +97,15 @@ class UserController extends Controller
             $data['data'][$sl]['city'] = $item->current_city ?? "" ;
             $data['data'][$sl]['section'] =$item->section_name ;
             $data['data'][$sl]['shift'] ="<span class='$class'>$shift</span>";
-            $data['data'][$sl]['action'] = "<a href='$editURL'><i class='fa fa-edit' style='font-size:14px; ''></i></a> 
-                                            | 
-                                            <a class='user_delete' href='$item->uid' data-toggle='modal' data-target='#user-delete' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>" ;
+            if($item->userType == 2){
+                $data['data'][$sl]['action'] = " 
+                <a class='user_delete' href='$item->uid' data-toggle='modal' data-target='#user-delete' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>" ;
+            } else{
+                $data['data'][$sl]['action'] = "<a href='$editURL'><i class='fa fa-edit' style='font-size:14px; ''></i></a> 
+                | 
+                <a class='user_delete' href='$item->uid' data-toggle='modal' data-target='#user-delete' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>" ;
+            }
+            
                 $sl++;
                 $serial++;
             }
@@ -131,9 +138,12 @@ class UserController extends Controller
         $data = User::getMasterData($user);
         $data['user'] = $user;
         
-        $data['user_details'] = $user->userDetails()->get();
+        $user_details = $user->userDetails()->get();
+        $data['user_details'] = $user_details;
         $data['mobile_details'] = $user->mobileNumberDetails()->get();
-        // dd($data['user_details']);
+        if(!$data['user_details']->isEmpty()){
+            $data['user_details'] = $user_details[0];
+        }
         return view('admin/user.edit' , $data); 
     }
 }

@@ -187,7 +187,6 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        return $request->all();
         try {
 
             $this->validate($request, [
@@ -213,7 +212,8 @@ class UserController extends Controller
         // return $request->all();
             $this->validate($request, [
             'old_password' => 'required',
-            'password' => 'required | max:8'
+            'password' => 'required | max:8',
+            'new_password' => 'required | max:8'
                 
         ]);
             $requestData = $request->all();

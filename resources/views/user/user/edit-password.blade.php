@@ -22,10 +22,10 @@
             <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <label>Old Password<strong style="color: red"> *</strong></label>
                 <div class="inputBox">
-                    <input type="password" id="old-password" name="old_password" value="" autocomplete="off" required="">
+                    <input type="password" id="old-password" name="old_password" value="" autocomplete="off" required>
                 </div>
                 @if ($errors->has('old_password'))
-                <div class="invalid-feedback">{{ $errors->first('old_password') }}</div>
+                <div style="margin-top: 20px;" class="invalid-feedback">{{ $errors->first('old_password') }}</div>
                 @endif
 
             </div>
@@ -33,10 +33,10 @@
             <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <label>New Password<strong style="color: red"> *</strong></label>
                 <div class="inputBox">
-                    <input type="password" id="new-password" name="new_password" value="" autocomplete="off" required="">
+                    <input type="password" id="new-password" name="new_password" value="" autocomplete="off" required>
                 </div>
                 @if ($errors->has('new_password'))
-                <div class="invalid-feedback">{{ $errors->first('new_password') }}</div>
+                <div style="margin-top: 20px;" class="invalid-feedback">{{ $errors->first('new_password') }}</div>
                 @endif
 
             </div>
@@ -44,13 +44,13 @@
             <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <label>Confirmed Password<strong style="color: red"> *</strong></label>
                 <div class="inputBox">
-                    <input type="password" id="confirmed-password" name="password" value="" autocomplete="off" required="">
+                    <input type="password" id="confirmed-password" name="password" value="" autocomplete="off" required>
                 </div>
                 @if ($errors->has('password'))
-                <div class="invalid-feedback">{{ $errors->first('password') }}</div>
+                <div style="margin-top: 20px;" class="invalid-feedback">{{ $errors->first('password') }}</div>
                 @endif
                 <div style="margin-top: 20px;">
-                <span  id = "message" style="color:red"> </span>
+                <span style="font-weight: bold;" id="message"> </span>
                 </div>
 
             </div>
@@ -78,8 +78,12 @@
             var cPassword = $(this).val();
             var nPassword = $("#new-password").val();
             if(cPassword === nPassword){
+                $("#message").removeClass('text-danger');
+                $("#message").addClass('text-success');
                 $("#message").text("**Password Matched");  
             }else{
+                $("#message").removeClass('text-success');
+                $("#message").addClass('text-danger');
                 $("#message").text("**Password Not Match");   
             }
         });
