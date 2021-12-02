@@ -14,8 +14,9 @@ use DB;
 
 class AboutController extends Controller
 {
-	public function home(){
-    	return view('admin/dashboard.index');
+    public function home()
+    {
+        return view('admin/dashboard.index');
     }
 
     public function edit($id)
@@ -26,18 +27,17 @@ class AboutController extends Controller
 
     public function update(Request $request, $id)
     {
-    	try {
+        try {
 
             $this->validate($request, [
-            'description' => 'required'
-                
-        ]);
+                'description' => 'required'
+
+            ]);
             DB::beginTransaction();
             About::saveOrUpdate($request, $id);
             DB::commit();
             Session::flash('flashy__success', __('Updated Successfully!'));
             return back();
-
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()

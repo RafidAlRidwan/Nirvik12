@@ -21,13 +21,13 @@ class UserDetail extends Model
         'updated_at'
     ];
 
-    public static function saveUserInfo($inputData, $userId) 
+    public static function saveUserInfo($inputData, $userId)
     {
         if (!isset($inputData['name']) || empty($inputData['name'])) {
             return;
         }
 
-        if(!empty($inputData['user_details_id'])){
+        if (!empty($inputData['user_details_id'])) {
             $user_details_id = $inputData['user_details_id'];
             $input = UserDetail::findOrFail($user_details_id);
             $input->user_id = $userId;
@@ -40,41 +40,39 @@ class UserDetail extends Model
             $input->shift = $inputData['shift'];
             $input->roll_no = $inputData['roll_no'];
             $input->religion = $inputData['religion'];
-            if($inputData['marital_status'] == 1){
+            if ($inputData['marital_status'] == 1) {
                 $input->marital_status = $inputData['marital_status'];
                 $input->spouse_name = NULL;
                 $input->number_of_child = NULL;
-            }
-            else{
+            } else {
                 $input->marital_status = $inputData['marital_status'];
                 $input->spouse_name = $inputData['spouse_name'];
                 $input->number_of_child = $inputData['no_of_children'];
             }
-            
+
             if (!empty($inputData['attachment'])) {
-                    $image = $inputData['attachment'];
-                    $unique_date = date_timestamp_get(date_create());
-                    $filename = $unique_date . $image->getClientOriginalName();
-                    $image_resize = Image::make($image->getRealPath());
-                    $image_resize->resize(400, 400);
-                    $image_resize->save('assets/user/landingPage/img/profilePicture/' . $filename);
-                    $inputData['attachment'] = $filename;
-                    $input->attachment = $filename ?? NULL;
+                $image = $inputData['attachment'];
+                $unique_date = date_timestamp_get(date_create());
+                $filename = $unique_date . $image->getClientOriginalName();
+                $image_resize = Image::make($image->getRealPath());
+                $image_resize->resize(400, 400);
+                $image_resize->save('assets/user/landingPage/img/profilePicture/' . $filename);
+                $inputData['attachment'] = $filename;
+                $input->attachment = $filename ?? NULL;
             }
-            $input -> save();
-            
+            $input->save();
+
             return;
-        }
-        else{
+        } else {
 
             if (isset($inputData['attachment']) && !empty($inputData['attachment'])) {
-                    $image = $inputData['attachment'];
-                    $unique_date = date_timestamp_get(date_create());
-                    $filename = $unique_date . $image->getClientOriginalName();
-                    $image_resize = Image::make($image->getRealPath());
-                    $image_resize->resize(400, 400);
-                    $image_resize->save('assets/user/landingPage/img/profilePicture/' . $filename);
-                    $inputData['attachment'] = $filename;
+                $image = $inputData['attachment'];
+                $unique_date = date_timestamp_get(date_create());
+                $filename = $unique_date . $image->getClientOriginalName();
+                $image_resize = Image::make($image->getRealPath());
+                $image_resize->resize(400, 400);
+                $image_resize->save('assets/user/landingPage/img/profilePicture/' . $filename);
+                $inputData['attachment'] = $filename;
             }
 
             UserDetail::create([
@@ -94,8 +92,5 @@ class UserDetail extends Model
                 'attachment' => $filename ?? NULL
             ]);
         }
-        
-        
-
     }
 }

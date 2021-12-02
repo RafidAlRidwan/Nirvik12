@@ -17,11 +17,11 @@ class News extends Model
     public static function saveOrUpdate($request, $id = null)
     {
         $requestData = $request->all();
- 
+
         if (is_null($id)) {
             $about = News::create($requestData);
         } else {
-            $about = News::findOrFail($id);   
+            $about = News::findOrFail($id);
             $about->update($requestData);
         }
     }
