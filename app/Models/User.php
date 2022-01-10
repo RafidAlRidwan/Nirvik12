@@ -51,37 +51,39 @@ class User extends Authenticatable
 
     public function userDetails()
     {
-        return $this->hasOne(UserDetail::class, 'user_id' , 'id');
+        return $this->hasOne(UserDetail::class, 'user_id', 'id');
     }
 
     public function mobileNumberDetails()
     {
-        return $this->hasMany(MobileNumberDetail::class, 'user_id' , 'id');
+        return $this->hasMany(MobileNumberDetail::class, 'user_id', 'id');
     }
 
     public static function getMasterData($user = null)
     {
 
         $data['shift_all'] = Shift::all();
-        $data['shift'] = Shift::pluck('name','id');
+        $data['religion'] = [1 => 'Islam', 2 => 'Hinduism', 3 => 'Buddhism', 4 => 'Christianity'];
+        $data['marital_status'] = [1 => 'Bachelor', 2 => 'Married'];
+        $data['shift'] = Shift::pluck('name', 'id');
         $data['section_all'] = Section::all();
-        $data['section'] = Section::pluck('name','id');
-        $data['acceptedExtensions'] ='.jpg, .jpeg, .gif, .png, .pdf, .doc, .docx, .xls, .xlsx';
+        $data['section'] = Section::pluck('name', 'id');
+        $data['acceptedExtensions'] = '.jpg, .jpeg, .gif, .png, .pdf, .doc, .docx, .xls, .xlsx';
         return $data;
     }
 
     public static function saveOrUpdate($request, $id = null)
     {
         $requestData = $request->all();
- 
+
         if (is_null($id)) {
             $requestData['password'] = Hash::make($requestData['password']);
             $user = User::create($requestData);
         } else {
             $user = User::findOrFail($id);
-            if(!empty($requestData['password'])){
+            if (!empty($requestData['password'])) {
                 $requestData['password'] = Hash::make($requestData['password']);
-            }   
+            }
             $user->update($requestData);
         }
 

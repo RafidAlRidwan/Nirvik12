@@ -11,24 +11,24 @@ class MobileNumberDetail extends Model
     protected $table = 'mobile_number_details';
 
     protected $fillable = [
-    	'user_id',
+        'user_id',
         'mobile',
         'created_at',
         'updated_at'
     ];
 
-    public static function saveMobileInfo($inputData, $userId) 
+    public static function saveMobileInfo($inputData, $userId)
     {
         if (!isset($inputData['mobile']) || empty($inputData['mobile'])) {
             return;
         }
         MobileNumberDetail::where('user_id', $userId)->delete();
-        
-        foreach ($inputData['mobile'] as $key=>$item) {
+
+        foreach ($inputData['mobile'] as $key => $item) {
             MobileNumberDetail::create([
                 'user_id' => $userId,
                 'mobile' => $item
-                
+
             ]);
         }
     }

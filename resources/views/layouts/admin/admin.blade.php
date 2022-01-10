@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,132 +32,135 @@
   <link rel="stylesheet" href="{{asset('assets/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 
   <style type="text/css">
-            
-        .right ul{
-          list-style: none;
-          padding: 0;
-        }
-        .right ul li a{
-          display: flex;
-          align-items: center;
-          height: 5px;
-        }
-        .right img{
-          margin: 0 10px;
-          border-radius: 50%;
-        }
+    .right ul {
+      list-style: none;
+      padding: 0;
+    }
 
-        .right a{
-          text-align: right;
-        }
+    .right ul li a {
+      display: flex;
+      align-items: center;
+      height: 5px;
+    }
 
-        .right a span{
-          font-size: 10px;
-        }
+    .right img {
+      margin: 0 10px;
+      border-radius: 50%;
+    }
 
-        .right ul li{
-          position: relative;
-        }
-        .dropdown ul li{
-          padding: 10px;
-        }
+    .right a {
+      text-align: right;
+    }
 
-        .right ul li .dropdown{
-          position: absolute;
-          top: 70px;
-          right: 0;
-          background: #fff;
-          padding: 10px 25px;
-          border-radius: 5px;
-          display: none;
-        }
+    .right a span {
+      font-size: 10px;
+    }
 
-        .right ul li .dropdown .fas{
-          margin-right: 10px;
-        }
+    .right ul li {
+      position: relative;
+    }
 
-        .right ul li .dropdown:before{
-          content: "";
-          position: absolute;
-          top: -20px;
-          left: 78%;
-          transform: translateX(-50%);
-          border: 10px solid;
-          border-color: transparent transparent #fff transparent;
-        }
+    .dropdown ul li {
+      padding: 10px;
+    }
 
-        .right ul li.active .dropdown{
-          display: block;
-        }
+    .right ul li .dropdown {
+      position: absolute;
+      top: 70px;
+      right: 0;
+      background: #fff;
+      padding: 10px 25px;
+      border-radius: 5px;
+      display: none;
+    }
+
+    .right ul li .dropdown .fas {
+      margin-right: 10px;
+    }
+
+    .right ul li .dropdown:before {
+      content: "";
+      position: absolute;
+      top: -20px;
+      left: 78%;
+      transform: translateX(-50%);
+      border: 10px solid;
+      border-color: transparent transparent #fff transparent;
+    }
+
+    .right ul li.active .dropdown {
+      display: block;
+    }
   </style>
   @yield('style')
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+  <div class="wrapper">
 
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{asset('assets/admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
-  </div>
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="{{asset('assets/admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
+    </div>
 
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <!-- <li class="nav-item d-none d-sm-inline-block">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <!-- <li class="nav-item d-none d-sm-inline-block">
         <a href="index3.html" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li> -->
-    </ul>
+      </ul>
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Navbar Search -->
-      <li class="nav-item">
-        
-        
-      </li>
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <!-- Navbar Search -->
+        <li class="nav-item">
 
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        
-        
-      </li>
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <div class="right">
+
+        </li>
+
+        <!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+
+
+        </li>
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <div class="right">
             <ul>
               <li>
                 <a href="#">
                   <p><img src="{{asset('assets/user/landingPage/img/profilePicture/demo.jpg')}}" alt="Admin" width="40">
                 </a>
-                 
+
                 <div class="dropdown">
-                    <ul>
-                      <li class="p-3"><a href="#"><i class="fas fa-user"></i> {{Auth::user()->name ?? NULL}}</a></li>
-                      <li class="p-3"><a href="#"><i class="fas fa-sliders-h"></i> Settings</a></li>
-                      <li class="p-3"><a onclick="event.preventDefault();
+                  <ul>
+                    <li class="p-3"><a href="#"><i class="fas fa-user"></i> {{Auth::user()->name ?? NULL}}</a></li>
+                    <li class="p-3"><a href="#"><i class="fas fa-sliders-h"></i> Settings</a></li>
+                    <li class="p-3"><a onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Signout</a></li>
-                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                        @csrf
-                                                        </form>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                    </form>
                   </ul>
                 </div>
-                
+
               </li>
-              </ul>
-            </div>
-        </div>
-    </div>
-        
-      </li>
-      
-    </ul>
+            </ul>
+          </div>
+  </div>
+  </div>
+
+  </li>
+
+  </ul>
   </nav>
   <!-- /.navbar -->
 
@@ -172,10 +176,10 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel d-flex">
-        
+
       </div>
 
-      
+
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -184,7 +188,11 @@
                with font-awesome or any other icon font library -->
           @php $path = Request::path(); @endphp
           <li class="nav-item menu-open">
-            <a href="{{URL::to('/admin/dashboard')}}" class="nav-link <?php if($path == 'admin/dashboard' || $path == 'user/dashboard'){ echo "active"; }else{ echo ""; } ?>">
+            <a href="{{URL::to('/admin/dashboard')}}" class="nav-link <?php if ($path == 'admin/dashboard' || $path == 'user/dashboard') {
+                                                                        echo "active";
+                                                                      } else {
+                                                                        echo "";
+                                                                      } ?>">
 
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -213,8 +221,13 @@
               </li>
             </ul> -->
           </li>
+          @php $id = Auth::user()->id; @endphp
           <li class="nav-item">
-            <a href="{{URL::to('/admin/user_management')}}" class="nav-link <?php if($path == 'admin/user_management'){ echo "active"; }else{ echo ""; } ?>">
+            <a href="{{URL::to('/admin/user_management')}}" class="nav-link <?php if ($path == 'admin/user_management' || $path == 'admin/user/edit/' . $id) {
+                                                                              echo "active";
+                                                                            } else {
+                                                                              echo "";
+                                                                            } ?>">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User Management
@@ -222,7 +235,11 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{URL::to('/admin/about/setting/1')}}" class="nav-link <?php if($path == 'admin/about/setting/1'){ echo "active"; }else{ echo ""; } ?>">
+            <a href="{{URL::to('/admin/about/setting/1')}}" class="nav-link <?php if ($path == 'admin/about/setting/1') {
+                                                                              echo "active";
+                                                                            } else {
+                                                                              echo "";
+                                                                            } ?>">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 About Settings
@@ -230,17 +247,21 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{URL::to('/admin/news/setting')}}" class="nav-link <?php if($path == 'admin/news/setting'){ echo "active"; }else{ echo ""; } ?>">
+            <a href="{{URL::to('/admin/news/setting')}}" class="nav-link <?php if ($path == 'admin/news/setting') {
+                                                                            echo "active";
+                                                                          } else {
+                                                                            echo "";
+                                                                          } ?>">
               <i class="nav-icon far fa-newspaper"></i>
               <p>
                 News Settings
               </p>
             </a>
           </li>
-          
-          
-          
-          
+
+
+
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -249,7 +270,7 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  
+
   <div class="content-wrapper">
     @yield('content')
   </div>
@@ -267,79 +288,74 @@
     <!-- Control sidebar content goes here -->
   </aside>
   <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
+  </div>
+  <!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="{{asset('assets/admin/plugins/jquery/jquery-3.6.0.min.js')}}"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="{{asset('assets/admin/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- ChartJS -->
-<script src="{{asset('assets/admin/plugins/chart.js/Chart.min.js')}}"></script>
-<!-- Sparkline -->
-<script src="{{asset('assets/admin/plugins/sparklines/sparkline.js')}}"></script>
-<!-- JQVMap -->
-<script src="{{asset('assets/admin/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-<script src="{{asset('assets/admin/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{{asset('assets/admin/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
+  <!-- jQuery -->
+  <script src="{{asset('assets/admin/plugins/jquery/jquery-3.6.0.min.js')}}"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="{{asset('assets/admin/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
+  <!-- Bootstrap 4 -->
+  <script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <!-- ChartJS -->
+  <script src="{{asset('assets/admin/plugins/chart.js/Chart.min.js')}}"></script>
+  <!-- Sparkline -->
+  <script src="{{asset('assets/admin/plugins/sparklines/sparkline.js')}}"></script>
+  <!-- JQVMap -->
+  <script src="{{asset('assets/admin/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
+  <script src="{{asset('assets/admin/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="{{asset('assets/admin/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
 
-<!-- daterangepicker -->
-<script src="{{asset('assets/admin/plugins/moment/moment.min.js')}}"></script>
-<script src="{{asset('assets/admin/plugins/daterangepicker/daterangepicker.js')}}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="{{asset('assets/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-<!-- overlayScrollbars -->
-<script src="{{asset('assets/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{asset('assets/admin/dist/js/adminlte.js')}}"></script>
-<script src="{{asset('assets/admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
-<script src="{{asset('assets/admin/plugins/toastr/toastr.min.js')}}"></script>
-<!-- DATA TABLES -->
-<script src="{{asset('assets/admin/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('assets/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('assets/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{asset('assets/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<script type="text/javascript">
+  <!-- daterangepicker -->
+  <script src="{{asset('assets/admin/plugins/moment/moment.min.js')}}"></script>
+  <script src="{{asset('assets/admin/plugins/daterangepicker/daterangepicker.js')}}"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="{{asset('assets/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+  <!-- overlayScrollbars -->
+  <script src="{{asset('assets/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+  <!-- AdminLTE App -->
+  <script src="{{asset('assets/admin/dist/js/adminlte.js')}}"></script>
+  <script src="{{asset('assets/admin/plugins/summernote/summernote-bs4.min.js')}}"></script>
+  <script src="{{asset('assets/admin/plugins/toastr/toastr.min.js')}}"></script>
+  <!-- DATA TABLES -->
+  <script src="{{asset('assets/admin/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+  <script src="{{asset('assets/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+  <script src="{{asset('assets/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+  <script src="{{asset('assets/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+  <script type="text/javascript">
     // $(document).on('click' , 'ul li', function(){
     //     alert('Hi');
     //     $(this).addClass('active').siblings().removeClass('active')
     // });
-</script>
-<script type="text/javascript">
-    document.querySelector(".right ul li").addEventListener("click", function(){
-  this.classList.toggle("active");
-});
-</script>
-<script type="text/javascript">
+  </script>
+  <script type="text/javascript">
+    document.querySelector(".right ul li").addEventListener("click", function() {
+      this.classList.toggle("active");
+    });
+  </script>
+  <script type="text/javascript">
+    <?php if ($message = Session::get('flashy__info')) : ?>
+      toastr.info('<?php echo " $message" ?>', {});
+    <?php endif ?>
 
-          <?php if($message = Session::get('flashy__info')): ?>
-            toastr.info('<?php echo " $message" ?>', {
-            });
-          <?php endif ?>
+    <?php if ($message = Session::get('flashy__warning')) : ?>
+      toastr.warning('<?php echo " $message" ?>', {});
+    <?php endif ?>
 
-          <?php if($message = Session::get('flashy__warning')): ?>
-            toastr.warning('<?php echo " $message" ?>', {
-            });
-          <?php endif ?>
+    <?php if ($message = Session::get('flashy__danger')) : ?>
+      toastr.error('<?php echo " $message" ?>', {});
+    <?php endif ?>
 
-          <?php if($message = Session::get('flashy__danger')): ?>
-            toastr.error('<?php echo " $message" ?>', {
-            });
-          <?php endif ?>
-
-          <?php if($message = Session::get('flashy__success')): ?>
-            toastr.success('<?php echo " $message" ?>', {
-            });
-          <?php endif ?>
-
-</script>
-@yield('script')
+    <?php if ($message = Session::get('flashy__success')) : ?>
+      toastr.success('<?php echo " $message" ?>', {});
+    <?php endif ?>
+  </script>
+  @yield('script')
 </body>
+
 </html>

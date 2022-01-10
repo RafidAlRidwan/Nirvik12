@@ -16,11 +16,11 @@ class About extends Model
     public static function saveOrUpdate($request, $id = null)
     {
         $requestData = $request->all();
- 
+
         if (is_null($id)) {
             $about = About::create($requestData);
         } else {
-            $about = About::findOrFail($id);   
+            $about = About::findOrFail($id);
             $about->update($requestData);
         }
     }

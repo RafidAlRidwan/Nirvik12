@@ -11,8 +11,9 @@ use validate;
 
 class LandingPageController extends Controller
 {
-    public function index(){
-    	
-    	return view('user/landing-page.index');
+    public function index()
+    {
+
+        return view('user/landing-page.index');
     }
 }

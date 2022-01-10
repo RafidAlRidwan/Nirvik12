@@ -33,7 +33,7 @@
 
     <!-- Main CSS-->
     <link href="{{asset('assets/admin/css/theme.css')}}" rel="stylesheet" media="all">
-    
+
     @yield('style')
 
 </head>
@@ -79,7 +79,7 @@
                             <a href="{{URL::to('/admin/about/setting/1')}}">
                                 <i class="fas fa-file-text"></i>About Settings</a>
                         </li>
-                        
+
                         <li>
                             <a href="form.html">
                                 <i class="far fa-check-square"></i>Forms</a>
@@ -107,7 +107,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
                     </ul>
                 </div>
             </nav>
@@ -126,7 +126,7 @@
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
                             <a class="js-arrow" href="{{URL::to('/admin/dashboard')}}">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard <i style="font-size: 13px; padding-top: 5px;" class="fas fa-chevron-right float-right"></i></a> 
+                                <i class="fas fa-tachometer-alt"></i>Dashboard <i style="font-size: 13px; padding-top: 5px;" class="fas fa-chevron-right float-right"></i></a>
                             <!-- <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
                                     <a href="index.html">Dashboard 1</a>
@@ -141,11 +141,11 @@
                             <a href="{{URL::to('/admin/user_management')}}">
                                 <i class="fas fa-users"></i>User Management</a>
                         </li>
-                       <li>
+                        <li>
                             <a href="{{URL::to('/admin/about/setting/1')}}">
                                 <i class="fas fa-file-text"></i>About Settings</a>
                         </li>
-                       
+
                         <li>
                             <a href="form.html">
                                 <i class="far fa-check-square"></i>Forms</a>
@@ -173,7 +173,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
                     </ul>
                 </nav>
             </div>
@@ -306,9 +306,9 @@
                                         </div>
                                     </div>
                                 </div>
-            @php
-             $name = App\Models\UserDetail::where('user_id' , Auth::user()->id)->first();
-            @endphp
+                                @php
+                                $name = App\Models\UserDetail::where('user_id' , Auth::user()->id)->first();
+                                @endphp
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
@@ -371,14 +371,14 @@
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
             <div class="row">
-                        <div class="col-md-12">
-                            <div class="copyright">
-                                <p>Copyright © 2021 <strong>TEAM NIRVIK'12</strong> All rights reserved.</p>
-                        </div>
-                     </div>
+                <div class="col-md-12">
+                    <div class="copyright">
+                        <p>Copyright © 2021 <strong>TEAM NIRVIK'12</strong> All rights reserved.</p>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
     <!-- Jquery JS-->
     <script src="{{asset('assets/admin/vendor/jquery-3.2.1.min.js')}}"></script>
