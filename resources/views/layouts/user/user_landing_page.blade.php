@@ -166,7 +166,15 @@
                         <li><a href="#faq">News <span class="icon-button-badge">{{count($newsDetails)}}</span></a></li>
                         <li><a href="#hotels">Events <span class="icon-button-badge">2</span></a></li>
                         <li><a href="#gallery">Gallary</a></li>
+                        @if($data)
+                        <li class="buy-tickets"><a onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" href="{{ route('logout') }}">logout</a></li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                        @else
                         <li class="buy-tickets"><a href="{{URL::to('user/login')}}">Login</a></li>
+                        @endif
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>

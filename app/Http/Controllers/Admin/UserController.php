@@ -15,6 +15,11 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('checkAdmin');
+    }
     public function index()
     {
         return view('admin/user.index');
@@ -96,11 +101,11 @@ class UserController extends Controller
             $data['data'][$sl]['section'] = $item->section_name;
             $data['data'][$sl]['shift'] = "<span class='$class'>$shift</span>";
             if ($item->userType == 2) {
-                $data['data'][$sl]['action'] = " 
+                $data['data'][$sl]['action'] = "
                 <a class='user_delete' href='$item->uid' data-toggle='modal' data-target='#user-delete' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>";
             } else {
-                $data['data'][$sl]['action'] = "<a href='$editURL'><i class='fa fa-edit' style='font-size:14px; ''></i></a> 
-                | 
+                $data['data'][$sl]['action'] = "<a href='$editURL'><i class='fa fa-edit' style='font-size:14px; ''></i></a>
+                |
                 <a class='user_delete' href='$item->uid' data-toggle='modal' data-target='#user-delete' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>";
             }
 
@@ -112,6 +117,22 @@ class UserController extends Controller
         echo json_encode($data);
         die();
     }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        $data = User::getMasterData($user);
+        $data['user'] = $user;
+
+        $user_details = $user->userDetails()->get();
+        $data['user_details'] = $user_details;
+        $data['mobile_details'] = $user->mobileNumberDetails()->get();
+        if (!$data['user_details']->isEmpty()) {
+            $data['user_details'] = $user_details[0];
+        }
+        return view('admin/user.edit', $data);
+    }
+
     public function destroy(Request $request)
     {
         // dd($request->all());
@@ -129,19 +150,5 @@ class UserController extends Controller
                 ->withErrors($e->getMessage())
                 ->withInput();
         }
-    }
-    public function edit($id)
-    {
-        $user = User::findOrFail($id);
-        $data = User::getMasterData($user);
-        $data['user'] = $user;
-
-        $user_details = $user->userDetails()->get();
-        $data['user_details'] = $user_details;
-        $data['mobile_details'] = $user->mobileNumberDetails()->get();
-        if (!$data['user_details']->isEmpty()) {
-            $data['user_details'] = $user_details[0];
-        }
-        return view('admin/user.edit', $data);
     }
 }

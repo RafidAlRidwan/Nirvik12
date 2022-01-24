@@ -2,6 +2,15 @@
 
 @section('style')
 <link href="{{asset('assets/user/landingPage/custom-css/cus-data-table.css')}}" rel="stylesheet">
+<style>
+    .btn-custom{
+        background-color: #2f3640;
+    }
+    .btn-custom:hover{
+        background-color: #fff;
+        border-color: #f82249;
+    }
+</style>
 
 @endsection
 
@@ -85,12 +94,6 @@
 
                     </div>
 
-
-
-
-
-
-
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
 
@@ -99,9 +102,11 @@
                                 <tr>
                                     <th>Profile Picture</th>
                                     <th>Name</th>
+                                    <th>Mobile Number</th>
                                     <th>Current City</th>
                                     <th>Section</th>
                                     <th>Shift</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -113,9 +118,11 @@
                                 <tr>
                                     <th>Profile Picture</th>
                                     <th>Name</th>
+                                    <th>Mobile Number</th>
                                     <th>Current City</th>
                                     <th>Section</th>
                                     <th>Shift</th>
+                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -170,6 +177,9 @@
                             "data": "name"
                         },
                         {
+                            "data": "mobile"
+                        },
+                        {
                             "data": "city"
                         },
                         {
@@ -177,6 +187,9 @@
                         },
                         {
                             "data": "shift"
+                        },
+                        {
+                            "data": "action"
                         },
 
 

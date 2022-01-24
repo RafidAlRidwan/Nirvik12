@@ -19,6 +19,7 @@
 <section class="content p-2 ">
     <div class="container-fluid m-t-25 card p-3">
         {!! Form::model($user, ['route' => ['user.update', $user->id],'method'=>'put', 'files' => true, 'class' => 'needs-validation', 'novalidate']) !!}
+        <input type="hidden" name="user_details_id" value="{{$user_details['id']}}">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <div class="form-group">
@@ -129,7 +130,7 @@
             </div>
             @endif
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <label>Profile Picture</label>
                 <div class="tower-file">
@@ -140,7 +141,7 @@
                     <button type="button" class="btn btn-secondary tower-file-clear align-top">Clear</button>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row">
             <div class="inputfield div-gap">
                 <button type="submit" class="btn btn-primary">Save</button>
