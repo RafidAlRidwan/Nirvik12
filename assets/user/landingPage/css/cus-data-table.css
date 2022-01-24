@@ -1,6 +1,6 @@
 body{
         font-family: "Open Sans", sans-serif;
-        background: linear-gradient( rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7) ), url(/nirvik12/assets/user/landingPage/img/dashboard-bg.jpg) center;
+        background: linear-gradient( rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7) ), url(/nirvik12/assets/user/landingPage/img/dashboard-bg.png) center;
 }
     .section-header {
           margin-bottom: 20px;
@@ -11,7 +11,7 @@ body{
         color: #999999 !important;
         background-color: #ffffff !important;
 
-        
+
     }
 
     .dataTables_wrapper .dataTables_paginate .pagination .paginate_button:hover{
@@ -33,7 +33,7 @@ body{
         border: 1px solid #f82249 !important;
         background: #f82249 !important;
         box-shadow: none;
-        border-top-left-radius: 40px; 
+        border-top-left-radius: 40px;
         border-bottom-left-radius: 40px;
         border-bottom-right-radius: 40px;
         border-top-right-radius: 40px;
@@ -47,8 +47,8 @@ body{
         line-height: 1.42857143;
         color: #fff !important;
         background-color: #070d22 !important;
-        border-color: #070d22 !important; 
-        border-top-left-radius: 40px; 
+        border-color: #070d22 !important;
+        border-top-left-radius: 40px;
         border-bottom-left-radius: 40px;
         border-bottom-right-radius: 40px;
         border-top-right-radius: 40px;
@@ -62,13 +62,13 @@ body{
     }
     .pagination>li:first-child>a, .pagination>li:first-child>span {
         margin-left: 0;
-        border-top-left-radius: 40px; 
+        border-top-left-radius: 40px;
         border-bottom-left-radius: 40px;
         border-bottom-right-radius: 40px;
         border-top-right-radius: 40px;
     }
     .pagination>li:last-child>a, .pagination>li:last-child>span {
-        border-top-left-radius: 40px; 
+        border-top-left-radius: 40px;
         border-bottom-left-radius: 40px;
         border-bottom-right-radius: 40px;
         border-top-right-radius: 40px;
@@ -98,7 +98,7 @@ body{
     .btn_details{
         display: inline-block;
         size: 12px;
-        color: #8a8a8a !important; 
+        color: #8a8a8a !important;
         border: 1px solid #d4d4d4;
         background-color: #fff;
         padding: 5px 9px;
@@ -111,10 +111,10 @@ body{
         box-shadow: none;
     }
 
-    
+
 
     h1{
-        text-transform: uppercase; 
+        text-transform: uppercase;
         text-align: center;
         font-weight: 1000;
         background-color: #f82249;
@@ -130,23 +130,23 @@ body{
         color: #fff;
     }
     .box{
-        background: transparent; 
-        padding-top: 20px; 
-        padding-right: 20px; 
-        padding-left: 20px; 
+        background: transparent;
+        padding-top: 20px;
+        padding-right: 20px;
+        padding-left: 20px;
         /*border-radius: 10px;*/
         /*box-shadow: 5px 5px 15px rgba(0,0,0,0.6);*/
     }
     table{
-        width:100%; 
-        text-align: center; 
+        width:100%;
+        text-align: center;
         border: 2px solid #0b1126;
-        
-        
+
+
     }
-    table:hover { 
-        box-shadow: 0px 5px 10px rgba(0,0,0,0.6); 
-        
+    table:hover {
+        box-shadow: 0px 5px 10px rgba(0,0,0,0.6);
+
     }
     /*button.dt-button, div.dt-button, a.dt-button, input.dt-button {
     display: none;
@@ -156,7 +156,7 @@ body{
       color: #999999 !important;
       background-color: transparent !important;
     }
-    
+
     div.dt-buttons {
           justify-content:center;
           margin-bottom: 5px;
@@ -213,7 +213,7 @@ body{
       color: #f82249;
       border: 2px solid #f82249;
   }
-    
+
 /*DATATABLE END*/
 
 /*SEACRH BOX*/
@@ -227,7 +227,7 @@ body{
                 width: 100%;
                 background-color: #2f3640;
             }
-            
+
 
             .search_wrap .search_box{
                 position: relative;
@@ -247,13 +247,13 @@ body{
                 border: 2px solid #2f3640;
                 box-shadow: 0px 2px 5px rgba(0,0,0,0.6);
             }
-            
+
             .search_wrap .search_box:hover> .btn{
 
                 background: #f82249;
 
             }
-            
+
             .search_wrap .search_box .input:hover{
                 box-shadow: 0px 5px 10px rgba(0,0,0,0.6);
                 border: 2px solid #f82249;
@@ -268,7 +268,7 @@ body{
                 background: #2f3640;
                 z-index: 1;
                 cursor: pointer;
-            }     
+            }
 
             .search_wrap .search_box .btn.btn_common .fa{
                 position: absolute;
@@ -279,7 +279,7 @@ body{
                 font-size: 15px;
             }
 
-            
+
             .search_wrap.search_wrap_4 .search_box .input{
                 padding-left: 50px;
             }
@@ -308,7 +308,7 @@ body{
           border-radius: 8px;
           box-shadow: 0px 5px 10px rgba(0,0,0,0.6);
         }
-        
+
 
         .select-box .options-container {
           background: #2f3640;
@@ -485,13 +485,13 @@ body{
         font-weight: 500;
         line-height: 1;
         font-size: 15px;
-    }    
+    }
     #btnReset:hover{
         border: 2px solid #f82249;
         background: #f82249;
     }
-    
-    
+
+
 
 
 

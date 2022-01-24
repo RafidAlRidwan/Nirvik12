@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\User;
 
-use URL;
 use Auth;
 use Redirect;
 use validate;
@@ -12,6 +11,7 @@ use App\Models\Section;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -75,13 +75,19 @@ class UserController extends Controller
             ->leftJoin('user_details AS ud', 'ud.user_id', '=', 'users.id')
             ->leftJoin('sections', 'ud.section', '=', 'sections.id')
             ->leftJoin('shifts', 'ud.shift', '=', 'shifts.id')
+            ->leftJoin('mobile_number_details as mn', 'mn.user_id', '=', 'users.id')
+            ->where('ud.full_name', '!=' ,'')
             ->select(
-                'ud.*',
-                "users.type",
+                DB::raw(DB::raw('group_concat(mn.mobile) as mobiles')),
+                'ud.full_name',
+                'ud.current_city',
+                'ud.user_id',
+                'users.type',
+                'users.id',
                 "sections.name AS section_name",
                 "shifts.name AS shift_name",
-            );
-        // dd($product_data->get());
+            )
+            ->groupBy('users.id');
 
         if (isset($request->section) && $request->section > 0) {
             if ($request->section == "Select All Section") {
@@ -98,9 +104,11 @@ class UserController extends Controller
             }
         }
 
-        if (isset($request->name) && $request->name > 0) {
+        if (isset($request->name) && $request->full_name > 0) {
             $product_data->where('full_name', 'LIKE', '%' . $request->name . '%');
         }
+
+
 
         $data['recordsTotal'] = $product_data->count();
         $data['recordsFiltered'] = $product_data->count();
@@ -122,6 +130,7 @@ class UserController extends Controller
                 $class = "badge-success";
                 $shift = 'Day';
             }
+            $viewURL = URL::to('user/my-profile/show' . '/' . $item->id);
             if (!empty($item->attachment)) {
                 $img = URL::to('assets/user/landingPage/img/profilePicture' . '/' . $item->attachment);
             } else {
@@ -129,10 +138,12 @@ class UserController extends Controller
             }
 
             $data['data'][$sl]['pp'] = "<img style='border: 1px solid #ddd; border-radius:50%; width: 45px; height:45px; ' src='$img' alt='pp' class='responsive'>";
-            $data['data'][$sl]['name'] = "<b class='text-primary'>$item->full_name</b>";
+            $data['data'][$sl]['name'] = "<a href='$viewURL'><b class='text-primary'>$item->full_name</b></a>";
+            $data['data'][$sl]['mobile'] = $item->mobiles;
             $data['data'][$sl]['city'] = $item->current_city ?? "";
             $data['data'][$sl]['section'] = $item->section_name;
             $data['data'][$sl]['shift'] = "<span class='$class'>$shift</span>";
+            $data['data'][$sl]['action'] = "<button class='btn btn-custom'><a href='$viewURL'>View</a></button>";
 
             $sl++;
         }
@@ -150,6 +161,7 @@ class UserController extends Controller
 
         $data['user_details'] = $user->userDetails()->get();
         $data['mobile_details'] = $user->mobileNumberDetails()->get();
+
         return view('user/user.my-profile', $data);
     }
 
@@ -184,6 +196,7 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        dd($request->all());
         try {
 
             $this->validate($request, [
@@ -191,6 +204,7 @@ class UserController extends Controller
 
             ]);
             DB::beginTransaction();
+
             User::saveOrUpdate($request, $id);
             DB::commit();
             Session::flash('flashy__success', __('Updated Successfully!'));
