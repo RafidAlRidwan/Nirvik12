@@ -98,11 +98,6 @@
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-    <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
-      <img class="animation__shake" src="{{asset('assets/admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
-    </div>
-
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <!-- Left navbar links -->
@@ -142,6 +137,7 @@
 
                 <div class="dropdown">
                   <ul>
+                    <!-- <li class="p-3"><a href={{route('landingPage')}}></i><strong>Goto Website</strong></a></li> -->
                     <li class="p-3"><a href="#"><i class="fas fa-user"></i> {{Auth::user()->name ?? NULL}}</a></li>
                     <li class="p-3"><a href="#"><i class="fas fa-sliders-h"></i> Settings</a></li>
                     <li class="p-3"><a onclick="event.preventDefault();
@@ -221,9 +217,8 @@
               </li>
             </ul> -->
           </li>
-          @php $id = Auth::user()->id; @endphp
           <li class="nav-item">
-            <a href="{{URL::to('/admin/user_management')}}" class="nav-link <?php if ($path == 'admin/user_management' || $path == 'admin/user/edit/' . $id) {
+            <a href="{{URL::to('/admin/user_management')}}" class="nav-link <?php if ($path == 'admin/user_management') {
                                                                               echo "active";
                                                                             } else {
                                                                               echo "";
@@ -255,6 +250,32 @@
               <i class="nav-icon far fa-newspaper"></i>
               <p>
                 News Settings
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{URL::to('/admin/news/setting')}}" class="nav-link <?php if ($path == 'admin/news/setting') {
+                                                                            echo "active";
+                                                                          } else {
+                                                                            echo "";
+                                                                          } ?>">
+              <i class="nav-icon far fa-calendar"></i>
+              <p>
+                Event Settings
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{URL::to('/admin/news/setting')}}" class="nav-link <?php if ($path == 'admin/news/setting') {
+                                                                            echo "active";
+                                                                          } else {
+                                                                            echo "";
+                                                                          } ?>">
+              <i class="nav-icon far fa-image"></i>
+              <p>
+                Galary Settings
               </p>
             </a>
           </li>

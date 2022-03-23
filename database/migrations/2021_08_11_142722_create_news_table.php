@@ -17,7 +17,7 @@ class CreateNewsTable extends Migration
             $table->id();
             $table->string('heading', 500)->nullable();
             $table->string('body', 999)->nullable();
-            $table->bigInteger('active')->nullable();
+            $table->bigInteger('status')->nullable();
             $table->timestamps();
         });
     }

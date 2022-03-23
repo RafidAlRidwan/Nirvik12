@@ -19,7 +19,7 @@
           {!! Form::model($user, ['route' => ['user.update', $user->id],'method'=>'put', 'files' => true, 'class' => 'needs-validation', 'novalidate']) !!}
 
 
-          @include ('user.user.form2')
+          @include ('user.user.edit_form')
 
           {!! Form::close() !!}
         </div>

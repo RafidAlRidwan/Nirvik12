@@ -11,7 +11,8 @@ class News extends Model
     protected $table = 'news';
     protected $fillable = [
         'heading',
-        'body'
+        'body',
+        'status'
     ];
 
     public static function saveOrUpdate($request, $id = null)
@@ -19,6 +20,7 @@ class News extends Model
         $requestData = $request->all();
 
         if (is_null($id)) {
+            $requestData['status'] = 1;
             $about = News::create($requestData);
         } else {
             $about = News::findOrFail($id);

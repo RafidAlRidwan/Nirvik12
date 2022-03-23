@@ -14,13 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // HOME PAGE
 Route::get('/', [App\Http\Controllers\User\LandingPageController::class, 'index'])->name('landingPage');
@@ -63,11 +57,20 @@ Route::put('/admin/about/update/{id}',
             ]);
 
 // USER MANAGEMENT
-Route::get('/admin/user_management', [App\Http\Controllers\Admin\UserController::class, 'index']);
+Route::get('/admin/user_management', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin_user_index');
 Route::post('/admin/getdata', [App\Http\Controllers\Admin\UserController::class, 'user_datatable']);
 Route::get('/admin/user/edit/{id}', [App\Http\Controllers\Admin\UserController::class, 'edit']);
 Route::post('/admin/user/delete', [App\Http\Controllers\Admin\UserController::class, 'destroy']);
+Route::put('/user/update/{id}',
+            [
+                'as'   => 'admin.user.update',
+                'uses' => 'App\Http\Controllers\Admin\UserController@update'
+            ]);
 
 // News MANAGEMENT
 Route::get('/admin/news/setting', [App\Http\Controllers\Admin\NewsController::class, 'index']);
 Route::post('/admin/news/store', 'App\Http\Controllers\Admin\NewsController@store');
+Route::post('/admin/news/getdata', [App\Http\Controllers\Admin\NewsController::class, 'news_datatable']);
+Route::post('/admin/news/update', 'App\Http\Controllers\Admin\NewsController@update');
+Route::post('/admin/news/destroy', 'App\Http\Controllers\Admin\NewsController@destroy');
+

@@ -20,7 +20,7 @@
         <div class="card-body">
           {!! Form::open(['action' => ['App\Http\Controllers\User\UserController@store'], 'files' => true, 'class' => 'needs-validation', 'novalidate']) !!}
 
-          @include ('user.user.form')
+          @include ('user.user.add_form')
 
           {!! Form::close() !!}
         </div>
