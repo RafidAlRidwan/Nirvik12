@@ -154,7 +154,7 @@
                 <div id="logo" class="pull-left">
                     <!-- Uncomment below if you prefer to use a text logo -->
                     <!-- <h1><a href="#main">C<span>o</span>nf</a></h1>-->
-                    <a href="#intro" class="scrollto"><img src="{{asset('assets/user/landingPage/img/logo.png')}}" alt="" title=""></a>
+                    <a href="#intro" class="scrollto"><img src="{{asset('assets/user/landingPage/img/logon.png')}}" alt="" title=""></a>
                 </div>
                 @php
                 $newsDetails = App\Models\News::orderBy('created_at', 'desc')->get();
@@ -422,6 +422,7 @@
                 </div>
 
             </section>
+            
 
 
 
@@ -460,7 +461,7 @@
                             <div class="row">
 
                                 <div class="col-lg-6 col-md-6 footer-info">
-                                    <img src="{{asset('assets/user/landingPage/img/logo.png')}}" alt="TheEvenet">
+                                    <img style="height: 100px;" src="{{asset('assets/user/landingPage/img/logon.png')}}" alt="TheEvenet">
                                     <p>In alias aperiam. Placeat tempore facere. Officiis voluptate ipsam vel eveniet est dolor et totam porro. Perspiciatis ad omnis fugit molestiae recusandae possimus. Aut consectetur id quis. In inventore consequatur ad voluptate cupiditate debitis accusamus repellat cumque.</p>
                                 </div>
 
