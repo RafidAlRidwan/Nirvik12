@@ -10,12 +10,14 @@
       </div>
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
         <ol class="breadcrumb float-sm-right">
-          <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-primary">Add New</button>
+          <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-primary">+ Add New</button>
         </ol>
       </div>
     </div>
   </div>
 </div>
+
+<hr>
 
 <section class="content p-2 ">
   <div class="container-fluid">
@@ -23,8 +25,8 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
 
-        <table id="index_datatable" class="table table-hover">
-          <thead>
+        <table id="index_datatable" class="table table-bordered table-striped table-hover">
+          <thead style="color:#fff; background: #4ed2c5;">
             <tr>
               <th>Serial</th>
               <th>Profile Picture</th>
@@ -69,7 +71,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      {!! Form::open(['action' => ['App\Http\Controllers\User\UserController@store'], 'files' => true, 'class' => 'needs-validation', 'novalidate']) !!}
+      {!! Form::open(['action' => ['App\Http\Controllers\User\UserController@store'], 'files' => true, 'class' => 'needs-validation']) !!}
       <div class="modal-body">
         <div class="card-body">
           <div class="form-group">

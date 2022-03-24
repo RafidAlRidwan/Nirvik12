@@ -46,8 +46,8 @@ class UserDetail extends Model
                 $input->number_of_child = NULL;
             } else {
                 $input->marital_status = $inputData['marital_status'];
-                $input->spouse_name = $inputData['spouse_name'];
-                $input->number_of_child = $inputData['no_of_children'];
+                $input->spouse_name = $inputData['spouse_name'] ?? NULL;
+                $input->number_of_child = $inputData['no_of_children'] ?? NULL;
             }
 
             if (!empty($inputData['attachment'])) {

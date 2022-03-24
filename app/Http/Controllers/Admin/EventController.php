@@ -13,7 +13,7 @@ use validate;
 use Auth;
 use DB;
 
-class NewsController extends Controller
+class EventController extends Controller
 {
     public function __construct()
     {
@@ -27,7 +27,6 @@ class NewsController extends Controller
 
     public function news_datatable(Request $request)
     {
-
         $searchString = $request->search['value'];
         $product_data = News::query()
             ->select(

@@ -9,4 +9,12 @@ class Section extends Model
 {
     use HasFactory;
     protected $table = 'sections';
+
+    public static function sectionInfo($id = NULL)
+    {
+        if(!empty($id)){
+            $section = Section::where('id', $id)->first();
+            return $section->name;
+        }
+    }
 }

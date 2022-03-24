@@ -9,6 +9,7 @@ use validate;
 use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
+use App\Models\MobileNumberDetail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
@@ -88,6 +89,7 @@ class UserController extends Controller
                 $shift = '';
             }
             $editURL = URL::to('admin/user/edit' . '/' . $item->uid);
+            $viewURL = URL::to('admin/user/show' . '/' . $item->uid);
             if (!empty($item->attachment)) {
                 $img = URL::to('assets/user/landingPage/img/profilePicture' . '/' . $item->attachment);
             } else {
@@ -99,14 +101,14 @@ class UserController extends Controller
             $data['data'][$sl]['name'] = "<b class='text-primary'>$item->full_name</b>";
             $data['data'][$sl]['city'] = $item->current_city ?? "";
             $data['data'][$sl]['section'] = $item->section_name;
-            $data['data'][$sl]['shift'] = "<span class='$class'>$shift</span>";
+            $data['data'][$sl]['shift'] = "<span style='font-size:11px;' class='$class'>$shift</span>";
             if ($item->userType == 2) {
                 $data['data'][$sl]['action'] = "
                 <a class='user_delete' href='$item->uid' data-toggle='modal' data-target='#user-delete' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>";
             } else {
                 $data['data'][$sl]['action'] = "<a href='$editURL'><i class='fa fa-edit' style='font-size:14px; ''></i></a>
-                |
-                <a class='user_delete' href='$item->uid' data-toggle='modal' data-target='#user-delete' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>";
+                | <a href='$viewURL'><i class='fa fa-eye' style='font-size:14px; ''></i></a>
+                | <a class='user_delete' href='$item->uid' data-toggle='modal' data-target='#user-delete' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>";
             }
 
             $sl++;
@@ -131,6 +133,41 @@ class UserController extends Controller
             $data['user_details'] = $user_details[0];
         }
         return view('admin/user.edit', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+
+            $this->validate($request, [
+                'name' => 'required',
+
+            ]);
+            User::saveOrUpdate($request, $id);
+            DB::commit();
+            Session::flash('flashy__success', __('Updated Successfully!'));
+            return back();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()
+                ->withErrors($e->getMessage())
+                ->withInput($request->all);
+        }
+    }
+
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        $data = User::getMasterData($user);
+        $data['user'] = $user;
+
+        $user_details = $user->userDetails()->get();
+        $data['user_details'] = $user_details;
+        $data['mobile_details'] = $user->mobileNumberDetails()->get();
+        if (!$data['user_details']->isEmpty()) {
+            $data['user_details'] = $user_details[0];
+        }
+        return view('admin/user.view', $data);
     }
 
     public function destroy(Request $request)

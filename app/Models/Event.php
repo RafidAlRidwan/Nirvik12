@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class News extends Model
+class Event extends Model
 {
     use HasFactory;
-    protected $table = 'news';
+    protected $table = 'events';
     protected $fillable = [
-        'heading',
+        'title',
         'body',
-        'status'
+        'date',
+        'file'
     ];
 
     public static function saveOrUpdate($request, $id = null)
@@ -21,9 +22,9 @@ class News extends Model
 
         if (is_null($id)) {
             $requestData['status'] = 1;
-            $about = News::create($requestData);
+            $about = Event::create($requestData);
         } else {
-            $about = News::findOrFail($id);
+            $about = Event::findOrFail($id);
             $about->update($requestData);
         }
     }

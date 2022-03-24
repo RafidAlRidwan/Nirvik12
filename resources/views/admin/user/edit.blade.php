@@ -4,12 +4,12 @@
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <h1 class="m-0">Edit User</h1>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                 <ol class="breadcrumb float-sm-right">
-                    <!-- <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-primary">Add New</button> -->
+                    <a href={{route('admin_user_index')}}><button type="button" class="btn btn-primary">Back</button></a>
                 </ol>
             </div>
         </div>
@@ -18,7 +18,7 @@
 
 <section class="content p-2 ">
     <div class="container-fluid m-t-25 card p-3">
-        {!! Form::model($user, ['route' => ['user.update', $user->id],'method'=>'put', 'files' => true, 'class' => 'needs-validation', 'novalidate']) !!}
+        {!! Form::model($user, ['route' => ['admin.user.update', $user->id],'method'=>'put', 'files' => true, 'class' => 'needs-validation', 'novalidate']) !!}
         <input type="hidden" name="user_details_id" value="{{$user_details['id']}}">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
@@ -94,18 +94,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            @if(!empty($mobile_details))
-            @foreach($mobile_details as $key => $value)
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-                <div class="form-group">
-                    <label for="mobile">Mobile No. {{$key + 1}}</label>
-                    <input type="text" class="form-control" id="current_address" placeholder="" name="mobile[]" value="{{$value->mobile}}">
-                </div>
-            </div>
-            @endforeach
-            @endif
-        </div>
+        <!--  -->
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <div class="form-group">
