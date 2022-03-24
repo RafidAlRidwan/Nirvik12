@@ -89,6 +89,7 @@ class UserController extends Controller
                 $shift = '';
             }
             $editURL = URL::to('admin/user/edit' . '/' . $item->uid);
+            $viewURL = URL::to('admin/user/show' . '/' . $item->uid);
             if (!empty($item->attachment)) {
                 $img = URL::to('assets/user/landingPage/img/profilePicture' . '/' . $item->attachment);
             } else {
@@ -106,8 +107,8 @@ class UserController extends Controller
                 <a class='user_delete' href='$item->uid' data-toggle='modal' data-target='#user-delete' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>";
             } else {
                 $data['data'][$sl]['action'] = "<a href='$editURL'><i class='fa fa-edit' style='font-size:14px; ''></i></a>
-                |
-                <a class='user_delete' href='$item->uid' data-toggle='modal' data-target='#user-delete' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>";
+                | <a href='$viewURL'><i class='fa fa-eye' style='font-size:14px; ''></i></a>
+                | <a class='user_delete' href='$item->uid' data-toggle='modal' data-target='#user-delete' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>";
             }
 
             $sl++;
@@ -152,6 +153,21 @@ class UserController extends Controller
                 ->withErrors($e->getMessage())
                 ->withInput($request->all);
         }
+    }
+
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        $data = User::getMasterData($user);
+        $data['user'] = $user;
+
+        $user_details = $user->userDetails()->get();
+        $data['user_details'] = $user_details;
+        $data['mobile_details'] = $user->mobileNumberDetails()->get();
+        if (!$data['user_details']->isEmpty()) {
+            $data['user_details'] = $user_details[0];
+        }
+        return view('admin/user.view', $data);
     }
 
     public function destroy(Request $request)

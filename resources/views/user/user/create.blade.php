@@ -84,8 +84,8 @@
     FastClick.attach(document.body);
   });
 </script>
-<!-- File SELECT -->
 
+<!-- File SELECT -->
 <script src="{{asset('assets/user/landingPage/file-select/tower-file-input.js')}}"></script>
 
 <script type="text/javascript">

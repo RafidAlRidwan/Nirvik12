@@ -60,6 +60,7 @@ Route::put('/admin/about/update/{id}',
 Route::get('/admin/user_management', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin_user_index');
 Route::post('/admin/getdata', [App\Http\Controllers\Admin\UserController::class, 'user_datatable']);
 Route::get('/admin/user/edit/{id}', [App\Http\Controllers\Admin\UserController::class, 'edit']);
+Route::get('/admin/user/show/{id}', [App\Http\Controllers\Admin\UserController::class, 'show']);
 Route::post('/admin/user/delete', [App\Http\Controllers\Admin\UserController::class, 'destroy']);
 Route::put('/user/update/{id}',
             [

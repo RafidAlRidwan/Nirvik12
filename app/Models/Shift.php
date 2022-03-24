@@ -9,4 +9,12 @@ class Shift extends Model
 {
     use HasFactory;
     protected $table = 'shifts';
+
+    public static function shiftInfo($id = NULL)
+    {
+        if(!empty($id)){
+            $shift = Shift::where('id', $id)->first();
+            return $shift->name;
+        }
+    }
 }
