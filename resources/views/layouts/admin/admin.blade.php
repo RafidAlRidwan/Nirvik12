@@ -163,9 +163,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="{{asset('assets/admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Nirvik'12</span>
+    <a href="index3.html" class="brand-link text-center">
+      <!-- <img src="{{asset('assets/admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
+      <img height="60px" src="{{asset('assets/user/landingPage/img/logoW.png')}}" alt="" title=""></a>
     </a>
 
     <!-- Sidebar -->

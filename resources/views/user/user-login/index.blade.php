@@ -6,7 +6,7 @@
     {{Form::open(array('url' => 'login' , 'class' => 'box', 'method' => 'POST'))}}
     <img src="{{asset('assets/user/loginPage/img/bzs.png')}}">
     <!-- <h3 class="title">নির্ভীক '১২</h3> -->
-    <a href={{route('landingPage')}}><img src="{{asset('assets/user/landingPage/img/logon.png')}}" alt="TheEvenet"></a>
+    <a href={{route('landingPage')}}><img src="{{asset('assets/user/landingPage/img/logoW.png')}}" alt="TheEvenet"></a>
 
     <input type="text" name="name" placeholder="Username" autocomplete="off" class="input" required="">
 
