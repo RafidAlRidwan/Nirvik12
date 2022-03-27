@@ -1,4 +1,4 @@
-@extends('layouts.user.user_navbar')
+@extends('layouts.user.user-dashboard-master')
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/user/landingPage/css/datepicker.min.css') }}">

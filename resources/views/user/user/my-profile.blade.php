@@ -1,4 +1,4 @@
-@extends('layouts.user.user_navbar')
+@extends('layouts.user.user-dashboard-master')
 @section('style')
 <style>
   .tool1 {
@@ -60,16 +60,16 @@
         <div style="margin-top: 5px;" class="details">
           <div class="social">
             @if((Auth::user()->id) == $value->user_id)
-                <a href={{$url}} title1="Edit Profile" class="tool1"><i class="fa fa-pen-square"></i></a>
-                <a href=""><i class="fa fa-facebook"></i></a>
-                <a href=""><i class="fa fa-facebook"></i></a>
-                <a href=""><i class="fa fa-instagram"></i></a>
-                <a href=""><i class="fa fa-twitter"></i></a>
-                <a href={{$urlPassword}} title1="Change Password" class="tool1"><i class="fa fa-key"></i></a>
+            <a href={{$url}} title1="Edit Profile" class="tool1"><i class="fa fa-pen-square"></i></a>
+            <a href=""><i class="fa fa-facebook"></i></a>
+            <a href=""><i class="fa fa-facebook"></i></a>
+            <a href=""><i class="fa fa-instagram"></i></a>
+            <a href=""><i class="fa fa-twitter"></i></a>
+            <a href={{$urlPassword}} title1="Change Password" class="tool1"><i class="fa fa-key"></i></a>
             @else
-                <a href=""><i class="fa fa-facebook"></i></a>
-                <a href=""><i class="fa fa-instagram"></i></a>
-                <a href=""><i class="fa fa-twitter"></i></a>
+            <a href=""><i class="fa fa-facebook"></i></a>
+            <a href=""><i class="fa fa-instagram"></i></a>
+            <a href=""><i class="fa fa-twitter"></i></a>
             @endif
 
           </div>
