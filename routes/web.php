@@ -69,9 +69,20 @@ Route::put('/user/update/{id}',
             ]);
 
 // News MANAGEMENT
-Route::get('/admin/news/setting', [App\Http\Controllers\Admin\NewsController::class, 'index']);
+Route::get('/admin/news/setting', [App\Http\Controllers\Admin\NewsController::class, 'index'])->name('news_index');;
 Route::post('/admin/news/store', 'App\Http\Controllers\Admin\NewsController@store');
 Route::post('/admin/news/getdata', [App\Http\Controllers\Admin\NewsController::class, 'news_datatable']);
 Route::post('/admin/news/update', 'App\Http\Controllers\Admin\NewsController@update');
+Route::get('/admin/news/show/{id}', [App\Http\Controllers\Admin\NewsController::class, 'show']);
 Route::post('/admin/news/destroy', 'App\Http\Controllers\Admin\NewsController@destroy');
+
+// Event MANAGEMENT
+Route::get('/admin/event/setting', [App\Http\Controllers\Admin\EventController::class, 'index'])->name('event_index');
+Route::get('/admin/event/create', [App\Http\Controllers\Admin\EventController::class, 'create']);
+Route::post('/admin/event/store', 'App\Http\Controllers\Admin\EventController@store');
+Route::post('/admin/event/getdata', [App\Http\Controllers\Admin\EventController::class, 'news_datatable']);
+Route::get('/admin/event/edit/{id}', [App\Http\Controllers\Admin\EventController::class, 'edit']);
+Route::post('/admin/event/update', 'App\Http\Controllers\Admin\EventController@update');
+Route::get('/admin/event/show/{id}', [App\Http\Controllers\Admin\EventController::class, 'show']);
+Route::post('/admin/event/destroy', 'App\Http\Controllers\Admin\EventController@destroy');
 

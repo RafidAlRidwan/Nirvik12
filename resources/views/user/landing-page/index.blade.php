@@ -84,7 +84,7 @@
                             <div class="col-lg-6">
                                    <h2>About Nirvik'12</h2>
                                    @php
-                                   $about = App\Models\About::where('id' , 1)->first();
+                                          $about = App\Models\About::where('id' , 1)->first();
                                    @endphp
                                    <p>{!! $about->description !!}</p>
                             </div>
@@ -101,15 +101,18 @@
                      <div class="row justify-content-center">
                             <div class="col-lg-9">
                                    <ul id="faq-list">
+                                          @php
+                                                 $newsDetails = App\Models\News::all();
+                                          @endphp
                                           @isset($newsDetails)
-                                          @foreach ($newsDetails as $item)
-                                          <li>
-                                                 <a data-toggle="collapse" class="collapsed" href="#faq{{$item->id}}">{{$item->heading}}<i class="fa fa-minus-circle"></i></a>
-                                                 <div id="faq{{$item->id}}" class="collapse" data-parent="#faq-list">
-                                                        {!!$item->body!!}
-                                                 </div>
-                                          </li>
-                                          @endforeach
+                                                 @foreach ($newsDetails as $item)
+                                                        <li>
+                                                               <a data-toggle="collapse" class="collapsed" href="#faq{{$item->id}}">{{$item->heading}}<i class="fa fa-minus-circle"></i></a>
+                                                               <div id="faq{{$item->id}}" class="collapse" data-parent="#faq-list">
+                                                                      {!!$item->body!!}
+                                                               </div>
+                                                        </li>
+                                                 @endforeach
                                           @endisset
 
                                           <a style="text-align: center;" class="text-danger pt-1 mb-0 {{ isset($newsDetails) && !$newsDetails->isEmpty() ? "d-none" : "" }}" id="notice-tools-technology-info" role="notice">
@@ -129,106 +132,64 @@
                             <!-- <p>Her are some nearby hotels</p> -->
                      </div>
                      <div style="justify-content: center" class="row">
-                            <div class="col-lg-6 col-md-6 mb-4">
-                                   <article style="margin-bottom: 10px;" class="hotel event-card">
-                                          <section class="date">
-                                                 <time datetime="23th feb">
-                                                        <span>23</span><span>feb</span>
-                                                 </time>
-                                          </section>
-                                          <section class="card-cont">
-                                                 <small>dj khaled</small>
-                                                 <h3>live in sydney</h3>
-                                                 <div class="even-date">
-                                                        <i class="fa fa-calendar"></i>
-                                                        <time>
-                                                               <span>wednesday 28 december 2014</span>
-                                                               <span>08:55pm to 12:00 am</span>
+                            @php
+                                   $event = App\Models\Event::whereDate('date', '>', date('Y-m-d'))->get();
+                            @endphp
+                            @isset($event)
+                                   @foreach ($event as $item)
+                                   <div class="col-lg-4 col-md-6 mb-4">
+                                          <article style="margin-bottom: 10px; justify-content: center" class="hotel event-card">
+                                                 @php
+                                                        $date_format_1 = date('m', strtotime($item->date ?? ''));
+                                                        $date_format_2 = date('d', strtotime($item->date ?? ''));
+                                                        $date_format_3 = date('h:i A', strtotime($item->time ?? ''));
+                                                        $date_format_4 = $item->date->format('l') ?? '';
+                                                        $date_format_5 = date('d F Y', strtotime($item->date ?? ''));
+                                                 @endphp
+                                                 <section class="date">
+                                                        <time datetime="23th feb">
+                                                               <span>{{$date_format_2}}</span><span>{{$date_format_1}}</span>
                                                         </time>
-                                                 </div>
-                                                 <div class="even-info">
-                                                        <i class="fa fa-map-marker"></i>
-                                                        <p>
-                                                               nexen square for people australia, sydney
-                                                        </p>
-                                                 </div>
-                                                 <a href="#" data-toggle='modal' data-target='#exampleModalCenter'>Details</a>
-                                          </section>
-                                   </article>
-                            </div>
+                                                 </section>
+                                                 <section class="card-cont">
+                                                        <small><strong>{{$item->title}}</strong></small>
+                                                        <div class="even-date">
+                                                               <i class="fa fa-calendar pr-2"> </i>
+                                                               <time>
+                                                                      <span>{{$date_format_3 ?? 'Full Day'}}, {{ $date_format_4}}, {{$date_format_5}}</span>
+                                                               </time>
+                                                        </div>
+                                                        <div class="even-info">
+                                                               <i class="fa fa-map-marker"></i>
+                                                               <p>
+                                                                      {{$item->venue}}
+                                                               </p>
+                                                        </div>
+                                                        <div>
+                                                               <a class="eventData" href={{$item->id}} data-toggle='modal' data-target='#event-details' title='{{$item->title}}' body='{!! $item->description !!}'>Details</a>
+                                                        </div>
+                                                 </section>
+                                          </article>
+                                   </div>
+                                   @endforeach
+                            @endisset
 
-                            <div class="col-lg-6 col-md-6 mb-4">
-                                   <article class="hotel event-card">
-                                          <section class="date">
-                                                 <time datetime="23th feb">
-                                                        <span>05</span><span>March</span>
-                                                 </time>
-                                          </section>
-                                          <section class="card-cont">
-                                                 <small>dj khaled</small>
-                                                 <h3>live in Seaol</h3>
-                                                 <div class="even-date">
-                                                        <i class="fa fa-calendar"></i>
-                                                        <time>
-                                                               <span>wednesday 28 december 2014</span>
-                                                               <span>08:55pm to 12:00 am</span>
-                                                        </time>
-                                                 </div>
-                                                 <div class="even-info">
-                                                        <i class="fa fa-map-marker"></i>
-                                                        <p>
-                                                               nexen square for people australia, sydney
-                                                        </p>
-                                                 </div>
-                                                 <a href="#" data-toggle='modal' data-target='#exampleModalCenter'>Details</a>
-                                          </section>
-                                   </article>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 mb-4">
-                                   <article class="hotel event-card">
-                                          <section class="date">
-                                                 <time datetime="23th feb">
-                                                        <span>16</span><span>June</span>
-                                                 </time>
-                                          </section>
-                                          <section class="card-cont">
-                                                 <small>dj khaled</small>
-                                                 <h3>live in Canada</h3>
-                                                 <div class="even-date">
-                                                        <i class="fa fa-calendar"></i>
-                                                        <time>
-                                                               <span>wednesday 28 december 2014</span>
-                                                               <span>08:55pm to 12:00 am</span>
-                                                        </time>
-                                                 </div>
-                                                 <div class="even-info">
-                                                        <i class="fa fa-map-marker"></i>
-                                                        <p>
-                                                               nexen square for people australia, sydney
-                                                        </p>
-                                                 </div>
-                                                 <a href="#" data-toggle='modal' data-target='#exampleModalCenter'>Details</a>
-                                          </section>
-                                   </article>
-                            </div>
                      </div>
               </div>
 
               <!-- Button trigger modal -->
-              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal fade" id="event-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                      <div class="modal-dialog modal-dialog-centered" role="document">
                             <div style="background: white; background: linear-gradient( to right bottom,
                             rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3)); border-radius: 1rem; z-index: 2; backdrop-filter: blur(2rem);" class="modal-content">
                                    <div class="modal-header">
-                                          <h5 style="color: #f82249; font-weight: bold;" class="modal-title" id="exampleModalCenterTitle">Event title</h5>
+                                          <h5 style="color: #f82249; font-weight: bold;" class="modal-title title" id="exampleModalCenterTitle"></h5>
                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                  <span aria-hidden="true">&times;</span>
                                           </button>
                                    </div>
-                                   <div style="color: #000;" class="modal-body">
+                                   <div style="color: #000;" class="modal-body body">
 
-                                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </div>
                                    <div class="modal-footer">
 
                                    </div>
@@ -298,4 +259,18 @@
 @section('footer')
        <!-- ======= Footer ======= -->
        @include('layouts.user.landing-page.footer')
+@endsection
+@section('main-script')
+<script>
+       // Event
+       $(".eventData").click(function(){
+       var title = $(this).attr('title');
+       var body = $(this).attr('body');
+       var bodyData = body.replace(/<[^>]+>/g, '').replace(/<\/p>/gi, "\n").replace(/<br\/?>/gi, "\n").replace(/<\/?[^>]+(>|$)/g, "");;
+
+       $('.title').text(title);
+       $('.body').text(bodyData);
+       
+       });
+</script>
 @endsection
