@@ -11,21 +11,23 @@ class Event extends Model
     protected $table = 'events';
     protected $fillable = [
         'title',
-        'body',
+        'description',
         'date',
-        'file'
+        'venue',
+        'time'
     ];
+
+    protected $dates = ['date', 'time'];
 
     public static function saveOrUpdate($request, $id = null)
     {
         $requestData = $request->all();
 
         if (is_null($id)) {
-            $requestData['status'] = 1;
-            $about = Event::create($requestData);
+            Event::create($requestData);
         } else {
-            $about = Event::findOrFail($id);
-            $about->update($requestData);
+            $event = Event::findOrFail($id);
+            $event->update($requestData);
         }
     }
 }

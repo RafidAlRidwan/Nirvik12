@@ -141,7 +141,7 @@
                     <li class="p-3"><a href="#"><i class="fas fa-user"></i> {{Auth::user()->name ?? NULL}}</a></li>
                     <li class="p-3"><a href="#"><i class="fas fa-sliders-h"></i> Settings</a></li>
                     <li class="p-3"><a onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Signout</a></li>
+                    document.getElementById('logout-form').submit();" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Signout</a></li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                       @csrf
                     </form>
@@ -255,7 +255,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{URL::to('/admin/news/setting')}}" class="nav-link <?php if ($path == 'admin/news/setting') {
+            <a href="{{URL::to('/admin/event/setting')}}" class="nav-link <?php if ($path == 'admin/event/setting') {
                                                                             echo "active";
                                                                           } else {
                                                                             echo "";

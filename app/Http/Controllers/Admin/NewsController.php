@@ -34,25 +34,6 @@ class NewsController extends Controller
                 "news.*",
             );
 
-        // if (isset($request->section) && $request->section > 0) {
-        //     if ($request->section == "Select All Section") {
-        //         $product_data->where('users.type', '>', 2);
-        //     } else {
-        //         $product_data->where('sections.name', $request->section);
-        //     }
-        // }
-        // if (isset($request->shift) && $request->shift > 0) {
-        //     if ($request->shift == "Select All Shift") {
-        //         $product_data->where('users.type', '>', 2);
-        //     } else {
-        //         $product_data->where('shifts.name', $request->shift);
-        //     }
-        // }
-
-        // if (isset($request->name) && $request->name > 0) {
-        //     $product_data->where('full_name', 'LIKE', '%' . $request->name . '%');
-        // }
-
         $data['recordsTotal'] = $product_data->count();
         $data['recordsFiltered'] = $product_data->count();
         $product_data->limit($request->length)->offset($request->start);
@@ -76,7 +57,7 @@ class NewsController extends Controller
                 $class = "";
                 $status = '';
             }
-            $editURL = URL::to('admin/user/edit' . '/' . $item->uid);
+            $viewURL = URL::to('admin/news/show' . '/' . $item->id);
             
             $data['data'][$sl]['serial'] = $serial;
             $data['data'][$sl]['heading'] = $item->heading ?? "";
@@ -84,7 +65,8 @@ class NewsController extends Controller
             $data['data'][$sl]['status'] = "<span style='font-size:11px;' class='$class'>$status</span>";
             $data['data'][$sl]['action'] = "<a class='news_edit' href='$item->id' data-toggle='modal' data-target='#news_edit_modal' heading=' $item->heading' body='$item->body' status_val='$item->status'><i class='fa fa-edit' style='font-size:14px; ''></i></a>
                 |
-                <a class='news_delete' href='$item->id' data-toggle='modal' data-target='#news_delete_modal' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>";
+                <a href='$viewURL'><i class='fa fa-eye' style='font-size:14px; ''></i></a>
+                | <a class='news_delete' href='$item->id' data-toggle='modal' data-target='#news_delete_modal' style='border: none; background: none;' > <i class='fa fa-trash'></i> </a>";
 
             $sl++;
             $serial++;
@@ -136,6 +118,14 @@ class NewsController extends Controller
                 ->withErrors($e->getMessage())
                 ->withInput($request->all);
         }
+    }
+
+    public function show($id)
+    {
+        $news = News::findOrFail($id);
+        $data['news'] = $news;
+
+        return view('admin/news.view', $data);
     }
 
     public function destroy(Request $request)

@@ -27,11 +27,8 @@ class UserController extends Controller
         if (Auth::user()->type == 3) {
             $data = User::getMasterData();
             return view('user/user.index', $data);
-        } elseif (Auth::user()->type == 1) {
-            return view('admin/dashboard.index');
         } else {
-            $data = User::getMasterData();
-            return view('user/user.index', $data);
+            return view('admin/dashboard.index');
         }
     }
 

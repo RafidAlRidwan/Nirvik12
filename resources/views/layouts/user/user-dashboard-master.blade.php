@@ -66,18 +66,12 @@
 
 <body>
 
-
-
-    <!--==========================
-    Header
-  ============================-->
+    <!--==========================Header============================-->
     <header id="header" class="header-fixed">
         <div class="container">
 
             <div id="logo" class="pull-left">
-                <!-- Uncomment below if you prefer to use a text logo -->
-                <!-- <h1><a href="#main">C<span>o</span>nf</a></h1>-->
-                <a href="#intro" class="scrollto"><img src="{{asset('assets/user/landingPage/img/logo.png')}}" alt="" title=""></a>
+                <a href="#intro" class="scrollto"><img src="{{asset('assets/user/landingPage/img/logoW.png')}}" alt="" title=""></a>
             </div>
 
             <nav id="nav-menu-container">
@@ -98,14 +92,14 @@
                                     echo "";
                                 } ?>"><a href="{{$url}}" class="">My Profile</a></li>
                     <li class="buy-tickets"><a onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();" href="{{ route('logout') }}">logout</a></li>
+                    document.getElementById('logout-form').submit();" href="{{ route('logout') }}">logout</a></li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
                 </ul>
-            </nav><!-- #nav-menu-container -->
+            </nav>
         </div>
-    </header><!-- #header -->
+    </header>
 
     <main id="main" class="main-page">
 
@@ -155,56 +149,7 @@
 
     <!-- Notification -->
     <script src="{{asset('assets/user/landingPage/notification/js/flashy.min.js')}}"></script>
-    <script type="text/javascript">
-        // $('[class=flashy__success]').click(function() {
-        //        flashy('Success Message', {
-        //          type : 'flashy__success'
-        //        });
-        //      });
-
-        //      $('[class=flashy__danger]').click(function() {
-        //        flashy('Danger Message', {
-        //          type : 'flashy__danger'
-        //        });
-        //      });
-
-        //      $('[class=flashy__warning]').click(function() {
-        //        var d = flashy('Warning Message', {
-        //          type : 'flashy__warning',
-        //          stop : true
-        //        });
-        //      });
-        //      $('[class=flashy__info]').click(function() {
-        //        var d = flashy('Info Message', {
-        //          type : 'flashy__info'
-        //        });
-        //      });
-
-        <?php if ($message = Session::get('flashy__info')) : ?>
-            flashy('<?php echo " $message" ?>', {
-                type: 'flashy__info'
-            });
-        <?php endif ?>
-
-        <?php if ($message = Session::get('flashy__warning')) : ?>
-            flashy('<?php echo " $message" ?>', {
-                type: 'flashy__warning'
-            });
-        <?php endif ?>
-
-        <?php if ($message = Session::get('flashy__danger')) : ?>
-            flashy('<?php echo " $message" ?>', {
-                type: 'flashy__danger'
-            });
-        <?php endif ?>
-
-        <?php if ($message = Session::get('flashy__success')) : ?>
-            flashy('<?php echo " $message" ?>', {
-                type: 'flashy__success'
-            });
-        <?php endif ?>
-    </script>
-
+    @include('layouts.user.landing-page.message')
 
     </div>
 </body>

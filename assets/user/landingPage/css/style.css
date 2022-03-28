@@ -44,7 +44,7 @@ h6 {
   font-weight: 400;
   margin: 0 0 20px 0;
   padding: 0;
-  color: #0e1b4d;
+  color: #f82249;
 }
 
 .main-page {
@@ -161,6 +161,7 @@ h6 {
 #header.header-scrolled,
 #header.header-fixed {
   background: rgba(6, 12, 34, 0.98);
+  border-bottom: 2px solid rgb(248, 34, 73);
   height: 70px;
   padding: 15px 0;
   transition: all 0.5s;
@@ -1041,13 +1042,12 @@ body.mobile-nav-active #mobile-nav-toggle {
   border: 1px solid #e0e5fa;
   border-radius: 10px;
   background: #fff;
-  margin-bottom: 30px;
   transition: 0.9s ease;
   cursor: pointer;
 }
 #hotels .hotel:hover {
   transform: scale(1.03);
-  box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+  /* box-shadow: 5px 5px 15px rgba(0,0,0,0.6); */
 }
 
 #hotels .hotel:hover .hotel-img img {
@@ -1074,11 +1074,11 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #hotels a {
-  color: #152b79;
+  color: #fff;
 }
 
 #hotels a:hover {
-  color: #f82249;
+  color: #000;
 }
 
 #hotels .stars {
@@ -1825,6 +1825,23 @@ body.mobile-nav-active #mobile-nav-toggle {
 
     }
 
+}
+
+
+@media screen and (max-width: 860px) {
+  .event-card {
+      display: block;
+      float: none;
+      width: 100%;
+      margin-bottom: 10px;
+  }
+  .event-card+.event-card {
+      margin-left: 0
+  }
+  .card-cont .even-date,
+  .card-cont .even-info {
+      font-size: 75%
+  }
 }
 
 @media (max-width: 768px) {

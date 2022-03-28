@@ -27,8 +27,8 @@
           <thead style="color:#fff; background: #4ed2c5;">
             <tr>
               <th>Serial</th>
-              <th>Heading</th>
-              <th>Body</th>
+              <th>Title</th>
+              <th>Description</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -39,8 +39,8 @@
           <tfoot>
             <tr>
               <th>Serial</th>
-              <th>Heading</th>
-              <th>Body</th>
+              <th>Title</th>
+              <th>Description</th>
               <th>Status</th>
               <th>Action</th>
             </tr>
@@ -65,11 +65,11 @@
       <div class="modal-body">
         <div class="card-body">
           <div class="form-group">
-            <label for="exampleInputEmail1">Heading</label>
+            <label for="exampleInputEmail1">Title</label>
             <input type="text" name="heading" class="form-control" required="">
           </div>
           <div class="form-group">
-            <label for="exampleSelectBorder">Body</label>
+            <label for="exampleSelectBorder">Description</label>
             <textarea name="body" id="summernote"></textarea>
           </div>
         </div>
@@ -99,11 +99,11 @@
         <div class="card-body">
           <input type="hidden" name="id" id="news_id">
           <div class="form-group">
-            <label for="exampleInputEmail1">Heading</label>
+            <label for="exampleInputEmail1">Title</label>
             <input type="text" name="heading" class="form-control" id="heading" required="">
           </div>
           <div class="form-group">
-            <label for="exampleSelectBorder">Body</label>
+            <label for="exampleSelectBorder">Description</label>
             <textarea name="body" id="summernote2"></textarea>
           </div>
           <div class="form-group">
