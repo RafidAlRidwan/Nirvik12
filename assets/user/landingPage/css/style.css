@@ -1050,7 +1050,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   /* box-shadow: 5px 5px 15px rgba(0,0,0,0.6); */
 }
 
-#hotels .hotel:hover .hotel-img img {
+/* #hotels .hotel:hover .hotel-img img {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
@@ -1071,7 +1071,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-size: 20px;
   margin-bottom: 5px;
   padding: 0 20px;
-}
+} */
 
 #hotels a {
   color: #fff;
@@ -1081,7 +1081,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: #000;
 }
 
-#hotels .stars {
+/* #hotels .stars {
   padding: 0 20px;
   margin-bottom: 5px;
 }
@@ -1096,7 +1096,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: #060c22;
   font-style: italic;
   font-size: 15px;
-}
+} */
 
 /*--------------------------------------------------------------
 # Gallery Section

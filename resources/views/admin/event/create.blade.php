@@ -46,13 +46,13 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Time</label>
-                    <input type="time" class="form-control" name="time" id="time"  placeholder="">
+                    <input type="time" class="form-control" name="time" id="time"  placeholder="" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Date</label>
-                    <input type="date" class="form-control datepicker" data-date-format="mm/dd/yyyy" name="date" id="date" autocomplete="off"  placeholder="">
+                    <input type="date" class="form-control datepicker" data-date-format="mm/dd/yyyy" name="date" id="date" autocomplete="off"  placeholder="" required>
                 </div>
             </div>
         </div>

@@ -76,7 +76,7 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         try {
             $this->validate($request, [
                 'title' => ['required'],
@@ -101,12 +101,13 @@ class EventController extends Controller
     {
         $event = Event::findOrFail($id);
         $data['event'] = $event;
-        $data['date'] = date('h:i:s', strtotime($event->time));
+        $data['date'] = date('H:i', strtotime($event->time));
         return view('admin/event.edit', $data);
     }
 
     public function update(Request $request)
     {
+        // dd($request->all());
         try {
             $id = $request->id;
             $this->validate($request, [

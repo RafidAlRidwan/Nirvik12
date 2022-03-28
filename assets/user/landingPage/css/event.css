@@ -100,7 +100,7 @@
 }
 
 .card-cont .even-info p {
-    padding: 30px 50px 0 0;
+    /* padding: 30px 50px 0 0; */
 }
 
 .card-cont .even-date time span {
@@ -108,7 +108,7 @@
 }
 
 .card-cont a {
-    display: block;
+    display: inline;
     text-decoration: none;
     width: 80px;
     height: 30px;

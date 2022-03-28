@@ -140,7 +140,7 @@
                                    <div class="col-lg-4 col-md-6 mb-4">
                                           <article style="margin-bottom: 10px; justify-content: center" class="hotel event-card">
                                                  @php
-                                                        $date_format_1 = date('m', strtotime($item->date ?? ''));
+                                                        $date_format_1 = date('M', strtotime($item->date ?? ''));
                                                         $date_format_2 = date('d', strtotime($item->date ?? ''));
                                                         $date_format_3 = date('h:i A', strtotime($item->time ?? ''));
                                                         $date_format_4 = $item->date->format('l') ?? '';
