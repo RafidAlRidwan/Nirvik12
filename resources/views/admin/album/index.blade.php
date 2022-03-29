@@ -6,21 +6,11 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-        <h1 class="m-0">Gallery Management</h1>
+        <h1 class="m-0">Album Management</h1>
       </div>
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
         <ol class="breadcrumb float-sm-right">
-          <div class="dropdown show mr-3">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Create Album
-            </a>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" data-toggle="modal" data-target="#album_modal">Add</a>
-              <a class="dropdown-item" href="#">View All</a>
-            </div>
-          </div>
-          <a href={{URL::to('admin/gallery/create')}}><button type="button" class="btn btn-primary">+ Add New</button></a>
+          <a><button type="button" data-toggle="modal" data-target="#album_modal" class="btn btn-primary">+ Add New</button></a>
         </ol>
       </div>
     </div>
@@ -38,7 +28,6 @@
             <tr>
               <th>Serial</th>
               <th>Title</th>
-              <th>Picture</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -49,7 +38,6 @@
             <tr>
             <th>Serial</th>
               <th>Title</th>
-              <th>Picture</th>
               <th>Action</th>
             </tr>
           </tfoot>

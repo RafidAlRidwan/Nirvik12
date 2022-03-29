@@ -60,7 +60,7 @@
                 <div id="edit-img" class="tower-file">
                     <div class=" tower-file-details">
                         <div class="tower-input-preview-container">
-                            <img class="null" src="{{asset('assets/user/landingPage/img/gallery')}}/{{ ($gallery->attachment) }}">
+                            <img class="null" src="{{asset($gallery->attachment)}}">
                         </div>
                     </div>
                 </div>

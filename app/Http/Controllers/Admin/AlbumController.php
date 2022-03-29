@@ -9,13 +9,14 @@ use Session;
 use Redirect;
 use validate;
 use App\Models\News;
+use App\Models\Album;
 use App\Models\Event;
 use App\Models\Gallery;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class GalleryController extends Controller
+class AlbumController extends Controller
 {
     public function __construct()
     {
@@ -24,12 +25,7 @@ class GalleryController extends Controller
     }
     public function index()
     {
-        return view('admin/gallery.index');
-    }
-
-    public function create()
-    {
-        return view('admin/gallery.create');
+        return view('admin/album.index');
     }
 
     public function news_datatable(Request $request)
@@ -75,10 +71,10 @@ class GalleryController extends Controller
     {
         try {
             $this->validate($request, [
-                'attachment' => ['required']
+                'title' => ['required']
             ]);
             DB::beginTransaction();
-            Gallery::saveOrUpdate($request);
+            Album::saveOrUpdate($request);
             DB::commit();
             Session::flash('flashy__success', __('Saved Successfully!'));
 
