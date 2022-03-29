@@ -13,8 +13,9 @@ use App\Models\Event;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Gallery;
 
-class EventController extends Controller
+class GalleryController extends Controller
 {
     public function __construct()
     {
@@ -23,20 +24,20 @@ class EventController extends Controller
     }
     public function index()
     {
-        return view('admin/event.index');
+        return view('admin/gallery.index');
     }
 
     public function create()
     {
-        return view('admin/event.create');
+        return view('admin/gallery.create');
     }
 
     public function news_datatable(Request $request)
     {
         $searchString = $request->search['value'];
-        $product_data = Event::query()
+        $product_data = Gallery::query()
             ->select(
-                "events.*",
+                "galleries.*",
             );
 
         $data['recordsTotal'] = $product_data->count();
@@ -52,15 +53,13 @@ class EventController extends Controller
 
         foreach ($product_data_list as $item) {
 
-            $editURL = URL::to('admin/event/edit' . '/' . $item->id);
-            $viewURL = URL::to('admin/event/show' . '/' . $item->id);
+            $editURL = URL::to('admin/gallery/edit' . '/' . $item->id);
+            $viewURL = URL::to('admin/gallery/show' . '/' . $item->id);
+            $img = URL::to('assets/user/landingPage/img/gallery' . '/' . $item->attachment);
 
             $data['data'][$sl]['serial'] = $serial;
             $data['data'][$sl]['title'] = $item->title ?? "";
-            $data['data'][$sl]['body'] = $item->description ?? "";
-            $data['data'][$sl]['venue'] = $item->venue ?? "";
-            $data['data'][$sl]['time'] = date('h:i A', strtotime($item->time ?? ''));
-            $data['data'][$sl]['date'] = date('d, F, Y', strtotime($item->date ?? '')); 
+            $data['data'][$sl]['image'] = "<img style='border: 1px solid #ddd; border-radius:5px; width: 45px; height:45px; ' src='$img' alt='image' class='responsive'>";
             $data['data'][$sl]['action'] = "<a class='event_edit' href='$editURL'><i class='fa fa-edit' style='font-size:14px; ''></i></a>
                 | <a href='$viewURL'><i class='fa fa-eye' style='font-size:14px; ''></i></a>
                 |<a class='event_delete' href='$item->id' data-toggle='modal' data-target='#event_delete_modal' style='border: none; background: none;' > <i class='fa fa-trash'></i> </a>";
@@ -76,14 +75,13 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         try {
             $this->validate($request, [
-                'title' => ['required'],
-                'venue' => ['required']
+                'attachment' => ['required']
             ]);
             DB::beginTransaction();
-            Event::saveOrUpdate($request);
+            Gallery::saveOrUpdate($request);
             DB::commit();
             Session::flash('flashy__success', __('Saved Successfully!'));
 
@@ -99,10 +97,9 @@ class EventController extends Controller
 
     public function edit($id)
     {
-        $event = Event::findOrFail($id);
-        $data['event'] = $event;
-        $data['date'] = date('H:i', strtotime($event->time));
-        return view('admin/event.edit', $data);
+        $gallery = Gallery::findOrFail($id);
+        $data['gallery'] = $gallery;
+        return view('admin/gallery.edit', $data);
     }
 
     public function update(Request $request)
@@ -111,16 +108,15 @@ class EventController extends Controller
         try {
             $id = $request->id;
             $this->validate($request, [
-                'title' => ['required'],
-                'venue' => ['required']
+                'attachment' => ['required'],
             ]);
             DB::beginTransaction();
-            Event::saveOrUpdate($request, $id);
+            Gallery::saveOrUpdate($request, $id);
             DB::commit();
             Session::flash('flashy__success', __('Updated Successfully!'));
 
             // Redirect to edit mode.
-            return Redirect::route('event_index');
+            return Redirect::route('gallery_index');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()

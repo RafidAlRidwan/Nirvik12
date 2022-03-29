@@ -25,36 +25,36 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label for="name">Title</label>
-                    <input type="text" class="form-control" name="title" value={{$event->title}} id="title" placeholder="" required>
+                    <input type="text" class="form-control" name="title" value='{{$event->title}}' id="title" placeholder="" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Venue</label>
-                    <input type="text" class="form-control" name="venue" id="venue" value={{$event->venue}}  placeholder="" required>
+                    <input type="text" class="form-control" name="venue" id="venue" value='{{$event->venue}}'  placeholder="" required>
                 </div>
             </div>
             
         </div>
         <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-              <div class="form-group">
-                <label for="description">Description</label>
-                <textarea name="description" id="summernote" >{{$event->description}}</textarea>
-              </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="summernote" >{{$event->description}}</textarea>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Time</label>
-                    <input type="time" class="form-control" name="time" value={{$date}} id="time"  placeholder="">
+                    <input type="time" class="form-control" name="time" value={{$date}} id="time"  placeholder="" required>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Date</label>
-                    <input type="date" class="form-control datepicker" value={{$event->date}} data-date-format="mm/dd/yyyy" name="date" id="date" autocomplete="off"  placeholder="">
+                    <input type="date" class="form-control datepicker" value={{$event->date}} data-date-format="mm/dd/yyyy" name="date" id="date" autocomplete="off"  placeholder="" required>
                 </div>
             </div>
         </div>
