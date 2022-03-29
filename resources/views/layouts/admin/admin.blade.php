@@ -268,7 +268,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{URL::to('/admin/news/setting')}}" class="nav-link <?php if ($path == 'admin/news/setting') {
+            <a href="{{URL::to('/admin/gallery/setting')}}" class="nav-link <?php if ($path == 'admin/gallery/setting') {
                                                                             echo "active";
                                                                           } else {
                                                                             echo "";
@@ -314,6 +314,8 @@
 
   <!-- jQuery -->
   <script src="{{asset('assets/admin/plugins/jquery/jquery-3.6.0.min.js')}}"></script>
+  <!-- jQuery Validate-->
+  <script src="{{asset('assets/admin/plugins/jquery/jquery.validate.js')}}"></script>
   <!-- jQuery UI 1.11.4 -->
   <script src="{{asset('assets/admin/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

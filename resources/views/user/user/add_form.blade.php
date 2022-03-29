@@ -164,10 +164,6 @@
 </div>
 
 <div class="row">
-
-
-
-
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <label>Marital Status</label>
         {!! Form::select('marital_status', $marital_status, null, ['placeholder'=>__('Select a Status') , 'class'=>'wide changeStatus', ($errors->has('marital_status') ? 'is-invalid' : ''), 'required']) !!}
@@ -201,7 +197,6 @@
         </div>
 
     </div>
-
 
 </div>
 
