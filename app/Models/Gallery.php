@@ -19,7 +19,6 @@ class Gallery extends Model
     public static function saveOrUpdate($request, $id = null)
     {
         $requestData = $request->all();
-        // dd($requestData['attachment']);
 
         if (is_null($id)) {
             
@@ -27,24 +26,31 @@ class Gallery extends Model
                 $image = $requestData['attachment'];
                 $unique_date = date_timestamp_get(date_create());
                 $filename = $unique_date . $image->getClientOriginalName();
+                $path = ('assets/user/landingPage/img/gallery/');
                 $image_resize = Image::make($image->getRealPath());
                 $image_resize->resize(800, 600);
-                $image_resize->save('assets/user/landingPage/img/gallery/' . $filename);
-                $requestData['attachment'] = $filename ?? NULL;
+                $main_path = $path.$filename;
+                $image_resize->save($main_path);
+                $requestData['attachment'] = $main_path ?? NULL;
             }
             $gallery = Gallery::create($requestData);
         } else {
 
-            // dd($requestData);
             $gallery = Gallery::findOrFail($id);
+            $image_path = $gallery->attachment; 
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
             if (!empty($requestData['attachment'])) {
                 $image = $requestData['attachment'];
                 $unique_date = date_timestamp_get(date_create());
                 $filename = $unique_date . $image->getClientOriginalName();
+                $path = ('assets/user/landingPage/img/gallery/');
                 $image_resize = Image::make($image->getRealPath());
                 $image_resize->resize(800, 600);
-                $image_resize->save('assets/user/landingPage/img/gallery/' . $filename);
-                $requestData['attachment'] = $filename ?? NULL;
+                $main_path = $path.$filename;
+                $image_resize->save($main_path);
+                $requestData['attachment'] = $main_path ?? NULL;
             }
             $gallery->update($requestData);
         }

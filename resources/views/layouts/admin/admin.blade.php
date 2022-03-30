@@ -275,13 +275,23 @@
                                                                           } ?>">
               <i class="nav-icon far fa-image"></i>
               <p>
-                Galary Settings
+              Gallery Settings
               </p>
             </a>
           </li>
 
-
-
+          <li class="nav-item">
+            <a href="{{URL::to('/admin/cover-page/setting')}}" class="nav-link <?php if ($path == 'admin/cover-page/setting') {
+                                                                            echo "active";
+                                                                          } else {
+                                                                            echo "";
+                                                                          } ?>">
+              <i class="nav-icon fa fa-clone"></i>
+              <p>
+                Cover Page Settings
+              </p>
+            </a>
+          </li>
 
         </ul>
       </nav>
