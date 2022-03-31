@@ -17,7 +17,7 @@
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <a class="dropdown-item" data-toggle="modal" data-target="#album_modal">Add</a>
-              <a class="dropdown-item" href="#">View All</a>
+              <a class="dropdown-item" href={{URL::to('admin/album/setting')}}>View All</a>
             </div>
           </div>
           <a href={{URL::to('admin/gallery/create')}}><button type="button" class="btn btn-primary">+ Add New</button></a>
@@ -38,6 +38,7 @@
             <tr>
               <th>Serial</th>
               <th>Title</th>
+              <th>Album</th>
               <th>Picture</th>
               <th>Action</th>
             </tr>
@@ -49,6 +50,7 @@
             <tr>
             <th>Serial</th>
               <th>Title</th>
+              <th>Album</th>
               <th>Picture</th>
               <th>Action</th>
             </tr>
@@ -126,6 +128,9 @@
         },
         {
           "data": "title"
+        },
+        {
+          "data": "album"
         },
         {
           "data": "image"

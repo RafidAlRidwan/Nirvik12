@@ -1,5 +1,23 @@
 @extends('layouts.admin.admin')
 
+@section('style')
+<style>
+  .paginate svg {
+    overflow: hidden;
+    vertical-align: middle;
+    width: 30px;
+  }
+  .paginate p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .paginate div {
+    display: block;
+    text-align: center;
+  }
+</style>
+@endsection
 @section('content')
 
 <div class="content-header">
@@ -32,23 +50,65 @@
             </tr>
           </thead>
           <tbody>
-
+            @foreach($album as $items)
+            <tr>
+              <td>{{$loop->iteration}}</td>
+              <td>{{$items->title}}</td>
+              <td><a class="album_edit" href={{$items->id}} title='{{$items->title}}' data-toggle='modal' data-target='#album_edit_modal'><i class='fa fa-edit' style='font-size:14px;'></i></a>
+                | <a class='album_delete' href={{$items->id}}  data-toggle='modal' data-target='#album_delete_modal' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>
+              </td>
+            </tr>
+            @endforeach
           </tbody>
           <tfoot>
             <tr>
-            <th>Serial</th>
+              <th>Serial</th>
               <th>Title</th>
               <th>Action</th>
             </tr>
           </tfoot>
         </table>
+        {{-- Pagination --}}
+        <div class="d-flex justify-content-center paginate">
+            {!! $album->links() !!}
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- EDIT MODAL -->
+<div class="modal fade" id="album_edit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Update Album</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {!! Form::open(['action' => ['App\Http\Controllers\Admin\AlbumController@update'], 'id'=>'edit_news', 'files' => true, 'class' => 'needs-validation']) !!}
+      <div class="modal-body">
+        <div class="card-body">
+          <input type="hidden" name="id" id="album_id">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Title</label>
+            <input type="text" name="title" class="form-control" id="title" required="">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+      {!! Form::close() !!}
+    </div>
+  </div>
+</div>
+<!-- EDIT MODAL ADD -->
+
 <!-- Modal Delete-->
-<div class="modal fade" id="gallery_delete_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="album_delete_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -59,12 +119,12 @@
       </div>
       <div class="modal-body">
 
-        {{ Form::open(array('url' => 'admin/gallery/destroy', 'id'=>'delete_form', 'method' => 'POST')) }}
+        {{ Form::open(array('url' => 'admin/album/destroy', 'id'=>'delete_form', 'method' => 'POST')) }}
         <div class="modal-body">
 
           <p>Are you sure?</p>
           <div class="modal-footer">
-            <input type="hidden" name="id" id="gallery_delete_id">
+            <input type="hidden" name="id" id="album_delete_id">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
             <button type="submit" class="btn btn-primary border-0 btn_submit">Yes</button>
           </div>
@@ -76,63 +136,26 @@
   </div>
 </div>
 <!-- Modal Delete-->
+
 @include('admin.album.add-modal')
 @endsection
 
 @section('script')
 
 <script type="text/javascript">
-  $(document).ready(function() {
-    window.csrfToken = '<?php echo csrf_token(); ?>';
-    var postData = {};
-    postData._token = window.csrfToken;
+  // Update News
+  $('#index_datatable').on('click', '.album_edit', function() {
+      var title = $(this).attr('title');
+      var id = $(this).attr('href');
+      $('#title').val(title);
+      $('#album_id').val(id);
 
-    var table = $('#index_datatable').DataTable({
-      "responsive": true,
-      "processing": true,
-      "serverSide": true,
-      "dom": 'Bfrtip',
-      "lengthMenu": [
-        [10, 25, 50, 100, 200, 250],
-        ['10 rows', '25 rows', '50 rows', '100 rows', '200 rows', '250 rows']
-      ],
-      "buttons": ['pageLength', 'copy', 'csv', 'excel', 'pdf', 'print'],
-      "ajax": {
-        "url": "{{URL::to('/admin/gallery/getdata')}}",
-        "type": "POST",
-        "data": function(d) {
-          $.extend(d, postData);
-          var dt_params = $('#index_datatable').data('dt_params');
-          if (dt_params) {
-            $.extend(d, dt_params);
-          }
-        }
-      },
-      "destroy": true,
-      "columns": [{
-          "data": "serial"
-        },
-        {
-          "data": "title"
-        },
-        {
-          "data": "image"
-        },
-        {
-          "data": "action"
-        },
-
-
-      ]
-    });
-
-    new $.fn.dataTable.FixedHeader(table);
   });
 
-  // Delete Gallery
-  $('#index_datatable').on('click', '.gallery_delete', function() {
+  // Delete Album
+  $('#index_datatable').on('click', '.album_delete', function() {
     var id = $(this).attr('href');
-    $('#gallery_delete_id').val(id);
+    $('#album_delete_id').val(id);
   });
 
 </script>

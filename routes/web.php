@@ -99,8 +99,6 @@ Route::post('/admin/gallery/destroy', 'App\Http\Controllers\Admin\GalleryControl
 // ALBUM MANAGEMENT
 Route::get('/admin/album/setting', [App\Http\Controllers\Admin\AlbumController::class, 'index'])->name('album_index');
 Route::post('/admin/album/store', 'App\Http\Controllers\Admin\AlbumController@store');
-Route::post('/admin/album/getdata', [App\Http\Controllers\Admin\AlbumController::class, 'news_datatable']);
-Route::get('/admin/album/edit/{id}', [App\Http\Controllers\Admin\AlbumController::class, 'edit']);
 Route::post('/admin/album/update', 'App\Http\Controllers\Admin\AlbumController@update');
 Route::post('/admin/album/destroy', 'App\Http\Controllers\Admin\AlbumController@destroy');
 

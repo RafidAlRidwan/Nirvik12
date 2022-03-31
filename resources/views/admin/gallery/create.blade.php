@@ -13,6 +13,9 @@
     width: 0.1px;
     opacity: 0;
     }
+    #demoInput5-error{
+        color: red;
+    }
 </style>
 @endsection
 
@@ -40,6 +43,14 @@
                 <div class="form-group">
                     <label for="name">Title</label>
                     <input type="text" class="form-control" name="title" id="title" placeholder="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label for="name">Album</label>
+                    {{ Form::select('album_id', $albumList, null, array('class'=>'form-control', 'placeholder'=>'Select')) }}
                 </div>
             </div>
         </div>
