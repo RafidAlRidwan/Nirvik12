@@ -1683,6 +1683,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     height: 45px;
     animation-delay: 3.5s;
   }
+  
   @keyframes animate {
     0% {
       transform: translateY(0) rotate(0deg);

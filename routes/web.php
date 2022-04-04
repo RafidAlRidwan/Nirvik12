@@ -18,6 +18,9 @@ Auth::routes();
 
 // HOME PAGE
 Route::get('/', [App\Http\Controllers\User\LandingPageController::class, 'index'])->name('landingPage');
+Route::get('/events', [App\Http\Controllers\User\LandingPageController::class, 'event'])->name('eventPage');
+Route::get('/news', [App\Http\Controllers\User\LandingPageController::class, 'news'])->name('newsPage');
+Route::get('/gallery', [App\Http\Controllers\User\LandingPageController::class, 'gallery'])->name('galleryPage');
 
 // USER LOGIN
 Route::get('/user/login', [App\Http\Controllers\User\UserLoginController::class, 'login'])->name('user_login');

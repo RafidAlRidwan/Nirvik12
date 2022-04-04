@@ -22,4 +22,34 @@ class LandingPageController extends Controller
         }
         return view('user/landing-page.index', compact('data'));
     }
+    public function event()
+    {
+        $data = Auth::user();
+        if(!$data){
+            $data = false;
+        } else{
+            $data = true;
+        }
+        return view('user/landing-page.event', compact('data'));
+    }
+    public function news()
+    {
+        $data = Auth::user();
+        if(!$data){
+            $data = false;
+        } else{
+            $data = true;
+        }
+        return view('user/landing-page.news', compact('data'));
+    }
+    public function gallery()
+    {
+        $data = Auth::user();
+        if(!$data){
+            $data = false;
+        } else{
+            $data = true;
+        }
+        return view('user/landing-page.gallery', compact('data'));
+    }
 }
