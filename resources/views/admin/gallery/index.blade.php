@@ -1,5 +1,18 @@
 @extends('layouts.admin.admin')
-
+@section('style')
+<style>
+    .tower-input-preview-container img {
+    vertical-align: middle;
+    border-style: none;
+    width: 300px;
+    margin-bottom: 10px;
+    }
+    .tower-file input[type="file"] {
+    height: 0.1px;
+    width: 0.1px;
+    opacity: 0;
+    }
+</style>
 @section('content')
 
 <div class="content-header">
@@ -17,7 +30,7 @@
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <a class="dropdown-item" data-toggle="modal" data-target="#album_modal">Add</a>
-              <a class="dropdown-item" href="#">View All</a>
+              <a class="dropdown-item" href={{URL::to('admin/album/setting')}}>View All</a>
             </div>
           </div>
           <a href={{URL::to('admin/gallery/create')}}><button type="button" class="btn btn-primary">+ Add New</button></a>
@@ -38,6 +51,7 @@
             <tr>
               <th>Serial</th>
               <th>Title</th>
+              <th>Album</th>
               <th>Picture</th>
               <th>Action</th>
             </tr>
@@ -49,6 +63,7 @@
             <tr>
             <th>Serial</th>
               <th>Title</th>
+              <th>Album</th>
               <th>Picture</th>
               <th>Action</th>
             </tr>
@@ -92,7 +107,15 @@
 @endsection
 
 @section('script')
+<!-- File SELECT -->
 
+<script src="{{asset('assets/user/landingPage/file-select/tower-file-input.js')}}"></script>
+
+<script type="text/javascript">
+    $('#demoInput5').fileInput({
+        iconClass: 'mdi mdi-fw mdi-upload'
+    });
+</script>
 <script type="text/javascript">
   $(document).ready(function() {
     window.csrfToken = '<?php echo csrf_token(); ?>';
@@ -126,6 +149,9 @@
         },
         {
           "data": "title"
+        },
+        {
+          "data": "album"
         },
         {
           "data": "image"

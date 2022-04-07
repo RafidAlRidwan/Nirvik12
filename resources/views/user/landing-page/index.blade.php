@@ -93,10 +93,11 @@
        </section>
 
        <!--==========================News Section============================-->
-       <section id="faq" class="wow">
+       <section id="faq" class="wow fadeInUp">
               <div class="container">
                      <div class="section-header">
                             <h2>NEWS</h2>
+                            <p><a style="color: blue;" href={{URL::to('/news')}}>See All</a></p>
                      </div>
                      <div class="row justify-content-center">
                             <div class="col-lg-9">
@@ -123,101 +124,236 @@
                      </div>
               </div>
        </section>
-
        <!--==========================Event Section============================-->
-       <section id="hotels" class="section-with-bg wow">
-              <div class="container">
+       <section id="schedule" class="section-with-bg">
+              <div class="container wow fadeInUp">
                      <div class="section-header">
-                            <h2>UPCOMING EVENTS</h2>
-                            <!-- <p>Her are some nearby hotels</p> -->
+                     <h2>Event & Program Schedule</h2>
+                     <p><a style="color: blue;" href={{URL::to('/events')}}>See All</a></p>
                      </div>
-                     <div style="justify-content: center" class="row">
-                            @php
-                                   $event = App\Models\Event::whereDate('date', '>', date('Y-m-d'))->get();
-                            @endphp
-                            @isset($event)
-                                   @foreach ($event as $item)
-                                   <div class="col-lg-4 col-md-6 mb-4">
-                                          <article style="margin-bottom: 10px; justify-content: center" class="hotel event-card">
-                                                 @php
-                                                        $date_format_1 = date('M', strtotime($item->date ?? ''));
-                                                        $date_format_2 = date('d', strtotime($item->date ?? ''));
-                                                        $date_format_3 = date('h:i A', strtotime($item->time ?? ''));
-                                                        $date_format_4 = $item->date->format('l') ?? '';
-                                                        $date_format_5 = date('d F Y', strtotime($item->date ?? ''));
-                                                 @endphp
-                                                 <section class="date">
-                                                        <time datetime="23th feb">
-                                                               <span>{{$date_format_2}}</span><span>{{$date_format_1}}</span>
-                                                        </time>
-                                                 </section>
-                                                 <section class="card-cont">
-                                                        <small><strong>{{$item->title}}</strong></small>
-                                                        <div class="even-date">
-                                                               <i class="fa fa-calendar pr-2"> </i>
-                                                               <time>
-                                                                      <span>{{$date_format_3 ?? 'Full Day'}}, {{ $date_format_4}}, {{$date_format_5}}</span>
-                                                               </time>
-                                                        </div>
-                                                        <div class="even-info">
-                                                               <i class="fa fa-map-marker"></i>
-                                                               <p>
-                                                                      {{$item->venue}}
-                                                               </p>
-                                                        </div>
-                                                        <div>
-                                                               <a class="eventData" href={{$item->id}} data-toggle='modal' data-target='#event-details' title='{{$item->title}}' body='{!! $item->description !!}'>Details</a>
-                                                        </div>
-                                                 </section>
-                                          </article>
-                                   </div>
-                                   @endforeach
-                            @endisset
+                     @php
+                            $current_month = date('F');
+                            $next_month_1 = date('F', strtotime('first day of +1 month'));
+                            $next_month_2 = date('F', strtotime('first day of +2 month'));
+                     @endphp
+                     <ul class="nav nav-tabs" role="tablist">
+                     <li class="nav-item">
+                     <a class="nav-link active" href="#day-1" role="tab" data-toggle="tab">{{$current_month}}</a>
+                     </li>
+                     <li class="nav-item">
+                     <a class="nav-link" href="#day-2" role="tab" data-toggle="tab">{{$next_month_1}}</a>
+                     </li>
+                     <li class="nav-item">
+                     <a class="nav-link" href="#day-3" role="tab" data-toggle="tab">{{$next_month_2}}</a>
+                     </li>
+                     </ul>
 
-                     </div>
-              </div>
+                     <div class="tab-content row justify-content-center">
 
-              <!-- Button trigger modal -->
-              <div class="modal fade" id="event-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                     <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div style="background: white; background: linear-gradient( to right bottom,
-                            rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3)); border-radius: 1rem; z-index: 2; backdrop-filter: blur(2rem);" class="modal-content">
-                                   <div class="modal-header">
-                                          <h5 style="color: #f82249; font-weight: bold;" class="modal-title title" id="exampleModalCenterTitle"></h5>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                 <span aria-hidden="true">&times;</span>
-                                          </button>
-                                   </div>
-                                   <div style="color: #000;" class="modal-body body">
+                     <!-- Schdule Day 1 -->
+                     <div role="tabpanel" class="col-lg-9 tab-pane fade show active" id="day-1">
 
-                                   <div class="modal-footer">
-
-                                   </div>
+                     <div class="row schedule-item">
+                            <div class="date col-md-2">
+                                   <time datetime="23th feb">
+                                          <span>02</span><span>MAY</span>
+                                   </time>
+                            </div>
+                            <div class="col-md-10">
+                            <div class="speaker">
+                            </div>
+                            
+                            <h4><a href="#" data-toggle='modal' data-target='#event-details' title='' body=''>Registration</a></h4>
+                            <p><i class="fa fa-map-marker"></i> Bogura Zilla School</p>
                             </div>
                      </div>
+
+                     <div class="row schedule-item">
+                            <div class="date col-md-2">
+                                   <time datetime="23th feb">
+                                          <span>02</span><span>MAY</span>
+                                   </time>
+                            </div>
+                            <div class="col-md-10">
+                            <div class="speaker">
+                            </div>
+                            <h4>Ifter 2022</h4>
+                            <p><i class="fa fa-map-marker"></i> Momo Inn</p>
+                            </div>
+                     </div>
+
+
+                     </div>
+                     <!-- End Schdule Day 1 -->
+
+                     <!-- Schdule Day 2 -->
+                     <div role="tabpanel" class="col-lg-9  tab-pane fade" id="day-2">
+
+                     <div class="row schedule-item">
+                            <div class="date col-md-2">
+                                   <time datetime="23th feb">
+                                          <span>02</span><span>MAY</span>
+                                   </time>
+                            </div>
+                            <div class="col-md-10">
+                            <div class="speaker">
+                            </div>
+                            <h4>Libero corrupti explicabo itaque. <span>Brenden Legros</span></h4>
+                            <p>Facere provident incidunt quos voluptas.</p>
+                            </div>
+                     </div>
+
+                     <div class="row schedule-item">
+                            <div class="date col-md-2">
+                                   <time datetime="23th feb">
+                                          <span>22</span><span>MAY</span>
+                                   </time>
+                            </div>
+                            <div class="col-md-10">
+                            <div class="speaker">
+                            </div>
+                            <h4>Et voluptatem iusto dicta nobis. <span>Hubert Hirthe</span></h4>
+                            <p>Maiores dignissimos neque qui cum accusantium ut sit sint inventore.</p>
+                            </div>
+                     </div>
+
+                     </div>
+                     <!-- End Schdule Day 2 -->
+
+                     <!-- Schdule Day 3 -->
+                     <div role="tabpanel" class="col-lg-9  tab-pane fade" id="day-3">
+
+                     <div class="row schedule-item">
+                            <div class="date col-md-2">
+                                   <time datetime="23th feb">
+                                          <span>22</span><span>MAY</span>
+                                   </time>
+                            </div>
+                            <div class="col-md-10">
+                            <div class="speaker">
+                            </div>
+                            <h4>Et voluptatem iusto dicta nobis. <span>Hubert Hirthe</span></h4>
+                            <p>Maiores dignissimos neque qui cum accusantium ut sit sint inventore.</p>
+                            </div>
+                     </div>
+
+                     <div class="row schedule-item">
+                            <div class="date col-md-2">
+                                   <time datetime="23th feb">
+                                          <span>22</span><span>MAY</span>
+                                   </time>
+                            </div>
+                            <div class="col-md-10">
+                            <div class="speaker">
+                            </div>
+                            <h4>Explicabo et rerum quis et ut ea. <span>Cole Emmerich</span></h4>
+                            <p>Veniam accusantium laborum nihil eos eaque accusantium aspernatur.</p>
+                            </div>
+                     </div>
+
+                     </div>
+                     <!-- End Schdule Day 3 -->
+
+                     </div>
+
               </div>
-              <!-- END MODAL -->
        </section>
 
-       <!--==========================Gallery Section============================-->
-       <section id="gallery" class="wow">
+       <!--==========================Members Section============================-->
+       <section id="speakers" class="wow fadeInUp">
               <div class="container">
                      <div class="section-header">
-                            <h2>Gallery</h2>
-                            <p>Check our gallery from the recent events</p>
+                     <h2>Members</h2>
+                     <p><a style="color: blue;" href={{URL::to('/news')}}>See All</a></p>
+                     </div>
+
+                     <div class="row">
+                     <div class="col-lg-4 col-md-6">
+                     <div class="speaker">
+                            <img src={{asset('assets/user/landingPage/img/speakers/1.jpg')}} alt="Speaker 1" class="img-fluid">
+                            <div class="details">
+                            <h3><a href="speaker-details.html">Brenden Legros</a></h3>
+                            <p>Quas alias incidunt</p>
+                            <div class="social">
+                            <a href=""><i class="fa fa-twitter"></i></a>
+                            <a href=""><i class="fa fa-facebook"></i></a>
+                            <a href=""><i class="fa fa-linkedin"></i></a>
+                            </div>
+                            </div>
+                     </div>
+                     </div>
+                     <div class="col-lg-4 col-md-6">
+                     <div class="speaker">
+                            <img src={{asset('assets/user/landingPage/img/speakers/2.jpg')}} alt="Speaker 2" class="img-fluid">
+                            <div class="details">
+                            <h3><a href="speaker-details.html">Hubert Hirthe</a></h3>
+                            <p>Consequuntur odio aut</p>
+                            <div class="social">
+                            <a href=""><i class="fa fa-twitter"></i></a>
+                            <a href=""><i class="fa fa-facebook"></i></a>
+                            <a href=""><i class="fa fa-linkedin"></i></a>
+                            </div>
+                            </div>
+                     </div>
+                     </div>
+                     <div class="col-lg-4 col-md-6">
+                     <div class="speaker">
+                            <img src={{asset('assets/user/landingPage/img/speakers/3.jpg')}} alt="Speaker 3" class="img-fluid">
+                            <div class="details">
+                            <h3><a href="speaker-details.html">Cole Emmerich</a></h3>
+                            <p>Fugiat laborum et</p>
+                            <div class="social">
+                            <a href=""><i class="fa fa-twitter"></i></a>
+                            <a href=""><i class="fa fa-facebook"></i></a>
+                            <a href=""><i class="fa fa-linkedin"></i></a>
+                            </div>
+                            </div>
+                     </div>
+                     </div>
+                     <div class="col-lg-4 col-md-6">
+                     <div class="speaker">
+                            <img src={{asset('assets/user/landingPage/img/speakers/4.jpg')}} alt="Speaker 4" class="img-fluid">
+                            <div class="details">
+                            <h3><a href="speaker-details.html">Jack Christiansen</a></h3>
+                            <p>Debitis iure vero</p>
+                            <div class="social">
+                            <a href=""><i class="fa fa-twitter"></i></a>
+                            <a href=""><i class="fa fa-facebook"></i></a>
+                            <a href=""><i class="fa fa-linkedin"></i></a>
+                            </div>
+                            </div>
+                     </div>
+                     </div>
+                     <div class="col-lg-4 col-md-6">
+                     <div class="speaker">
+                            <img src={{asset('assets/user/landingPage/img/speakers/5.jpg')}} alt="Speaker 5" class="img-fluid">
+                            <div class="details">
+                            <h3><a href="speaker-details.html">Alejandrin Littel</a></h3>
+                            <p>Qui molestiae natus</p>
+                            <div class="social">
+                            <a href=""><i class="fa fa-twitter"></i></a>
+                            <a href=""><i class="fa fa-facebook"></i></a>
+                            <a href=""><i class="fa fa-linkedin"></i></a>
+                            </div>
+                            </div>
+                     </div>
+                     </div>
+                     <div class="col-lg-4 col-md-6">
+                     <div class="speaker">
+                            <img src={{asset('assets/user/landingPage/img/speakers/6.jpg')}} alt="Speaker 6" class="img-fluid">
+                            <div class="details">
+                            <h3><a href="speaker-details.html">Willow Trantow</a></h3>
+                            <p>Non autem dicta</p>
+                            <div class="social">
+                            <a href=""><i class="fa fa-twitter"></i></a>
+                            <a href=""><i class="fa fa-facebook"></i></a>
+                            <a href=""><i class="fa fa-linkedin"></i></a>
+                            </div>
+                            </div>
+                     </div>
+                     </div>
                      </div>
               </div>
-              <div class="owl-carousel gallery-carousel">
-                     <a href="{{asset('assets/user/landingPage/img/gallery/1.jpg')}}" class="venobox" data-gall="gallery-carousel"><img src="{{asset('assets/user/landingPage/img/gallery/1.jpg')}}" alt=""></a>
-                     <a href="{{asset('assets/user/landingPage/img/gallery/2.jpg')}}" class="venobox" data-gall="gallery-carousel"><img src="{{asset('assets/user/landingPage/img/gallery/2.jpg')}}" alt=""></a>
-                     <a href="{{asset('assets/user/landingPage/img/gallery/3.jpg')}}" class="venobox" data-gall="gallery-carousel"><img src="{{asset('assets/user/landingPage/img/gallery/3.jpg')}}" alt=""></a>
-                     <a href="{{asset('assets/user/landingPage/img/gallery/4.jpg')}}" class="venobox" data-gall="gallery-carousel"><img src="{{asset('assets/user/landingPage/img/gallery/4.jpg')}}" alt=""></a>
-                     <a href="{{asset('assets/user/landingPage/img/gallery/5.jpg')}}" class="venobox" data-gall="gallery-carousel"><img src="{{asset('assets/user/landingPage/img/gallery/5.jpg')}}" alt=""></a>
-                     <a href="{{asset('assets/user/landingPage/img/gallery/6.jpg')}}" class="venobox" data-gall="gallery-carousel"><img src="{{asset('assets/user/landingPage/img/gallery/6.jpg')}}" alt=""></a>
-                     <a href="{{asset('assets/user/landingPage/img/gallery/7.jpg')}}" class="venobox" data-gall="gallery-carousel"><img src="{{asset('assets/user/landingPage/img/gallery/7.jpg')}}" alt=""></a>
-                     <a href="{{asset('assets/user/landingPage/img/gallery/8.jpg')}}" class="venobox" data-gall="gallery-carousel"><img src="{{asset('assets/user/landingPage/img/gallery/8.jpg')}}" alt=""></a>
-              </div>
-
        </section>
 
        <!--==========================Sponsors Section============================-->
@@ -254,6 +390,7 @@
                      </div>
               </div>
        </section>
+
 @endsection
 
 @section('footer')

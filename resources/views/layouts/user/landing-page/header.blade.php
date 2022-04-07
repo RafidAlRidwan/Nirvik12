@@ -7,14 +7,31 @@
               </div>
               @php
               $newsDetails = App\Models\News::orderBy('created_at', 'desc')->get();
+              $path = Request::path();
               @endphp
               <nav id="nav-menu-container">
                      <ul class="nav-menu">
-                            <li class="menu-active"><a href="#intro">Home</a></li>
+                            <li class="<?php if ($path == "/") {
+                                                 echo "menu-active";
+                                                 } else {
+                                                 echo "";
+                                                 } ?>"><a href={{URL::to('/')}}>Home</a></li>
                             <li><a href="#about">About</a></li>
-                            <li><a href="#faq">News <span class="icon-button-badge">{{count($newsDetails)}}</span></a></li>
-                            <li><a href="#hotels">Events <span class="icon-button-badge">2</span></a></li>
-                            <li><a href="#gallery">Gallary</a></li>
+                            <li class="<?php if ($path == 'news') {
+                                                 echo "menu-active";
+                                                 } else {
+                                                 echo "";
+                                                 } ?>"><a href={{URL::to('/news')}}>News <span class="icon-button-badge">{{count($newsDetails)}}</span></a></li>
+                            <li class="<?php if ($path == 'events') {
+                                                 echo "menu-active";
+                                                 } else {
+                                                 echo "";
+                                                 } ?>"><a href={{URL::to('/events')}}>Events <span class="icon-button-badge">2</span></a></li>
+                            <li class="<?php if ($path == 'album') {
+                                                 echo "menu-active";
+                                                 } else {
+                                                 echo "";
+                                                 } ?>"><a href={{URL::to('/album')}}>Gallary</a></li>
                             @if($data)
                             <li class="buy-tickets"><a onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();" href="{{ route('logout') }}">logout</a></li>

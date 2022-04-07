@@ -268,6 +268,19 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{URL::to('/admin/album/setting')}}" class="nav-link <?php if ($path == 'admin/album/setting') {
+                                                                            echo "active";
+                                                                          } else {
+                                                                            echo "";
+                                                                          } ?>">
+              <i class="nav-icon far fa-image"></i>
+              <p>
+              Album Settings
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{URL::to('/admin/gallery/setting')}}" class="nav-link <?php if ($path == 'admin/gallery/setting') {
                                                                             echo "active";
                                                                           } else {
@@ -292,6 +305,35 @@
               </p>
             </a>
           </li>
+          <!-- <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Tables
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../tables/simple.html" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Simple Tables</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../tables/data.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>DataTables</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../tables/jsgrid.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>jsGrid</p>
+                </a>
+              </li>
+            </ul>
+          </li> -->
 
         </ul>
       </nav>

@@ -31,18 +31,25 @@
         </div>
     </div>
 </div>
-
+@include('errors.validation')
 <section class="content p-2 ">
     <div class="container-fluid m-t-25 card p-3">
 
         {!! Form::open(['action' => ['App\Http\Controllers\Admin\GalleryController@update'], 'id'=>'edit_event', 'files' => true, 'class' => 'needs-validation']) !!}
         <div class="row">
-
             <input type="hidden" name="id" value={{$gallery->id}}>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label for="name">Title</label>
-                    <input type="text" class="form-control" name="title" value='{{$gallery->title}}' id="title" placeholder="" required>
+                    <input type="text" class="form-control" name="title" value='{{$gallery->title}}' id="title" placeholder="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label for="name">Album</label>
+                    {{ Form::select('album_id', $albumList, $album_details[0]['id'] ?? NULL, array('class'=>'form-control', 'placeholder'=>'Select')) }}
                 </div>
             </div>
         </div>
@@ -50,7 +57,8 @@
             <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <label>Upload Picture</label>
                 <div class="tower-file">
-                    <input type="file" id="demoInput5" name="attachment" value="$value->attachment" />
+                    <input type="hidden" name="image" id="image" value={{$gallery->attachment}}/>
+                    <input type="file" id="demoInput5" name="attachment" />
                     <label for="demoInput5" class="update-button btn btn-primary">
                         <span class=" mdi mdi-upload"></span>Select Files
                     </label>

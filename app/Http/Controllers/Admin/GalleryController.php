@@ -9,6 +9,7 @@ use Session;
 use Redirect;
 use validate;
 use App\Models\News;
+use App\Models\Album;
 use App\Models\Event;
 use App\Models\Gallery;
 use App\Models\Section;
@@ -29,15 +30,18 @@ class GalleryController extends Controller
 
     public function create()
     {
-        return view('admin/gallery.create');
+        $data['albumList'] = Album::pluck('title','id');
+        return view('admin/gallery.create', $data);
     }
 
     public function news_datatable(Request $request)
     {
         $searchString = $request->search['value'];
         $product_data = Gallery::query()
-            ->select(
+                        ->leftJoin('albums', 'galleries.album_id', '=', 'albums.id')
+                        ->select(
                 "galleries.*",
+                'albums.title as album',
             );
 
         $data['recordsTotal'] = $product_data->count();
@@ -59,6 +63,7 @@ class GalleryController extends Controller
 
             $data['data'][$sl]['serial'] = $serial;
             $data['data'][$sl]['title'] = $item->title ?? "";
+            $data['data'][$sl]['album'] = $item->album ?? "Others";
             $data['data'][$sl]['image'] = "<img style='border: 1px solid #ddd; border-radius:5px; width: 45px; height:45px; ' src='$img' alt='image' class='responsive'>";
             $data['data'][$sl]['action'] = "<a class='event_edit' href='$editURL'><i class='fa fa-edit' style='font-size:14px; ''></i></a>
                 | <a href='$viewURL'><i class='fa fa-eye' style='font-size:14px; ''></i></a>
@@ -96,6 +101,9 @@ class GalleryController extends Controller
     {
         $gallery = Gallery::findOrFail($id);
         $data['gallery'] = $gallery;
+        $data['albumList'] = Album::pluck('title','id');
+        $album_details = $gallery->albumDetails()->get();
+        $data['album_details'] = $album_details;
         return view('admin/gallery.edit', $data);
     }
 
@@ -105,7 +113,7 @@ class GalleryController extends Controller
         try {
             $id = $request->id;
             $this->validate($request, [
-                'attachment' => ['required'],
+                'image' => ['required'],
             ]);
             DB::beginTransaction();
             Gallery::saveOrUpdate($request, $id);
@@ -126,6 +134,8 @@ class GalleryController extends Controller
     {
         $gallery = Gallery::findOrFail($id);
         $data['gallery'] = $gallery;
+        $album_details = $gallery->albumDetails()->get();
+        $data['album_details'] = $album_details;
         return view('admin/gallery.view', $data);
     }
 

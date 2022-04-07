@@ -13,6 +13,7 @@ class Gallery extends Model
     protected $table = 'galleries';
     protected $fillable = [
         'title',
+        'album_id',
         'attachment',
     ];
 
@@ -54,5 +55,9 @@ class Gallery extends Model
             }
             $gallery->update($requestData);
         }
+    }
+    public function albumDetails()
+    {
+        return $this->hasOne(Album::class, 'id', 'album_id');
     }
 }
