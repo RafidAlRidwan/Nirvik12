@@ -71,33 +71,15 @@
                      <h2>Photo Gallery</h2>
                      <!-- <p>Here is our event schedule</p> -->
                      </div>
-
-
                      <div id="basicExample">
-                            <a href="{{asset('assets/user/landingPage/img/gallery/1.jpg')}}" target=”_blank”>
-                                   <img alt="" src="{{asset('assets/user/landingPage/img/gallery/1.jpg')}}"/>
-                            </a>
-                            <a href="{{asset('assets/user/landingPage/img/gallery/2.jpg')}}" target=”_blank”>
-                                   <img alt="" src="{{asset('assets/user/landingPage/img/gallery/2.jpg')}}"/>
-                            </a>
-                            <a href="{{asset('assets/user/landingPage/img/gallery/3.jpg')}}" target=”_blank”>
-                                   <img alt="" src="{{asset('assets/user/landingPage/img/gallery/3.jpg')}}"/>
-                            </a>
-                            <a href="{{asset('assets/user/landingPage/img/gallery/4.jpg')}}" target=”_blank”>
-                                   <img alt="" src="{{asset('assets/user/landingPage/img/gallery/4.jpg')}}"/>
-                            </a>
-                            <a href="{{asset('assets/user/landingPage/img/gallery/5.jpg')}}" target=”_blank”>
-                                   <img alt="" src="{{asset('assets/user/landingPage/img/gallery/5.jpg')}}"/>
-                            </a>
-                            <a href="{{asset('assets/user/landingPage/img/gallery/9.jpg')}}" target=”_blank”>
-                                   <img alt="" src="{{asset('assets/user/landingPage/img/gallery/9.jpg')}}"/>
-                            </a>
-                            <a href="{{asset('assets/user/landingPage/img/gallery/10.jpg')}}" target=”_blank”>
-                                   <img alt="" src="{{asset('assets/user/landingPage/img/gallery/10.jpg')}}"/>
-                            </a>
-                            <a href="{{asset('assets/user/landingPage/img/gallery/6.jpg')}}" target=”_blank”>
-                                   <img alt="" src="{{asset('assets/user/landingPage/img/gallery/6.jpg')}}"/>
-                            </a>
+                            @isset($gallery)
+                                   @foreach ($gallery as $item)
+                                          <a href="{{asset($item->attachment)}}" target=”_blank”>
+                                                 <img alt="Photo" src="{{asset($item->attachment)}}"/>
+                                          </a>
+                                   @endforeach
+                            @endisset
+
                      </div>
 
               </div>

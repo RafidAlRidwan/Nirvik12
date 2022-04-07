@@ -1,5 +1,18 @@
 @extends('layouts.admin.admin')
-
+@section('style')
+<style>
+    .tower-input-preview-container img {
+    vertical-align: middle;
+    border-style: none;
+    width: 300px;
+    margin-bottom: 10px;
+    }
+    .tower-file input[type="file"] {
+    height: 0.1px;
+    width: 0.1px;
+    opacity: 0;
+    }
+</style>
 @section('content')
 
 <div class="content-header">
@@ -94,7 +107,15 @@
 @endsection
 
 @section('script')
+<!-- File SELECT -->
 
+<script src="{{asset('assets/user/landingPage/file-select/tower-file-input.js')}}"></script>
+
+<script type="text/javascript">
+    $('#demoInput5').fileInput({
+        iconClass: 'mdi mdi-fw mdi-upload'
+    });
+</script>
 <script type="text/javascript">
   $(document).ready(function() {
     window.csrfToken = '<?php echo csrf_token(); ?>';

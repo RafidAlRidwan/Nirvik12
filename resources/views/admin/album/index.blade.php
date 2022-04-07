@@ -16,6 +16,17 @@
     display: block;
     text-align: center;
   }
+  .tower-input-preview-container img {
+    vertical-align: middle;
+    border-style: none;
+    width: 300px;
+    margin-bottom: 10px;
+    }
+    .tower-file input[type="file"] {
+    height: 0.1px;
+    width: 0.1px;
+    opacity: 0;
+    }
 </style>
 @endsection
 @section('content')
@@ -46,6 +57,7 @@
             <tr>
               <th>Serial</th>
               <th>Title</th>
+              <th>Cover Photo</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -54,6 +66,11 @@
             <tr>
               <td>{{$loop->iteration}}</td>
               <td>{{$items->title}}</td>
+              @if(!empty($items->attachment))
+                <td><img style='border: 1px solid #ddd; border-radius:5px; width: 45px; height:45px; ' src={{asset('/'. $items->attachment)}} alt='cover photo' class='responsive'></td>
+              @else
+                <td><img style='border: 1px solid #ddd; border-radius:5px; width: 45px; height:45px; ' src={{asset('/assets/user/landingPage/img/album.png')}} alt='cover photo' class='responsive'></td>
+              @endif
               <td><a class="album_edit" href={{$items->id}} title='{{$items->title}}' data-toggle='modal' data-target='#album_edit_modal'><i class='fa fa-edit' style='font-size:14px;'></i></a>
                 | <a class='album_delete' href={{$items->id}}  data-toggle='modal' data-target='#album_delete_modal' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>
               </td>
@@ -141,8 +158,17 @@
 @endsection
 
 @section('script')
+<!-- File SELECT -->
+
+<script src="{{asset('assets/user/landingPage/file-select/tower-file-input.js')}}"></script>
 
 <script type="text/javascript">
+    $('#demoInput5').fileInput({
+        iconClass: 'mdi mdi-fw mdi-upload'
+    });
+</script>
+<script type="text/javascript">
+  
   // Update News
   $('#index_datatable').on('click', '.album_edit', function() {
       var title = $(this).attr('title');

@@ -27,11 +27,11 @@
                                                  } else {
                                                  echo "";
                                                  } ?>"><a href={{URL::to('/events')}}>Events <span class="icon-button-badge">2</span></a></li>
-                            <li class="<?php if ($path == 'gallery') {
+                            <li class="<?php if ($path == 'album') {
                                                  echo "menu-active";
                                                  } else {
                                                  echo "";
-                                                 } ?>"><a href={{URL::to('/gallery')}}>Gallary</a></li>
+                                                 } ?>"><a href={{URL::to('/album')}}>Gallary</a></li>
                             @if($data)
                             <li class="buy-tickets"><a onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();" href="{{ route('logout') }}">logout</a></li>

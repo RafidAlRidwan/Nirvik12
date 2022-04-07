@@ -15,6 +15,18 @@
             <label for="exampleInputEmail1">Title</label>
             <input type="text" name="title" class="form-control" required="">
           </div>
+          <div class="row">
+            <div class="mb-3 col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                <label>Cover Photo</label>
+                <div class="tower-file">
+                    <input type="file" id="demoInput5" name="attachment" value=""/>
+                    <label for="demoInput5" class="btn btn-primary">
+                        <span class="mdi mdi-upload"></span>Select Files
+                    </label>
+                    <button type="button" class="btn btn-secondary tower-file-clear align-top">Clear</button>
+                </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
