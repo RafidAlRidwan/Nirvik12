@@ -137,7 +137,8 @@
       <div class="tab-panels">
 
         <section id="general" class="tab-panel">
-          <h2>General Settings</h2>
+          <h4>General Settings</h4>
+          <hr>
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
@@ -167,11 +168,12 @@
                   </div>
                   @endif
               </div>
-            </div>
+          </div>
         </section>
 
         <section id="profile" class="tab-panel">
-          <h2>Profile</h2>
+          <h4>Profile</h4>
+          <hr>
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
@@ -191,10 +193,40 @@
           </section>
 
         <section id="footer" class="tab-panel">
-          <h2>6C. Dunkles Bock</h2>
-          <p><strong>Overall Impression:</strong> A dark, strong, malty German lager beer that emphasizes the malty-rich and somewhat toasty qualities of continental malts without being sweet in the finish.</p>
-          <p><strong>History:</strong> Originated in the Northern German city of Einbeck, which was a brewing center and popular exporter in the days of the Hanseatic League (14th to 17th century). Recreated in Munich starting in the 17th century. The name “bock” is based on a corruption of the name “Einbeck” in the Bavarian dialect, and was thus only used after the beer came to Munich. “Bock” also means “Ram” in German, and is often used in logos and advertisements.</p>
-        </section>
+          <h4>Footer Settings</h4>
+          <hr>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label for="name">Address</label>
+                    <input type="text" class="form-control" name="location" value='' id="location" placeholder="" required>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label for="name">Phone</label>
+                    <input type="text" class="form-control" name="phone" value='' id="phone" placeholder="" required>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                  <div class="form-group">
+                      <label for="name">Email</label>
+                      <input type="email" class="form-control" name="email" value='' id="email" placeholder="" required>
+                  </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea name="description" id="summernote"></textarea>
+                </div>
+            </div>
+          </div>
+          
+          </section>
 
       </div>
       
