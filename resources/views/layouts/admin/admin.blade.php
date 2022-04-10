@@ -139,7 +139,7 @@
                   <ul>
                     <!-- <li class="p-3"><a href={{route('landingPage')}}></i><strong>Goto Website</strong></a></li> -->
                     <li class="p-3"><a href="#"><i class="fas fa-user"></i> {{Auth::user()->name ?? NULL}}</a></li>
-                    <li class="p-3"><a href="#"><i class="fas fa-sliders-h"></i> Settings</a></li>
+                    <li class="p-3"><a href="{{URL::to('/admin/settings')}}"><i class="fas fa-sliders-h"></i> Settings</a></li>
                     <li class="p-3"><a onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Signout</a></li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -273,7 +273,7 @@
                                                                           } else {
                                                                             echo "";
                                                                           } ?>">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon far fa-folder-open"></i>
               <p>
               Album Settings
               </p>
@@ -299,9 +299,22 @@
                                                                           } else {
                                                                             echo "";
                                                                           } ?>">
-              <i class="nav-icon fa fa-clone"></i>
+              <i class="nav-icon fa fa-desktop"></i>
               <p>
                 Cover Page Settings
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{URL::to('/admin/settings')}}" class="nav-link <?php if ($path == 'admin/settings') {
+                                                                            echo "active";
+                                                                          } else {
+                                                                            echo "";
+                                                                          } ?>">
+              <i class="nav-icon fa fa-cog"></i>
+              <p>
+                General Settings
               </p>
             </a>
           </li>
@@ -366,6 +379,7 @@
 
   <!-- jQuery -->
   <script src="{{asset('assets/admin/plugins/jquery/jquery-3.6.0.min.js')}}"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <!-- jQuery Validate-->
   <script src="{{asset('assets/admin/plugins/jquery/jquery.validate.js')}}"></script>
   <!-- jQuery UI 1.11.4 -->

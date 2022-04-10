@@ -16,7 +16,7 @@ use App\Models\Section;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AlbumController extends Controller
+class SettingsController extends Controller
 {
     public function __construct()
     {
@@ -25,8 +25,7 @@ class AlbumController extends Controller
     }
     public function index()
     {
-        $data['album'] = Album::paginate(5);
-        return view('admin/album.index', $data);
+        return view('admin/settings.index');
     }
 
     public function store(Request $request)

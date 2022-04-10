@@ -13,6 +13,8 @@
     opacity: 0;
     }
 </style>
+@endsection
+
 @section('content')
 
 <div class="content-header">
