@@ -32,7 +32,7 @@
                                                  } else {
                                                  echo "";
                                                  } ?>"><a href={{URL::to('/album')}}>Gallary</a></li>
-                            @if($data)
+                            @if(Session::has('userName'))
                             <li class="buy-tickets"><a onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();" href="{{ route('logout') }}">logout</a></li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

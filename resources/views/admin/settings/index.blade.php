@@ -143,7 +143,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
                 <div class="form-group">
                     <label for="name">App Name</label>
-                    <input type="text" class="form-control" name="app_name" value='' id="app_name" placeholder="" required>
+                    <input type="text" class="form-control" name="key" value='' id="app_name" placeholder="" required>
                 </div>
             </div>
           </div>

@@ -24,7 +24,10 @@ class UserController extends Controller
     }
     public function index()
     {
-        if (Auth::user()->type == 3) {
+        $user = Auth::user();
+        Session::put('userName', $user->name);
+        // dd(Session::get('userName'));
+        if ($user->type == 3) {
             $data = User::getMasterData();
             return view('user/user.index', $data);
         } else {

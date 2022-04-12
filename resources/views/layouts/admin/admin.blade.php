@@ -138,7 +138,7 @@
                 <div class="dropdown">
                   <ul>
                     <!-- <li class="p-3"><a href={{route('landingPage')}}></i><strong>Goto Website</strong></a></li> -->
-                    <li class="p-3"><a href="#"><i class="fas fa-user"></i> {{Auth::user()->name ?? NULL}}</a></li>
+                    <li class="p-3"><a href="#"><i class="fas fa-user"></i> {{Session::get('userName') ?? NULL}}</a></li>
                     <li class="p-3"><a href="{{URL::to('/admin/settings')}}"><i class="fas fa-sliders-h"></i> Settings</a></li>
                     <li class="p-3"><a onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Signout</a></li>

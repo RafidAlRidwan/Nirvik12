@@ -3,64 +3,45 @@
 namespace App\Http\Controllers\User;
 
 use URL;
-use Session;
 use Redirect;
 use validate;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 
 class LandingPageController extends Controller
 {
     public function index()
     {
+        $value = Cache::rememberForever('settings', function () {
+            return DB::table('settings')->get();
+        });
+        // $val= Cache::get('settings');
+        // Cache::flush();
+        // dd($val);
         $data = Auth::user();
-        if(!$data){
-            $data = false;
-        } else{
-            $data = true;
-        }
-        return view('user/landing-page.index', compact('data'));
+        // dd($data);
+        
+        return view('user/landing-page.index');
     }
     public function event()
     {
-        $data = Auth::user();
-        if(!$data){
-            $data = false;
-        } else{
-            $data = true;
-        }
-        return view('user/landing-page.event', compact('data'));
+        return view('user/landing-page.event');
     }
     public function news()
     {
-        $data = Auth::user();
-        if(!$data){
-            $data = false;
-        } else{
-            $data = true;
-        }
-        return view('user/landing-page.news', compact('data'));
+        return view('user/landing-page.news');
     }
     public function album()
     {
-        $data = Auth::user();
-        if(!$data){
-            $data = false;
-        } else{
-            $data = true;
-        }
-        return view('user/landing-page.album', compact('data'));
+        return view('user/landing-page.album');
     }
     public function gallery($id)
     {
-        $data = Auth::user();
-        if(!$data){
-            $data['data'] = false;
-        } else{
-            $data['data'] = true;
-        }
         if($id != 0){
             $data['gallery'] = Gallery::where('album_id', $id)->get();
         }else{
