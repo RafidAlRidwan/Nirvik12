@@ -1,9 +1,13 @@
 <!--==========================Header============================-->
 <header id="header">
        <div class="container">
+              @php
+              $cache = Cache::get('settings');
+              $banner = $cache->where('key', 'banner')->first();
+              @endphp
 
               <div id="logo" class="pull-left">
-                     <a href="#intro" class="scrollto"><img src="{{asset('assets/user/landingPage/img/logoW.png')}}" alt="" title=""></a>
+                     <a href="#intro" class="scrollto"><img src="{{asset($banner->value)}}" alt="" title=""></a>
               </div>
               @php
               $newsDetails = App\Models\News::orderBy('created_at', 'desc')->get();

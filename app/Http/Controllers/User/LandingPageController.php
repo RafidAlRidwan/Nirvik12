@@ -16,16 +16,7 @@ use Illuminate\Support\Facades\Session;
 class LandingPageController extends Controller
 {
     public function index()
-    {
-        $value = Cache::rememberForever('settings', function () {
-            return DB::table('settings')->get();
-        });
-        // $val= Cache::get('settings');
-        // Cache::flush();
-        // dd($val);
-        $data = Auth::user();
-        // dd($data);
-        
+    {   
         return view('user/landing-page.index');
     }
     public function event()

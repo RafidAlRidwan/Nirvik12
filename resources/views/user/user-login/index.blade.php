@@ -1,12 +1,16 @@
 @extends('layouts.user.login')
 
 @section('content')
+@php
+$cache = Cache::get('settings');
+$banner = $cache->where('key', 'banner')->first();
+@endphp
 <div class="login-content">
   <div class="form-box">
     {{Form::open(array('url' => 'login' , 'class' => 'box', 'method' => 'POST'))}}
     <img src="{{asset('assets/user/loginPage/img/bzs.png')}}">
     <!-- <h3 class="title">নির্ভীক '১২</h3> -->
-    <a href={{route('landingPage')}}><img src="{{asset('assets/user/landingPage/img/logoW.png')}}" alt="TheEvenet"></a>
+    <a href={{route('landingPage')}}><img src="{{asset($banner->value)}}" alt="নির্ভীক'১২"></a>
 
     <input type="text" name="name" placeholder="Username" autocomplete="off" class="input" required="">
 

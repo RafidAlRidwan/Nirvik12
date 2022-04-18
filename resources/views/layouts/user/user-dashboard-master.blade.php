@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
+@php
+$cache = Cache::get('settings');
+$app_name = $cache->where('key', 'app_name')->first();
+$banner = $cache->where('key', 'banner')->first();
+@endphp
 <head>
     <meta charset="utf-8">
-    <title>Nirvik'12</title>
+    <title>{{$app_name->value}}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -71,7 +75,7 @@
         <div class="container">
 
             <div id="logo" class="pull-left">
-                <a href="#intro" class="scrollto"><img src="{{asset('assets/user/landingPage/img/logoW.png')}}" alt="" title=""></a>
+                <a href="#intro" class="scrollto"><img src="{{asset($banner->value)}}" alt="" title=""></a>
             </div>
 
             <nav id="nav-menu-container">

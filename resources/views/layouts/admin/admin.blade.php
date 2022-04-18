@@ -159,13 +159,16 @@
   </ul>
   </nav>
   <!-- /.navbar -->
-
+  @php
+  $cache = Cache::get('settings');
+  $banner = $cache->where('key', 'banner')->first();
+  @endphp
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link text-center">
       <!-- <img src="{{asset('assets/admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-      <img height="60px" src="{{asset('assets/user/landingPage/img/logoW.png')}}" alt="" title=""></a>
+      <img height="60px" src="{{asset($banner->value)}}" alt="" title=""></a>
     </a>
 
     <!-- Sidebar -->
@@ -255,7 +258,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{URL::to('/admin/event/setting')}}" class="nav-link <?php if ($path == 'admin/event/setting') {
+            <a href="{{URL::to('/admin/event/setting')}}" class="nav-link <?php if ($path == 'admin/event/setting' || $path == 'admin/event/create') {
                                                                             echo "active";
                                                                           } else {
                                                                             echo "";
@@ -281,7 +284,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{URL::to('/admin/gallery/setting')}}" class="nav-link <?php if ($path == 'admin/gallery/setting') {
+            <a href="{{URL::to('/admin/gallery/setting')}}" class="nav-link <?php if ($path == 'admin/gallery/setting' || $path == 'admin/gallery/create') {
                                                                             echo "active";
                                                                           } else {
                                                                             echo "";
@@ -294,7 +297,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{URL::to('/admin/cover-page/setting')}}" class="nav-link <?php if ($path == 'admin/cover-page/setting') {
+            <a href="{{URL::to('/admin/cover-page/setting')}}" class="nav-link <?php if ($path == 'admin/cover-page/setting' || $path == 'admin/cover-page/create') {
                                                                             echo "active";
                                                                           } else {
                                                                             echo "";
@@ -361,8 +364,11 @@
     @yield('content')
   </div>
   <!-- /.content-wrapper -->
+  @php
+    $app_name = Cache::get('settings')->where('key', 'app_name')->first();
+  @endphp
   <footer class="main-footer">
-    <strong>Copyright &copy; 2021 <a href="https://adminlte.io">TEAM Nirvik'12</a>.</strong>
+    <strong>Copyright &copy; 2022 <a href="https://adminlte.io">{{$app_name->value}} TEAM</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 2.0
@@ -379,7 +385,6 @@
 
   <!-- jQuery -->
   <script src="{{asset('assets/admin/plugins/jquery/jquery-3.6.0.min.js')}}"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <!-- jQuery Validate-->
   <script src="{{asset('assets/admin/plugins/jquery/jquery.validate.js')}}"></script>
   <!-- jQuery UI 1.11.4 -->
@@ -390,6 +395,8 @@
   </script>
   <!-- Bootstrap 4 -->
   <script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <!-- <script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.min.js')}}"></script> -->
+
   <!-- ChartJS -->
   <script src="{{asset('assets/admin/plugins/chart.js/Chart.min.js')}}"></script>
   <!-- Sparkline -->

@@ -118,7 +118,8 @@ Route::post('/admin/cover-page/update', 'App\Http\Controllers\Admin\CoverPageCon
 Route::post('/admin/cover-page/destroy', 'App\Http\Controllers\Admin\CoverPageController@destroy');
 
 // Settings
-Route::get('/admin/settings', [App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('cover_page_index');
+Route::get('/admin/settings', [App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('setting_index');
+Route::post('/admin/settings/update', [App\Http\Controllers\Admin\SettingsController::class, 'update']);
 
 
 // ADMIN SECTION END
