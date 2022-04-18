@@ -14,20 +14,26 @@
               <div class="footer-top">
                      <div class="container">
                             <div class="row">
+                            @php
+                            $cache = Cache::get('settings');
+                            $app_name = $cache->where('key', 'app_name')->first();
+                            $banner = $cache->where('key', 'banner')->first();
+                            $description = $cache->where('key', 'description')->first();
+                            $address = $cache->where('key', 'address')->first();
+                            $phone = $cache->where('key', 'phone')->first();
+                            $email = $cache->where('key', 'email')->first();
+                            @endphp
 
                                    <div class="col-lg-6 col-md-6 footer-info">
-                                          <img style="height: 100px;" src="{{asset('assets/user/landingPage/img/logoW.png')}}" alt="TheEvenet">
-                                          <p>In alias aperiam. Placeat tempore facere. Officiis voluptate ipsam vel eveniet est dolor et totam porro. Perspiciatis ad omnis fugit molestiae recusandae possimus. Aut consectetur id quis. In inventore consequatur ad voluptate cupiditate debitis accusamus repellat cumque.</p>
+                                          <img style="height: 100px;" src="{{asset($banner->value)}}" alt="Nirvik'12">
+                                          <p>{{$description->value}}</p>
                                    </div>
 
                                    <div class="col-lg-6 col-md-6 footer-contact">
                                           <h4>Contact Us</h4>
-                                          <p>
-                                                 A108 Adam Street <br>
-                                                 New York, NY 535022<br>
-                                                 United States <br>
-                                                 <strong>Phone:</strong> +1 5589 55488 55<br>
-                                                 <strong>Email:</strong> info@example.com<br>
+                                          <p>{{$address->value}}<br>
+                                                 <strong>Phone:</strong> {{$phone->value}}<br>
+                                                 <strong>Email:</strong> {{$email->value}}<br>
                                           </p>
 
                                           <div class="social-links">
@@ -46,10 +52,10 @@
 
               <div class="container">
                      <div class="copyright">
-                            &copy; Copyright <strong>Nirvik'12</strong>. All Rights Reserved
+                            &copy; Copyright <strong>{{$app_name->value}}</strong>. All Rights Reserved
                      </div>
                      <div class="credits">
-                            Designed by <a href="www.nirvik12.com/">Nirvik'12 TEAM</a>
+                            Designed by <a href="www.nirvik12.com/">{{$app_name->value}} TEAM</a>
                      </div>
               </div>
 

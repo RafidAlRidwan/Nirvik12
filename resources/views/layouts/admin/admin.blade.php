@@ -138,8 +138,8 @@
                 <div class="dropdown">
                   <ul>
                     <!-- <li class="p-3"><a href={{route('landingPage')}}></i><strong>Goto Website</strong></a></li> -->
-                    <li class="p-3"><a href="#"><i class="fas fa-user"></i> {{Auth::user()->name ?? NULL}}</a></li>
-                    <li class="p-3"><a href="#"><i class="fas fa-sliders-h"></i> Settings</a></li>
+                    <li class="p-3"><a href="#"><i class="fas fa-user"></i> {{Session::get('userName') ?? NULL}}</a></li>
+                    <li class="p-3"><a href="{{URL::to('/admin/settings')}}"><i class="fas fa-sliders-h"></i> Settings</a></li>
                     <li class="p-3"><a onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Signout</a></li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -159,13 +159,16 @@
   </ul>
   </nav>
   <!-- /.navbar -->
-
+  @php
+  $cache = Cache::get('settings');
+  $banner = $cache->where('key', 'banner')->first();
+  @endphp
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link text-center">
       <!-- <img src="{{asset('assets/admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-      <img height="60px" src="{{asset('assets/user/landingPage/img/logoW.png')}}" alt="" title=""></a>
+      <img height="60px" src="{{asset($banner->value)}}" alt="" title=""></a>
     </a>
 
     <!-- Sidebar -->
@@ -255,7 +258,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{URL::to('/admin/event/setting')}}" class="nav-link <?php if ($path == 'admin/event/setting') {
+            <a href="{{URL::to('/admin/event/setting')}}" class="nav-link <?php if ($path == 'admin/event/setting' || $path == 'admin/event/create') {
                                                                             echo "active";
                                                                           } else {
                                                                             echo "";
@@ -273,7 +276,7 @@
                                                                           } else {
                                                                             echo "";
                                                                           } ?>">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon far fa-folder-open"></i>
               <p>
               Album Settings
               </p>
@@ -281,7 +284,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{URL::to('/admin/gallery/setting')}}" class="nav-link <?php if ($path == 'admin/gallery/setting') {
+            <a href="{{URL::to('/admin/gallery/setting')}}" class="nav-link <?php if ($path == 'admin/gallery/setting' || $path == 'admin/gallery/create') {
                                                                             echo "active";
                                                                           } else {
                                                                             echo "";
@@ -294,14 +297,27 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{URL::to('/admin/cover-page/setting')}}" class="nav-link <?php if ($path == 'admin/cover-page/setting') {
+            <a href="{{URL::to('/admin/cover-page/setting')}}" class="nav-link <?php if ($path == 'admin/cover-page/setting' || $path == 'admin/cover-page/create') {
                                                                             echo "active";
                                                                           } else {
                                                                             echo "";
                                                                           } ?>">
-              <i class="nav-icon fa fa-clone"></i>
+              <i class="nav-icon fa fa-desktop"></i>
               <p>
                 Cover Page Settings
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{URL::to('/admin/settings')}}" class="nav-link <?php if ($path == 'admin/settings') {
+                                                                            echo "active";
+                                                                          } else {
+                                                                            echo "";
+                                                                          } ?>">
+              <i class="nav-icon fa fa-cog"></i>
+              <p>
+                General Settings
               </p>
             </a>
           </li>
@@ -348,8 +364,11 @@
     @yield('content')
   </div>
   <!-- /.content-wrapper -->
+  @php
+    $app_name = Cache::get('settings')->where('key', 'app_name')->first();
+  @endphp
   <footer class="main-footer">
-    <strong>Copyright &copy; 2021 <a href="https://adminlte.io">TEAM Nirvik'12</a>.</strong>
+    <strong>Copyright &copy; 2022 <a href="https://adminlte.io">{{$app_name->value}} TEAM</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 2.0
@@ -376,6 +395,8 @@
   </script>
   <!-- Bootstrap 4 -->
   <script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <!-- <script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.min.js')}}"></script> -->
+
   <!-- ChartJS -->
   <script src="{{asset('assets/admin/plugins/chart.js/Chart.min.js')}}"></script>
   <!-- Sparkline -->

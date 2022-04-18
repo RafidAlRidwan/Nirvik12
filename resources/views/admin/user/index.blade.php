@@ -10,7 +10,7 @@
       </div>
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
         <ol class="breadcrumb float-sm-right">
-          <button type="submit" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-primary">+ Add New</button>
+          <button type="submit" data-toggle="modal" data-target="#add_user" class="btn btn-primary">+ Add New</button>
         </ol>
       </div>
     </div>
@@ -62,7 +62,7 @@
 </section>
 
 <!-- ADD MODAL -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="add_user" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">

@@ -66,12 +66,15 @@
             <tr>
               <td>{{$loop->iteration}}</td>
               <td>{{$items->title}}</td>
+              @php
+                $editURL = URL::to('admin/album/edit' . '/' . $items->id);
+              @endphp
               @if(!empty($items->attachment))
-                <td><img style='border: 1px solid #ddd; border-radius:5px; width: 45px; height:45px; ' src={{asset('/'. $items->attachment)}} alt='cover photo' class='responsive'></td>
+                <td><img style='border: 1px solid #ddd; border-radius:5px; width: 45px; height:45px; ' src='{{asset('/'. $items->attachment)}}' alt='cover photo' class='responsive'></td>
               @else
                 <td><img style='border: 1px solid #ddd; border-radius:5px; width: 45px; height:45px; ' src={{asset('/assets/user/landingPage/img/album.png')}} alt='cover photo' class='responsive'></td>
               @endif
-              <td><a class="album_edit" href={{$items->id}} title='{{$items->title}}' data-toggle='modal' data-target='#album_edit_modal'><i class='fa fa-edit' style='font-size:14px;'></i></a>
+              <td><a class="album_edit" href={{$editURL}}><i class='fa fa-edit' style='font-size:14px;'></i></a>
                 | <a class='album_delete' href={{$items->id}}  data-toggle='modal' data-target='#album_delete_modal' style='border: none; background: none;' ><i class='fa fa-trash'></i> </a>
               </td>
             </tr>

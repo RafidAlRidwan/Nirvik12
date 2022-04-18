@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-
+// USER SECTION START
 // HOME PAGE
 Route::get('/', [App\Http\Controllers\User\LandingPageController::class, 'index'])->name('landingPage');
 Route::get('/events', [App\Http\Controllers\User\LandingPageController::class, 'event'])->name('eventPage');
@@ -46,8 +46,10 @@ Route::put('/user/my-profile/update_password/{id}',
                 'uses' => 'App\Http\Controllers\User\UserController@update_password'
             ]);
 Route::get('/user/my-profile/show/{id}', [App\Http\Controllers\User\UserController::class, 'show']);
+// USER SECTION END
 
 
+// ADMIN SECTION START
 // ADMIN DASHBOARD
 Route::get('/admin/dashboard', [App\Http\Controllers\Admin\AboutController::class, 'home']);
 Route::get('/admin/icon', [App\Http\Controllers\Admin\AboutController::class, 'icon']);
@@ -103,6 +105,21 @@ Route::post('/admin/gallery/destroy', 'App\Http\Controllers\Admin\GalleryControl
 // ALBUM MANAGEMENT
 Route::get('/admin/album/setting', [App\Http\Controllers\Admin\AlbumController::class, 'index'])->name('album_index');
 Route::post('/admin/album/store', 'App\Http\Controllers\Admin\AlbumController@store');
+Route::get('/admin/album/edit/{id}', [App\Http\Controllers\Admin\AlbumController::class, 'edit']);
 Route::post('/admin/album/update', 'App\Http\Controllers\Admin\AlbumController@update');
 Route::post('/admin/album/destroy', 'App\Http\Controllers\Admin\AlbumController@destroy');
 
+// COVER PAGE MANAGEMENT
+Route::get('/admin/cover-page/setting', [App\Http\Controllers\Admin\CoverPageController::class, 'index'])->name('cover_page_index');
+Route::get('/admin/cover-page/create', [App\Http\Controllers\Admin\CoverPageController::class, 'create']);
+Route::post('/admin/cover-page/store', 'App\Http\Controllers\Admin\CoverPageController@store');
+Route::get('/admin/cover-page/edit/{id}', [App\Http\Controllers\Admin\CoverPageController::class, 'edit']);
+Route::post('/admin/cover-page/update', 'App\Http\Controllers\Admin\CoverPageController@update');
+Route::post('/admin/cover-page/destroy', 'App\Http\Controllers\Admin\CoverPageController@destroy');
+
+// Settings
+Route::get('/admin/settings', [App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('setting_index');
+Route::post('/admin/settings/update', [App\Http\Controllers\Admin\SettingsController::class, 'update']);
+
+
+// ADMIN SECTION END

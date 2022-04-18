@@ -24,7 +24,10 @@ class UserController extends Controller
     }
     public function index()
     {
-        if (Auth::user()->type == 3) {
+        $user = Auth::user();
+        Session::put('userName', $user->name);
+        // dd(Session::get('userName'));
+        if ($user->type == 3) {
             $data = User::getMasterData();
             return view('user/user.index', $data);
         } else {
@@ -66,7 +69,6 @@ class UserController extends Controller
 
     public function contact_datatable(Request $request)
     {
-
         $searchString = $request->search['value'];
         $product_data = User::where('type', '>', 2)
             ->leftJoin('user_details AS ud', 'ud.user_id', '=', 'users.id')
@@ -101,8 +103,8 @@ class UserController extends Controller
             }
         }
 
-        if (isset($request->name) && $request->full_name > 0) {
-            $product_data->where('full_name', 'LIKE', '%' . $request->name . '%');
+        if (isset($request->name) && $request->name > 0) {
+            $product_data->where('ud.full_name', 'LIKE', '%' . $request->name . '%');
         }
 
 
@@ -171,9 +173,6 @@ class UserController extends Controller
         $data['user_details'] = $user->userDetails()->get();
         $data['mobile_details'] = $user->mobileNumberDetails()->get();
 
-
-        // dd($data['user']);
-
         return view('user/user.edit', $data);
     }
 
@@ -182,11 +181,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $data = User::getMasterData($user);
         $data['user'] = $user;
-
         $data['user_details'] = $user->userDetails()->get();
-
-
-        // dd($data['user']);
 
         return view('user/user.edit-password', $data);
     }
@@ -215,7 +210,6 @@ class UserController extends Controller
 
     public function update_password(Request $request, $id)
     {
-        // return $request->all();
         $this->validate($request, [
             'old_password' => 'required',
             'password' => 'required | max:8',
@@ -243,7 +237,6 @@ class UserController extends Controller
 
     public function admin_index()
     {
-
         return view('admin/user.index');
     }
 }

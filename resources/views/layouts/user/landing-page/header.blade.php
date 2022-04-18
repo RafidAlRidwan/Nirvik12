@@ -1,9 +1,13 @@
 <!--==========================Header============================-->
 <header id="header">
        <div class="container">
+              @php
+              $cache = Cache::get('settings');
+              $banner = $cache->where('key', 'banner')->first();
+              @endphp
 
               <div id="logo" class="pull-left">
-                     <a href="#intro" class="scrollto"><img src="{{asset('assets/user/landingPage/img/logoW.png')}}" alt="" title=""></a>
+                     <a href="#intro" class="scrollto"><img src="{{asset($banner->value)}}" alt="" title=""></a>
               </div>
               @php
               $newsDetails = App\Models\News::orderBy('created_at', 'desc')->get();
@@ -32,7 +36,7 @@
                                                  } else {
                                                  echo "";
                                                  } ?>"><a href={{URL::to('/album')}}>Gallary</a></li>
-                            @if($data)
+                            @if(Session::has('userName'))
                             <li class="buy-tickets"><a onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();" href="{{ route('logout') }}">logout</a></li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
