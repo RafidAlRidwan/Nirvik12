@@ -52,7 +52,7 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
 
-        <table id="index_datatable" class="table table-bordered table-striped table-hover">
+        <table id="index_datatable" class="table table-bordered table-striped table-hover table-responsive">
           <thead style="color:#fff; background: #4ed2c5;">
             <tr>
               <th>Serial</th>
@@ -84,6 +84,7 @@
             <tr>
               <th>Serial</th>
               <th>Title</th>
+              <th>Cover Photo</th>
               <th>Action</th>
             </tr>
           </tfoot>

@@ -10,7 +10,15 @@ var swiper2 = new Swiper(".bg-slider", {
     thumbs: {
         swiper: swiper,
     },
+    speed: 1000,
+    parallax: true,
+    autoplay: {
+        delay: 6500,
+        disableOnInteraction: false,
+    },
+    watchSlidesProgress: true,
 });
+
 
 //Navigation bar effects on scroll
 

@@ -204,6 +204,32 @@ a:hover{
 
 }
 
+.btn-sm{
+	display: center;
+	width: 50px;
+	height: 40px;
+	border-radius: 25px;
+	outline: none;
+	border: 2px solid #fff;
+	background: none;
+	background-size: 200%;
+	font-size: 1.0rem;
+	color: #fff;
+	font-family: 'Poppins', sans-serif;
+	text-transform: uppercase;
+	margin: 1rem 0;
+	cursor: pointer;
+	transition: .5s;
+}
+.btn-sm:hover{
+	width: 50px;
+	color: #fff;
+	background: #f82249;
+	border: 2px solid #f82249;
+	/*box-shadow: 0 0 10px #f82249, 0 0 40px #f82249, 0 0 80px #f82249;*/
+
+}
+
  .box input[type ='text'],
  .box input[type ='password'],
  .box input[type ='email']{

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cache;
 
 class UserController extends Controller
 {
@@ -27,6 +28,14 @@ class UserController extends Controller
         $user = Auth::user();
         Session::put('userName', $user->name);
         // dd(Session::get('userName'));
+
+        $cache = Cache::get('settings');
+        if(empty($cache)){
+            Cache::rememberForever('settings', function () {
+                return DB::table('settings')->get();
+            });
+        }
+
         if ($user->type == 3) {
             $data = User::getMasterData();
             return view('user/user.index', $data);
