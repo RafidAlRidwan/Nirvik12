@@ -10,7 +10,7 @@ var swiper2 = new Swiper(".bg-slider", {
     thumbs: {
         swiper: swiper,
     },
-    speed: 1000,
+    speed: 1500,
     parallax: true,
     autoplay: {
         delay: 6500,

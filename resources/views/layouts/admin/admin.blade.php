@@ -91,6 +91,19 @@
     .right ul li.active .dropdown {
       display: block;
     }
+    .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+      /* background-color: #f82249; */
+      background-color: rgba(255,255,255,.1);
+
+      border-radius: 30px 0px 0px 30px;
+      color: #fff;
+      border-right: 4px solid #f82249;
+    }
+    [class*=sidebar-dark-] .nav-sidebar>.nav-item.menu-open>.nav-link, [class*=sidebar-dark-] .nav-sidebar>.nav-item:hover>.nav-link, [class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link:focus {
+      color: #fff;
+      border-radius: 30px 0px 0px 30px;
+      border-right: 4px solid #f82249;
+    }
   </style>
   @yield('style')
 </head>
@@ -186,7 +199,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           @php $path = Request::path(); @endphp
-          <li class="nav-item menu-open">
+          <li class="nav-item">
             <a href="{{URL::to('/admin/dashboard')}}" class="nav-link <?php if ($path == 'admin/dashboard' || $path == 'user/dashboard') {
                                                                         echo "active";
                                                                       } else {

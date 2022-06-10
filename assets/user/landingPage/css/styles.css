@@ -10,10 +10,18 @@
 --------------------------------------------------------------*/
 
 body {
-  background: #fff;
-  color: #2f3138;
+  /* backdrop-filter: blur(0.5rem); */
+
+  background: linear-gradient( rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8) ), url(/nirvik12/assets/user/landingPage/img/about-bg2.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+  
+        color: #2f3138;
   font-family: "Open Sans", sans-serif;
   overflow: visible;
+
   
 }
 
