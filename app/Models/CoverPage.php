@@ -31,7 +31,7 @@ class CoverPage extends Model
                     $filename = $unique_date . $image->getClientOriginalName();
                     $path = ('assets/user/landingPage/slider/images/');
                     $image_resize = Image::make($image->getRealPath());
-                    $image_resize->resize(2049, 1150);
+                    // $image_resize->resize(2049, 1150);
                     $main_path = $path.$filename;
                     $image_resize->save($main_path);
                     $requestData['attachment'] = $main_path ?? NULL;

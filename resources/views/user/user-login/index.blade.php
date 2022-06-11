@@ -1,5 +1,31 @@
 @extends('layouts.user.login')
 
+@section('style')
+<style>
+  .anm
+  {
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration:50s;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:linear;
+    -moz-animation-name: rotate;
+    -moz-animation-duration:50s;
+    -moz-animation-iteration-count:infinite;
+    -moz-animation-timing-function:linear;
+  }
+
+  @-webkit-keyframes rotate {
+    from {-webkit-transform:rotate(0deg);}
+    to {  -webkit-transform:rotate(360deg);}
+  }
+
+  @-moz-keyframes rotate {
+    from {-moz-transform:rotate(0deg);}
+    to {  -moz-transform:rotate(360deg);}
+  }
+</style>
+@endsection
+
 @section('content')
 @php
 $cache = Cache::get('settings');
@@ -8,7 +34,7 @@ $banner = $cache->where('key', 'banner')->first();
 <div class="login-content">
   <div class="form-box">
     {{Form::open(array('url' => 'login' , 'class' => 'box', 'method' => 'POST'))}}
-    <img src="{{asset('assets/user/loginPage/img/bzs.png')}}">
+    <img class="anm" src="{{asset('assets/user/loginPage/img/bzs.png')}}">
     <!-- <h3 class="title">নির্ভীক '১২</h3> -->
     <a href={{route('landingPage')}}><img src="{{asset($banner->value)}}" alt="নির্ভীক'১২"></a>
 

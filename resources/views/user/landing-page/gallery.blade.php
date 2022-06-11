@@ -31,12 +31,17 @@
        .custom-section {
        width: 100%;
        height: auto;
-       background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/nirvik12/assets/user/landingPage/img/bzs.jpg) center;
+       background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/nirvik12/assets/user/landingPage/img/map.jpg) center;
        background-size: cover;
        overflow: hidden;
        position: relative;
+       backdrop-filter: blur(59px);
        }
-       
+
+       img:hover {
+              transform: scale(1.1);
+       }
+                     
 </style>
 <link rel="stylesheet" href="{{asset('assets/user/landingPage/gallery/justifiedGallery.min.css')}}">
 @endsection
@@ -55,9 +60,10 @@
                      <div class="breadcrumb-wrap"></div>
                             <h1 style="color: #fff;" class="page-title">Gallery</h1>
                             <div class="content">
-                                   <p class="lead">Bla bla bla</p>
+                                   <p style="color: #fff;" class="lead">Recent Photos</p>
+
                                    <p>
-                                          <a class="btn btn-primary" href="#">View All</a>
+                                          <a class="btn btn-primary" href="{{URL::to('/album')}}">Back</a>
                                    </p>
                             </div>
               </div>
@@ -75,7 +81,7 @@
                             @isset($gallery)
                                    @foreach ($gallery as $item)
                                           <a href="{{asset($item->attachment)}}" target=”_blank”>
-                                                 <img alt="Photo" src="{{asset($item->attachment)}}"/>
+                                                 <img style="transition: 0.3s" alt="Photo" src="{{asset($item->attachment)}}"/>
                                           </a>
                                    @endforeach
                             @endisset

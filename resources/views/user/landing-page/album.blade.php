@@ -31,7 +31,7 @@
        .custom-section {
        width: 100%;
        height: auto;
-       background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/nirvik12/assets/user/landingPage/img/bzs.jpg) center;
+       background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/nirvik12/assets/user/landingPage/img/map.jpg) center;
        background-size: cover;
        overflow: hidden;
        position: relative;
@@ -110,7 +110,7 @@
                      <div class="breadcrumb-wrap"></div>
                             <h1 style="color: #fff;" class="page-title">Album</h1>
                             <div class="content">
-                                   <p class="lead">Bla bla bla</p>
+                            <p style="color: #fff;" class="lead">Recent Photos</p>
                                    <p>
                                           <a class="btn btn-primary" href="#">View All</a>
                                    </p>

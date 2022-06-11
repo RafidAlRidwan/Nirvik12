@@ -9,80 +9,45 @@
        <!--==========================Cover Page Section============================-->
        <section class="home">
               <div class="media-icons">
-                     <a href="#"><i class="fa fa-facebook"></i></a>
+                     <a href="https://www.facebook.com/groups/138718299513425"><i class="fa fa-facebook"></i></a>
                      <a href="#"><i class="fa fa-instagram"></i></a>
                      <a href="#"><i class="fa fa-twitter"></i></a>
               </div>
 
               <div class="swiper bg-slider">
                      <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                   <img src={{asset('assets/user/landingPage/slider/images/bg1.jpg')}} alt="">
-                                   <div class="text-content">
-                                          <h2 class="title">Autumn <span>Season</span></h2>
-                                          <p>Autumn, also known as fall in North American English, is one of the four temperate
-                                                 seasons. Outside the tropics, autumn marks the transition from summer to winter,
-                                                 in September or March. Autumn is the season when the duration of daylight becomes
-                                                 noticeably shorter and the temperature cools considerably.</p>
+                            @php
+                                   $coverPhotos = App\Models\CoverPage::all();
+                            @endphp
+                            @foreach ($coverPhotos as $value)
+                                   <div class="swiper-slide">
+                                          <img src="{{asset($value->attachment)}}" alt="">
+                                          <div class="text-content">
+                                                 <!-- <h2 class="title">{{$value->title}} <span style="color: #fff;">2022</span></h2> -->
+                                                 <h2 class="title">{{$value->title}}</h2>
+                                                 <!-- <p></p> -->
+                                          </div>
                                    </div>
-                            </div>
-                            <div class="swiper-slide dark-layer">
-                                   <img src={{asset('assets/user/landingPage/slider/images/bg2.jpg')}} alt="">
-                                   <div class="text-content">
-                                          <h2 class="title">Winter <span>Season</span></h2>
-                                          <p>Winter is the coldest season of the year in polar and temperate zones. It occurs
-                                                 between autumn and spring.The tilt of Earth's axis causes seasons; winter occurs
-                                                 when a hemisphere is oriented away from the Sun. Different cultures define different
-                                                 dates as the start of winter, and some use a definition based on weather.</p>
-                                   </div>
-                            </div>
-                            <div class="swiper-slide dark-layer">
-                                   <img src={{asset('assets/user/landingPage/slider/images/bg3.jpg')}} alt="">
-                                   <div class="text-content">
-                                          <h2 class="title">Summer <span>Season</span></h2>
-                                          <p>Summer is the hottest of the four temperate seasons, occurring after spring and
-                                                 before autumn. At or aroundthe summer solstice, the earliest sunrise and latest
-                                                 sunset occurs, daylight hours are longest and dark hours are shortest, with day
-                                                 length decreasing as the season progresses after the solstice.</p>
-                                   </div>
-                            </div>
-                            <div class="swiper-slide">
-                                   <img src={{asset('assets/user/landingPage/slider/images/bg4.jpg')}} alt="">
-                                   <div class="text-content">
-                                          <h2 class="title">Spring <span style="color: #fff;">Season</span></h2>
-                                          <p>Spring, also known as springtime, is one of the four temperate seasons, succeeding
-                                                 winter and preceding summer. There are various technical definitions of spring, but
-                                                 local usage of the term varies according to local climate, cultures and customs. When
-                                                 it is spring in the Northern Hemisphere, it is autumn in the Southern Hemisphere and
-                                                 vice versa.</p>
-                                   </div>
-                            </div>
-                            <div class="swiper-slide">
-                                   <img src={{asset('assets/user/landingPage/slider/images/bg5.jpg')}} alt="">
-                                   <div class="text-content">
-                                          <h2 class="title">Ifter <span style="color: #fff;">2021</span></h2>
-                                          <p>The only reason why we love school is because it's the place where all my friends are!</p>
-                                   </div>
-                            </div>
+                            @endforeach
                      </div>
               </div>
 
               <div class="bg-slider-thumbs">
                      <div class="swiper-wrapper thumbs-container">
-                            <img src={{asset('assets/user/landingPage/slider/images/bg1.jpg')}} class="swiper-slide" alt="">
-                            <img src={{asset('assets/user/landingPage/slider/images/bg2.jpg')}} class="swiper-slide" alt="">
-                            <img src={{asset('assets/user/landingPage/slider/images/bg3.jpg')}} class="swiper-slide" alt="">
-                            <img src={{asset('assets/user/landingPage/slider/images/bg4.jpg')}} class="swiper-slide" alt="">
-                            <img src={{asset('assets/user/landingPage/slider/images/bg5.jpg')}} class="swiper-slide" alt="">
+                            @foreach ($coverPhotos as $value)
+                                   <img src="{{asset($value->attachment)}}" class="swiper-slide" alt="">
+                            @endforeach
                      </div>
               </div>
        </section>
        <!--==========================About Section============================-->
        <section id="about">
               <div class="container">
+                     <div class="section-header">
+                            <h2 style="color: #f82249">About Nirvik'12</h2>
+                     </div>
                      <div class="row">
-                            <div class="col-lg-6">
-                                   <h2>About Nirvik'12</h2>
+                            <div class="col-lg-12">
                                    @php
                                           $about = App\Models\About::where('id' , 1)->first();
                                    @endphp
@@ -93,7 +58,7 @@
        </section>
 
        <!--==========================News Section============================-->
-       <section id="faq" class="wow fadeInUp">
+       <section id="faq" class="wow">
               <div class="container">
                      <div class="section-header">
                             <h2>NEWS</h2>
@@ -150,209 +115,117 @@
 
                      <div class="tab-content row justify-content-center">
 
-                     <!-- Schdule Day 1 -->
-                     <div role="tabpanel" class="col-lg-9 tab-pane fade show active" id="day-1">
+                            <!-- Schdule Day 1 -->
+                            <div role="tabpanel" class="col-lg-9 tab-pane fade show active" id="day-1">
+                                   @php
+                                          $current_date = date('m');
+                                          $events = App\Models\Event::whereMonth('date', $current_date)->get();
+                                   @endphp
 
-                     <div class="row schedule-item">
-                            <div class="date col-md-2">
-                                   <time datetime="23th feb">
-                                          <span>02</span><span>MAY</span>
-                                   </time>
-                            </div>
-                            <div class="col-md-10">
-                            <div class="speaker">
-                            </div>
-                            
-                            <h4><a href="#" data-toggle='modal' data-target='#event-details' title='' body=''>Registration</a></h4>
-                            <p><i class="fa fa-map-marker"></i> Bogura Zilla School</p>
-                            </div>
-                     </div>
+                                   @isset($events)
+                                   @foreach ($events as $value)
+                                          @php
+                                                 $day1 = date('d', strtotime($value['date']));
+                                                 $month1 = date('M', strtotime($value['date']));
+                                          @endphp
+                                          <div class="row schedule-item">
+                                                 <div class="date col-md-2">
+                                                        <time datetime="23th feb">
+                                                               <span>{{$day1}}</span><span>{{$month1}}</span>
+                                                        </time>
+                                                 </div>
+                                                 <div class="col-md-10">
+                                                 <div class="speaker">
+                                                 </div>
+                                                 
+                                                 <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title={{$value['title']}} body={{$value['description']}}>{{$value['title']}}</a></h4>
+                                                 <p><i class="fa fa-map-marker"></i> {{$value['venue']}}</p>
+                                                 </div>
+                                          </div>
+                                   @endforeach
+                                   @endisset
+                                   <a style="text-align: center;" class="text-danger pt-1 mb-0 {{ isset($events) && !$events->isEmpty() ? "d-none" : "" }}" id="notice-tools-technology-info" role="notice">
+                                          <i class="icon-info22 mr-1" aria-hidden="true"></i> {!! __("No Events found!") !!}
+                                   </a>
 
-                     <div class="row schedule-item">
-                            <div class="date col-md-2">
-                                   <time datetime="23th feb">
-                                          <span>02</span><span>MAY</span>
-                                   </time>
                             </div>
-                            <div class="col-md-10">
-                            <div class="speaker">
-                            </div>
-                            <h4>Ifter 2022</h4>
-                            <p><i class="fa fa-map-marker"></i> Momo Inn</p>
-                            </div>
-                     </div>
+                            <!-- End Schdule Day 1 -->
 
+                            <!-- Schdule Day 2 -->
+                            <div role="tabpanel" class="col-lg-9  tab-pane fade" id="day-2">
 
-                     </div>
-                     <!-- End Schdule Day 1 -->
+                                   @php
+                                          $current_date2 = date('m', strtotime('first day of +1 month'));
+                                          $events2 = App\Models\Event::whereMonth('date', $current_date2)->get();
+                                   @endphp
 
-                     <!-- Schdule Day 2 -->
-                     <div role="tabpanel" class="col-lg-9  tab-pane fade" id="day-2">
+                                   @isset($events2)
+                                   @foreach ($events2 as $value)
+                                          @php
+                                                 $day2 = date('d', strtotime($value['date']));
+                                                 $month2 = date('M', strtotime($value['date']));
+                                          @endphp
+                                          <div class="row schedule-item">
+                                                 <div class="date col-md-2">
+                                                        <time datetime="23th feb">
+                                                               <span>{{$day2}}</span><span>{{$month2}}</span>
+                                                        </time>
+                                                 </div>
+                                                 <div class="col-md-10">
+                                                 <div class="speaker">
+                                                 </div>
+                                                 
+                                                 <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title={{$value['title']}} body={{$value['description']}}>{{$value['title']}}</a></h4>
+                                                 <p><i class="fa fa-map-marker"></i> {{$value['venue']}}</p>
+                                                 </div>
+                                          </div>
+                                   @endforeach
+                                   @endisset
+                                   <a style="text-align: center;" class="text-danger pt-1 mb-0 {{ isset($events2) && !$events2->isEmpty() ? "d-none" : "" }}" id="notice-tools-technology-info" role="notice">
+                                          <i class="icon-info22 mr-1" aria-hidden="true"></i> {!! __("No Events found!") !!}
+                                   </a>
 
-                     <div class="row schedule-item">
-                            <div class="date col-md-2">
-                                   <time datetime="23th feb">
-                                          <span>02</span><span>MAY</span>
-                                   </time>
                             </div>
-                            <div class="col-md-10">
-                            <div class="speaker">
-                            </div>
-                            <h4>Libero corrupti explicabo itaque. <span>Brenden Legros</span></h4>
-                            <p>Facere provident incidunt quos voluptas.</p>
-                            </div>
-                     </div>
+                            <!-- End Schdule Day 2 -->
 
-                     <div class="row schedule-item">
-                            <div class="date col-md-2">
-                                   <time datetime="23th feb">
-                                          <span>22</span><span>MAY</span>
-                                   </time>
-                            </div>
-                            <div class="col-md-10">
-                            <div class="speaker">
-                            </div>
-                            <h4>Et voluptatem iusto dicta nobis. <span>Hubert Hirthe</span></h4>
-                            <p>Maiores dignissimos neque qui cum accusantium ut sit sint inventore.</p>
-                            </div>
-                     </div>
+                            <!-- Schdule Day 3 -->
+                            <div role="tabpanel" class="col-lg-9  tab-pane fade" id="day-3">
 
-                     </div>
-                     <!-- End Schdule Day 2 -->
+                                   @php
+                                          $current_date3 = date('m', strtotime('first day of +2 month'));
+                                          $events3 = App\Models\Event::whereMonth('date', $current_date3)->get();
+                                   @endphp
 
-                     <!-- Schdule Day 3 -->
-                     <div role="tabpanel" class="col-lg-9  tab-pane fade" id="day-3">
-
-                     <div class="row schedule-item">
-                            <div class="date col-md-2">
-                                   <time datetime="23th feb">
-                                          <span>22</span><span>MAY</span>
-                                   </time>
+                                   @isset($events3)
+                                   @foreach ($events3 as $value)
+                                          @php
+                                                 $day3 = date('d', strtotime($value['date']));
+                                                 $month3 = date('M', strtotime($value['date']));
+                                          @endphp
+                                          <div class="row schedule-item">
+                                                 <div class="date col-md-2">
+                                                        <time datetime="23th feb">
+                                                               <span>{{$day3}}</span><span>{{$month3}}</span>
+                                                        </time>
+                                                 </div>
+                                                 <div class="col-md-10">
+                                                 <div class="speaker">
+                                                 </div>
+                                                 
+                                                 <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title={{$value['title']}} body={{$value['description']}}>{{$value['title']}}</a></h4>
+                                                 <p><i class="fa fa-map-marker"></i> {{$value['venue']}}</p>
+                                                 </div>
+                                          </div>
+                                   @endforeach
+                                   @endisset
+                                   <a style="text-align: center;" class="text-danger pt-1 mb-0 {{ isset($events3) && !$events3->isEmpty() ? "d-none" : "" }}" id="notice-tools-technology-info" role="notice">
+                                          <i class="icon-info22 mr-1" aria-hidden="true"></i> {!! __("No Events found!") !!}
+                                   </a>
                             </div>
-                            <div class="col-md-10">
-                            <div class="speaker">
-                            </div>
-                            <h4>Et voluptatem iusto dicta nobis. <span>Hubert Hirthe</span></h4>
-                            <p>Maiores dignissimos neque qui cum accusantium ut sit sint inventore.</p>
-                            </div>
-                     </div>
+                            <!-- End Schdule Day 3 -->
 
-                     <div class="row schedule-item">
-                            <div class="date col-md-2">
-                                   <time datetime="23th feb">
-                                          <span>22</span><span>MAY</span>
-                                   </time>
-                            </div>
-                            <div class="col-md-10">
-                            <div class="speaker">
-                            </div>
-                            <h4>Explicabo et rerum quis et ut ea. <span>Cole Emmerich</span></h4>
-                            <p>Veniam accusantium laborum nihil eos eaque accusantium aspernatur.</p>
-                            </div>
-                     </div>
-
-                     </div>
-                     <!-- End Schdule Day 3 -->
-
-                     </div>
-
-              </div>
-       </section>
-
-       <!--==========================Members Section============================-->
-       <section id="speakers" class="wow fadeInUp">
-              <div class="container">
-                     <div class="section-header">
-                     <h2>Members</h2>
-                     <p><a style="color: blue;" href={{URL::to('/news')}}>See All</a></p>
                      </div>
 
-                     <div class="row">
-                     <div class="col-lg-4 col-md-6">
-                     <div class="speaker">
-                            <img src={{asset('assets/user/landingPage/img/speakers/1.jpg')}} alt="Speaker 1" class="img-fluid">
-                            <div class="details">
-                            <h3><a href="speaker-details.html">Brenden Legros</a></h3>
-                            <p>Quas alias incidunt</p>
-                            <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                            </div>
-                     </div>
-                     </div>
-                     <div class="col-lg-4 col-md-6">
-                     <div class="speaker">
-                            <img src={{asset('assets/user/landingPage/img/speakers/2.jpg')}} alt="Speaker 2" class="img-fluid">
-                            <div class="details">
-                            <h3><a href="speaker-details.html">Hubert Hirthe</a></h3>
-                            <p>Consequuntur odio aut</p>
-                            <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                            </div>
-                     </div>
-                     </div>
-                     <div class="col-lg-4 col-md-6">
-                     <div class="speaker">
-                            <img src={{asset('assets/user/landingPage/img/speakers/3.jpg')}} alt="Speaker 3" class="img-fluid">
-                            <div class="details">
-                            <h3><a href="speaker-details.html">Cole Emmerich</a></h3>
-                            <p>Fugiat laborum et</p>
-                            <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                            </div>
-                     </div>
-                     </div>
-                     <div class="col-lg-4 col-md-6">
-                     <div class="speaker">
-                            <img src={{asset('assets/user/landingPage/img/speakers/4.jpg')}} alt="Speaker 4" class="img-fluid">
-                            <div class="details">
-                            <h3><a href="speaker-details.html">Jack Christiansen</a></h3>
-                            <p>Debitis iure vero</p>
-                            <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                            </div>
-                     </div>
-                     </div>
-                     <div class="col-lg-4 col-md-6">
-                     <div class="speaker">
-                            <img src={{asset('assets/user/landingPage/img/speakers/5.jpg')}} alt="Speaker 5" class="img-fluid">
-                            <div class="details">
-                            <h3><a href="speaker-details.html">Alejandrin Littel</a></h3>
-                            <p>Qui molestiae natus</p>
-                            <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                            </div>
-                     </div>
-                     </div>
-                     <div class="col-lg-4 col-md-6">
-                     <div class="speaker">
-                            <img src={{asset('assets/user/landingPage/img/speakers/6.jpg')}} alt="Speaker 6" class="img-fluid">
-                            <div class="details">
-                            <h3><a href="speaker-details.html">Willow Trantow</a></h3>
-                            <p>Non autem dicta</p>
-                            <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                            </div>
-                     </div>
-                     </div>
-                     </div>
               </div>
        </section>
 
@@ -390,7 +263,24 @@
                      </div>
               </div>
        </section>
-
+       <!--==========================Modal============================-->
+       <section>
+              <div class="modal fade" id="event-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                   <div class="modal-header">
+                                          <h5 class="modal-title text-bold title" id="exampleModalLabel"></h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                          </button>
+                                   </div>
+                                   <div class="modal-body body">
+                                   
+                                   </div>
+                            </div>
+                     </div>
+              </div>
+       </section>
 @endsection
 
 @section('footer')

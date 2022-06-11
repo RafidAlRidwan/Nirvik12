@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\About;
+use DB;
 use URL;
+use Auth;
 use Session;
 use Redirect;
 use validate;
-use Auth;
-use DB;
+use App\Models\User;
+use App\Models\About;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AboutController extends Controller
 {
@@ -21,7 +22,9 @@ class AboutController extends Controller
     }
     public function home()
     {
-        return view('admin/dashboard.index');
+        $user = new User;
+        $data = $user->userCount();
+        return view('admin/dashboard.index', $data);
     }
 
     public function edit($id)
@@ -50,4 +53,5 @@ class AboutController extends Controller
                 ->withInput($request->all);
         }
     }
+
 }

@@ -29,7 +29,7 @@ class Gallery extends Model
                 $filename = $unique_date . $image->getClientOriginalName();
                 $path = ('assets/user/landingPage/img/gallery/');
                 $image_resize = Image::make($image->getRealPath());
-                $image_resize->resize(800, 600);
+                // $image_resize->resize(800, 600);
                 $main_path = $path.$filename;
                 $image_resize->save($main_path);
                 $requestData['attachment'] = $main_path ?? NULL;
