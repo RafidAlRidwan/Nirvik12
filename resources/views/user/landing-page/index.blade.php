@@ -1,5 +1,4 @@
 @extends('layouts.user.landing-page.master')
-namespace App;
 
 @section('header')
        <!-- ======= Header Assets ======= -->
@@ -122,6 +121,8 @@ namespace App;
                                           $current_date = date('m');
                                           $events = App\Models\Event::whereMonth('date', $current_date)->get();
                                    @endphp
+
+                                   @isset($events)
                                    @foreach ($events as $value)
                                           @php
                                                  $day1 = date('d', strtotime($value['date']));
@@ -142,7 +143,10 @@ namespace App;
                                                  </div>
                                           </div>
                                    @endforeach
-
+                                   @endisset
+                                   <a style="text-align: center;" class="text-danger pt-1 mb-0 {{ isset($events) && !$events->isEmpty() ? "d-none" : "" }}" id="notice-tools-technology-info" role="notice">
+                                          <i class="icon-info22 mr-1" aria-hidden="true"></i> {!! __("No Events found!") !!}
+                                   </a>
 
                             </div>
                             <!-- End Schdule Day 1 -->
@@ -154,6 +158,8 @@ namespace App;
                                           $current_date2 = date('m', strtotime('first day of +1 month'));
                                           $events2 = App\Models\Event::whereMonth('date', $current_date2)->get();
                                    @endphp
+
+                                   @isset($events2)
                                    @foreach ($events2 as $value)
                                           @php
                                                  $day2 = date('d', strtotime($value['date']));
@@ -174,6 +180,10 @@ namespace App;
                                                  </div>
                                           </div>
                                    @endforeach
+                                   @endisset
+                                   <a style="text-align: center;" class="text-danger pt-1 mb-0 {{ isset($events2) && !$events2->isEmpty() ? "d-none" : "" }}" id="notice-tools-technology-info" role="notice">
+                                          <i class="icon-info22 mr-1" aria-hidden="true"></i> {!! __("No Events found!") !!}
+                                   </a>
 
                             </div>
                             <!-- End Schdule Day 2 -->
@@ -185,6 +195,8 @@ namespace App;
                                           $current_date3 = date('m', strtotime('first day of +2 month'));
                                           $events3 = App\Models\Event::whereMonth('date', $current_date3)->get();
                                    @endphp
+
+                                   @isset($events3)
                                    @foreach ($events3 as $value)
                                           @php
                                                  $day3 = date('d', strtotime($value['date']));
@@ -205,6 +217,10 @@ namespace App;
                                                  </div>
                                           </div>
                                    @endforeach
+                                   @endisset
+                                   <a style="text-align: center;" class="text-danger pt-1 mb-0 {{ isset($events3) && !$events3->isEmpty() ? "d-none" : "" }}" id="notice-tools-technology-info" role="notice">
+                                          <i class="icon-info22 mr-1" aria-hidden="true"></i> {!! __("No Events found!") !!}
+                                   </a>
                             </div>
                             <!-- End Schdule Day 3 -->
 
@@ -212,103 +228,6 @@ namespace App;
 
               </div>
        </section>
-
-       <!--==========================Members Section============================-->
-       <!-- <section id="speakers" class="wow fadeInUp">
-              <div class="container">
-                     <div class="section-header">
-                     <h2>Members</h2>
-                     <p><a style="color: blue;" href={{URL::to('/news')}}>See All</a></p>
-                     </div>
-
-                     <div class="row">
-                     <div class="col-lg-4 col-md-6">
-                     <div class="speaker">
-                            <img src={{asset('assets/user/landingPage/img/speakers/1.jpg')}} alt="Speaker 1" class="img-fluid">
-                            <div class="details">
-                            <h3><a href="speaker-details.html">Brenden Legros</a></h3>
-                            <p>Quas alias incidunt</p>
-                            <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                            </div>
-                     </div>
-                     </div>
-                     <div class="col-lg-4 col-md-6">
-                     <div class="speaker">
-                            <img src={{asset('assets/user/landingPage/img/speakers/2.jpg')}} alt="Speaker 2" class="img-fluid">
-                            <div class="details">
-                            <h3><a href="speaker-details.html">Hubert Hirthe</a></h3>
-                            <p>Consequuntur odio aut</p>
-                            <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                            </div>
-                     </div>
-                     </div>
-                     <div class="col-lg-4 col-md-6">
-                     <div class="speaker">
-                            <img src={{asset('assets/user/landingPage/img/speakers/3.jpg')}} alt="Speaker 3" class="img-fluid">
-                            <div class="details">
-                            <h3><a href="speaker-details.html">Cole Emmerich</a></h3>
-                            <p>Fugiat laborum et</p>
-                            <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                            </div>
-                     </div>
-                     </div>
-                     <div class="col-lg-4 col-md-6">
-                     <div class="speaker">
-                            <img src={{asset('assets/user/landingPage/img/speakers/4.jpg')}} alt="Speaker 4" class="img-fluid">
-                            <div class="details">
-                            <h3><a href="speaker-details.html">Jack Christiansen</a></h3>
-                            <p>Debitis iure vero</p>
-                            <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                            </div>
-                     </div>
-                     </div>
-                     <div class="col-lg-4 col-md-6">
-                     <div class="speaker">
-                            <img src={{asset('assets/user/landingPage/img/speakers/5.jpg')}} alt="Speaker 5" class="img-fluid">
-                            <div class="details">
-                            <h3><a href="speaker-details.html">Alejandrin Littel</a></h3>
-                            <p>Qui molestiae natus</p>
-                            <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                            </div>
-                     </div>
-                     </div>
-                     <div class="col-lg-4 col-md-6">
-                     <div class="speaker">
-                            <img src={{asset('assets/user/landingPage/img/speakers/6.jpg')}} alt="Speaker 6" class="img-fluid">
-                            <div class="details">
-                            <h3><a href="speaker-details.html">Willow Trantow</a></h3>
-                            <p>Non autem dicta</p>
-                            <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                            </div>
-                            </div>
-                     </div>
-                     </div>
-                     </div>
-              </div>
-       </section> -->
 
        <!--==========================Sponsors Section============================-->
        <section id="supporters" class="section-with-bg wow ">

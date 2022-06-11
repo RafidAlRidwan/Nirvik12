@@ -85,6 +85,11 @@ class AlbumController extends Controller
             $id = $request->id;
             DB::beginTransaction();
 
+            $hasPhotos = Gallery::where('album_id', $id)->get();
+            if(!empty($hasPhotos))
+            {
+                return redirect()->back()->with('flashy__danger', __('This Album has Photos!'));
+            }
             Album::where('id', $id)->delete();
 
             DB::commit();

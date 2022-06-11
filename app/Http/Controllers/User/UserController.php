@@ -35,12 +35,14 @@ class UserController extends Controller
                 return DB::table('settings')->get();
             });
         }
-
+        
         if ($user->type == 3) {
             $data = User::getMasterData();
             return view('user/user.index', $data);
         } else {
-            return view('admin/dashboard.index');
+            $user = new User;
+            $data = $user->userCount();
+            return view('admin/dashboard.index', $data);
         }
     }
 

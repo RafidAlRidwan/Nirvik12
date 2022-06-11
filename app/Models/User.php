@@ -90,4 +90,30 @@ class User extends Authenticatable
         UserDetail::saveUserInfo($request->all(), $user->id);
         MobileNumberDetail::saveMobileInfo($request->all(), $user->id);
     }
+
+    public function userCount()
+    {
+        $data['a'] = User::select('user_details.section as connections')
+        ->leftJoin('user_details', 'user_details.user_id', '=', 'users.id')
+        ->where('section', 1)
+        ->groupBy('users.id')
+        ->get();
+        $data['b'] = User::select('user_details.section as connections')
+        ->leftJoin('user_details', 'user_details.user_id', '=', 'users.id')
+        ->where('section', 2)
+        ->groupBy('users.id')
+        ->get();
+        $data['c'] = User::select('user_details.section as connections')
+        ->leftJoin('user_details', 'user_details.user_id', '=', 'users.id')
+        ->where('section', 3)
+        ->groupBy('users.id')
+        ->get();
+        $data['d'] = User::select('user_details.section as connections')
+        ->leftJoin('user_details', 'user_details.user_id', '=', 'users.id')
+        ->where('section', 4)
+        ->groupBy('users.id')
+        ->get();
+
+        return $data;
+    }
 }
