@@ -81,9 +81,12 @@ class User extends Authenticatable
             $user = User::create($requestData);
         } else {
             $user = User::findOrFail($id);
-            if (!empty($requestData['password'])) {
+            if ($user->exists && (string)$requestData['password'] === $user->password) {
+                unset($requestData['password']);
+            } else {
                 $requestData['password'] = Hash::make($requestData['password']);
             }
+
             $user->update($requestData);
         }
 

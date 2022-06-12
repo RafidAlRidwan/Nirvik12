@@ -36,6 +36,11 @@
                                                  } else {
                                                  echo "";
                                                  } ?>"><a href={{URL::to('/album')}}>Gallary</a></li>
+                            <li class="<?php if ($path == 'committee') {
+                                                 echo "menu-active";
+                                                 } else {
+                                                 echo "";
+                                                 } ?>"><a href={{URL::to('/committee')}}>Committee</a></li>
                             @if(Session::has('userName'))
                             <li class="buy-tickets"><a onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();" href="{{ route('logout') }}">logout</a></li>

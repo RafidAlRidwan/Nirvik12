@@ -35,12 +35,18 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Email address</label>
-                    <input type="email" class="form-control" name="email" id="email" value="{{$user->email}}" placeholder="">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" value="{{$user->password}}" placeholder="">
                 </div>
             </div>
         </div>
         <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Email address</label>
+                    <input type="email" class="form-control" name="email" id="email" value="{{$user->email}}" placeholder="">
+                </div>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="designation">Designation</label>
@@ -53,14 +59,14 @@
                     <input type="text" class="form-control" id="office_name" name="office_name" value="{{$user_details['office_name']}}" placeholder="">
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="current_city">Current City</label>
                     <input type="text" class="form-control" id="current_city" placeholder="" value="{{$user_details['current_city']}}" name="current_city">
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="roll_no">Class Roll No.</label>
@@ -73,14 +79,14 @@
                     {!! Form::select('section', $section, ($user_details['section']) ,['placeholder'=>__('Select a Section') , 'class'=>'form-control', ($errors->has('section') ? 'is-invalid' : ''), 'required']) !!}
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="shift">Shift</label>
                     {!! Form::select('shift', $shift, ($user_details['shift']) ,['placeholder'=>__('Select a Shift') , 'class'=>'form-control', ($errors->has('shift') ? 'is-invalid' : ''), 'required']) !!}
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                 <div class="form-group">
                     <label for="religion">Religion</label>
@@ -133,7 +139,7 @@
         </div> -->
         <div class="row">
             <div class="inputfield div-gap">
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </div>
         {!! Form::close() !!}

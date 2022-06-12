@@ -1,14 +1,8 @@
 @include('errors.validation')
 
-<!-- Button trigger modal -->
-
-
-
-
-@foreach($user_details as $key => $value)
 
 <div class="row">
-    <input type="hidden" name="user_details_id" value="{{$value->id}}">
+    <input type="hidden" name="user_details_id" value="{{$user_details->id}}">
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <label>User Name</label>
         <div class="inputBox">
@@ -21,31 +15,16 @@
 
     </div>
 
-    <!-- <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            <label>Password<strong style="color: red"> *</strong></label>
-            <div class="inputBox">
-                <input type="password" name="password" value="{{$user->password}}" autocomplete="off" required="">
-            </div>
-            @if ($errors->has('password'))
-            <div class="invalid-feedback">{{ $errors->first('password') }}</div>
-            @endif
-
-        </div> -->
-
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <label>Full Name</label>
         <div class="inputBox">
-            {!! Form::text('full_name', $value->full_name, [($errors->has('full_name') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
+            {!! Form::text('full_name', $user_details->full_name, [($errors->has('full_name') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
         </div>
         @if ($errors->has('full_name'))
         <div class="invalid-feedback">{{ $errors->first('full_name') }}</div>
         @endif
 
     </div>
-
-
-
-
 
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <label>Email<strong style="color: red"> *</strong></label>
@@ -59,11 +38,10 @@
 
     </div>
 
-
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <label>Designation</label>
         <div class="inputBox">
-            {!! Form::text('designation', $value->designation, [($errors->has('designation') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
+            {!! Form::text('designation', $user_details->designation, [($errors->has('designation') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
 
         </div>
         @if ($errors->has('designation'))
@@ -75,7 +53,7 @@
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <label>Company</label>
         <div class="inputBox">
-            {!! Form::text('office_name', $value->office_name, [($errors->has('office_name') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
+            {!! Form::text('office_name', $user_details->office_name, [($errors->has('office_name') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
 
         </div>
         @if ($errors->has('office_name'))
@@ -84,12 +62,10 @@
 
     </div>
 
-
-
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <label>Current City</label>
         <div class="inputBox">
-            {!! Form::text('current_city', $value->current_city, [($errors->has('current_city') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
+            {!! Form::text('current_city', $user_details->current_city, [($errors->has('current_city') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
         </div>
         @if ($errors->has('current_city'))
         <div class="invalid-feedback">{{ $errors->first('current_city') }}</div>
@@ -97,12 +73,10 @@
 
     </div>
 
-
-
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <label>Class Roll No.</label>
         <div class="inputBox">
-            {!! Form::number('roll_no', $value->roll_no, [($errors->has('roll_no') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
+            {!! Form::number('roll_no', $user_details->roll_no, [($errors->has('roll_no') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
 
         </div>
         @if ($errors->has('roll_no'))
@@ -114,7 +88,7 @@
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
 
         <label>Section</label>
-        {!! Form::select('section', $section, $value->section, ['placeholder'=>__('Select a Section') , 'class'=>'wide', ($errors->has('section') ? 'is-invalid' : ''), 'required']) !!}
+        {!! Form::select('section', $section, $user_details->section, ['placeholder'=>__('Select a Section') , 'class'=>'wide', ($errors->has('section') ? 'is-invalid' : ''), 'required']) !!}
         @if ($errors->has('religion'))
         <div class="invalid-feedback">{{ $errors->first('section') }}</div>
         @endif
@@ -124,7 +98,7 @@
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
 
         <label>Shift</label>
-        {!! Form::select('shift', $shift, $value->shift, ['placeholder'=>__('Select a Shift') , 'class'=>'wide', ($errors->has('shift') ? 'is-invalid' : ''), 'required']) !!}
+        {!! Form::select('shift', $shift, $user_details->shift, ['placeholder'=>__('Select a Shift') , 'class'=>'wide', ($errors->has('shift') ? 'is-invalid' : ''), 'required']) !!}
         @if ($errors->has('shift'))
         <div class="invalid-feedback">{{ $errors->first('shift') }}</div>
         @endif
@@ -133,7 +107,7 @@
 
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <label>Religion</label>
-        {!! Form::select('religion', $religion, $value->religion, ['placeholder'=>__('Select a Religion') , 'class'=>'wide', ($errors->has('religion') ? 'is-invalid' : ''), 'required']) !!}
+        {!! Form::select('religion', $religion, $user_details->religion, ['placeholder'=>__('Select a Religion') , 'class'=>'wide', ($errors->has('religion') ? 'is-invalid' : ''), 'required']) !!}
         @if ($errors->has('religion'))
         <div class="invalid-feedback">{{ $errors->first('religion') }}</div>
         @endif
@@ -143,7 +117,7 @@
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <label>Currrent Address</label>
         <div class="inputTextArea">
-            {!! Form::textarea('current_address', $value->current_address, ['rows'=>2, ($errors->has('current_address') ? 'is-invalid' : ''), 'class'=>'custom-textarea' ,'required']) !!}
+            {!! Form::textarea('current_address', $user_details->current_address, ['rows'=>2, ($errors->has('current_address') ? 'is-invalid' : ''), 'class'=>'custom-textarea' ,'required']) !!}
             @if ($errors->has('current_address'))
             <div class="invalid-feedback">{{ $errors->first('current_address') }}</div>
             @endif
@@ -154,6 +128,16 @@
 
 <div class="row">
     <div class="field_wrapper">
+        
+        @if(!isset($mobile_details))
+        <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+            <label>Mobile No</label>
+            <div class="inputMobile" style="display: flex;">
+                <input type="number" class="custom-add" name="mobile[]" />
+                <span class="add_button" title="Add field"><i class="fa fa-plus"></i></span>
+            </div>
+        </div>
+        @endif
 
         @foreach($mobile_details as $key => $item )
         @if($key == 0)
@@ -185,42 +169,12 @@
 
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <label>Marital Status</label>
-        {!! Form::select('marital_status', $marital_status, $value->marital_status, ['placeholder'=>__('Select a Status') , 'class'=>'wide changeStatus', ($errors->has('marital_status') ? 'is-invalid' : ''), 'required']) !!}
+        {!! Form::select('marital_status', $marital_status, $user_details->marital_status, ['placeholder'=>__('Select a Status') , 'class'=>'wide changeStatus', ($errors->has('marital_status') ? 'is-invalid' : ''), 'required']) !!}
         @if ($errors->has('marital_status'))
         <div class="invalid-feedback">{{ $errors->first('marital_status') }}</div>
         @endif
 
     </div>
-    <div id="marital-status">
-        @if($value -> spouse_name != '')
-        <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            <label>Spouse Name</label>
-            <div class="inputBox">
-                {!! Form::text('spouse_name', $value->spouse_name, [($errors->has('spouse_name') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
-
-            </div>
-            @if ($errors->has('spouse_name'))
-            <div class="invalid-feedback">{{ $errors->first('spouse_name') }}</div>
-            @endif
-        </div>
-        @endif
-
-        @if($value -> number_of_child != '')
-        <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            <label>No of Children</label>
-            <div class="inputBox">
-                {!! Form::number('number_of_child', $value->number_of_child, [($errors->has('number_of_child') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
-
-            </div>
-            @if ($errors->has('number_of_child'))
-            <div class="invalid-feedback">{{ $errors->first('number_of_child') }}</div>
-            @endif
-        </div>
-        @endif
-
-
-    </div>
-
 
 </div>
 
@@ -228,17 +182,17 @@
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <label>Profile Picture</label>
         <div class="tower-file">
-            <input type="file" id="demoInput5" name="attachment" value="$value->attachment" />
+            <input type="file" id="demoInput5" name="attachment" value="$user_details->attachment" />
             <label for="demoInput5" class="update-button btn btn-primary">
                 <span class=" mdi mdi-upload"></span>Select Files
             </label>
             <button type="button" class="btn btn-secondary tower-file-clear align-top">Clear</button>
         </div>
-        @if(!empty($value->attachment))
+        @if(!empty($user_details->attachment))
         <div id="edit-img" class="tower-file">
             <div class=" tower-file-details">
                 <div class="tower-input-preview-container">
-                    <img class="null" src="{{asset('assets/user/landingPage/img/profilePicture')}}/{{ ($value->attachment) }}">
+                    <img class="null" src="{{asset('assets/user/landingPage/img/profilePicture')}}/{{ ($user_details->attachment) }}">
                 </div>
             </div>
         </div>
@@ -246,8 +200,6 @@
 
     </div>
 </div>
-
-@endforeach
 
 <div class="row">
     <div class="inputfield div-gap">
