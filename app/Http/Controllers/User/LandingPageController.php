@@ -31,6 +31,10 @@ class LandingPageController extends Controller
     {
         return view('user/landing-page.album');
     }
+    public function committee()
+    {
+        return view('user/landing-page.committee');
+    }
     public function gallery($id)
     {
         if($id != 0){

@@ -181,7 +181,7 @@ class UserController extends Controller
         $data = User::getMasterData($user);
         $data['user'] = $user;
 
-        $data['user_details'] = $user->userDetails()->get();
+        $data['user_details'] = $user->userDetails()->first();
         $data['mobile_details'] = $user->mobileNumberDetails()->get();
 
         return view('user/user.edit', $data);

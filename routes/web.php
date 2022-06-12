@@ -20,7 +20,8 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\User\LandingPageController::class, 'index'])->name('landingPage');
 Route::get('/events', [App\Http\Controllers\User\LandingPageController::class, 'event'])->name('eventPage');
 Route::get('/news', [App\Http\Controllers\User\LandingPageController::class, 'news'])->name('newsPage');
-Route::get('/album', [App\Http\Controllers\User\LandingPageController::class, 'album'])->name('galleryPage');
+Route::get('/album', [App\Http\Controllers\User\LandingPageController::class, 'album'])->name('albumPage');
+Route::get('/committee', [App\Http\Controllers\User\LandingPageController::class, 'committee'])->name('committeePage');
 Route::get('/gallery/{id}', [App\Http\Controllers\User\LandingPageController::class, 'gallery'])->name('galleryPage');
 
 // USER LOGIN

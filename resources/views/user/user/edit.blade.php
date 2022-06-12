@@ -40,15 +40,10 @@
     //Once add button is clicked
     $(addButton).click(function() {
       //Check maximum number of input fields
-      if (x < maxField) {
         x++; //Increment field counter
         var fieldHTML = '<article><div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4"><label>Mobile No</label><div class="inputMobile" style="display: flex;"><input type="number" class="custom-add" name="mobile[]" value=""/><span class="remove_button"><i class="fa fa-minus-circle"></i></span></div></div></article>'; //New input field html 
         $(wrapper).append(fieldHTML); //Add field html
-      } else {
-        flashy('<?php echo "Maximum 3" ?>', {
-          type: 'flashy__info'
-        });
-      }
+      
     });
 
     //Once remove button is clicked
