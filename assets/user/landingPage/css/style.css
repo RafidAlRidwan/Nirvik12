@@ -917,10 +917,11 @@ body.mobile-nav-active #mobile-nav-toggle {
   padding-top: 15px;
   padding-bottom: 15px;
   transition: background-color ease-in-out 0.3s;
+  background-color: #fff;
 }
 
-#schedule .schedule-item:hover {
-  background-color: #fff;
+#schedule .schedule-item .schedule-item-row:hover {
+  background-color: #f6f7fd;
 }
 
 #schedule .schedule-item time {

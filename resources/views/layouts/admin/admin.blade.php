@@ -27,6 +27,9 @@
   <link rel="stylesheet" href="{{asset('assets/admin/plugins/daterangepicker/daterangepicker.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/plugins/summernote/summernote-bs4.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/admin/plugins/toastr/toastr.min.css')}}">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{asset('assets/admin/plugins/select2/css/select2.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
   <!-- DATA TABLE -->
   <link rel="stylesheet" href="{{asset('assets/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
@@ -246,6 +249,18 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{URL::to('/admin/committee/setting')}}" class="nav-link <?php if ($path == 'admin/committee/setting') {
+                                                                              echo "active";
+                                                                            } else {
+                                                                              echo "";
+                                                                            } ?>">
+              <i class="nav-icon fa fa-podcast"></i>
+              <p>
+                Committee Setup
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{URL::to('/admin/about/setting/1')}}" class="nav-link <?php if ($path == 'admin/about/setting/1') {
                                                                               echo "active";
                                                                             } else {
@@ -427,6 +442,8 @@
   <script src="{{asset('assets/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
   <!-- overlayScrollbars -->
   <script src="{{asset('assets/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+  <!-- Select2 -->
+  <script src="{{asset('assets/admin/plugins/select2/js/select2.full.min.js')}}"></script>
   <!-- AdminLTE App -->
   <script src="{{asset('assets/admin/dist/js/adminlte.js')}}"></script>
   <script src="{{asset('assets/admin/plugins/summernote/summernote-bs4.min.js')}}"></script>

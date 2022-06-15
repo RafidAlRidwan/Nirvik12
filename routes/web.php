@@ -118,6 +118,17 @@ Route::get('/admin/cover-page/edit/{id}', [App\Http\Controllers\Admin\CoverPageC
 Route::post('/admin/cover-page/update', 'App\Http\Controllers\Admin\CoverPageController@update');
 Route::post('/admin/cover-page/destroy', 'App\Http\Controllers\Admin\CoverPageController@destroy');
 
+// COMMITTEE MANAGEMENT
+Route::get('/admin/committee/setting', [App\Http\Controllers\Admin\CommitteeController::class, 'index'])->name('committee_index');
+Route::get('/admin/committee/create', [App\Http\Controllers\Admin\CommitteeController::class, 'create']);
+Route::post('/admin/committee/store', 'App\Http\Controllers\Admin\CommitteeController@store');
+Route::post('/admin/committee/getdata', [App\Http\Controllers\Admin\CommitteeController::class, 'datatable']);
+Route::get('/admin/committee/edit/{id}', [App\Http\Controllers\Admin\CommitteeController::class, 'edit']);
+Route::post('/admin/committee/update', 'App\Http\Controllers\Admin\CommitteeController@update');
+Route::post('/admin/committee/destroy', 'App\Http\Controllers\Admin\CommitteeController@destroy');
+Route::get('/admin/committee/getUserData/{id}', [App\Http\Controllers\Admin\CommitteeController::class, 'getUserIds']);
+Route::get('/admin/committee/view/{id}', [App\Http\Controllers\Admin\CommitteeController::class, 'show']);
+
 // Settings
 Route::get('/admin/settings', [App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('setting_index');
 Route::post('/admin/settings/update', [App\Http\Controllers\Admin\SettingsController::class, 'update']);

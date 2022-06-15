@@ -57,7 +57,7 @@
                      <div class="content">
                             <p style="color: #fff;" class="lead">Recent Events Committee List</p>
                             <p>
-                                   <a class="btn btn-primary" href="#">View All</a>
+                                   <a class="btn btn-info" href="#">View All</a>
                             </p>
                      </div>
               </div>
@@ -72,32 +72,36 @@
                      <p>Here is our event committee</p>
               </div>
 
-              @php
-                     $current_date = date('Y-m-d');
-                     $events = App\Models\Event::whereDate('date', '>=', $current_date)->get();
-              @endphp
-              @foreach ($events as $value)
-                     @php
-                            $day1 = date('d', strtotime($value['date']));
-                            $month1 = date('M', strtotime($value['date']));
-                     @endphp
-                     <div class="row schedule-item">
-                            <div class="date col-md-2 col-sm-2 col-xl-2">
-                                   <time datetime="23th feb">
-                                          <span>{{$day1}}</span><span>{{$month1}}</span>
-                                   </time>
-                            </div>
-                            <div class="col-md-10 col-sm-10 col-xl-10">
-                            <div class="speaker">
-                            </div>
-                            
-                            <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title={{$value['title']}} body={{$value['description']}}>{{$value['title']}}</a></h4>
-                            <p><i class="fa fa-map-marker"></i> {{$value['venue']}}</p>
+              <div class="tab-content row justify-content-center">
+                     <div role="tabpanel" class="col-lg-9 tab-pane fade show active" id="day-1">
+                            <div class="row schedule-item p-3 border-0">
+                                   
+                                   <div class="schedule-item-row col-md-12 border d-flex justify-content-between p-3">
+                                          
+                                          <div class="">
+                                                 <h4><a href="#" class="eventData">Ifter Mahfil Committee</a></h4>
+                                                 <p><i class="fa fa-map-marker"></i> BZS</p>
+                                          </div>
+                                          <div class="">
+                                                 <a href=""><button class="btn btn-info">Details</button></a>
+                                          </div>
+                                          
+                                   </div>
+                                   <div class="schedule-item-row col-md-12 border d-flex justify-content-between p-3">
+                                          
+                                          <div class="">
+                                                 <h4><a href="#" class="eventData">Ifter Mahfil Committee</a></h4>
+                                                 <p><i class="fa fa-map-marker"></i> BZS</p>
+                                          </div>
+                                          <div class="">
+                                                 <button class="btn btn-info">Details</button>
+                                          </div>
+                                          
+                                   </div>
                             </div>
                      </div>
-              @endforeach
-              
-
+                     
+              </div>
        </div>
 </section>
 @endsection
