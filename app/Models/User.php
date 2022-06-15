@@ -119,4 +119,19 @@ class User extends Authenticatable
 
         return $data;
     }
+
+    public static function getUserIds($id)
+    {
+        $data['user'] = User::query()
+        ->leftJoin('user_details', 'users.id', '=', 'user_details.user_id')
+        ->where('users.type', 3)
+        ->whereNotNull('user_details.full_name')
+        ->where('user_details.user_id', '!=', $id)
+        ->select(
+            'user_details.full_name',
+            'user_details.user_id'
+            )
+        ->get();
+        return $data['user'];
+    }
 }

@@ -33,7 +33,7 @@ class LandingPageController extends Controller
     }
     public function committee()
     {
-        return view('user/landing-page.committee');
+        return view('user/landing-page.committee-details');
     }
     public function gallery($id)
     {
