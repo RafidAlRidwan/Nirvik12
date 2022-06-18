@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Shift;
+use App\Models\Section;
+use App\Models\UserDetail;
+use App\Models\MobileNumberDetail;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use App\Models\UserDetail;
-use App\Models\MobileNumberDetail;
-use Illuminate\Support\Facades\Hash;
-use App\Models\Shift;
-use App\Models\Section;
 
 class User extends Authenticatable
 {
@@ -122,16 +123,30 @@ class User extends Authenticatable
 
     public static function getUserIds($id)
     {
-        $data['user'] = User::query()
-        ->leftJoin('user_details', 'users.id', '=', 'user_details.user_id')
-        ->where('users.type', 3)
-        ->whereNotNull('user_details.full_name')
-        ->where('user_details.user_id', '!=', $id)
-        ->select(
-            'user_details.full_name',
-            'user_details.user_id'
-            )
-        ->get();
+        $sql = DB::select("
+        SELECT (
+            case
+            when (sections.name is not null)  then
+            CONCAT(user_details.full_name,' (', sections.name,')')
+            when (sections.name is null) then 
+            CONCAT(user_details.full_name,' (n/a)')
+            end 
+            )AS full_name,
+            users.id as user_id
+
+            FROM users
+            LEFT JOIN user_details 
+            ON user_details.user_id = users.id
+            LEFT JOIN sections
+            ON sections.id = user_details.section
+            WHERE users.type = 3 AND user_details.user_id != $id
+            AND user_details.full_name != 'null' ");
+        
+        $array=array_map(function($item){
+            return (array) $item;
+        },$sql);
+        $data['user'] = $array;
+
         return $data['user'];
     }
 }

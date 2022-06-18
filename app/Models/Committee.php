@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Committee extends Model
 {
@@ -34,15 +35,29 @@ class Committee extends Model
     public static function getMasterData($committee = null)
     {
 
-        $data['user'] = User::query()
-        ->leftJoin('user_details', 'users.id', '=', 'user_details.user_id')
-        ->where('users.type', 3)
-        ->whereNotNull('user_details.full_name')
-        ->pluck(
-            'user_details.full_name',
-            'user_details.user_id'
-            )
-        ->toArray();
+        $sql = DB::select("
+        SELECT (
+            case
+            when (sections.name is not null)  then
+            CONCAT(user_details.full_name,' (', sections.name,')')
+            when (sections.name is null) then 
+            CONCAT(user_details.full_name,' (n/a)')
+            end 
+            )AS name,
+            users.id
+
+            FROM users
+            LEFT JOIN user_details 
+            ON user_details.user_id = users.id
+            LEFT JOIN sections
+            ON sections.id = user_details.section
+            WHERE users.type = 3
+            AND user_details.full_name != 'null' ");
+        
+        $array=array_map(function($item){
+            return (array) $item;
+        },$sql);
+        $data['user'] = collect($array)->pluck('name', 'id');
         $data['events'] = Event::whereDate('date', '>=', date('Y-m-d'))->pluck('title', 'id');
         return $data;
     }

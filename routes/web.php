@@ -129,6 +129,18 @@ Route::post('/admin/committee/destroy', 'App\Http\Controllers\Admin\CommitteeCon
 Route::get('/admin/committee/getUserData/{id}', [App\Http\Controllers\Admin\CommitteeController::class, 'getUserIds']);
 Route::get('/admin/committee/view/{id}', [App\Http\Controllers\Admin\CommitteeController::class, 'show']);
 
+// COLLECTION MANAGEMENT
+Route::post('/admin/collection/store', 'App\Http\Controllers\Admin\CollectionController@store');
+Route::post('/admin/collection/getdata/{id}', [App\Http\Controllers\Admin\CollectionController::class, 'datatable']);
+Route::post('/admin/collection/destroy', 'App\Http\Controllers\Admin\CollectionController@destroy');
+Route::post('/admin/collection/transfer', 'App\Http\Controllers\Admin\CollectionController@transfer');
+Route::get('/admin/collection/getBalance/{userId?}/{committeeId?}', [App\Http\Controllers\Admin\CollectionController::class, 'getBalanceData']);
+Route::post('/admin/fundTransfer/getdata/{id}', [App\Http\Controllers\Admin\CollectionController::class, 'transfer_datatable']);
+Route::post('/admin/expense/getdata/{id}', [App\Http\Controllers\Admin\CollectionController::class, 'expense_datatable']);
+Route::post('/admin/collection/fundDestroy', 'App\Http\Controllers\Admin\CollectionController@fundDestroy');
+Route::post('/admin/collection/expenseStore', 'App\Http\Controllers\Admin\CollectionController@expenseStore');
+
+
 // Settings
 Route::get('/admin/settings', [App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('setting_index');
 Route::post('/admin/settings/update', [App\Http\Controllers\Admin\SettingsController::class, 'update']);
