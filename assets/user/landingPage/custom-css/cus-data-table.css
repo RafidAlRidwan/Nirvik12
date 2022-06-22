@@ -5,6 +5,32 @@ body{
     .section-header {
           margin-bottom: 20px;
         }
+    /* New Datatable */
+    table.dataTable {
+        width: 100%;
+        margin: 0 auto;
+        clear: both;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    table.dataTable thead th, table.dataTable thead td {
+        padding: 8px 16px;
+        border-bottom: 1px solid #111;
+    }
+    .form-inline {
+        /* display: -ms-flexbox; */
+        display: block;
+        -ms-flex-flow: row wrap;
+        flex-flow: row wrap;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    .table{
+        background-color:#fff;
+    }
+    .pagination {
+        display: inline-block;
+    }
 
         /*DATATABLE*/
     .dataTables_wrapper .dataTables_paginate .pagination .paginate_button {
@@ -74,7 +100,7 @@ body{
         border-top-right-radius: 40px;
     }
 
-   .dataTables_wrapper .dataTables_filter input {
+    .dataTables_wrapper .dataTables_filter input {
         border: 1px solid #aaa;
         border-radius: 40px;
         padding: 5px;
@@ -118,14 +144,14 @@ body{
         text-align: center;
         font-weight: 1000;
         background-color: #f82249;
-        padding: 40px;
+        padding: 20px;
     }
 
     th{
         text-align: center;
+        font-size: 14px;
         text-transform: uppercase;
-        letter-spacing: 0.1rem;
-        font-weight: 900;
+        letter-spacing: 0.04rem;
         background-color: #0b1126;
         color: #fff;
     }
@@ -141,12 +167,11 @@ body{
         width:100%;
         text-align: center;
         border: 2px solid #0b1126;
-
+        background-color:rgba(0, 0, 0, 0.3);
 
     }
     table:hover {
         box-shadow: 0px 5px 10px rgba(0,0,0,0.6);
-
     }
     /*button.dt-button, div.dt-button, a.dt-button, input.dt-button {
     display: none;
@@ -396,13 +421,13 @@ body{
 
         .select-box .option,
         .selected {
-          padding: 12px 24px;
+          padding: 9px 24px;
           cursor: pointer;
         }
 
         .select-box .option,
         .selected2 {
-          padding: 12px 24px;
+          padding: 9px 24px;
           cursor: pointer;
         }
 

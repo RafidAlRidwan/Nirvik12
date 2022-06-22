@@ -98,15 +98,15 @@ class UserController extends Controller
                 "shifts.name AS shift_name",
             )
             ->groupBy('users.id');
-
-        if (isset($request->section) && $request->section > 0) {
+        
+        if (!empty($request->section)) {
             if ($request->section == "Select All Section") {
                 $product_data->where('users.type', '>', 2);
             } else {
                 $product_data->where('sections.name', $request->section);
             }
         }
-        if (isset($request->shift) && $request->shift > 0) {
+        if (!empty($request->shift)) {
             if ($request->shift == "Select All Shift") {
                 $product_data->where('users.type', '>', 2);
             } else {
@@ -114,7 +114,7 @@ class UserController extends Controller
             }
         }
 
-        if (isset($request->name) && $request->name > 0) {
+        if (!empty($request->name)) {
             $product_data->where('ud.full_name', 'LIKE', '%' . $request->name . '%');
         }
 
@@ -153,7 +153,7 @@ class UserController extends Controller
             $data['data'][$sl]['city'] = $item->current_city ?? "";
             $data['data'][$sl]['section'] = $item->section_name;
             $data['data'][$sl]['shift'] = "<span class='$class'>$shift</span>";
-            $data['data'][$sl]['action'] = "<button class='btn btn-custom'><a href='$viewURL'>View</a></button>";
+            $data['data'][$sl]['action'] = "<button class='btn btn-sm btn-custom'><a href='$viewURL'>View</a></button>";
 
             $sl++;
         }

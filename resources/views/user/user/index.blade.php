@@ -3,10 +3,11 @@
 @section('style')
 <link href="{{asset('assets/user/landingPage/custom-css/cus-data-table.css')}}" rel="stylesheet">
 <style>
-    .btn-custom{
+    .btn-custom {
         background-color: #2f3640;
     }
-    .btn-custom:hover{
+
+    .btn-custom:hover {
         background-color: #fff;
         border-color: #f82249;
     }
@@ -25,11 +26,10 @@
                 <div class="box">
                     <div class="row">
 
-                        <div class="filter-box">
                             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
 
-                                <div class="containerr" style="margin-bottom: 10px;">
-                                    <div class="search_wrap search_wrap_4">
+                                <div class="containerr">
+                                    <div class="search_wrap search_wrap_4 mb-2">
                                         <div class="search_box">
                                             <div class="btn btn_common">
                                                 <i class="fa fa-search"></i>
@@ -92,12 +92,9 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-
+                    </div>
+                    <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-
-
                             <table id="index_datatable" class="table table-hover">
                                 <thead>
                                     <tr>
@@ -128,6 +125,8 @@
                                 </tfoot>
                             </table>
                         </div>
+                    </div>
+                            
 
                     </div>
                 </div>
@@ -160,7 +159,8 @@
                         [10, 25, 50, 100, 200, 250],
                         ['10 rows', '25 rows', '50 rows', '100 rows', '200 rows', '250 rows']
                     ],
-                    "buttons": ['pageLength', 'copy', 'csv', 'excel', 'pdf', 'print'],
+                    "buttons": ['pageLength'],
+                    // "buttons": ['pageLength', 'copy', 'csv', 'excel', 'pdf', 'print'],
                     "ajax": {
                         "url": "{{URL::to('/user/getdt')}}",
                         "type": "POST",

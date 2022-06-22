@@ -5,9 +5,9 @@
 @include('layouts.user.landing-page.header-assets')
 
 <body>
-       
+
        @yield('header')
-       
+
        <div class="main-scope">
               <!-- Preloader -->
               <div class="loading">
@@ -23,6 +23,13 @@
        <!-- ======= Footer Assets ======= -->
        @include('layouts.user.landing-page.footer-assets')
 
+       <!-- Turn Off Inspect -->
+       <!-- <script>
+              $(document).bind("contextmenu", function(e) {
+                     e.preventDefault();
+
+              });
+       </script> -->
 </body>
 
 </html>

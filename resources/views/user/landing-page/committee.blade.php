@@ -1,5 +1,26 @@
 @extends('layouts.user.landing-page.master')
 @section('main-style')
+<!-- DATA TABLE -->
+<link rel="stylesheet" href="{{asset('assets/user/landingPage/datatable/css/jquery.dataTables.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/user/landingPage/datatable/css/fixedHeader.bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/user/landingPage/datatable/css/responsive.bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/user/landingPage/datatable/css/buttons.dataTables.min.css')}}">
+<link href="{{asset('assets/user/landingPage/custom-css/cus-data-table.css')}}" rel="stylesheet">
+
+<style>
+       .btn-custom {
+              background-color: #2f3640;
+       }
+
+       .btn-custom:hover {
+              background-color: #fff;
+              border-color: #f82249;
+       }
+
+       table.dataTable {
+              border-collapse: collapse;
+       }
+</style>
 <style>
        .page-header .container {
               padding-top: 36px;
@@ -53,13 +74,13 @@
               <div class="backdrop-gradient"></div>
               <div class="container">
                      <div class="breadcrumb-wrap"></div>
-                     <h1 style="color: #fff;" class="page-title">Events & Program Committees</h1>
-                     <div class="content">
-                            <p style="color: #fff;" class="lead">Recent Events Committee List</p>
-                            <p>
-                                   <a class="btn btn-info" href="#">View All</a>
-                            </p>
-                     </div>
+                     <h2 style="color: #fff;" class="page-title">Events & Program Committees</h1>
+                            <div class="content">
+                                   <p style="color: #fff;" class="lead">Recent Events Committee List</p>
+                                   <p>
+                                          <a class="btn btn-info" href="#">View All</a>
+                                   </p>
+                            </div>
               </div>
        </div>
 </section>
@@ -72,35 +93,39 @@
                      <p>Here is our event committee</p>
               </div>
 
-              <div class="tab-content row justify-content-center">
-                     <div role="tabpanel" class="col-lg-9 tab-pane fade show active" id="day-1">
-                            <div class="row schedule-item p-3 border-0">
-                                   
-                                   <div class="schedule-item-row col-md-12 border d-flex justify-content-between p-3">
-                                          
-                                          <div class="">
-                                                 <h4><a href="#" class="eventData">Ifter Mahfil Committee</a></h4>
-                                                 <p><i class="fa fa-map-marker"></i> BZS</p>
-                                          </div>
-                                          <div class="">
-                                                 <a href=""><button class="btn btn-info">Details</button></a>
-                                          </div>
-                                          
-                                   </div>
-                                   <div class="schedule-item-row col-md-12 border d-flex justify-content-between p-3">
-                                          
-                                          <div class="">
-                                                 <h4><a href="#" class="eventData">Ifter Mahfil Committee</a></h4>
-                                                 <p><i class="fa fa-map-marker"></i> BZS</p>
-                                          </div>
-                                          <div class="">
-                                                 <button class="btn btn-info">Details</button>
-                                          </div>
-                                          
-                                   </div>
-                            </div>
+              <div class="row">
+
+                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+                            <table id="index_datatable" class="table table-hover">
+                                   <thead>
+                                          <tr>
+                                                 <th>Serial</th>
+                                                 <th>Event</th>
+                                                 <th>Committee Name</th>
+                                                 <th>Manager</th>
+                                                 <th>Total Member</th>
+                                                 <th>Action</th>
+                                          </tr>
+                                   </thead>
+                                   <tbody>
+
+
+
+                                   </tbody>
+                                   <tfoot>
+                                          <tr>
+                                                 <th>Serial</th>
+                                                 <th>Event</th>
+                                                 <th>Committee Name</th>
+                                                 <th>Manager</th>
+                                                 <th>Total Member</th>
+                                                 <th>Action</th>
+                                          </tr>
+                                   </tfoot>
+                            </table>
                      </div>
-                     
+
               </div>
        </div>
 </section>
@@ -109,4 +134,74 @@
 @section('footer')
 <!-- ======= Footer ======= -->
 @include('layouts.user.landing-page.footer')
+@endsection
+
+@section('main-script')
+<!-- DATA TABLES -->
+<script src="{{asset('assets/user/landingPage/datatable/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/dataTables.fixedHeader.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/responsive.bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/jszip.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/pdfmake.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/vfs_fonts.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/buttons.print.min.js')}}"></script>
+<script>
+       $(document).ready(function() {
+              window.csrfToken = '<?php echo csrf_token(); ?>';
+              var postData = {};
+              postData._token = window.csrfToken;
+
+              var table = $('#index_datatable').DataTable({
+                     "responsive": true,
+                     "processing": true,
+                     "serverSide": true,
+                     "dom": 'Bfrtip',
+                     "lengthMenu": [
+                            [10, 25, 50, 100, 200, 250],
+                            ['10 rows', '25 rows', '50 rows', '100 rows', '200 rows', '250 rows']
+                     ],
+                     // "buttons": ['pageLength', 'copy', 'csv', 'excel', 'pdf', 'print'],
+                     "buttons": ['pageLength'],
+                     "ajax": {
+                            "url": "{{URL::to('/public/committee/getdata')}}",
+                            "type": "POST",
+                            "data": function(d) {
+                                   $.extend(d, postData);
+                                   var dt_params = $('#index_datatable').data('dt_params');
+                                   if (dt_params) {
+                                          $.extend(d, dt_params);
+                                   }
+                            }
+                     },
+                     "destroy": true,
+                     "columns": [{
+                                   "data": "serial"
+                            },
+                            {
+                                   "data": "event_name"
+                            },
+                            {
+                                   "data": "committee_name"
+                            },
+                            {
+                                   "data": "manager_name"
+                            },
+                            {
+                                   "data": "total_member"
+                            },
+                            {
+                                   "data": "action"
+                            },
+
+
+                     ]
+              });
+
+              new $.fn.dataTable.FixedHeader(table);
+       });
+</script>
 @endsection

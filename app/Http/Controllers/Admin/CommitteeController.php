@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use DB;
 use URL;
 use Auth;
 use Session;
@@ -12,11 +11,13 @@ use App\Models\News;
 use App\Models\User;
 use App\Models\Event;
 use App\Models\Section;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Committee;
-use App\Models\CommitteeMember;
 use App\Models\UserDetail;
+use Illuminate\Http\Request;
+use App\Models\CommitteeMember;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Models\Collection;
 
 class CommitteeController extends Controller
 {
@@ -133,12 +134,64 @@ class CommitteeController extends Controller
 
     public function show($id)
     {
+        // Member Table Values
         $memberDetails = CommitteeMember::select('committee_members.*', 'user_details.full_name')
         ->leftJoin('user_details', 'user_details.user_id', '=', 'committee_members.user_id')
         ->where('committee_members.committee_id', $id)
         ->get();
         $data['memberDetails'] = $memberDetails;
         $data['committeeDetails'] = Committee::with('userData')->findOrFail($id);
+
+        // Add Collection Values
+        $manager_array = Committee::query()
+        ->leftJoin('user_details', 'committees.manager_id', '=', 'user_details.user_id')
+        ->where('committees.id', $id)
+        ->select(
+            DB::raw("CONCAT(user_details.full_name, ' (Manager)') AS name"),
+            'user_details.user_id'
+            )
+        ->get();
+        $manager_id = $manager_array->pluck('name', 'user_id')->toArray();
+        
+        $member_ids = CommitteeMember::query()
+        ->leftJoin('user_details', 'committee_members.user_id', '=', 'user_details.user_id')
+        ->where('committee_members.committee_id', $id)
+        ->pluck(
+            'user_details.full_name',
+            'user_details.user_id'
+            )
+        ->toArray();
+        $data['comiittee_members']= ($manager_id + $member_ids);
+
+        $sql = DB::select("
+        SELECT (
+            case
+            when (sections.name is not null)  then
+            CONCAT(user_details.full_name,' (', sections.name,')')
+            when (sections.name is null) then 
+            CONCAT(user_details.full_name,' (n/a)')
+            end 
+            )AS name,
+            users.id
+
+            FROM users
+            LEFT JOIN user_details 
+            ON user_details.user_id = users.id
+            LEFT JOIN sections
+            ON sections.id = user_details.section
+            LEFT OUTER JOIN collection_histories 
+            ON users.id = collection_histories.user_id
+            AND collection_histories.committee_id = $id 
+            WHERE collection_histories.user_id IS NULL
+            AND users.type = 3
+            AND user_details.full_name != 'null' ");
+        
+        $array=array_map(function($item){
+            return (array) $item;
+        },$sql);
+
+        $data['user']= collect($array)->pluck('name', 'id')->toArray();
+
         return view('admin/committee.view', $data);
     }
 
