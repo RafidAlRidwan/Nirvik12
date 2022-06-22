@@ -5,6 +5,7 @@ $cache = Cache::get('settings');
 $app_name = $cache->where('key', 'app_name')->first();
 $banner = $cache->where('key', 'banner')->first();
 @endphp
+
 <head>
     <meta charset="utf-8">
     <title>{{$app_name->value}}</title>
@@ -21,7 +22,8 @@ $banner = $cache->where('key', 'banner')->first();
     <link href="{{asset('assets/user/landingPage/css/googleFont.css')}}" rel="stylesheet">
 
     <!-- Bootstrap CSS File -->
-    <link href="{{asset('assets/user/landingPage/css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- <link href="{{asset('assets/user/landingPage/css/bootstrap.min.css')}}" rel="stylesheet"> -->
+    <link href="{{asset('assets/user/landingPage/lib/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Libraries CSS Files -->
     <link href="{{asset('assets/user/landingPage/css/all.min.css')}}" rel="stylesheet">
@@ -95,6 +97,11 @@ $banner = $cache->where('key', 'banner')->first();
                                 } else {
                                     echo "";
                                 } ?>"><a href="{{$url}}" class="">My Profile</a></li>
+                    <li class="<?php if ($path == 'user/committee') {
+                                    echo "menu-active";
+                                } else {
+                                    echo "";
+                                } ?>"><a href="{{URL::to('user/committee')}}" class="">Committee</a></li>
                     <li class="buy-tickets"><a onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();" href="{{ route('logout') }}">logout</a></li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -114,7 +121,8 @@ $banner = $cache->where('key', 'banner')->first();
 
     <!-- JavaScript Libraries -->
     <script src="{{asset('assets/user/landingPage/datatable/js/jquery-3.5.1.js')}}"></script>
-    <script src="{{asset('assets/user/landingPage/js/bootstrap.min.js')}}"></script>
+    <!-- <script src="{{asset('assets/user/landingPage/js/bootstrap.min.js')}}"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="{{asset('assets/user/landingPage/lib/jquery/jquery-migrate.min.js')}}"></script>
     <script src="{{asset('assets/user/landingPage/lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('assets/user/landingPage/lib/easing/easing.min.js')}}"></script>

@@ -14,7 +14,7 @@
     </div>
 
     <div class="wrapper">
-      <div class="card">
+      <div class="card" style="background: transparent; border:none;">
         <div class="card-body">
           {!! Form::model($user, ['route' => ['user.update', $user->id],'method'=>'put', 'files' => true, 'class' => 'needs-validation', 'novalidate']) !!}
 

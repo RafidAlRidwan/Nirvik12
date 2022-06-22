@@ -25,7 +25,7 @@ class CollectionController extends Controller
     public function datatable(Request $request, $id)
     {
         $searchString = $request->search['value'];
-        $product_data = Collection::where('committee_id',$id)->with('userData', 'memberData');
+        $product_data = Collection::where('committee_id', $id)->with('userData', 'memberData');
 
         $data['recordsTotal'] = $product_data->count();
         $data['recordsFiltered'] = $product_data->count();
@@ -68,14 +68,12 @@ class CollectionController extends Controller
             DB::commit();
             Session::flash('flashy__success', __('Added Successfully!'));
             return back();
-            
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()
                 ->withErrors($e->getMessage())
                 ->withInput();
         }
-            
     }
 
     public function destroy(Request $request)
@@ -90,22 +88,20 @@ class CollectionController extends Controller
             $amount = $collection->amount;
             $committee = Committee::findOrFail($committee_id);
 
-            if($committee->manager_id == $member_id)
-            {
-                if($committee->total_balance >= $amount){
+            if ($committee->manager_id == $member_id) {
+                if ($committee->total_balance >= $amount) {
                     $committee->total_balance = $committee->total_balance - $amount;
                     $committee->save();
-                }else{
+                } else {
                     return redirect()->back()->with('flashy__danger', __('Insufficient Balance!'));
                 }
-                
             } else {
                 $members = CommitteeMember::where('user_id', $member_id)
-                ->where('committee_id', $committee_id)->first();
-                if( $members->balance >= $amount){
+                    ->where('committee_id', $committee_id)->first();
+                if ($members->balance >= $amount) {
                     $members->balance = $members->balance - $amount;
                     $members->save();
-                }else{
+                } else {
                     return redirect()->back()->with('flashy__danger', __('Insufficient Balance!'));
                 }
             }
@@ -115,8 +111,7 @@ class CollectionController extends Controller
             DB::commit();
             Session::flash('flashy__success', __('Reverted Successfully!'));
             return back();
-
-            } catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()
                 ->withErrors($e->getMessage())
@@ -129,8 +124,7 @@ class CollectionController extends Controller
         try {
             $requestData = $request->all();
 
-            if($requestData['transfer_from'] == $requestData['transfer_to'])
-            {
+            if ($requestData['transfer_from'] == $requestData['transfer_to']) {
                 Session::flash('flashy__danger', __('Fund Transfer Failed!'));
                 return back();
             }
@@ -145,14 +139,12 @@ class CollectionController extends Controller
             DB::commit();
             Session::flash('flashy__success', __('Fund Transferred Successfully!'));
             return back();
-            
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()
                 ->withErrors($e->getMessage())
                 ->withInput();
         }
-            
     }
 
     public function getBalanceData($userId, $committeeId)
@@ -163,7 +155,7 @@ class CollectionController extends Controller
     public function transfer_datatable(Request $request, $id)
     {
         $searchString = $request->search['value'];
-        $product_data = FundTransfer::where('committee_id',$id)->with('transferFromUserData', 'transferToUserData');
+        $product_data = FundTransfer::where('committee_id', $id)->with('transferFromUserData', 'transferToUserData');
 
         $data['recordsTotal'] = $product_data->count();
         $data['recordsFiltered'] = $product_data->count();
@@ -198,28 +190,26 @@ class CollectionController extends Controller
         try {
             $id = $request->id;
             DB::beginTransaction();
-            
+
             $fund = FundTransfer::findOrFail($id);
             $committeeData = Committee::findOrFail($fund->committee_id);
 
-            if($committeeData->manager_id == $fund->transfer_from)
-            {
+            if ($committeeData->manager_id == $fund->transfer_from) {
                 $committeeData->total_balance = $committeeData->total_balance + $fund->amount;
                 $committeeData->save();
             } else {
                 $members = CommitteeMember::where('user_id', $fund->transfer_from)
-                ->where('committee_id', $fund->committee_id)->first();
+                    ->where('committee_id', $fund->committee_id)->first();
                 $members->balance = $members->balance + $fund->amount;
                 $members->save();
             }
 
-            if($committeeData->manager_id == $fund->transfer_to)
-            {
+            if ($committeeData->manager_id == $fund->transfer_to) {
                 $committeeData->total_balance = $committeeData->total_balance - $fund->amount;
                 $committeeData->save();
             } else {
                 $members = CommitteeMember::where('user_id', $fund->transfer_to)
-                ->where('committee_id', $fund->committee_id)->first();
+                    ->where('committee_id', $fund->committee_id)->first();
                 $members->balance = $members->balance - $fund->amount;
                 $members->save();
             }
@@ -249,33 +239,31 @@ class CollectionController extends Controller
             $requestData = $request->all();
 
             $committee = Committee::findOrFail($requestData['committee_id']);
-            if($committee->total_balance >= $requestData['amount']){
+            if ($committee->total_balance >= $requestData['amount']) {
                 $committee->total_balance = $committee->total_balance - $requestData['amount'];
                 $committee->save();
             } else {
                 Session::flash('flashy__danger', __('Insufficient Balance!'));
                 return back();
             }
-            
+
             Expense::create($requestData);
-            
+
             DB::commit();
             Session::flash('flashy__success', __('Added Successfully!'));
             return back();
-            
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()
                 ->withErrors($e->getMessage())
                 ->withInput();
         }
-            
     }
 
     public function expense_datatable(Request $request, $id)
     {
         $searchString = $request->search['value'];
-        $product_data = Expense::where('committee_id',$id)->with('managerData');
+        $product_data = Expense::where('committee_id', $id)->with('managerData');
 
         $data['recordsTotal'] = $product_data->count();
         $data['recordsFiltered'] = $product_data->count();

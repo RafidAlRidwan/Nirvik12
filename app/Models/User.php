@@ -55,6 +55,11 @@ class User extends Authenticatable
         return $this->hasOne(UserDetail::class, 'user_id', 'id');
     }
 
+    public function sectionData()
+    {
+        return $this->hasOne(Section::class, 'user_id', 'id');
+    }
+
     public function mobileNumberDetails()
     {
         return $this->hasMany(MobileNumberDetail::class, 'user_id', 'id');
@@ -98,25 +103,25 @@ class User extends Authenticatable
     public function userCount()
     {
         $data['a'] = User::select('user_details.section as connections')
-        ->leftJoin('user_details', 'user_details.user_id', '=', 'users.id')
-        ->where('section', 1)
-        ->groupBy('users.id')
-        ->get();
+            ->leftJoin('user_details', 'user_details.user_id', '=', 'users.id')
+            ->where('section', 1)
+            ->groupBy('users.id')
+            ->get();
         $data['b'] = User::select('user_details.section as connections')
-        ->leftJoin('user_details', 'user_details.user_id', '=', 'users.id')
-        ->where('section', 2)
-        ->groupBy('users.id')
-        ->get();
+            ->leftJoin('user_details', 'user_details.user_id', '=', 'users.id')
+            ->where('section', 2)
+            ->groupBy('users.id')
+            ->get();
         $data['c'] = User::select('user_details.section as connections')
-        ->leftJoin('user_details', 'user_details.user_id', '=', 'users.id')
-        ->where('section', 3)
-        ->groupBy('users.id')
-        ->get();
+            ->leftJoin('user_details', 'user_details.user_id', '=', 'users.id')
+            ->where('section', 3)
+            ->groupBy('users.id')
+            ->get();
         $data['d'] = User::select('user_details.section as connections')
-        ->leftJoin('user_details', 'user_details.user_id', '=', 'users.id')
-        ->where('section', 4)
-        ->groupBy('users.id')
-        ->get();
+            ->leftJoin('user_details', 'user_details.user_id', '=', 'users.id')
+            ->where('section', 4)
+            ->groupBy('users.id')
+            ->get();
 
         return $data;
     }
@@ -141,10 +146,10 @@ class User extends Authenticatable
             ON sections.id = user_details.section
             WHERE users.type = 3 AND user_details.user_id != $id
             AND user_details.full_name != 'null' ");
-        
-        $array=array_map(function($item){
+
+        $array = array_map(function ($item) {
             return (array) $item;
-        },$sql);
+        }, $sql);
         $data['user'] = $array;
 
         return $data['user'];

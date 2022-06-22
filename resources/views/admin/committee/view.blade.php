@@ -1,99 +1,102 @@
 @extends('layouts.admin.admin')
 @section('style')
 <style>
-    .tower-input-preview-container img {
+  .tower-input-preview-container img {
     vertical-align: middle;
     border-style: none;
     width: 300px;
     margin-bottom: 10px;
-    }
-    .tower-file input[type="file"] {
+  }
+
+  .tower-file input[type="file"] {
     height: 0.1px;
     width: 0.1px;
     opacity: 0;
-    }
-    #demoInput5-error{
-        color: red;
-    }
-    /*
+  }
+
+  #demoInput5-error {
+    color: red;
+  }
+
+  /*
     CSS for the main interaction
     */
-    .tabset > input[type="radio"] {
-      position: absolute;
-      left: -200vw;
-    }
+  .tabset>input[type="radio"] {
+    position: absolute;
+    left: -200vw;
+  }
 
-    .tabset .tab-panel {
-      display: none;
-    }
+  .tabset .tab-panel {
+    display: none;
+  }
 
-    .tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
-    .tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2),
-    .tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3),
-    .tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4),
-    .tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5),
-    .tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) {
-      display: block;
-    }
+  .tabset>input:first-child:checked~.tab-panels>.tab-panel:first-child,
+  .tabset>input:nth-child(3):checked~.tab-panels>.tab-panel:nth-child(2),
+  .tabset>input:nth-child(5):checked~.tab-panels>.tab-panel:nth-child(3),
+  .tabset>input:nth-child(7):checked~.tab-panels>.tab-panel:nth-child(4),
+  .tabset>input:nth-child(9):checked~.tab-panels>.tab-panel:nth-child(5),
+  .tabset>input:nth-child(11):checked~.tab-panels>.tab-panel:nth-child(6) {
+    display: block;
+  }
 
-    /*
+  /*
     Styling
     */
 
-    .tabset > label {
-      position: relative;
-      display: inline-block;
-      padding: 15px 15px 25px;
-      border: 1px solid transparent;
-      border-bottom: 0;
-      cursor: pointer;
-      font-weight: 600;
-    }
+  .tabset>label {
+    position: relative;
+    display: inline-block;
+    padding: 15px 15px 25px;
+    border: 1px solid transparent;
+    border-bottom: 0;
+    cursor: pointer;
+    font-weight: 600;
+  }
 
-    .tabset > label::after {
-      content: "";
-      position: absolute;
-      left: 15px;
-      bottom: 10px;
-      width: 22px;
-      height: 4px;
-      background: #8d8d8d;
-    }
+  .tabset>label::after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+    width: 22px;
+    height: 4px;
+    background: #8d8d8d;
+  }
 
-    .tabset > label:hover,
-    .tabset > input:focus + label {
-      color: #06c;
-    }
+  .tabset>label:hover,
+  .tabset>input:focus+label {
+    color: #06c;
+  }
 
-    .tabset > label:hover::after,
-    .tabset > input:focus + label::after,
-    .tabset > input:checked + label::after {
-      background: #06c;
-    }
+  .tabset>label:hover::after,
+  .tabset>input:focus+label::after,
+  .tabset>input:checked+label::after {
+    background: #06c;
+  }
 
-    .tabset > input:checked + label {
-      border-color: #ccc;
-      border-bottom: 1px solid #fff;
-      margin-bottom: -1px;
-    }
+  .tabset>input:checked+label {
+    border-color: #ccc;
+    border-bottom: 1px solid #fff;
+    margin-bottom: -1px;
+  }
 
-    .tab-panel {
-      padding: 30px 0;
-      border-top: 1px solid #ccc;
-    }
+  .tab-panel {
+    padding: 30px 0;
+    border-top: 1px solid #ccc;
+  }
 
-    /*
+  /*
     Demo purposes only
     */
-    *,
-    *:before,
-    *:after {
-      box-sizing: border-box;
-    }
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
 
-    .tabset {
-      max-width: 65em;
-    }
+  .tabset {
+    max-width: 65em;
+  }
 </style>
 @endsection
 
@@ -117,31 +120,31 @@
 
 <section class="content p-2">
   <div class="container-fluid m-t-25 card p-3">
-  <section>
-    <div class="tabset">
-      <!-- Tab 1 -->
-      <input type="radio" name="tabset" id="tab1" aria-controls="general" checked>
-      <label for="tab1">Member List</label>
+    <section>
+      <div class="tabset">
+        <!-- Tab 1 -->
+        <input type="radio" name="tabset" id="tab1" aria-controls="general" checked>
+        <label for="tab1">Member List</label>
 
-      <!-- Tab 2 -->
-      <input type="radio" name="tabset" id="tab2" aria-controls="profile">
-      <label for="tab2">Collection History</label>
+        <!-- Tab 2 -->
+        <input type="radio" name="tabset" id="tab2" aria-controls="profile">
+        <label for="tab2">Collection History</label>
 
-      <!-- Tab 3 -->
-      <input type="radio" name="tabset" id="tab3" aria-controls="footer">
-      <label for="tab3">Fund Transfer</label>
+        <!-- Tab 3 -->
+        <input type="radio" name="tabset" id="tab3" aria-controls="footer">
+        <label for="tab3">Fund Transfer</label>
 
-      <!-- Tab 4 -->
-      <input type="radio" name="tabset" id="tab4" aria-controls="expense">
-      <label for="tab4">Expenses History</label>
-      
-      <div class="tab-panels">
+        <!-- Tab 4 -->
+        <input type="radio" name="tabset" id="tab4" aria-controls="expense">
+        <label for="tab4">Expenses History</label>
 
-        <section id="general" class="tab-panel">
-          <h4><strong>{{$committeeDetails->name}}</strong>- Committee Member List</h4>
-          <hr>
-          
-          <div class="card">
+        <div class="tab-panels">
+
+          <section id="general" class="tab-panel">
+            <h4><strong>{{$committeeDetails->name}}</strong>- Committee Member List</h4>
+            <hr>
+
+            <div class="card">
               <div class="card-body p-0">
                 <table class="table table-sm table-hover">
                   <thead style="color:#fff; background: #4ed2c5;">
@@ -153,39 +156,39 @@
                     </tr>
                   </thead>
                   <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td><strong>{{$committeeDetails->userData->full_name}}</strong></td>
-                        <td><span class="badge bg-success">Manager</span></td>
-                        <td>{{$committeeDetails->total_balance}}</td>
-                      </tr>
+                    <tr>
+                      <td>1</td>
+                      <td><strong>{{$committeeDetails->userData->full_name}}</strong></td>
+                      <td><span class="badge bg-success">Manager</span></td>
+                      <td>{{$committeeDetails->total_balance}}</td>
+                    </tr>
                     @foreach ($memberDetails as $item)
-                      <tr>
-                        <td>{{$loop->iteration + 1}}</td>
-                        <td>{{$item->full_name}}</td>
-                        <td><span class="badge bg-info">Member</span></td>
-                        <td>{{$item->balance}}</td>
-                      </tr>
+                    <tr>
+                      <td>{{$loop->iteration + 1}}</td>
+                      <td>{{$item->full_name}}</td>
+                      <td><span class="badge bg-info">Member</span></td>
+                      <td>{{$item->balance}}</td>
+                    </tr>
                     @endforeach
-                    
+
                   </tbody>
                 </table>
               </div>
-          </div>
+            </div>
 
-        </section>
+          </section>
 
-        <section id="profile" class="tab-panel">
-          <div class="d-flex justify-content-between">
-            <h4>Collection History</h4>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#add_collection">+ Add</button>
-          </div>
-          <hr>
+          <section id="profile" class="tab-panel">
+            <div class="d-flex justify-content-between">
+              <h4>Collection History</h4>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#add_collection">+ Add</button>
+            </div>
+            <hr>
 
-          <div class="card">
+            <div class="card">
               <div class="card-body p-0">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                  <table id="index_datatable" width="100%" class="table table-sm table-hover" >
+                  <table id="index_datatable" width="100%" class="table table-sm table-hover">
                     <thead style="color:#fff; background: #4ed2c5;">
                       <tr>
                         <th style="width: 10px">#</th>
@@ -197,26 +200,26 @@
                       </tr>
                     </thead>
                     <tbody>
-                      
+
                     </tbody>
                   </table>
                 </div>
               </div>
-          </div>
-          
-        </section>
+            </div>
 
-        <section id="footer" class="tab-panel">
-          <div class="d-flex justify-content-between">
-            <h4>Fund Transfer</h4>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#fund_transfer">+ Add</button>
-          </div>
-          <hr>
+          </section>
 
-          <div class="card">
+          <section id="footer" class="tab-panel">
+            <div class="d-flex justify-content-between">
+              <h4>Fund Transfer</h4>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#fund_transfer">+ Add</button>
+            </div>
+            <hr>
+
+            <div class="card">
               <div class="card-body p-0">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                  <table id="fund_datatable" width="100%" class="table table-sm table-hover" >
+                  <table id="fund_datatable" width="100%" class="table table-sm table-hover">
                     <thead style="color:#fff; background: #4ed2c5;">
                       <tr>
                         <th style="width: 10px">#</th>
@@ -229,27 +232,27 @@
                       </tr>
                     </thead>
                     <tbody>
-                      
+
                     </tbody>
                   </table>
                 </div>
               </div>
-          </div>
-          
-          
-        </section>
+            </div>
 
-        <section id="expense" class="tab-panel">
-          <div class="d-flex justify-content-between">
-            <h4>Expenses</h4>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#add_expense">+ Add</button>
-          </div>
-          <hr>
 
-          <div class="card">
+          </section>
+
+          <section id="expense" class="tab-panel">
+            <div class="d-flex justify-content-between">
+              <h4>Expenses</h4>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#add_expense">+ Add</button>
+            </div>
+            <hr>
+
+            <div class="card">
               <div class="card-body p-0">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                  <table id="expense_datatable" width="100%" class="table table-sm table-hover" >
+                  <table id="expense_datatable" width="100%" class="table table-sm table-hover">
                     <thead style="color:#fff; background: #4ed2c5;">
                       <tr>
                         <th style="width: 10px">#</th>
@@ -261,20 +264,20 @@
                       </tr>
                     </thead>
                     <tbody>
-                      
+
                     </tbody>
                   </table>
                 </div>
               </div>
-          </div>
-          
-          
-        </section>
+            </div>
+
+
+          </section>
+
+        </div>
 
       </div>
-      
-    </div>
-  </section>
+    </section>
 </section>
 
 <!-- ADD Collection MODAL -->
@@ -306,7 +309,7 @@
             <label for="exampleInputEmail1">Amount <span class="badge badge-success" id="output"></span></label>
             <input type="number" name="amount" class="form-control" id="amount" required="" autocomplete="off">
           </div>
-          
+
           <div class="form-group">
             <label for="exampleInputEmail1">Remarks</label>
             <input type="text" name="remarks" class="form-control" id="remarks">
@@ -393,7 +396,7 @@
             <label for="exampleInputEmail1">Amount <span class="badge badge-success" id="output"></span></label>
             <input type="number" name="amount" class="form-control" id="amount" required="" autocomplete="off">
           </div>
-          
+
           <div class="form-group">
             <label for="exampleInputEmail1">Remarks</label>
             <input type="text" name="remarks" class="form-control" id="remarks">
@@ -480,7 +483,7 @@
   //Initialize Select2 Elements
   $('.select2').select2();
 
-  $( "#amount" ).keyup(function() {
+  $("#amount").keyup(function() {
     var value = $(this).val();
     var count = $("#user_id :selected").length;
 
@@ -490,15 +493,13 @@
     var result = value / count;
 
     // Output changes
-    $('#output').html(result+ " * " +num);
-    
+    $('#output').html(result + " * " + num);
+
   });
 
-  $('#add_collection').on('hidden.bs.modal', function () {
+  $('#add_collection').on('hidden.bs.modal', function() {
     $("#from_collection").trigger("reset");
-    $("#user_id").empty();
   });
-
 </script>
 
 <script type="text/javascript">
@@ -518,7 +519,7 @@
       ],
       "buttons": ['pageLength', 'copy', 'csv', 'excel', 'pdf', 'print'],
       "ajax": {
-        "url": "{{URL::to('/admin/collection/getdata/')}}"+'/'+id,
+        "url": "{{URL::to('/admin/collection/getdata/')}}" + '/' + id,
         "type": "POST",
         "data": function(d) {
           $.extend(d, postData);
@@ -565,40 +566,39 @@
 
 <script>
   // AJAX LOAD
-  $( "#transfer_from" ).change(function() {
+  $("#transfer_from").change(function() {
     var userId = $(this).val();
     var committeeId = $('#committee_id').val();
     var fundAmount = $('#fund_amount').val();
     $.ajax({
-        url : "{{URL::to('/admin/collection/getBalance/')}}"+'/'+userId+'/'+committeeId,
-        data : '_token = <?php echo csrf_token() ?>',
-        type : 'GET',
-        dataType : 'json',
-        success : function(result){
-          if(result){
-            $('#amount_output').html("Balance: "+result);
-            $('#available_balance').val(result);
-          }
+      url: "{{URL::to('/admin/collection/getBalance/')}}" + '/' + userId + '/' + committeeId,
+      data: '_token = <?php echo csrf_token() ?>',
+      type: 'GET',
+      dataType: 'json',
+      success: function(result) {
+        if (result) {
+          $('#amount_output').html("Balance: " + result);
+          $('#available_balance').val(result);
         }
+      }
     });
   });
-  $( "#fund_amount" ).keyup(function() {
+  $("#fund_amount").keyup(function() {
     var value = $(this).val();
     var balance = $("#available_balance").val();
 
-    if(parseInt(value) > parseInt(balance))
-    {
+    if (parseInt(value) > parseInt(balance)) {
       $(this).val('');
       // Output changes
       $('#balance_output').html("<p class='text-danger'>Invalid Balance!</p>");
-    }else{
+    } else {
       // Output changes
       $('#balance_output').html("");
     }
-    
+
   });
 
-  $('#fund_transfer').on('hidden.bs.modal', function () {
+  $('#fund_transfer').on('hidden.bs.modal', function() {
     $('#amount_output').html('');
     $('#balance_output').html("");
     $("#from_fund").trigger("reset");
@@ -622,7 +622,7 @@
       ],
       "buttons": ['pageLength', 'copy', 'csv', 'excel', 'pdf', 'print'],
       "ajax": {
-        "url": "{{URL::to('/admin/fundTransfer/getdata/')}}"+'/'+id,
+        "url": "{{URL::to('/admin/fundTransfer/getdata/')}}" + '/' + id,
         "type": "POST",
         "data": function(d) {
           $.extend(d, postData);
@@ -687,7 +687,7 @@
       ],
       "buttons": ['pageLength', 'copy', 'csv', 'excel', 'pdf', 'print'],
       "ajax": {
-        "url": "{{URL::to('/admin/expense/getdata/')}}"+'/'+id,
+        "url": "{{URL::to('/admin/expense/getdata/')}}" + '/' + id,
         "type": "POST",
         "data": function(d) {
           $.extend(d, postData);

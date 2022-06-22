@@ -23,6 +23,10 @@ Route::get('/news', [App\Http\Controllers\User\LandingPageController::class, 'ne
 Route::get('/album', [App\Http\Controllers\User\LandingPageController::class, 'album'])->name('albumPage');
 Route::get('/committee', [App\Http\Controllers\User\LandingPageController::class, 'committee'])->name('committeePage');
 Route::get('/gallery/{id}', [App\Http\Controllers\User\LandingPageController::class, 'gallery'])->name('galleryPage');
+Route::post('/public/committee/getdata', [App\Http\Controllers\User\LandingPageController::class, 'datatable']);
+Route::get('/public/committee/details/{id}', [App\Http\Controllers\User\LandingPageController::class, 'show']);
+Route::get('/public/committee/registration/{id}', [App\Http\Controllers\User\LandingPageController::class, 'registration']);
+Route::post('/public/registration/getdata/{id}', [App\Http\Controllers\User\LandingPageController::class, 'registrationDatatable']);
 
 // USER LOGIN
 Route::get('/user/login', [App\Http\Controllers\User\UserLoginController::class, 'login'])->name('user_login');
@@ -36,17 +40,32 @@ Route::post('/user/store', 'App\Http\Controllers\User\UserController@store');
 Route::post('/user/getdt', [App\Http\Controllers\User\UserController::class, 'contact_datatable']);
 Route::get('/user/my-profile/edit/{id}', [App\Http\Controllers\User\UserController::class, 'edit']);
 Route::get('/user/my-profile/edit-password/{id}', [App\Http\Controllers\User\UserController::class, 'edit_password']);
-Route::put('/user/my-profile/update/{id}',
-            [
-                'as'   => 'user.update',
-                'uses' => 'App\Http\Controllers\User\UserController@update'
-            ]);
-Route::put('/user/my-profile/update_password/{id}',
-            [
-                'as'   => 'user.update_password',
-                'uses' => 'App\Http\Controllers\User\UserController@update_password'
-            ]);
+Route::put(
+    '/user/my-profile/update/{id}',
+    [
+        'as'   => 'user.update',
+        'uses' => 'App\Http\Controllers\User\UserController@update'
+    ]
+);
+Route::put(
+    '/user/my-profile/update_password/{id}',
+    [
+        'as'   => 'user.update_password',
+        'uses' => 'App\Http\Controllers\User\UserController@update_password'
+    ]
+);
 Route::get('/user/my-profile/show/{id}', [App\Http\Controllers\User\UserController::class, 'show']);
+Route::get('/user/committee', [App\Http\Controllers\User\CommitteeController::class, 'index']);
+Route::post('/user/committee/getdata', [App\Http\Controllers\User\CommitteeController::class, 'datatable']);
+Route::get('/user/committee/memberView/{id}', [App\Http\Controllers\User\CommitteeController::class, 'memberShow']);
+Route::get('/user/committee/collectionView/{id}', [App\Http\Controllers\User\CommitteeController::class, 'collectionShow']);
+Route::get('/user/committee/expenseView/{id}', [App\Http\Controllers\User\CommitteeController::class, 'expenseShow']);
+Route::post('/user/collection/getdata/{id}', [App\Http\Controllers\User\CommitteeController::class, 'collectionDatatable']);
+Route::post('/user/expense/getdata/{id}', [App\Http\Controllers\User\CommitteeController::class, 'expenseDatatable']);
+Route::post('/user/collection/store', 'App\Http\Controllers\User\CommitteeController@store');
+Route::post('/user/collection/destroy', 'App\Http\Controllers\User\CommitteeController@destroy');
+Route::post('/user/expense/store', 'App\Http\Controllers\User\CommitteeController@expenseStore');
+
 // USER SECTION END
 
 
@@ -57,11 +76,13 @@ Route::get('/admin/icon', [App\Http\Controllers\Admin\AboutController::class, 'i
 
 // ABOUT MANAGEMENT
 Route::get('/admin/about/setting/{id}', [App\Http\Controllers\Admin\AboutController::class, 'edit']);
-Route::put('/admin/about/update/{id}',
-            [
-                'as'   => 'about.update',
-                'uses' => 'App\Http\Controllers\Admin\AboutController@update'
-            ]);
+Route::put(
+    '/admin/about/update/{id}',
+    [
+        'as'   => 'about.update',
+        'uses' => 'App\Http\Controllers\Admin\AboutController@update'
+    ]
+);
 
 // USER MANAGEMENT
 Route::get('/admin/user_management', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin_user_index');
@@ -69,11 +90,13 @@ Route::post('/admin/getdata', [App\Http\Controllers\Admin\UserController::class,
 Route::get('/admin/user/edit/{id}', [App\Http\Controllers\Admin\UserController::class, 'edit']);
 Route::get('/admin/user/show/{id}', [App\Http\Controllers\Admin\UserController::class, 'show']);
 Route::post('/admin/user/delete', [App\Http\Controllers\Admin\UserController::class, 'destroy']);
-Route::put('/user/update/{id}',
-            [
-                'as'   => 'admin.user.update',
-                'uses' => 'App\Http\Controllers\Admin\UserController@update'
-            ]);
+Route::put(
+    '/user/update/{id}',
+    [
+        'as'   => 'admin.user.update',
+        'uses' => 'App\Http\Controllers\Admin\UserController@update'
+    ]
+);
 
 // News MANAGEMENT
 Route::get('/admin/news/setting', [App\Http\Controllers\Admin\NewsController::class, 'index'])->name('news_index');;
