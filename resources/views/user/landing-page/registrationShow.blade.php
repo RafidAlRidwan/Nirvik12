@@ -95,7 +95,19 @@
         table.dataTable {
                 border-collapse: collapse;
         }
+        .nice-select {
+                width: 100%;
+        }
+
+        .nice-select .option:hover,
+        .nice-select .option.focus,
+        .nice-select .option.selected.focus {
+                padding-top: 2px;
+                padding-bottom: 2px;
+        }
 </style>
+<link rel="stylesheet" href="{{asset('assets/user/landingPage/custom-select/css/style.css')}}">
+
 @endsection
 @section('header')
 <!-- ======= Header Assets ======= -->
@@ -179,6 +191,11 @@
                                                                                 </div>
                                                                         </div>
                                                                         <div class="row">
+                                                                                <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mb-2">
+                                                                                        {!! Form::select('section', $sections, null, ['placeholder'=>__('All Section') ,'id'=>'changeSection', 'class'=>'wide']) !!}
+                                                                                </div>
+                                                                        </div>
+                                                                        <div class="row">
 
                                                                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
@@ -229,7 +246,8 @@
 <script>
         $(function() {
                 $('[data-toggle="tooltip"]').tooltip()
-        })
+        });
+       
 </script>
 <!-- DATA TABLES -->
 <script src="{{asset('assets/user/landingPage/datatable/js/jquery.dataTables.min.js')}}"></script>
@@ -243,8 +261,17 @@
 <script src="{{asset('assets/user/landingPage/datatable/js/vfs_fonts.js')}}"></script>
 <script src="{{asset('assets/user/landingPage/datatable/js/buttons.html5.min.js')}}"></script>
 <script src="{{asset('assets/user/landingPage/datatable/js/buttons.print.min.js')}}"></script>
-
+<script src="{{asset('assets/user/landingPage/custom-select/js/jquery.nice-select.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/custom-select/js/fastclick.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/custom-select/js/prism.js')}}"></script>
 <script>
+        $(document).ready(function() {
+                $('#changeSection').niceSelect();
+                FastClick.attach(document.body);
+        });
+</script>
+<script>
+
         $(document).ready(function() {
                 window.csrfToken = '<?php echo csrf_token(); ?>';
                 var postData = {};
@@ -292,6 +319,22 @@
                 });
 
                 new $.fn.dataTable.FixedHeader(table);
+        });
+        $('#changeSection').on('change', function() {
+                var previousFilter = $('#index_datatable').data('dt_params');
+                var filterables = {};
+                if (previousFilter != undefined) {
+                        filterables = $('#index_datatable').data('dt_params');
+                }
+
+                var sectionSelected = $(this).val();
+                if (sectionSelected != "") {
+                        filterables.section = sectionSelected;
+                } else {
+                        filterables.section = 0;
+                }
+                $('#index_datatable').data('dt_params', filterables);
+                $('#index_datatable').DataTable().draw();
         });
 </script>
 @endsection

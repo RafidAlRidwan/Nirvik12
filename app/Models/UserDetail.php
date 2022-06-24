@@ -11,7 +11,10 @@ class UserDetail extends Model
 {
     use HasFactory;
     protected $table = 'user_details';
-
+    public function sectionData()
+    {
+        return $this->hasOne(Section::class, 'id', 'section');
+    }
     protected $fillable = [
         'full_name', 'user_id', 'designation',
         'office_name', 'current_city', 'attachment',
@@ -51,12 +54,17 @@ class UserDetail extends Model
             }
 
             if (!empty($inputData['attachment'])) {
+                $image_path = $input->attachment;
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
                 $image = $inputData['attachment'];
-                $unique_date = date_timestamp_get(date_create());
-                $filename = $unique_date . $image->getClientOriginalName();
-                $image_resize = Image::make($image->getRealPath());
-                $image_resize->resize(400, 400);
-                $image_resize->save('assets/user/landingPage/img/profilePicture/' . $filename);
+                // $unique_date = date_timestamp_get(date_create());
+                // $filename = $unique_date . $image->getClientOriginalName();
+                // $image_resize = Image::make($image->getRealPath());
+                // $image_resize->resize(400, 400);
+                // $path = ('assets/user/landingPage/img/profilePicture/');
+                $filename = $inputData['attachment'];
                 $inputData['attachment'] = $filename;
                 $input->attachment = $filename ?? NULL;
             }
@@ -70,8 +78,10 @@ class UserDetail extends Model
                 $unique_date = date_timestamp_get(date_create());
                 $filename = $unique_date . $image->getClientOriginalName();
                 $image_resize = Image::make($image->getRealPath());
+                $path = ('assets/user/landingPage/img/profilePicture/');
+                $main_path = $path . $filename;
                 $image_resize->resize(400, 400);
-                $image_resize->save('assets/user/landingPage/img/profilePicture/' . $filename);
+                $image_resize->save($main_path);
                 $inputData['attachment'] = $filename;
             }
 

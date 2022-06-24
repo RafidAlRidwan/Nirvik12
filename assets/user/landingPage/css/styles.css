@@ -518,7 +518,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-style: italic;
 }
 
-#speakers .speaker .details .social {
+.details .social {
   height: 30px;
 }
 
@@ -545,11 +545,11 @@ body.mobile-nav-active #mobile-nav-toggle {
   margin-bottom: 10px;
 }
 
-#speakers-details .details .social {
+.details .social {
   margin-bottom: 15px;
 }
 
-#speakers-details .details .social a {
+.details .social a {
   background: #e9edfb;
   color: #112363;
   line-height: 1;
@@ -561,12 +561,12 @@ body.mobile-nav-active #mobile-nav-toggle {
   padding-top: 9px;
 }
 
-#speakers-details .details .social a:hover {
+.details .social a:hover {
   background: #f82249;
   color: #fff;
 }
 
-#speakers-details .details .social a i {
+.details .social a i {
   font-size: 18px;
 }
 

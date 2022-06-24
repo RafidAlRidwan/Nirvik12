@@ -423,7 +423,7 @@
   </script>
   <!-- Bootstrap 4 -->
   <script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <!-- <script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.min.js')}}"></script> -->
+  <script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
 
   <!-- ChartJS -->
   <script src="{{asset('assets/admin/plugins/chart.js/Chart.min.js')}}"></script>
@@ -442,7 +442,8 @@
   <script src="{{asset('assets/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
   <!-- overlayScrollbars -->
   <script src="{{asset('assets/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
-  
+  <!-- Select2 -->
+  <script src="{{asset('assets/admin/plugins/select2/js/select2.full.min.js')}}"></script>
   <!-- AdminLTE App -->
   <script src="{{asset('assets/admin/dist/js/adminlte.js')}}"></script>
   <script src="{{asset('assets/admin/plugins/summernote/summernote-bs4.min.js')}}"></script>

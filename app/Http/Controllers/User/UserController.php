@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cache;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -30,12 +31,12 @@ class UserController extends Controller
         // dd(Session::get('userName'));
 
         $cache = Cache::get('settings');
-        if(empty($cache)){
+        if (empty($cache)) {
             Cache::rememberForever('settings', function () {
                 return DB::table('settings')->get();
             });
         }
-        
+
         if ($user->type == 3) {
             $data = User::getMasterData();
             return view('user/user.index', $data);
@@ -86,7 +87,7 @@ class UserController extends Controller
             ->leftJoin('sections', 'ud.section', '=', 'sections.id')
             ->leftJoin('shifts', 'ud.shift', '=', 'shifts.id')
             ->leftJoin('mobile_number_details as mn', 'mn.user_id', '=', 'users.id')
-            ->where('ud.full_name', '!=' ,'')
+            ->where('ud.full_name', '!=', '')
             ->select(
                 DB::raw(DB::raw('group_concat(mn.mobile) as mobiles')),
                 'ud.full_name',
@@ -98,7 +99,7 @@ class UserController extends Controller
                 "shifts.name AS shift_name",
             )
             ->groupBy('users.id');
-        
+
         if (!empty($request->section)) {
             if ($request->section == "Select All Section") {
                 $product_data->where('users.type', '>', 2);
@@ -199,6 +200,7 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         try {
 
             $this->validate($request, [
@@ -249,5 +251,22 @@ class UserController extends Controller
     public function admin_index()
     {
         return view('admin/user.index');
+    }
+
+    public function imageUpload(Request $request)
+    {
+        if (!empty($request->image)) {
+
+            $image_array_1 = explode(";", $request->image);
+
+            $image_array_2 = explode(",", $image_array_1[1]);
+
+            $data = base64_decode($image_array_2[1]);
+
+            $imageName = 'assets/user/landingPage/img/profilePicture/' . time() . '.jpg';
+            file_put_contents($imageName, $data);
+
+            return $imageName;
+        }
     }
 }

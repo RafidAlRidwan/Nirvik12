@@ -123,19 +123,19 @@
     <section>
       <div class="tabset">
         <!-- Tab 1 -->
-        <input type="radio" name="tabset" id="tab1" aria-controls="general" checked>
+        <input type="radio" class="tab" name="tabset" id="tab1" aria-controls="general" checked>
         <label for="tab1">Member List</label>
 
         <!-- Tab 2 -->
-        <input type="radio" name="tabset" id="tab2" aria-controls="profile">
+        <input type="radio" class="tab" name="tabset" id="tab2" aria-controls="profile">
         <label for="tab2">Collection History</label>
 
         <!-- Tab 3 -->
-        <input type="radio" name="tabset" id="tab3" aria-controls="footer">
+        <input type="radio" class="tab" name="tabset" id="tab3" aria-controls="footer">
         <label for="tab3">Fund Transfer</label>
 
         <!-- Tab 4 -->
-        <input type="radio" name="tabset" id="tab4" aria-controls="expense">
+        <input type="radio" class="tab" name="tabset" id="tab4" aria-controls="expense">
         <label for="tab4">Expenses History</label>
 
         <div class="tab-panels">
@@ -477,12 +477,26 @@
 @endsection
 
 @section('script')
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script>
   //Initialize Select2 Elements
   $('.select2').select2();
 
+  //Initialize Select2 Elements
+  $('.select2bs4').select2({
+    theme: 'bootstrap4'
+  });
+</script>
+<script>
+  $(".tab").on("click", function() {
+    {
+      $.fn.dataTable.tables({
+        visible: true,
+        api: true
+      }).columns.adjust();
+    }
+  });
+</script>
+<script>
   $("#amount").keyup(function() {
     var value = $(this).val();
     var count = $("#user_id :selected").length;

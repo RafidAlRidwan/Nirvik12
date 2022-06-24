@@ -14,6 +14,7 @@
         @endif
 
     </div>
+    <input type="hidden" name="password" value="{{$user->password}}">
 
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <label>Full Name</label>
@@ -124,11 +125,19 @@
 
         </div>
     </div>
+    <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+        <label>Marital Status</label>
+        {!! Form::select('marital_status', $marital_status, $user_details->marital_status, ['placeholder'=>__('Select a Status') , 'class'=>'wide changeStatus', ($errors->has('marital_status') ? 'is-invalid' : ''), 'required']) !!}
+        @if ($errors->has('marital_status'))
+        <div class="invalid-feedback">{{ $errors->first('marital_status') }}</div>
+        @endif
+
+    </div>
 </div>
 
 <div class="row">
     <div class="field_wrapper">
-        
+
         @if(!isset($mobile_details))
         <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
             <label>Mobile No</label>
@@ -161,43 +170,54 @@
         @endif
 
         @endforeach
+        <input type="hidden" name="attachment" id="upload_images">
 
     </div>
 </div>
-
-<div class="row">
-
+<div class="row mt-4">
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-        <label>Marital Status</label>
-        {!! Form::select('marital_status', $marital_status, $user_details->marital_status, ['placeholder'=>__('Select a Status') , 'class'=>'wide changeStatus', ($errors->has('marital_status') ? 'is-invalid' : ''), 'required']) !!}
-        @if ($errors->has('marital_status'))
-        <div class="invalid-feedback">{{ $errors->first('marital_status') }}</div>
-        @endif
-
-    </div>
-
-</div>
-
-<div class="row">
-    <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-        <label>Profile Picture</label>
-        <div class="tower-file">
-            <input type="file" id="demoInput5" name="attachment" value="$user_details->attachment" />
-            <label for="demoInput5" class="update-button btn btn-primary">
-                <span class=" mdi mdi-upload"></span>Select Files
+        <div class="image_area">
+            @if(!empty($user_details->attachment))
+            <label for="upload_image">
+                <img id="uploaded_image" src="{{asset('')}}{{ ($user_details->attachment) }}" class="img-fluid" />
             </label>
-            <button type="button" class="btn btn-secondary tower-file-clear align-top">Clear</button>
+            <input type="file" name="image" id="upload_image" class="image" style="display:none">
+
+            <div class="overlay">
+                <div class="text">Change Image</div>
+            </div>
+            @endif
         </div>
-        @if(!empty($user_details->attachment))
-        <div id="edit-img" class="tower-file">
-            <div class=" tower-file-details">
-                <div class="tower-input-preview-container">
-                    <img class="null" src="{{asset('assets/user/landingPage/img/profilePicture')}}/{{ ($user_details->attachment) }}">
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Crop Image Before Upload</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="sample_image" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="crop">Crop</button>
+            </div>
         </div>
-        @endif
-
     </div>
 </div>
 

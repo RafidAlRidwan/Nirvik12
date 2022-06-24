@@ -29,8 +29,8 @@ Route::get('/public/committee/registration/{id}', [App\Http\Controllers\User\Lan
 Route::post('/public/registration/getdata/{id}', [App\Http\Controllers\User\LandingPageController::class, 'registrationDatatable']);
 
 // USER LOGIN
-Route::get('/user/login', [App\Http\Controllers\User\UserLoginController::class, 'login'])->name('user_login');
-Route::get('/user/forget/password', [App\Http\Controllers\User\UserLoginController::class, 'password_reset']);
+Route::get('/user/login', [App\Http\Controllers\User\UserLoginController::class, 'login'])->name('user_login')->middleware('guest');
+Route::get('/user/forget/password', [App\Http\Controllers\User\UserLoginController::class, 'password_reset'])->middleware('guest');
 
 // USER DASHBOARD
 Route::get('/user/dashboard', [App\Http\Controllers\User\UserController::class, 'index'])->name('user_dashboard');
@@ -65,6 +65,7 @@ Route::post('/user/expense/getdata/{id}', [App\Http\Controllers\User\CommitteeCo
 Route::post('/user/collection/store', 'App\Http\Controllers\User\CommitteeController@store');
 Route::post('/user/collection/destroy', 'App\Http\Controllers\User\CommitteeController@destroy');
 Route::post('/user/expense/store', 'App\Http\Controllers\User\CommitteeController@expenseStore');
+Route::post('/user/image/upload', 'App\Http\Controllers\User\UserController@imageUpload');
 
 // USER SECTION END
 

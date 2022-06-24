@@ -6,6 +6,7 @@ use URL;
 use Redirect;
 use validate;
 use App\Models\Gallery;
+use App\Models\Section;
 use App\Models\Committee;
 use App\Models\Collection;
 use Illuminate\Http\Request;
@@ -89,12 +90,11 @@ class LandingPageController extends Controller
     {
         $searchString = $request->search['value'];
         $product_data = Collection::where('committee_id', $id)->with('userData');
-
-        if (!empty($request->member)) {
-            if ($request->member == 0) {
+        if (!empty($request->section)) {
+            if ($request->section == 0) {
                 $product_data = $product_data;
             } else {
-                $product_data->where('collection_histories.member_id', $request->member);
+                $product_data->whereRelation('userData', 'section', '=', $request->section);
             }
         }
 
@@ -206,6 +206,7 @@ class LandingPageController extends Controller
         $data['committeeDetails'] = Committee::with('userData')->findOrFail($id);
         $manager_collection = $data['committeeDetails']->total_balance;
 
+        $data['sections'] = Section::pluck('name', 'id')->toArray();
         // Total Registration Count
 
         $registration = Collection::where('committee_id', $id)->get();

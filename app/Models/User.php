@@ -55,11 +55,6 @@ class User extends Authenticatable
         return $this->hasOne(UserDetail::class, 'user_id', 'id');
     }
 
-    public function sectionData()
-    {
-        return $this->hasOne(Section::class, 'user_id', 'id');
-    }
-
     public function mobileNumberDetails()
     {
         return $this->hasMany(MobileNumberDetail::class, 'user_id', 'id');
