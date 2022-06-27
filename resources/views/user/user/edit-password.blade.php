@@ -14,11 +14,11 @@
         </div>
 
         <div class="wrapper">
-            <div class="card">
+            <div class="card" style="background-color: transparent; border:none;">
                 <div class="card-body">
                     {!! Form::model($user, ['route' => ['user.update_password', $user->id],'method'=>'put', 'files' => true, 'class' => 'needs-validation', 'novalidate']) !!}
 
-
+                    <div class="row">
                     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                         <label>Old Password<strong style="color: red"> *</strong></label>
                         <div class="inputBox">
@@ -54,9 +54,11 @@
                         </div>
 
                     </div>
+                    </div>
+                    
 
 
-                    <div class="inputfield div-gap">
+                    <div class="inputfield">
                         <button type="submit" class=" btn btn-primary">Update</button>
                     </div>
 

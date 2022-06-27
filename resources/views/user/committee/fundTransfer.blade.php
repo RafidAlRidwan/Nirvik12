@@ -63,37 +63,34 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                         <section id="schedule" class="section-with-bg">
                                                 <div class="container wow fadeInUp">
-                                                @include('user.committee.navBar')
+                                                        @include('user.committee.navBar')
                                                         <div class="tab-content row justify-content-center">
-                                                                <!-- TAB 2 -->
+                                                                <!-- TAB 3 -->
                                                                 <div class="col-lg-9 tab-pane fade show active">
-                                                                        <hr>
+                                                                        <hr class="px-3">
                                                                         <div class="card" style="background-color: transparent; border:none;">
                                                                                 <div class="d-flex justify-content-between px-3">
-                                                                                        <h4 class="text-bold">Collection History</h4>
+                                                                                        <h4 class="text-bold">Fund Transfer History</h4>
                                                                                         @php
                                                                                         $checkAccess = App\Models\Collection::checkAccess($committeeDetails->id);
                                                                                         @endphp
                                                                                         @if(!$checkAccess)
-                                                                                        <button style="text-decoration: line-through" class="btn btn-secondary text-bold btn-sm h-25 " disabled data-toggle="modal" data-target="#add_collection">+ Add</button>
+                                                                                        <button style="text-decoration: line-through" class="btn btn-secondary text-bold btn-sm h-25 " disabled data-toggle="modal" data-target="#fund_transfer">+ Add</button>
                                                                                         @else
-                                                                                        <button class="btn btn-info btn-custom text-bold btn-sm h-25 " data-toggle="modal" data-target="#add_collection">+ Add</button>
+                                                                                        <button class="btn btn-info btn-custom text-bold btn-sm h-25 " data-toggle="modal" data-target="#fund_transfer">+ Add</button>
                                                                                         @endif
                                                                                 </div>
-                                                                                <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 mb-2">
-                                                                                        {!! Form::select('member', $comiittee_members, null, ['placeholder'=>__('All Member') ,'id'=>'changeMember', 'class'=>'wide', 'aria-label'=>'Default select example']) !!}
-                                                                                </div>
                                                                                 <div class="card-body p-0">
-
                                                                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                                                                                <table id="collection_datatable" style="width: 100%;" class="table table-sm table-hover">
+                                                                                                <table id="fundTransfer_datatable" width="100%" class="table table-sm table-hover">
                                                                                                         <thead style="color:#fff; background: #4ed2c5;">
                                                                                                                 <tr>
                                                                                                                         <th style="width: 10px">#</th>
-                                                                                                                        <th>Recieved By</th>
-                                                                                                                        <th>Collected From</th>
+                                                                                                                        <th>Transfer From</th>
+                                                                                                                        <th>Transfer To</th>
                                                                                                                         <th>Amount</th>
                                                                                                                         <th>Date</th>
+                                                                                                                        <th>Remarks</th>
                                                                                                                         <th>Action</th>
                                                                                                                 </tr>
                                                                                                         </thead>
@@ -115,85 +112,49 @@
         </section>
 </main>
 
-<!-- ADD Collection MODAL -->
-<div class="modal fade" id="add_collection" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+<!-- Fund Transfer MODAL -->
+<div class="modal fade" id="fund_transfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content" style="border: none; background: black; background: linear-gradient( to right bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)); border-radius: 1rem; backdrop-filter: blur(5px);">
 
-                        {!! Form::open(['action' => ['App\Http\Controllers\User\CommitteeController@store'], 'id' => 'from_collection', 'files' => true, 'class' => 'needs-validation']) !!}
+                        {!! Form::open(['action' => ['App\Http\Controllers\Admin\CollectionController@transfer'], 'id' => 'from_fund', 'files' => true, 'class' => 'needs-validation']) !!}
                         <div class="modal-body">
                                 <div class="d-flex justify-content-between">
-                                        <h5 class="modal-title" style="color:#fff; font-weight:700" id="exampleModalLongTitle">Add Collection</h5>
+                                        <h5 class="modal-title" style="color:#fff; font-weight:700" id="exampleModalLongTitle">Fund Transfer</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span style="color: #f82249; text-shadow: 0 0px 0 #fff; opacity: 1;" aria-hidden="true">&times;</span>
                                         </button>
                                 </div>
-
                                 <div class="card-body">
+
                                         <input type="hidden" name="committee_id" id="committee_id" value="{{$committeeDetails->id}}">
                                         <input type="hidden" name="manager_id" value="{{$committeeDetails->manager_id}}">
+                                        <input type="hidden" name="available_balance" id="available_balance">
                                         <div class="form-group">
-                                                <label class="text-white" for="exampleInputEmail1">Recieved By</label>
-                                                @if($committeeDetails['manager_id'] == Auth::user()->id)
-                                                {!! Form::select('member_id', $comiittee_members, null, ['placeholder'=>__('Select Member') ,'id'=>'member_id', 'class'=>'form-control', 'style'=>'width: 100%', 'required']) !!}
-                                                @else
-                                                {!! Form::select('member_id', $comiittee_members, Auth::user()->id, ['placeholder'=>__('Select Member') ,'id'=>'member_id', 'class'=>'form-control', 'style'=>'width: 100%', 'disabled', 'required']) !!}
-                                                @endif
+                                                <label for="exampleInputEmail1" class="text-white">Transfer From <span class="badge badge-success" id="amount_output"></span></label>
+                                                {!! Form::select('transfer_from', $comiittee_members, null, ['placeholder'=>__('Select') ,'id'=>'transfer_from', 'class'=>'form-control', 'style'=>'width: 100%', 'required']) !!}
                                         </div>
 
                                         <div class="form-group">
-                                                <label class="text-white" for="exampleInputEmail1">Collected From</label>
-                                                {!! Form::select('user_id[]', $user, null, ['data-placeholder'=>__('Search Multiple Mates') ,'multiple'=>'multiple','id'=>'user_id', 'class'=>'select2', 'style'=>'width: 100%', 'required']) !!}
+                                                <label for="exampleInputEmail1" class="text-white">Transfer To</label>
+                                                {!! Form::select('transfer_to', $comiittee_members, null, ['placeholder'=>__('Select') ,'id'=>'transfer_to', 'class'=>'form-control', 'style'=>'width: 100%', 'required']) !!}
                                         </div>
 
                                         <div class="form-group">
-                                                <label class="text-white" for="exampleInputEmail1">Amount <span class="badge badge-success" id="output"></span></label>
-                                                <input type="number" name="amount" class="form-control" id="amount" required="" autocomplete="off">
+                                                <label for="exampleInputEmail1" class="text-white">Amount <span class="badge badge-success" id="output"></span></label>
+                                                <input type="number" name="amount" class="form-control" id="fund_amount" required="" autocomplete="off">
+                                                <div class="text-bold" id="balance_output"></div>
                                         </div>
-
                                         <div class="form-group">
-                                                <label class="text-white" for="exampleInputEmail1">Remarks</label>
+                                                <label for="exampleInputEmail1" class="text-white">Remarks</label>
                                                 <input type="text" name="remarks" class="form-control" id="remarks">
                                         </div>
-                                        <div class="d-flex justify-content-end">
-                                                <button type="submit" class="btn btn-custom border-0 btn_submit">Save</button>
-                                        </div>
-
+                                        <button type="submit" class="btn btn-primary">Transfer</button>
 
                                 </div>
                         </div>
-
                         {!! Form::close() !!}
-                </div>
-        </div>
-</div>
-
-<!-- Delete Collection Modal -->
-<div class="modal fade" id="collection_delete_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content" style="border: none; background: black; background: linear-gradient( to right bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)); border-radius: 1rem; backdrop-filter: blur(5px);">
-                        <div class="modal-body">
-                                <div class="d-flex justify-content-between">
-                                        <h5 class="modal-title" style="color:#fff; font-weight:700" id="exampleModalLongTitle">Revert</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span style="color: #f82249; text-shadow: 0 0px 0 #fff; opacity: 1;" aria-hidden="true">&times;</span>
-                                        </button>
-                                </div>
-                                {{ Form::open(array('url' => 'user/collection/destroy', 'id'=>'delete_form', 'method' => 'POST')) }}
-                                <div class="modal-body">
-
-                                        <p style="color:#fff;">Are you sure?</p>
-
-                                        <div class=" modal-footer">
-                                                <input type="hidden" name="id" id="collection_delete_id">
-                                                <button type="submit" class="btn btn-custom border-0 btn_submit">Yes</button>
-                                        </div>
-
-                                </div>
-                                {{ Form::close() }}
-
-
-                        </div>
                 </div>
         </div>
 </div>
@@ -207,39 +168,16 @@
                 $('[data-toggle="tooltip"]').tooltip()
         })
 </script>
-<script>
-        $(document).ready(function() {
-                $('#changeMember').niceSelect();
-                FastClick.attach(document.body);
-        });
-        $("#amount").keyup(function() {
-                var value = $(this).val();
-                var count = $("#user_id :selected").length;
-
-                var val = parseInt(value);
-                var num = parseInt(count);
-
-                var result = value / count;
-
-                // Output changes
-                $('#output').html(result + " * " + num);
-
-        });
-</script>
-<!-- Select2 -->
-<script src="{{asset('assets/admin/plugins/select2/js/select2.full.min.js')}}"></script>
-
 <script type="text/javascript">
         $(document).ready(function() {
                 window.csrfToken = '<?php echo csrf_token(); ?>';
                 var postData = {};
                 postData._token = window.csrfToken;
                 var id = $('#committee_id').val();
-                var table = $('#collection_datatable').DataTable({
+                var table = $('#fundTransfer_datatable').DataTable({
                         "responsive": true,
                         "processing": true,
                         "serverSide": true,
-                        "autoWidth": true,
                         "dom": 'Bfrtip',
                         "lengthMenu": [
                                 [10, 25, 50, 100, 200, 250],
@@ -247,11 +185,11 @@
                         ],
                         "buttons": ['pageLength'],
                         "ajax": {
-                                "url": "{{URL::to('/user/collection/getdata/')}}" + '/' + id,
+                                "url": "{{URL::to('/user/fundTransfer/getdata/')}}" + '/' + id,
                                 "type": "POST",
                                 "data": function(d) {
                                         $.extend(d, postData);
-                                        var dt_params = $('#collection_datatable').data('dt_params');
+                                        var dt_params = $('#fundTransfer_datatable').data('dt_params');
                                         if (dt_params) {
                                                 $.extend(d, dt_params);
                                         }
@@ -262,16 +200,19 @@
                                         "data": "serial"
                                 },
                                 {
-                                        "data": "recieved_by"
+                                        "data": "transfer_from"
                                 },
                                 {
-                                        "data": "collected_from"
+                                        "data": "transfer_to"
                                 },
                                 {
                                         "data": "amount"
                                 },
                                 {
                                         "data": "date"
+                                },
+                                {
+                                        "data": "remarks"
                                 },
                                 {
                                         "data": "action"
@@ -284,36 +225,53 @@
                 new $.fn.dataTable.FixedHeader(table);
         });
 
-        $('#changeMember').on('change', function() {
-                var previousFilter = $('#collection_datatable').data('dt_params');
-                var filterables = {};
-                if (previousFilter != undefined) {
-                        filterables = $('#collection_datatable').data('dt_params');
-                }
-
-                var memberSelected = $(this).val();
-                if (memberSelected != "") {
-                        filterables.member = memberSelected;
-                } else {
-                        filterables.member = 0;
-                }
-                $('#collection_datatable').data('dt_params', filterables);
-                $('#collection_datatable').DataTable().draw();
-        });
-
         // Delete Form
-        $('#collection_datatable').on('click', '.collection_delete', function() {
+        $('#fundTransfer_datatable').on('click', '.fund_delete', function() {
 
                 var id = $(this).attr('href');
-                $('#collection_delete_id').val(id);
+                $('#fund_transfer_delete_id').val(id);
         });
 </script>
 <script>
-        //Initialize Select2 Elements
-        $('.select2').select2();
+        // AJAX LOAD
+        $("#transfer_from").change(function() {
+                var userId = $(this).val();
+                var committeeId = $('#committee_id').val();
+                var fundAmount = $('#fund_amount').val();
+                $.ajax({
+                        url: "{{URL::to('/user/collection/getBalance/')}}" + '/' + userId + '/' + committeeId,
+                        data: '_token = <?php echo csrf_token() ?>',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(result) {
+                                console.log(result);
+                                if (result >= 0) {
+                                        $('#amount_output').html("Balance: " + result);
+                                        $('#available_balance').val(result);
+                                }
+                        }
+                });
+        });
+        $("#fund_amount").keyup(function() {
+                var value = $(this).val();
+                var balance = $("#available_balance").val();
 
-        $('#add_collection').on('hidden.bs.modal', function() {
-                $("#from_collection").trigger("reset");
+                if (parseInt(value) > parseInt(balance)) {
+                        $(this).val('');
+                        // Output changes
+                        $('#balance_output').html("<p class='text-danger'>Invalid Balance!</p>");
+                } else {
+                        // Output changes
+                        $('#balance_output').html("");
+                }
+
+        });
+
+        $('#fund_transfer').on('hidden.bs.modal', function() {
+                $('#amount_output').html('');
+                $('#balance_output').html("");
+                $("#from_fund").trigger("reset");
         });
 </script>
+
 @endsection

@@ -87,21 +87,18 @@ $banner = $cache->where('key', 'banner')->first();
                     $id = Auth::user()->id;
                     $path = Request::path();
                     @endphp
-                    <li class="<?php if ($path == 'user/dashboard') {
-                                    echo "menu-active";
-                                } else {
-                                    echo "";
-                                } ?>"><a href="{{URL::to('user/dashboard')}}">Dashboard</a></li>
-                    <li class="<?php if ($path == 'user/my-profile/show/' . $id) {
-                                    echo "menu-active";
-                                } else {
-                                    echo "";
-                                } ?>"><a href="{{$url}}" class="">My Profile</a></li>
-                    <li class="<?php if ($path == 'user/committee') {
-                                    echo "menu-active";
-                                } else {
-                                    echo "";
-                                } ?>"><a href="{{URL::to('user/committee')}}" class="">Committee</a></li>
+                    <li class="{{request()->is('user/dashboard') ? 'menu-active' : ''}}">
+                        <a href="{{URL::to('user/dashboard')}}">Dashboard</a>
+                    </li>
+
+                    <li class="{{request()->is('user/committee/*') ? 'menu-active' : ''}}">
+                        <a href="{{URL::to('user/committee/')}}" class="">Committee</a>
+                    </li>
+
+                    <li class="{{request()->is('user/my-profile/*') ? 'menu-active' : ''}}">
+                        <a href="{{$url}}" class="">My Profile</a>
+                    </li>
+
                     <li class="buy-tickets"><a onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();" href="{{ route('logout') }}">logout</a></li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

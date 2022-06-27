@@ -94,15 +94,20 @@
     .right ul li.active .dropdown {
       display: block;
     }
-    .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+
+    .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active,
+    .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
       /* background-color: #f82249; */
-      background-color: rgba(255,255,255,.1);
+      background-color: rgba(255, 255, 255, .1);
 
       border-radius: 30px 0px 0px 30px;
       color: #fff;
       border-right: 4px solid #f82249;
     }
-    [class*=sidebar-dark-] .nav-sidebar>.nav-item.menu-open>.nav-link, [class*=sidebar-dark-] .nav-sidebar>.nav-item:hover>.nav-link, [class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link:focus {
+
+    [class*=sidebar-dark-] .nav-sidebar>.nav-item.menu-open>.nav-link,
+    [class*=sidebar-dark-] .nav-sidebar>.nav-item:hover>.nav-link,
+    [class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link:focus {
       color: #fff;
       border-radius: 30px 0px 0px 30px;
       border-right: 4px solid #f82249;
@@ -184,7 +189,8 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link text-center">
       <!-- <img src="{{asset('assets/admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-      <img height="60px" src="{{asset($banner->value)}}" alt="" title=""></a>
+      <img height="60px" src="{{asset($banner->value)}}" alt="" title="">
+    </a>
     </a>
 
     <!-- Sidebar -->
@@ -237,11 +243,9 @@
             </ul> -->
           </li>
           <li class="nav-item">
-            <a href="{{URL::to('/admin/user_management')}}" class="nav-link <?php if ($path == 'admin/user_management') {
-                                                                              echo "active";
-                                                                            } else {
-                                                                              echo "";
-                                                                            } ?>">
+            <a href="{{URL::to('/admin/user_management')}}" class="nav-link 
+            {{request()->is('admin/user_management') ? 'active' : ''}} ||
+            {{request()->is('admin/user/*') ? 'active' : ''}}">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 User Management
@@ -249,11 +253,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{URL::to('/admin/committee/setting')}}" class="nav-link <?php if ($path == 'admin/committee/setting') {
-                                                                              echo "active";
-                                                                            } else {
-                                                                              echo "";
-                                                                            } ?>">
+            <a href="{{URL::to('/admin/committee/setting')}}" class="nav-link
+            {{request()->is('admin/committee/*') ? 'active' : ''}}">
               <i class="nav-icon fa fa-podcast"></i>
               <p>
                 Committee Setup
@@ -261,11 +262,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{URL::to('/admin/about/setting/1')}}" class="nav-link <?php if ($path == 'admin/about/setting/1') {
-                                                                              echo "active";
-                                                                            } else {
-                                                                              echo "";
-                                                                            } ?>">
+            <a href="{{URL::to('/admin/about/setting/1')}}" class="nav-link 
+            {{request()->is('admin/about/*') ? 'active' : ''}}">
               <i class="nav-icon fas fa-book"></i>
               <p>
                 About Settings
@@ -273,11 +271,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{URL::to('/admin/news/setting')}}" class="nav-link <?php if ($path == 'admin/news/setting') {
-                                                                            echo "active";
-                                                                          } else {
-                                                                            echo "";
-                                                                          } ?>">
+            <a href="{{URL::to('/admin/news/setting')}}" class="nav-link 
+            {{request()->is('admin/news/*') ? 'active' : ''}}">
               <i class="nav-icon far fa-newspaper"></i>
               <p>
                 News Settings
@@ -286,11 +281,8 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{URL::to('/admin/event/setting')}}" class="nav-link <?php if ($path == 'admin/event/setting' || $path == 'admin/event/create') {
-                                                                            echo "active";
-                                                                          } else {
-                                                                            echo "";
-                                                                          } ?>">
+            <a href="{{URL::to('/admin/event/setting')}}" class="nav-link
+            {{request()->is('admin/event/*') ? 'active' : ''}}">
               <i class="nav-icon far fa-calendar"></i>
               <p>
                 Event Settings
@@ -299,37 +291,28 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{URL::to('/admin/album/setting')}}" class="nav-link <?php if ($path == 'admin/album/setting') {
-                                                                            echo "active";
-                                                                          } else {
-                                                                            echo "";
-                                                                          } ?>">
+            <a href="{{URL::to('/admin/album/setting')}}" class="nav-link 
+            {{request()->is('admin/album/*') ? 'active' : ''}}">
               <i class="nav-icon far fa-folder-open"></i>
               <p>
-              Album Settings
+                Album Settings
               </p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="{{URL::to('/admin/gallery/setting')}}" class="nav-link <?php if ($path == 'admin/gallery/setting' || $path == 'admin/gallery/create') {
-                                                                            echo "active";
-                                                                          } else {
-                                                                            echo "";
-                                                                          } ?>">
+            <a href="{{URL::to('/admin/gallery/setting')}}" class="nav-link 
+            {{request()->is('admin/gallery/*') ? 'active' : ''}}">
               <i class="nav-icon far fa-image"></i>
               <p>
-              Gallery Settings
+                Gallery Settings
               </p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="{{URL::to('/admin/cover-page/setting')}}" class="nav-link <?php if ($path == 'admin/cover-page/setting' || $path == 'admin/cover-page/create') {
-                                                                            echo "active";
-                                                                          } else {
-                                                                            echo "";
-                                                                          } ?>">
+            <a href="{{URL::to('/admin/cover-page/setting')}}" class="nav-link 
+            {{request()->is('admin/cover-page/*') ? 'active' : ''}}">
               <i class="nav-icon fa fa-desktop"></i>
               <p>
                 Cover Page Settings
@@ -338,11 +321,8 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{URL::to('/admin/settings')}}" class="nav-link <?php if ($path == 'admin/settings') {
-                                                                            echo "active";
-                                                                          } else {
-                                                                            echo "";
-                                                                          } ?>">
+            <a href="{{URL::to('/admin/settings')}}" class="nav-link
+            {{request()->is('admin/settings') ? 'active' : ''}}">
               <i class="nav-icon fa fa-cog"></i>
               <p>
                 General Settings
@@ -393,7 +373,7 @@
   </div>
   <!-- /.content-wrapper -->
   @php
-    $app_name = Cache::get('settings')->where('key', 'app_name')->first();
+  $app_name = Cache::get('settings')->where('key', 'app_name')->first();
   @endphp
   <footer class="main-footer">
     <strong>Copyright &copy; 2022 <a href="https://adminlte.io">{{$app_name->value}} TEAM</a>.</strong>
@@ -422,8 +402,9 @@
     $.widget.bridge('uibutton', $.ui.button)
   </script>
   <!-- Bootstrap 4 -->
-  <script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
 
   <!-- ChartJS -->
   <script src="{{asset('assets/admin/plugins/chart.js/Chart.min.js')}}"></script>

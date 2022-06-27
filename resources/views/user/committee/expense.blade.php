@@ -63,17 +63,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                         <section id="schedule" class="section-with-bg">
                                                 <div class="container wow fadeInUp">
-                                                        <ul class="nav-tabs">
-                                                                <li class="nav-item">
-                                                                        <a class="nav-link" data-toggle="tooltip" data-placement="top" title="Committee Members" href="{{URL::to('/user/committee/memberView/'.$committeeDetails['id'])}}">Members</a>
-                                                                </li>
-                                                                <li class="nav-item">
-                                                                        <a class="nav-link" data-toggle="tooltip" data-placement="top" title="Total Collection History" href="{{URL::to('/user/committee/collectionView/'.$committeeDetails['id'])}}">Collections</a>
-                                                                </li>
-                                                                <li class="nav-item">
-                                                                        <a class="nav-link mt-1 active" data-toggle="tooltip" data-placement="top" title="Total Expenses History" href="{{URL::to('/user/committee/expenseView/'.$committeeDetails['id'])}}">Expenses</a>
-                                                                </li>
-                                                        </ul>
+                                                @include('user.committee.navBar')
                                                         <div class="tab-content row justify-content-center">
                                                                 <!-- TAB 3 -->
                                                                 <div class="col-lg-9 tab-pane fade show active">

@@ -1,17 +1,18 @@
 @extends('layouts.admin.admin')
 @section('style')
 <style>
-    .tower-input-preview-container img {
+  .tower-input-preview-container img {
     vertical-align: middle;
     border-style: none;
     width: 300px;
     margin-bottom: 10px;
-    }
-    .tower-file input[type="file"] {
+  }
+
+  .tower-file input[type="file"] {
     height: 0.1px;
     width: 0.1px;
     opacity: 0;
-    }
+  }
 </style>
 @endsection
 
@@ -26,14 +27,9 @@
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
         <ol class="breadcrumb float-sm-right">
           <div class="dropdown show mr-3">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Create Album
+            <a class="btn btn-secondary" data-toggle="modal" data-target="#album_modal">
+              + Create Album
             </a>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" data-toggle="modal" data-target="#album_modal">Add</a>
-              <a class="dropdown-item" href={{URL::to('admin/album/setting')}}>View All</a>
-            </div>
           </div>
           <a href={{URL::to('admin/gallery/create')}}><button type="button" class="btn btn-primary">+ Add New</button></a>
         </ol>
@@ -63,7 +59,7 @@
           </tbody>
           <tfoot>
             <tr>
-            <th>Serial</th>
+              <th>Serial</th>
               <th>Title</th>
               <th>Album</th>
               <th>Picture</th>
@@ -114,9 +110,9 @@
 <script src="{{asset('assets/user/landingPage/file-select/tower-file-input.js')}}"></script>
 
 <script type="text/javascript">
-    $('#demoInput5').fileInput({
-        iconClass: 'mdi mdi-fw mdi-upload'
-    });
+  $('#demoInput5').fileInput({
+    iconClass: 'mdi mdi-fw mdi-upload'
+  });
 </script>
 <script type="text/javascript">
   $(document).ready(function() {
@@ -174,6 +170,5 @@
     var id = $(this).attr('href');
     $('#gallery_delete_id').val(id);
   });
-
 </script>
 @endsection

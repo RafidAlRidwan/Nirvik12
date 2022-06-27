@@ -11,6 +11,7 @@ use App\Models\Section;
 use App\Models\Committee;
 use App\Models\Collection;
 use App\Models\UserDetail;
+use App\Models\FundTransfer;
 use Illuminate\Http\Request;
 use App\Models\CommitteeMember;
 use Illuminate\Support\Facades\DB;
@@ -203,7 +204,38 @@ class CommitteeController extends Controller
         echo json_encode($data);
         die();
     }
+    public function fundTransferDatatable(Request $request, $id)
+    {
+        $searchString = $request->search['value'];
+        $product_data = FundTransfer::where('committee_id', $id)->with('transferFromUserData', 'transferToUserData');
 
+        $data['recordsTotal'] = $product_data->count();
+        $data['recordsFiltered'] = $product_data->count();
+        $product_data->limit($request->length)->offset($request->start);
+        $product_data_list = $product_data->get();
+        $data['draw'] = $request->draw;
+        $data['data'] = array();
+        $sl = 0;
+        $serial = 1;
+
+        foreach ($product_data_list as $item) {
+
+            $date = date('d M, Y', strtotime($item->created_at));
+            $data['data'][$sl]['serial'] = $serial;
+            $data['data'][$sl]['transfer_from'] = $item->transferFromUserData->full_name ?? "";
+            $data['data'][$sl]['transfer_to'] = $item->transferToUserData->full_name ?? "";
+            $data['data'][$sl]['amount'] = $item->amount ?? "0";
+            $data['data'][$sl]['date'] = $date ?? '-';
+            $data['data'][$sl]['remarks'] = $item->remarks ?? "-";
+            $data['data'][$sl]['action'] = "
+                <a class='fund_delete' href='$item->id' data-toggle='modal' data-target='#fund_transfer_delete_modal' style='border: none; background: none;' > <button disabled class='btn btn-danger btn-sm'>Revert</button> </a>";
+
+            $sl++;
+            $serial++;
+        }
+        echo json_encode($data);
+        die();
+    }
     public function memberShow($id)
     {
         // Member Table Values
@@ -304,6 +336,31 @@ class CommitteeController extends Controller
         return view('user/committee.expense', $data);
     }
 
+    public function fundTransferShow($id)
+    {
+        $data['committeeDetails'] = Committee::with('userData')->findOrFail($id);
+        $manager_array = Committee::query()
+            ->leftJoin('user_details', 'committees.manager_id', '=', 'user_details.user_id')
+            ->where('committees.id', $id)
+            ->select(
+                DB::raw("CONCAT(user_details.full_name, ' (Manager)') AS name"),
+                'user_details.user_id'
+            )
+            ->get();
+        $manager_id = $manager_array->pluck('name', 'user_id')->toArray();
+
+        $member_ids = CommitteeMember::query()
+            ->leftJoin('user_details', 'committee_members.user_id', '=', 'user_details.user_id')
+            ->where('committee_members.committee_id', $id)
+            ->pluck(
+                'user_details.full_name',
+                'user_details.user_id'
+            )
+            ->toArray();
+        $data['comiittee_members'] = ($manager_id + $member_ids);
+        return view('user/committee.fundTransfer', $data);
+    }
+
     public function destroy(Request $request)
     {
         try {
@@ -345,5 +402,9 @@ class CommitteeController extends Controller
                 ->withErrors($e->getMessage())
                 ->withInput();
         }
+    }
+    public function getBalanceData($userId, $committeeId)
+    {
+        return response()->json(Collection::getBalanceData($userId, $committeeId));
     }
 }

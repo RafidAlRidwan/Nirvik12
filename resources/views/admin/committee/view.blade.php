@@ -590,7 +590,8 @@
       type: 'GET',
       dataType: 'json',
       success: function(result) {
-        if (result) {
+        console.log(result);
+        if (result >= 0) {
           $('#amount_output').html("Balance: " + result);
           $('#available_balance').val(result);
         }

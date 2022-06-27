@@ -21,7 +21,7 @@ Route::get('/', [App\Http\Controllers\User\LandingPageController::class, 'index'
 Route::get('/events', [App\Http\Controllers\User\LandingPageController::class, 'event'])->name('eventPage');
 Route::get('/news', [App\Http\Controllers\User\LandingPageController::class, 'news'])->name('newsPage');
 Route::get('/album', [App\Http\Controllers\User\LandingPageController::class, 'album'])->name('albumPage');
-Route::get('/committee', [App\Http\Controllers\User\LandingPageController::class, 'committee'])->name('committeePage');
+Route::get('/public/committee/view', [App\Http\Controllers\User\LandingPageController::class, 'committee'])->name('committeePage');
 Route::get('/gallery/{id}', [App\Http\Controllers\User\LandingPageController::class, 'gallery'])->name('galleryPage');
 Route::post('/public/committee/getdata', [App\Http\Controllers\User\LandingPageController::class, 'datatable']);
 Route::get('/public/committee/details/{id}', [App\Http\Controllers\User\LandingPageController::class, 'show']);
@@ -60,12 +60,15 @@ Route::post('/user/committee/getdata', [App\Http\Controllers\User\CommitteeContr
 Route::get('/user/committee/memberView/{id}', [App\Http\Controllers\User\CommitteeController::class, 'memberShow']);
 Route::get('/user/committee/collectionView/{id}', [App\Http\Controllers\User\CommitteeController::class, 'collectionShow']);
 Route::get('/user/committee/expenseView/{id}', [App\Http\Controllers\User\CommitteeController::class, 'expenseShow']);
+Route::get('/user/committee/fundTransferView/{id}', [App\Http\Controllers\User\CommitteeController::class, 'fundTransferShow']);
 Route::post('/user/collection/getdata/{id}', [App\Http\Controllers\User\CommitteeController::class, 'collectionDatatable']);
 Route::post('/user/expense/getdata/{id}', [App\Http\Controllers\User\CommitteeController::class, 'expenseDatatable']);
+Route::post('/user/fundTransfer/getdata/{id}', [App\Http\Controllers\User\CommitteeController::class, 'fundTransferDatatable']);
 Route::post('/user/collection/store', 'App\Http\Controllers\User\CommitteeController@store');
 Route::post('/user/collection/destroy', 'App\Http\Controllers\User\CommitteeController@destroy');
 Route::post('/user/expense/store', 'App\Http\Controllers\User\CommitteeController@expenseStore');
 Route::post('/user/image/upload', 'App\Http\Controllers\User\UserController@imageUpload');
+Route::get('/user/collection/getBalance/{userId?}/{committeeId?}', [App\Http\Controllers\User\CommitteeController::class, 'getBalanceData']);
 
 // USER SECTION END
 

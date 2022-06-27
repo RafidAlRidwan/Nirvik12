@@ -15,32 +15,28 @@
               @endphp
               <nav id="nav-menu-container">
                      <ul class="nav-menu">
-                            <li class="<?php if ($path == "/") {
-                                                 echo "menu-active";
-                                                 } else {
-                                                 echo "";
-                                                 } ?>"><a href={{URL::to('/')}}>Home</a></li>
+                            <li class="{{request()->is('/') ? 'menu-active' : ''}}">
+                                   <a href={{URL::to('/')}}>Home</a>
+                            </li>
+
                             <li><a href="#about">About</a></li>
-                            <li class="<?php if ($path == 'news') {
-                                                 echo "menu-active";
-                                                 } else {
-                                                 echo "";
-                                                 } ?>"><a href={{URL::to('/news')}}>News <span class="icon-button-badge">{{count($newsDetails)}}</span></a></li>
-                            <li class="<?php if ($path == 'events') {
-                                                 echo "menu-active";
-                                                 } else {
-                                                 echo "";
-                                                 } ?>"><a href={{URL::to('/events')}}>Events <span class="icon-button-badge">2</span></a></li>
-                            <li class="<?php if ($path == 'album') {
-                                                 echo "menu-active";
-                                                 } else {
-                                                 echo "";
-                                                 } ?>"><a href={{URL::to('/album')}}>Gallary</a></li>
-                            <li class="<?php if ($path == 'committee') {
-                                                 echo "menu-active";
-                                                 } else {
-                                                 echo "";
-                                                 } ?>"><a href={{URL::to('/committee')}}>Committee</a></li>
+
+                            <li class="{{request()->is('news') ? 'menu-active' : ''}}">
+                                   <a href={{URL::to('/news')}}>News <span class="icon-button-badge">{{count($newsDetails)}}</span></a>
+                            </li>
+
+                            <li class="{{request()->is('events') ? 'menu-active' : ''}}">
+                                   <a href={{URL::to('/events')}}>Events <span class="icon-button-badge">2</span></a></li>
+                            </li>
+
+                            <li class="{{request()->is('album') ? 'menu-active' : ''
+                                   || request()->is('gallery/*') ? 'menu-active' : ''}}
+                            "><a href={{URL::to('/album')}}>Gallary</a></li>
+
+                            <li class="{{request()->is('public/committee/*') ? 'menu-active' : ''}}">
+                                   <a href={{URL::to('/public/committee/view')}}>Committee</a>
+                            </li>
+
                             @if(Session::has('userName'))
                             <li class="buy-tickets"><a onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();" href="{{ route('logout') }}">logout</a></li>

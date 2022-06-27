@@ -123,6 +123,10 @@ class CollectionController extends Controller
     {
         try {
             $requestData = $request->all();
+            if ($requestData['amount'] == 0) {
+                Session::flash('flashy__danger', __('Fund Transfer Failed! Invalid Balance!'));
+                return back();
+            }
 
             if ($requestData['transfer_from'] == $requestData['transfer_to']) {
                 Session::flash('flashy__danger', __('Fund Transfer Failed!'));
