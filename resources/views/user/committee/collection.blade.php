@@ -134,11 +134,7 @@
                                         <input type="hidden" name="manager_id" value="{{$committeeDetails->manager_id}}">
                                         <div class="form-group">
                                                 <label class="text-white" for="exampleInputEmail1">Recieved By</label>
-                                                @if($committeeDetails['manager_id'] == Auth::user()->id)
-                                                {!! Form::select('member_id', $comiittee_members, null, ['placeholder'=>__('Select Member') ,'id'=>'member_id', 'class'=>'form-control', 'style'=>'width: 100%', 'required']) !!}
-                                                @else
                                                 {!! Form::select('member_id', $comiittee_members, Auth::user()->id, ['placeholder'=>__('Select Member') ,'id'=>'member_id', 'class'=>'form-control', 'style'=>'width: 100%', 'disabled', 'required']) !!}
-                                                @endif
                                         </div>
 
                                         <div class="form-group">

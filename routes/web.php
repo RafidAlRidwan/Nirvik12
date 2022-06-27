@@ -69,6 +69,7 @@ Route::post('/user/collection/destroy', 'App\Http\Controllers\User\CommitteeCont
 Route::post('/user/expense/store', 'App\Http\Controllers\User\CommitteeController@expenseStore');
 Route::post('/user/image/upload', 'App\Http\Controllers\User\UserController@imageUpload');
 Route::get('/user/collection/getBalance/{userId?}/{committeeId?}', [App\Http\Controllers\User\CommitteeController::class, 'getBalanceData']);
+Route::post('/user/collection/transfer', 'App\Http\Controllers\User\CommitteeController@transfer');
 
 // USER SECTION END
 

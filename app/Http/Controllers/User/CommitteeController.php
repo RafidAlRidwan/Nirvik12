@@ -89,6 +89,38 @@ class CommitteeController extends Controller
         }
     }
 
+    public function transfer(Request $request)
+    {
+        try {
+            $requestData = $request->all();
+            if ($requestData['amount'] == 0) {
+                Session::flash('flashy__danger', __('Fund Transfer Failed! Invalid Balance!'));
+                return back();
+            }
+
+            if ($requestData['transfer_from'] == $requestData['transfer_to']) {
+                Session::flash('flashy__danger', __('Fund Transfer Failed!'));
+                return back();
+            }
+
+            $this->validate($request, [
+                'transfer_from' => ['required'],
+                'transfer_to' => ['required'],
+                'amount' => ['required'],
+            ]);
+            DB::beginTransaction();
+            FundTransfer::saveOrUpdate($request);
+            DB::commit();
+            Session::flash('flashy__success', __('Fund Transferred Successfully!'));
+            return back();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()
+                ->withErrors($e->getMessage())
+                ->withInput();
+        }
+    }
+
     public function datatable(Request $request)
     {
         $searchString = $request->search['value'];

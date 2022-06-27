@@ -118,7 +118,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content" style="border: none; background: black; background: linear-gradient( to right bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)); border-radius: 1rem; backdrop-filter: blur(5px);">
 
-                        {!! Form::open(['action' => ['App\Http\Controllers\Admin\CollectionController@transfer'], 'id' => 'from_fund', 'files' => true, 'class' => 'needs-validation']) !!}
+                        {!! Form::open(['action' => ['App\Http\Controllers\User\CommitteeController@transfer'], 'id' => 'from_fund', 'files' => true, 'class' => 'needs-validation']) !!}
                         <div class="modal-body">
                                 <div class="d-flex justify-content-between">
                                         <h5 class="modal-title" style="color:#fff; font-weight:700" id="exampleModalLongTitle">Fund Transfer</h5>
@@ -133,7 +133,7 @@
                                         <input type="hidden" name="available_balance" id="available_balance">
                                         <div class="form-group">
                                                 <label for="exampleInputEmail1" class="text-white">Transfer From <span class="badge badge-success" id="amount_output"></span></label>
-                                                {!! Form::select('transfer_from', $comiittee_members, null, ['placeholder'=>__('Select') ,'id'=>'transfer_from', 'class'=>'form-control', 'style'=>'width: 100%', 'required']) !!}
+                                                {!! Form::select('transfer_from', $comiittee_members, Auth::user()->id, ['placeholder'=>__('Select') ,'id'=>'transfer_from', 'class'=>'form-control', 'style'=>'width: 100%','disabled', 'required']) !!}
                                         </div>
 
                                         <div class="form-group">
@@ -150,7 +150,9 @@
                                                 <label for="exampleInputEmail1" class="text-white">Remarks</label>
                                                 <input type="text" name="remarks" class="form-control" id="remarks">
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Transfer</button>
+                                        <div class="d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-custom border-0 btn_submit">Transfer</button>
+                                        </div>
 
                                 </div>
                         </div>
