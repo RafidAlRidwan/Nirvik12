@@ -2,26 +2,61 @@
 
 @section('style')
 <style>
-  .anm
-  {
+  .anm {
     -webkit-animation-name: rotate;
-    -webkit-animation-duration:50s;
-    -webkit-animation-iteration-count:infinite;
-    -webkit-animation-timing-function:linear;
+    -webkit-animation-duration: 50s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
     -moz-animation-name: rotate;
-    -moz-animation-duration:50s;
-    -moz-animation-iteration-count:infinite;
-    -moz-animation-timing-function:linear;
+    -moz-animation-duration: 50s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
   }
 
   @-webkit-keyframes rotate {
-    from {-webkit-transform:rotate(0deg);}
-    to {  -webkit-transform:rotate(360deg);}
+    from {
+      -webkit-transform: rotate(0deg);
+    }
+
+    to {
+      -webkit-transform: rotate(360deg);
+    }
   }
 
   @-moz-keyframes rotate {
-    from {-moz-transform:rotate(0deg);}
-    to {  -moz-transform:rotate(360deg);}
+    from {
+      -moz-transform: rotate(0deg);
+    }
+
+    to {
+      -moz-transform: rotate(360deg);
+    }
+  }
+
+  .fb:hover {
+    transform: scale(1.2);
+  }
+
+  .google:hover {
+    transform: scale(1.2);
+  }
+
+  .form-box {
+    animation: fadeInDown 1s;
+  }
+
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+
+    100% {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
   }
 </style>
 @endsection
@@ -47,8 +82,15 @@ $banner = $cache->where('key', 'banner')->first();
     <div style="justify-content: center">
       <button type="submit" class="btn">Login</button>
     </div>
+    <div style="justify-content: center; display: flex;">
+      <a class="fb" href=""><img style="width: 40px; height: 40px" src="{{asset('/assets/user/loginPage/img/fb.png')}}"></a>
+      <a class="google" href=""><img style="width: 40px; height: 40px" src="{{asset('/assets/user/loginPage/img/google.png')}}"></a>
+    </div>
+
+
     {{ Form::close() }}
     <div style="text-align: center; color: #f82249; background-color: #none; display: block;"><span>{{ $errors->first('name') }} </span></div>
   </div>
+</div>
 </div>
 @endsection

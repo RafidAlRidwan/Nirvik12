@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +26,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        $cache = Cache::get('settings');
+        if (empty($cache)) {
+            Cache::rememberForever('settings', function () {
+                return DB::table('settings')->get();
+            });
+        }
     }
 }

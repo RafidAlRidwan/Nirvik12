@@ -1,8 +1,8 @@
 <head>
-@php
-$cache = Cache::get('settings');
-$app_name = $cache->where('key', 'app_name')->first();
-@endphp
+       @php
+       $cache = Cache::get('settings');
+       $app_name = $cache->where('key', 'app_name')->first();
+       @endphp
        <meta charset="utf-8">
        <title>{{$app_name->value}}</title>
        <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -43,7 +43,11 @@ $app_name = $cache->where('key', 'app_name')->first();
        <link rel="stylesheet" href="{{asset('assets/user/landingPage/css/preloader.css')}}">
 
        @yield('main-style')
-       
+       <style>
+              .media-icons {
+                     display: none;
+              }
+       </style>
        <!-- =======================================================
        Theme Name: TheEvent
        Theme URL: https://bootstrapmade.com/theevent-conference-event-bootstrap-template/
