@@ -29,8 +29,8 @@ Route::get('/public/committee/registration/{id}', [App\Http\Controllers\User\Lan
 Route::post('/public/registration/getdata/{id}', [App\Http\Controllers\User\LandingPageController::class, 'registrationDatatable']);
 
 // USER LOGIN
-Route::get('/user/login', [App\Http\Controllers\User\UserLoginController::class, 'login'])->name('user_login')->middleware('guest');
-Route::get('/user/forget/password', [App\Http\Controllers\User\UserLoginController::class, 'password_reset'])->middleware('guest');
+Route::get('/user/login', [App\Http\Controllers\User\UserloginController::class, 'login'])->name('user_login');
+Route::get('/user/forget/password', [App\Http\Controllers\User\UserloginController::class, 'password_reset']);
 
 // USER DASHBOARD
 Route::get('/user/dashboard', [App\Http\Controllers\User\UserController::class, 'index'])->name('user_dashboard');

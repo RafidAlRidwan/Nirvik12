@@ -29,8 +29,8 @@
                                    <a href={{URL::to('/events')}}>Events <span class="icon-button-badge">2</span></a></li>
                             </li>
 
-                            <li class="{{request()->is('album') ? 'menu-active' : ''
-                                   || request()->is('gallery/*') ? 'menu-active' : ''}}
+                            <li class="{{(request()->is('album') ? 'menu-active' : '')
+                                   || (request()->is('gallery/*') ? 'menu-active' : '')}}
                             "><a href={{URL::to('/album')}}>Gallary</a></li>
 
                             <li class="{{request()->is('public/committee/*') ? 'menu-active' : ''}}">

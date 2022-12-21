@@ -3,6 +3,11 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\UserSeeder;
+use Database\Seeders\AboutSeeder;
+use Database\Seeders\ShiftSeeder;
+use Database\Seeders\SectionSeeder;
+use Database\Seeders\SettingsSeeder;
 
 
 class DatabaseSeeder extends Seeder
@@ -15,9 +20,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            UsersSeeder::class,
+            UserSeeder::class,
             SettingsSeeder::class,
             AboutSeeder::class,
+            ShiftSeeder::class,
+            SectionSeeder::class,
         ]);
     }
 }

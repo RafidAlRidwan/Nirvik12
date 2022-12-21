@@ -13,6 +13,7 @@
     -moz-animation-timing-function: linear;
   }
 
+
   @-webkit-keyframes rotate {
     from {
       -webkit-transform: rotate(0deg);
@@ -37,6 +38,7 @@
     transform: scale(1.2);
   }
 
+
   .google:hover {
     transform: scale(1.2);
   }
@@ -58,6 +60,37 @@
       transform: none;
     }
   }
+
+  .logo:hover {
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  @keyframes shake {
+
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
 </style>
 @endsection
 
@@ -71,7 +104,7 @@ $banner = $cache->where('key', 'banner')->first();
     {{Form::open(array('url' => 'login' , 'class' => 'box', 'method' => 'POST'))}}
     <img class="anm" src="{{asset('assets/user/loginPage/img/bzs.png')}}">
     <!-- <h3 class="title">নির্ভীক '১২</h3> -->
-    <a href={{route('landingPage')}}><img src="{{asset($banner->value)}}" alt="নির্ভীক'১২"></a>
+    <a href={{route('landingPage')}}><img class="logo" src="{{asset($banner->value)}}" alt="নির্ভীক'১২"></a>
 
     <input type="text" name="name" placeholder="Username" autocomplete="off" class="input" required="">
 

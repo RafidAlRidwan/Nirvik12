@@ -29,7 +29,7 @@
         <!-- small box -->
         <div class="small-box bg-info">
           <div class="inner">
-            <h3>{{count($a)}}</h3>
+            <h3>2</h3>
 
             <p>Section A</p>
           </div>
@@ -44,7 +44,7 @@
         <!-- small box -->
         <div class="small-box bg-success">
           <div class="inner">
-            <h3>{{count($b)}}</h3>
+            <h3>3</h3>
 
             <p>Section B</p>
           </div>
@@ -59,7 +59,7 @@
         <!-- small box -->
         <div class="small-box bg-warning">
           <div class="inner">
-            <h3>{{count($c)}}</h3>
+            <h3>4</h3>
 
             <p>Section C</p>
           </div>
@@ -74,7 +74,7 @@
         <!-- small box -->
         <div class="small-box bg-danger">
           <div class="inner">
-            <h3>{{count($d)}}</h3>
+            <h3>5</h3>
 
             <p>Section D</p>
           </div>

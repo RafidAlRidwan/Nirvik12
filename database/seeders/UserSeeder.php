@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\UserDetail;
 
 class UserSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create(
+        $superadmin = User::create(
             [
                 'name' => 'superadmin',
                 'email' => 'superadmin@gmail.com',
@@ -22,17 +23,29 @@ class UserSeeder extends Seeder
                 'type' => 1,
             ]
         );
-        User::create([
+        if ($superadmin) {
+            UserDetail::create([
+                'user_id' => $superadmin->id,
+                'full_name' => 'Super Admin',
+                'email' => $superadmin->email,
+                'section' => 1,
+                'shift' => 1,
+            ]);
+        }
+        $admin = User::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('1234'),
             'type' => 2,
         ]);
-        User::create([
-            'name' => 'a1',
-            'email' => 'a1@gmail.com',
-            'password' => bcrypt('1234'),
-            'type' => 3,
-        ]);
+        if ($admin) {
+            UserDetail::create([
+                'user_id' => $admin->id,
+                'full_name' => 'Super Admin',
+                'email' => $admin->email,
+                'section' => 1,
+                'shift' => 1,
+            ]);
+        }
     }
 }
