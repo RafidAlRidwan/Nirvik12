@@ -40,7 +40,8 @@
        .custom-section {
               width: 100%;
               height: auto;
-              background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/nirvik12/assets/user/landingPage/img/map.jpg) center;
+              background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/assets/user/landingPage/img/map.jpg) center;
+              /* background: #e6fbf6; */
               background-size: cover;
               overflow: hidden;
               position: relative;
@@ -74,11 +75,11 @@
               <div class="backdrop-gradient"></div>
               <div class="container">
                      <div class="breadcrumb-wrap"></div>
-                     <h2 style="color: #fff;" class="page-title">Events & Program Committees</h1>
+                     <h2 style="font-weight: bold;" class="page-title">#Events & Program Committees</h1>
                             <div class="content">
-                                   <p style="color: #fff;" class="lead">Recent Events Committee List</p>
+                                   <p style="font-weight: bold;" class="lead">Recent Events Committee List</p>
                                    <p>
-                                          <a class="btn btn-info" href="#">View All</a>
+                                          <!-- <a class="btn btn-info" href="#">View All</a> -->
                                    </p>
                             </div>
               </div>
@@ -88,10 +89,10 @@
 <!--==========================Schedule Section============================-->
 <section id="schedule" class="section-with-bg">
        <div class="container wow fadeInUp">
-              <div class="section-header">
+              <!-- <div class="section-header">
                      <h2>Event & Program Committee</h2>
                      <p>Here is our event committee</p>
-              </div>
+              </div> -->
 
               <div class="row">
 

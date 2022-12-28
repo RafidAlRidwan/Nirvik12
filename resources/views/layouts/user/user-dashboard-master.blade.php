@@ -71,22 +71,19 @@ $banner = $cache->where('key', 'banner')->first();
 </head>
 
 <body>
+    @include('layouts.user.landing-page.header')
 
-    <!--==========================Header============================-->
-    <header id="header" class="header-fixed">
+    ==========================Header============================
+    <!-- <header id="header" class="header-fixed">
         <div class="container">
 
             <div id="logo" class="pull-left">
-                <a href="#intro" class="scrollto"><img src="{{asset($banner->value)}}" alt="" title=""></a>
+                <a href="#intro" class="scrollto"><img src="" alt="" title=""></a>
             </div>
 
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
-                    @php
-                    $url = URL::to('/user/my-profile/show'.'/'.Auth::user()->id);
-                    $id = Auth::user()->id;
-                    $path = Request::path();
-                    @endphp
+                    
                     <li class="{{request()->is('user/dashboard') ? 'menu-active' : ''}}">
                         <a href="{{URL::to('user/dashboard')}}">Dashboard</a>
                     </li>
@@ -95,8 +92,13 @@ $banner = $cache->where('key', 'banner')->first();
                         <a href="{{URL::to('user/committee/')}}" class="">Committee</a>
                     </li>
 
+                    <li class="{{request()->is('blog') ? 'menu-active' : ''}} ||
+                    {{request()->is('blog/*') ? 'menu-active' : ''}}">
+                        <a href="{{route('blog')}}" class="">Blogs</a>
+                    </li>
+
                     <li class="{{request()->is('user/my-profile/*') ? 'menu-active' : ''}}">
-                        <a href="{{$url}}" class="">My Profile</a>
+                        <a href="" class="">My Profile</a>
                     </li>
 
                     <li class="buy-tickets"><a onclick="event.preventDefault();
@@ -107,7 +109,7 @@ $banner = $cache->where('key', 'banner')->first();
                 </ul>
             </nav>
         </div>
-    </header>
+    </header> -->
 
     <main id="main" class="main-page">
 

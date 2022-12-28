@@ -22,7 +22,6 @@ class SettingsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('checkAdmin');
     }
     public function index()
     {
@@ -61,5 +60,4 @@ class SettingsController extends Controller
                 ->withInput($request->all);
         }
     }
-
 }

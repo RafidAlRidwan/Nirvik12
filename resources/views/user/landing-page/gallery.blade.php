@@ -73,10 +73,10 @@
        <!--==========================Schedule Section============================-->
        <section id="schedule" class="section-with-bg">
               <div class="container wow fadeInUp">
-                     <div class="section-header">
+                     <!-- <div class="section-header">
                      <h2>Photo Gallery</h2>
-                     <!-- <p>Here is our event schedule</p> -->
-                     </div>
+                     <p>Here is our event schedule</p>
+                     </div> -->
                      <div id="basicExample">
                             @isset($gallery)
                                    @foreach ($gallery as $item)

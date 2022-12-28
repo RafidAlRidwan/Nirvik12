@@ -21,7 +21,6 @@ class AlbumController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('checkAdmin');
     }
     public function index()
     {

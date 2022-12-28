@@ -31,7 +31,7 @@
        .custom-section {
        width: 100%;
        height: auto;
-       background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/nirvik12/assets/user/landingPage/img/map.jpg) center;
+       background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/assets/user/landingPage/img/map.jpg) center;
        background-size: cover;
        overflow: hidden;
        position: relative;
@@ -108,11 +108,11 @@
               <div class="backdrop-gradient"></div>
               <div class="container">
                      <div class="breadcrumb-wrap"></div>
-                            <h1 style="color: #fff;" class="page-title">Album</h1>
+                            <h1 style="font-weight: bold;" class="page-title">#Album</h1>
                             <div class="content">
-                            <p style="color: #fff;" class="lead">Recent Photos</p>
+                            <p style="font-weight: bold;" class="lead">Recent Photos</p>
                                    <p>
-                                          <a class="btn btn-primary" href="#">View All</a>
+                                          <!-- <a class="btn btn-primary" href="#">View All</a> -->
                                    </p>
                             </div>
               </div>
@@ -121,9 +121,9 @@
 
        <!--==========================Album Section============================-->
        <section id="albums" class="wow fadeInUp">
-                     <div class="section-header">
+                     <!-- <div class="section-header">
                             <h2>Album</h2>
-                     </div>
+                     </div> -->
                      @php
                             $albumDetails = App\Models\Album::all();
                      @endphp
