@@ -65,7 +65,7 @@
     }
 
     .w-100 {
-        width: 80% !important;
+        width: 50% !important;
     }
 
     .message-count {
@@ -117,6 +117,8 @@
                                 <span>{{$blog->date}}</span>
                                 <span class="px-2">·</span>
                                 <a href="#" class="text-muted">{{$blog->comment ? $blog->comment->count() : 0}} Comments</a>
+                                <span class="px-2">·</span>
+                                <a href="#" class="text-muted">{{$blog->read_count}} Views</a>
                             </small>
                         </div>
                         <div class="card-body border-top" style="text-align: justify">
@@ -267,7 +269,7 @@
             e.preventDefault();
             var commentBody = $('#comment_body').val();
             var blog_id = "{{$blog->id}}";
-            var user_id = "{{Auth::user()->id}}";
+            var user_id = "{{Auth::user() ? Auth::user()->id : 0}}";
             var comment = $.trim($("#comment_body").val());
             if (comment == "") {
                 alert("Please Comment first!");
@@ -300,7 +302,7 @@
         e.preventDefault();
         var parent_id = $(this).attr('data-id');
         var blog_id = "{{$blog->id}}";
-        var user_id = "{{Auth::user()->id}}";
+        var user_id = "{{Auth::user() ? Auth::user()->id : 0}}";
         var replyBody = $.trim($('#reply_body' + parent_id).val());
         if (replyBody == "") {
             alert("Please Comment");

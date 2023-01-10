@@ -25,14 +25,16 @@ Route::get('/events', [App\Http\Controllers\User\LandingPageController::class, '
 Route::get('/news', [App\Http\Controllers\User\LandingPageController::class, 'news'])->name('newsPage');
 Route::get('/album', [App\Http\Controllers\User\LandingPageController::class, 'album'])->name('albumPage');
 Route::get('/blog', [App\Http\Controllers\User\BlogPageController::class, 'index'])->name('blog');
+Route::get('/blog/create', [App\Http\Controllers\User\BlogPageController::class, 'create'])->name('blogCreate');
 Route::get('/blog/{blog}', [App\Http\Controllers\User\BlogPageController::class, 'show'])->name('blog.show');
-Route::get('/blog/create', [App\Http\Controllers\User\BlogPageController::class, 'create'])->name('blog.create');
+Route::get('/blogs-filter', [App\Http\Controllers\User\BlogPageController::class, 'blogsFilter'])->name('blog.filter');
 Route::get('/public/committee/view', [App\Http\Controllers\User\LandingPageController::class, 'committee'])->name('committeePage');
 Route::get('/gallery/{id}', [App\Http\Controllers\User\LandingPageController::class, 'gallery'])->name('galleryPage');
 Route::post('/public/committee/getdata', [App\Http\Controllers\User\LandingPageController::class, 'datatable']);
 Route::get('/public/committee/details/{id}', [App\Http\Controllers\User\LandingPageController::class, 'show']);
 Route::get('/public/committee/registration/{id}', [App\Http\Controllers\User\LandingPageController::class, 'registration']);
 Route::post('/public/registration/getdata/{id}', [App\Http\Controllers\User\LandingPageController::class, 'registrationDatatable']);
+Route::post('/blog/read/count', [App\Http\Controllers\User\BlogPageController::class, 'countRead'])->name('blog.read.count');
 
 // USER LOGIN
 Route::middleware([IsAuthUser::class])->group(function () {
@@ -65,7 +67,7 @@ Route::middleware([IsUser::class])->group(function () {
             'uses' => 'App\Http\Controllers\User\UserController@update_password'
         ]
     );
-    Route::get('/user/my-profile/show/{id}', [App\Http\Controllers\User\UserController::class, 'show']);
+    Route::get('/user/my-profile/show/{id}', [App\Http\Controllers\User\UserController::class, 'show'])->name('myProfile');
     Route::get('/user/committee', [App\Http\Controllers\User\CommitteeController::class, 'index']);
     Route::post('/user/committee/getdata', [App\Http\Controllers\User\CommitteeController::class, 'datatable']);
     Route::get('/user/committee/memberView/{id}', [App\Http\Controllers\User\CommitteeController::class, 'memberShow']);

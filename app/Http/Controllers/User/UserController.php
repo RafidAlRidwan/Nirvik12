@@ -212,7 +212,7 @@ class UserController extends Controller
             User::saveOrUpdate($request, $id);
             DB::commit();
             Session::flash('flashy__success', __('Updated Successfully!'));
-            return back();
+            return redirect()->route('myProfile', Auth::user()->id);
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()
@@ -243,7 +243,7 @@ class UserController extends Controller
                 $user->update($requestData);
                 DB::commit();
                 Session::flash('flashy__success', __('Password Updated Successfully!'));
-                return back();
+                return redirect()->route('myProfile', Auth::user()->id);
             }
         }
     }

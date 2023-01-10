@@ -16,8 +16,8 @@ class BlogPageController extends Controller
 {
     public function index()
     {
-        $blog = Blog::orderBy('created_at', 'DESC')->latest()->limit(2)->get();
-        return view('user/blog.index', compact('blog'));
+        $top2Blogs = Blog::orderBy('created_at', 'DESC')->latest()->limit(2)->get();
+        return view('user/blog.index', compact('top2Blogs'));
     }
     public function create()
     {
@@ -48,7 +48,7 @@ class BlogPageController extends Controller
     public function show(Blog $blog)
     {
         $blog['date'] = date('d F Y', strtotime($blog->created_at));
-        return view('user/blog.show', compact('blog'));
+        return view('user.blog.show', compact('blog'));
     }
     public static function save($request)
     {
@@ -84,5 +84,21 @@ class BlogPageController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
         return view('user.blog.comments', compact('comments'))->render();
+    }
+    public function countRead(Request $request)
+    {
+        $blog = Blog::find($request->blog);
+        $count = $blog->read_count + 1;
+        $blog->read_count = $count;
+        $blog->save();
+    }
+    public function blogsFilter(Request $request)
+    {
+        $perPage = 3;
+        $pageNo = $request->page;
+        $total = $perPage * $pageNo + 3;
+
+        $blogs = Blog::take($total)->orderBy('created_at', 'DESC')->get();
+        return view('user.blog.blogs', compact('blogs', 'pageNo'))->render();
     }
 }

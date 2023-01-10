@@ -17,6 +17,13 @@
   .card {
     width: 700px;
   }
+
+  .inputBox input {
+    background: #fff;
+    color: #000;
+    border: 2px solid #eee;
+  }
+
 </style>
 @endsection
 

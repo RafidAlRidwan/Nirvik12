@@ -51,10 +51,11 @@ $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
             @if((Auth::user()->id) == $value->user_id)
             <a href={{$url}} data-toggle="tooltip" data-placement="top" title="Edit Profile"><i class="fa fa-pen-square"></i></a>
             <a href={{$urlPassword}} data-toggle="tooltip" data-placement="top" title="Change Password"><i class="fa fa-key"></i></a>
+            <a href="" data-toggle="tooltip" data-placement="top" title="Sync Facebook for Social Login"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            <a href="" data-toggle="tooltip" data-placement="top" title="Sync Google for Social Login"><i class="fa fa-google" aria-hidden="true"></i></a>
             @endif
-            <a href="" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a>
-            <a href="" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram"></i></a>
-            <a href="" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a>
+            <!-- <a href="" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a> -->
+            <!-- <a href="" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram"></i></a> -->
 
           </div>
         </div>

@@ -47,8 +47,9 @@
                                    <a href="{{URL::to('user/dashboard')}}">Class Mates</a>
                             </li>
                             <li class="{{request()->is('user/my-profile/*') ? 'menu-active' : ''}}">
-                                   <a href="{{route('profile.edit', auth()->user()->id)}}" class="">My Profile</a>
+                                   <a href="{{route('myProfile', auth()->user()->id)}}" class="">My Profile</a>
                             </li>
+
                             @endif
                             @if(auth()->user() && (auth()->user()->type === 1 || auth()->user()->type === 2))
                             <li>
