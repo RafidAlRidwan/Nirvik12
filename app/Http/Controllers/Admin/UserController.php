@@ -13,6 +13,7 @@ use App\Models\MobileNumberDetail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -118,6 +119,30 @@ class UserController extends Controller
         echo json_encode($data);
         die();
     }
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:10', 'unique:users,name'],
+            'password' => ['required', 'min:4']
+        ]);
+        $this->saveData($request);
+        Session::flash('flashy__success', __('Saved Successfully!'));
+
+        // Redirect to edit mode.
+        return Redirect::back();
+    }
+    public static function saveData($request)
+    {
+        $requestData = $request->all();
+        $requestData['password'] = Hash::make($requestData['password']);
+        $requestData['email'] = $request->name . '@gmail.com';
+        $user = User::create($requestData);
+        UserDetail::create([
+            'user_id' => $user->id,
+            'full_name' => $request->name,
+            'email' => $request->name . '@gmail.com',
+        ]);
+    }
 
     public function edit($id)
     {
@@ -137,10 +162,8 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         try {
-
             $this->validate($request, [
                 'name' => 'required',
-
             ]);
             User::saveOrUpdate($request, $id);
             DB::commit();

@@ -26,6 +26,7 @@ Route::get('/news', [App\Http\Controllers\User\LandingPageController::class, 'ne
 Route::get('/album', [App\Http\Controllers\User\LandingPageController::class, 'album'])->name('albumPage');
 Route::get('/blog', [App\Http\Controllers\User\BlogPageController::class, 'index'])->name('blog');
 Route::get('/blog/create', [App\Http\Controllers\User\BlogPageController::class, 'create'])->name('blogCreate');
+Route::get('/blog/edit/{blog}', [App\Http\Controllers\User\BlogPageController::class, 'edit'])->name('blogEdit');
 Route::get('/blog/{blog}', [App\Http\Controllers\User\BlogPageController::class, 'show'])->name('blog.show');
 Route::get('/blogs-filter', [App\Http\Controllers\User\BlogPageController::class, 'blogsFilter'])->name('blog.filter');
 Route::get('/public/committee/view', [App\Http\Controllers\User\LandingPageController::class, 'committee'])->name('committeePage');
@@ -46,10 +47,13 @@ Route::get('/user/dashboard', [App\Http\Controllers\User\UserController::class, 
 // USER DASHBOARD
 Route::middleware([IsUser::class])->group(function () {
     Route::post('/blog/store', [App\Http\Controllers\User\BlogPageController::class, 'store'])->name('blog.store');
+    Route::post('/blog/like', [App\Http\Controllers\User\BlogPageController::class, 'liked'])->name('blog.like');
     Route::post('/comment/store', [App\Http\Controllers\User\BlogPageController::class, 'storeComment'])->name('comment.store');
+    Route::post('/comment/edit', [App\Http\Controllers\User\BlogPageController::class, 'editComment'])->name('comment.edit');
+    Route::post('/comment/update', [App\Http\Controllers\User\BlogPageController::class, 'updateComment'])->name('comment.update');
     Route::get('/user/my-profile', [App\Http\Controllers\User\UserController::class, 'view_my_profile'])->name('user_my_profile');
     Route::get('/user/create', [App\Http\Controllers\User\UserController::class, 'create']);
-    Route::post('/user/store', 'App\Http\Controllers\User\UserController@store');
+    Route::post('/user/store', [App\Http\Controllers\User\UserController::class, 'store']);
     Route::post('/user/getdt', [App\Http\Controllers\User\UserController::class, 'contact_datatable']);
     Route::get('/user/my-profile/edit/{id}', [App\Http\Controllers\User\UserController::class, 'edit'])->name('profile.edit');
     Route::get('/user/my-profile/edit-password/{id}', [App\Http\Controllers\User\UserController::class, 'edit_password']);
@@ -106,6 +110,7 @@ Route::middleware([CheckAdmin::class])->group(function () {
     // USER MANAGEMENT
     Route::get('/admin/user_management', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin_user_index');
     Route::post('/admin/getdata', [App\Http\Controllers\Admin\UserController::class, 'user_datatable']);
+    Route::post('/admin/user/store', [App\Http\Controllers\Admin\UserController::class, 'store']);
     Route::get('/admin/user/edit/{id}', [App\Http\Controllers\Admin\UserController::class, 'edit']);
     Route::get('/admin/user/show/{id}', [App\Http\Controllers\Admin\UserController::class, 'show']);
     Route::post('/admin/user/delete', [App\Http\Controllers\Admin\UserController::class, 'destroy']);

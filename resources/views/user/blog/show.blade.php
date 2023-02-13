@@ -11,45 +11,6 @@
         background-color: #fff;
         border-top: 1px solid #fff;
     }
-</style>
-<style>
-    .page-header .container {
-        padding-top: 36px;
-        padding-bottom: 36px;
-        position: relative;
-        animation: pop-in 2.5s ease-out;
-    }
-
-    .container {
-        max-width: 1140px;
-        padding-right: 30px;
-        padding-left: 30px;
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    .custom-section {
-        width: 100%;
-        height: auto;
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/assets/user/landingPage/img/map.jpg) center;
-        background-size: cover;
-        overflow: hidden;
-        position: relative;
-    }
-
-    @media (min-width: 768px) {
-        .page-header .container {
-            padding-top: 100px;
-            /* padding-bottom: 48px; */
-        }
-    }
-
-    @media (max-width: 768px) {
-        .page-header .container {
-            padding-top: 100px;
-            /* padding-bottom: 48px; */
-        }
-    }
 
     .thumb-sm {
         width: 55px;
@@ -78,11 +39,24 @@
         width: 26px;
         left: -15px;
     }
+
+    .btn-info {
+        color: #fff;
+        background-color: #f82249;
+        border-color: #f82249;
+    }
+
+    .btn-info:hover {
+        color: #fff;
+        background-color: #282f4e;
+        border-color: #282f4e;
+    }
 </style>
 @endsection
 
 @section('main-content')
 <!--==========================Custom Section============================-->
+
 <section>
     <div class="page-header custom-section">
         <div class="backdrop-gradient"></div>
@@ -91,9 +65,11 @@
             <h2 style="font-weight: bold;" class="page-title">#Blogs Details</h1>
                 <div class="content">
                     <p style="font-weight: bold;" class="lead">Recent Blog List</p>
+                    @if(Auth::user() && Auth::user()->id == $blog->posted_by)
                     <p>
-                        <!-- <a class="btn btn-info" href="#">View All</a> -->
+                        <a href="{{route('blogEdit', $blog->id)}}" style="background-color: #ff4d6d; border: 1px solid #ff4d6d;" class="blog-create -btn btn-info btn-sm">Edit Blog</a>
                     </p>
+                    @endif
                 </div>
         </div>
     </div>
@@ -112,13 +88,16 @@
                                 <!-- <a href="#" class="badge badge-primary">#Salupt</a> -->
                             </div>
                             <small class="small text-muted">
-                                <a href="#" class="text-muted">BY {{$blog->userDetails ? $blog->userDetails->full_name : 'Guest'}}</a>
-                                <span class="px-2">·</span>
-                                <span>{{$blog->date}}</span>
+                                <span>{{$blog->likeCount()}} Likes</span>
                                 <span class="px-2">·</span>
                                 <a href="#" class="text-muted">{{$blog->comment ? $blog->comment->count() : 0}} Comments</a>
                                 <span class="px-2">·</span>
                                 <a href="#" class="text-muted">{{$blog->read_count}} Views</a>
+                                <span class="px-2">·</span>
+                                <span>{{$blog->date}}</span>
+                            </small>
+                            <small>
+                                <br><a href="#" class="text-muted">BY {{$blog->userDetails ? $blog->userDetails->full_name : 'Guest'}}</a>
                             </small>
                         </div>
                         <div class="card-body border-top" style="text-align: justify">
@@ -134,12 +113,15 @@
                                 <div class="media mt-5">
                                     <img src="{{asset($item->userDetails->attachment ?? '/assets/blog/imgs/ava.png')}}" class="mr-3 thumb-sm rounded-circle" alt="...">
                                     <div class="media-body">
-                                        <h6 class="mt-0">{{$item->userDetails->full_name}}</h6>
-                                        <p class="mb-3">{{$item->comment}}</p>
+                                        <h6 class="mt-0">{{$blog->userDetails ? $blog->userDetails->full_name : 'Guest'}}</h6>
+                                        <p class="mb-3" id="comment{{$item->id}}">{{$item->comment}}</p>
                                         <textarea cols="20" id="reply_body{{$item->id}}" rows="2" class="form-control mb-2 d-none " placeholder="Enter Your Reply Here"></textarea>
                                         <!-- <span class="badge badge-primary message-count">12</span>
                                         <a href="#" id="btn_like{{$item->id}}" class="text-dark small font-weight-bold btn_like" data-id="{{$item->id}}"><i class="ti-back-right"></i> <button class="btn btn-outline-dark btn-sm"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button></a> -->
-                                        <a href="#" id="btn_reply{{$item->id}}" class="text-dark small font-weight-bold btn_reply" data-id="{{$item->id}}"><i class="ti-back-right"></i> <button class="btn btn-outline-dark btn-sm"><i class="fa fa-reply" aria-hidden="true"></i> Reply</button></a>
+                                        @if(auth()->user() && auth()->user()->id == $userId)
+                                        <a href="#" id="btn_edit{{$item->id}}" class="text-dark small font-weight-bold btn_edit" data-id="{{$item->id}}"><i class="ti-back-right"></i> <button class="btn btn-outline-dark btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i></button></a>
+                                        @endif
+                                        <a href="#" id="btn_reply{{$item->id}}" class="text-dark small font-weight-bold btn_reply" data-id="{{$item->id}}"><i class="ti-back-right"></i> <button class="btn btn-outline-dark btn-sm"><i class="fa fa-reply" aria-hidden="true"></i></button></a>
                                         <a href="#" id="reply_submit{{$item->id}}" class="text-dark small font-weight-bold btn_reply_submit d-none" data-id="{{$item->id}}"><i class="ti-back-right"></i> <button class="btn btn-outline-dark btn-sm"><i class="fa fa-paper-plane" aria-hidden="true"></i></button></a>
                                         <a href="#" id="reply_close{{$item->id}}" class="text-dark small font-weight-bold btn_reply_close d-none" data-id="{{$item->id}}"><i class="ti-back-right"></i> <button class="btn btn-outline-dark btn-sm"><i class="fa fa-window-close" aria-hidden="true"></i></button></a>
                                         @foreach ($item->children as $child)
@@ -148,9 +130,11 @@
                                                 <img src="{{asset($child->userDetails->attachment ?? '/assets/blog/imgs/ava.png')}}" class="thumb-sm rounded-circle" alt="...">
                                             </a>
                                             <div class="media-body align-items-center">
-                                                <h6 class="mt-0">{{$child->userDetails->full_name}}</h6>
-                                                <p class="mb-3">{{$child->comment}}</p>
-                                                <!-- <a href="#" class="text-dark small font-weight-bold"><i class="ti-back-right"></i> Replay</a> -->
+                                                <h6 class="mt-0">{{$child->userDetails ? $child->userDetails->full_name : 'Guest'}}</h6>
+                                                <p class="mb-3" id="comment{{$child->id}}"> {{$child->comment}}</p>
+                                                @if(auth()->user() && auth()->user()->id == $userId)
+                                                <a href="#" id="btn_edit{{$child->id}}" class="text-dark small font-weight-bold btn_edit" data-id="{{$child->id}}"><i class="ti-back-right"></i> <button class="btn btn-outline-dark btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i></button></a>
+                                                @endif
                                             </div>
                                         </div>
                                         @endforeach
@@ -176,74 +160,42 @@
                     <h6 class="mt-5 text-center">Related Posts</h6>
                     <hr>
                     <div class="row">
+                        @forelse($match_blogs as $item)
+                        @php
+                        $date = date('d F Y', strtotime($item->created_at));
+                        $singleTag = $item->tags->first();
+                        @endphp
                         <div class="col-md-6 col-lg-4">
                             <div class="card mb-5">
                                 <div class="card-header p-0">
                                     <div class="blog-media">
-                                        <img src="{{asset('assets/blog/imgs/blog-2.jpg')}}" alt="" class="w-100">
-                                        <a href="#" class="badge badge-primary">#Placeat</a>
+                                        <img src="{{asset($item->attachment)}}" alt="" class="w-100">
+                                        <a href="{{route('blog.show', $item->id)}}" class="badge badge-primary readCount" data-id="{{$item->id}}">{{$singleTag->slugs}}</a>
                                     </div>
                                 </div>
                                 <div class="card-body px-0">
-                                    <h6 class="card-title mb-2"><a href="#" class="text-dark">Voluptates Corporis Placeat</a></h6>
-                                    <small class="small text-muted">January 20 2019
+                                    <h6 class="card-title mb-2"><a href="{{route('blog.show', $item->id)}}" class="text-dark readCount" data-id="{{$item->id}}">{{$item->title}}</a></h6>
+                                    <small class="small text-muted">{{$date}}
                                         <span class="px-2">-</span>
-                                        <a href="#" class="text-muted">34 Comments</a>
+                                        <a href="#" class="text-muted">{{$item->comment ? $item->comment->count() : 0}} Comments</a>
                                     </small>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card mb-5">
-                                <div class="card-header p-0">
-                                    <div class="blog-media">
-                                        <img src="{{asset('assets/blog/imgs/blog-3.jpg')}}" alt="" class="w-100">
-                                        <a href="#" class="badge badge-primary">#dolores</a>
-                                    </div>
-                                </div>
-                                <div class="card-body px-0">
-                                    <h6 class="card-title mb-2"><a herf="#" class="text-dark">Dolorum Dolores Itaque</a></h6>
-                                    <small class="small text-muted">January 19 2019
-                                        <span class="px-2">-</span>
-                                        <a href="#" class="text-muted">64 Comments</a>
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4 d-none d-lg-block">
-                            <div class="card mb-5">
-                                <div class="card-header p-0">
-                                    <div class="blog-media">
-                                        <img src="{{asset('assets/blog/imgs/blog-4.jpg')}}" alt="" class="w-100">
-                                        <a href="#" class="badge badge-primary">#amet</a>
-                                    </div>
-                                </div>
-                                <div class="card-body px-0">
-                                    <h6 class="card-title mb-2">Quisquam Dignissimos</h6>
-                                    <small class="small text-muted">January 17 2019
-                                        <span class="px-2">-</span>
-                                        <a href="#" class="text-muted">93 Comments</a>
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
+                        @empty
+                        <p>No Related Blogs</p>
+                        @endforelse
                     </div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-3 pb-4">
                 <div class="page-sidebar">
                     <h6 class=" ">Tags</h6>
-                    <a href="javascript:void(0)" class="badge badge-primary m-1">#iusto</a>
-                    <a href="javascript:void(0)" class="badge badge-primary m-1">#quibusdam</a>
-                    <a href="javascript:void(0)" class="badge badge-primary m-1">#officia</a>
-                    <a href="javascript:void(0)" class="badge badge-primary m-1">#animi</a>
-                    <a href="javascript:void(0)" class="badge badge-primary m-1">#mollitia</a>
-                    <a href="javascript:void(0)" class="badge badge-primary m-1">#quod</a>
-                    <a href="javascript:void(0)" class="badge badge-primary m-1">#ipsa at</a>
-                    <a href="javascript:void(0)" class="badge badge-primary m-1">#dolor</a>
-                    <a href="javascript:void(0)" class="badge badge-primary m-1">#incidunt</a>
-                    <a href="javascript:void(0)" class="badge badge-primary m-1">#possimus</a>
-
+                    @forelse($blog->tags as $tag)
+                    <a href="javascript:void(0)" class="badge badge-primary m-1">{{$tag->slugs}}</a>
+                    @empty
+                    <p>#empty_tags</p>
+                    @endforelse
                     <!-- <div class="ad-card d-flex text-center align-items-center justify-content-center mt-4">
                     <span href="#" class="font-weight-bold">ADS</span>
                 </div> -->
@@ -253,6 +205,30 @@
 
         <!-- Sidebar -->
 
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="commentEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Comment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" name="comment_id" id="comment_id">
+                        <textarea cols="20" id="comment" rows="2" class="form-control mb-2 comment"></textarea>
+                        <small id="emailHelp" class="form-text text-danger">*if comment box is empty, we will consider as delete comment</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-sm update">Update</button>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 @endsection
@@ -270,9 +246,15 @@
             var commentBody = $('#comment_body').val();
             var blog_id = "{{$blog->id}}";
             var user_id = "{{Auth::user() ? Auth::user()->id : 0}}";
+            if (user_id == 0) {
+                toastr.warning("Please login first!");
+                $('#comment_body').val("");
+                return;
+            }
             var comment = $.trim($("#comment_body").val());
             if (comment == "") {
-                alert("Please Comment first!");
+                toastr.warning("Please Comment first!");
+                $('#comment_body').val("");
                 return;
             }
             $.post("{{route('comment.store')}}", {
@@ -288,9 +270,59 @@
 
         });
     });
+    $(document).on("click", ".btn_edit", function(e) {
+        e.preventDefault();
+        $('#commentEditModal').modal('show');
+        var commentId = $(this).attr('data-id');
+        $('#comment_id').val(commentId);
+        $.post("{{route('comment.edit')}}", {
+            "_token": "{{ csrf_token() }}",
+            comment_id: commentId,
+        }, function(data) {
+            $('#comment').val("");
+            $('#comment').val(data.comment);
+        });
+    });
+    $(document).on("click", ".update", function(e) {
+        e.preventDefault();
+        var comment_body = $('.comment').val();
+        var commentId = $('#comment_id').val();
+        $.post("{{route('comment.update')}}", {
+            "_token": "{{ csrf_token() }}",
+            comment_id: commentId,
+            comment_body: comment_body,
+        }, function(data) {
+            if (data.status == 0) {
+                $('#commentEditModal').modal('hide');
+                return;
+            }
+            if (data.status == 1) {
+                $('#comment' + commentId).text(data.comment);
+                $('#commentEditModal').modal('hide');
+                toastr.success("Your Comment updated");
+                return;
+            }
+            if (data.status == 2) {
+                $('#comment' + commentId).text(data.comment);
+                $('#commentEditModal').modal('hide');
+                toastr.success("Your Reply updated");
+                return;
+            }
+
+            $('#commentEditModal').modal('hide');
+            $('#comment_body').val("");
+            $('#content_expand').html('');
+            $('#content_expand').html(data);
+            toastr.success("Your Comment deleted");
+        });
+    });
+    $("#commentEditModal").on("hidden.bs.modal", function() {
+        $(".modal-body input").val("");
+    });
     $(document).on("click", ".btn_reply", function(e) {
         e.preventDefault();
         var parent_id = $(this).attr('data-id');
+        $('#btn_edit' + parent_id).addClass('d-none');
         $('#reply_body' + parent_id).removeClass('d-none');
         $(this).addClass('d-none');
         $('#reply_submit' + parent_id).removeClass('d-none');
@@ -305,7 +337,8 @@
         var user_id = "{{Auth::user() ? Auth::user()->id : 0}}";
         var replyBody = $.trim($('#reply_body' + parent_id).val());
         if (replyBody == "") {
-            alert("Please Comment");
+            toastr.warning("Please Comment");
+
             return;
         }
         $.post("{{route('comment.store')}}", {
@@ -327,7 +360,27 @@
         $('#btn_reply' + parent_id).removeClass('d-none');
         $('#reply_submit' + parent_id).addClass('d-none');
         $('#reply_close' + parent_id).addClass('d-none');
+        $('#btn_edit' + parent_id).removeClass('d-none');
 
+    });
+
+    $(".readCount").click(function() {
+        var blog = $(this).attr('data-id');
+        $.ajax({
+            url: "{{route('blog.read.count')}}",
+            type: "POST",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "blog": blog
+            },
+            success: function(response) {
+                // table.draw();
+                // toastr.success('is Featured updated!');
+            },
+            error: function(response) {
+
+            },
+        });
     });
 </script>
 @endsection

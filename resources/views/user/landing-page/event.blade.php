@@ -1,44 +1,5 @@
 @extends('layouts.user.landing-page.master')
 @section('main-style')
-<style>
-       .page-header .container {
-              padding-top: 36px;
-              padding-bottom: 36px;
-              position: relative;
-              animation: pop-in 2.5s ease-out;
-       }
-
-       .container {
-              max-width: 1140px;
-              padding-right: 30px;
-              padding-left: 30px;
-              margin-right: auto;
-              margin-left: auto;
-       }
-
-       .custom-section {
-              width: 100%;
-              height: auto;
-              background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/nirvik12/assets/user/landingPage/img/map.jpg) center;
-              background-size: cover;
-              overflow: hidden;
-              position: relative;
-       }
-
-       @media (min-width: 768px) {
-              .page-header .container {
-                     padding-top: 100px;
-                     /* padding-bottom: 48px; */
-              }
-       }
-
-       @media (max-width: 768px) {
-              .page-header .container {
-                     padding-top: 100px;
-                     /* padding-bottom: 48px; */
-              }
-       }
-</style>
 @endsection
 @section('header')
 <!-- ======= Header Assets ======= -->
@@ -48,23 +9,21 @@
 @section('main-content')
 
 <!--==========================Custom Section============================-->
-<section>
-       <div class="page-header custom-section">
-              <div class="backdrop-gradient"></div>
-              <div class="container">
-                     <div class="breadcrumb-wrap"></div>
-                     <h1 style="color: #fff;" class="page-title">Events & Program</h1>
-                     <div class="content">
-                            <p style="color: #fff;" class="lead">Recent Events</p>
-                            <p>
-                                   <a class="btn btn-primary" href="#">View All</a>
-                            </p>
-                     </div>
-              </div>
-       </div>
-</section>
+@php $data = [
+'title' => "Events & Program",
+'sub-title' => "Recent Events",
+'action' => "",
+'button' => "",
+'isAuth' => 0,
+'route-name' => "",
+'button2' => ""
+]
+@endphp
+@include('layouts.user.landing-page.secondary-header', $data)
+
 
 <!--==========================Schedule Section============================-->
+
 <section id="schedule" class="section-with-bg">
        <div class="container wow fadeInUp">
               <div class="section-header">
@@ -73,35 +32,69 @@
               </div>
 
               @php
-                     $current_date = date('Y-m-d');
-                     $events = App\Models\Event::whereDate('date', '>=', $current_date)->get();
+              $current_date = date('Y-m-d');
               @endphp
               @foreach ($events as $value)
-                     @php
-                            $day1 = date('d', strtotime($value['date']));
-                            $month1 = date('M', strtotime($value['date']));
-                     @endphp
-                     <div class="row schedule-item">
-                            <div class="date col-md-2 col-sm-2 col-xl-2">
-                                   <time datetime="23th feb">
-                                          <span>{{$day1}}</span><span>{{$month1}}</span>
-                                   </time>
-                            </div>
-                            <div class="col-md-10 col-sm-10 col-xl-10">
+              @php
+              $day1 = date('d', strtotime($value['date']));
+              $month1 = date('M', strtotime($value['date']));
+              @endphp
+              <div class="row schedule-item">
+                     <div class="date col-md-2 col-sm-2 col-xl-2">
+                            <time datetime="23th feb">
+                                   <span>{{$day1}}</span><span>{{$month1}}</span>
+                            </time>
+                     </div>
+                     <div class="col-md-10 col-sm-10 col-xl-10">
                             <div class="speaker">
                             </div>
-                            
+
                             <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title={{$value['title']}} body={{$value['description']}}>{{$value['title']}}</a></h4>
                             <p><i class="fa fa-map-marker"></i> {{$value['venue']}}</p>
-                            </div>
                      </div>
+              </div>
               @endforeach
-              
+
+              <div class="d-flex justify-content-center mt-2">
+                     {!! $events->links() !!}
+              </div>
+
 
        </div>
+       <!--==========================Modal============================-->
+       <section>
+              <div class="modal fade" id="event-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                   <div class="modal-header">
+                                          <h5 class="modal-title text-bold title" id="exampleModalLabel"></h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                 <span aria-hidden="true">&times;</span>
+                                          </button>
+                                   </div>
+                                   <div class="modal-body body">
+
+                                   </div>
+                            </div>
+                     </div>
+              </div>
+       </section>
 </section>
 @endsection
+@section('main-script')
+<script>
+       // Event
+       $(".eventData").click(function() {
+              var title = $(this).attr('title');
+              var body = $(this).attr('body');
+              var bodyData = body.replace(/<[^>]+>/g, '').replace(/<\/p>/gi, "\n").replace(/<br\/?>/gi, "\n").replace(/<\/?[^>]+(>|$)/g, "");;
 
+              $('.title').text(title);
+              $('.body').text(bodyData);
+
+       });
+</script>
+@endsection
 @section('footer')
 <!-- ======= Footer ======= -->
 @include('layouts.user.landing-page.footer')

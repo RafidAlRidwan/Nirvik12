@@ -18,7 +18,6 @@
 </div>
 
 <hr>
-
 <section class="content p-2 ">
   <div class="container-fluid">
     <div class="row m-t-25 card p-3">
@@ -71,7 +70,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      {!! Form::open(['action' => ['App\Http\Controllers\User\UserController@store'], 'files' => true, 'class' => 'needs-validation']) !!}
+      {!! Form::open(['action' => ['App\Http\Controllers\Admin\UserController@store'], 'files' => true, 'class' => 'needs-validation']) !!}
       <div class="modal-body">
         <div class="card-body">
           <div class="form-group">

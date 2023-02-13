@@ -1,5 +1,5 @@
 @if(!empty($blogs) && $blogs->count() > 0)
-<div class="container wow fadeInUp p-5">
+<div class="container p-5">
 
     <div class="page-container">
         <div class="page-content">
@@ -17,8 +17,10 @@
                             </div>
                         </div>
                         <div class="card-body px-0">
-                            <h5 class="card-title mb-2">{{$item->title}}</h5>
-                            <small class="small text-muted">{{$date}}
+                            <a class="readCount" href="{{route('blog.show', $item->id)}}" data-id="{{$item->id}}">
+                                <h5 class="card-title mb-2">{{$item->title}}</h5>
+                            </a>
+                            <small class="small text-muted">{{$item->likeCount()}} Likes - {{$date}}
                                 <span class="px-2">-</span>
                                 <a href="#" class="text-muted">{{$item->comment ? $item->comment->count() : 0}} Comments</a>
                             </small>
@@ -27,9 +29,27 @@
                                 ipsum. Nostrum placeat hic saepe voluptatum dicta ipsum beatae.</p> -->
                         </div>
 
-                        <div class="card-footer pb-2 text-center">
-                            <!-- <a href="{{route('blog.show', $item->id)}}" class="btn btn-outline-dark btn-sm"><i class="fa fa-thumbs-up" aria-hidden="true"></i> 10</a> -->
-                            <a href="{{route('blog.show', $item->id)}}" class="btn btn-outline-dark btn-sm readCount" data-id="{{$item->id}}">READ MORE</a>
+                        <div class="card-footer pb-2 text-center d-flex justify-content-center">
+                            @php
+                            $allLikes = $item->likes;
+                            $like = $allLikes->where('user_id', $userId);
+                            if($like->count() > 0){
+                            $status = true;
+                            }else{
+                            $status = false;
+                            }
+                            @endphp
+                            <div id="ControllerData{{$item->id}}">
+                                @if($status)
+                                <a style="color:#ff4d6d;" id="like{{$item->id}}" class="btn btn-outline-dark btn-sm liked" data-id="{{$item->id}}"><i style="color:#ff4d6d" class="fa fa-thumbs-up" aria-hidden="true"></i> Liked</a>
+                                @else
+                                <a id="unlike{{$item->id}}" class="btn btn-outline-dark btn-sm liked" data-id="{{$item->id}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</a>
+                                @endif
+                            </div>
+                            <a style="color:#ff4d6d; display:none" id="like{{$item->id}}" class="btn btn-outline-dark btn-sm liked " data-id="{{$item->id}}"><i style="color:#ff4d6d" class="fa fa-thumbs-up" aria-hidden="true"></i> Liked</a>
+                            <a style="display:none" id="unlike{{$item->id}}" class="btn btn-outline-dark btn-sm liked" data-id="{{$item->id}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</a>
+
+                            <a href="{{route('blog.show', $item->id)}}" class="ml-1 btn btn-outline-dark btn-sm readCount" data-id="{{$item->id}}">READ MORE</a>
                         </div>
                     </div>
                 </div>

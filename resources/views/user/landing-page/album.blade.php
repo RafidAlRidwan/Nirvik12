@@ -1,47 +1,13 @@
 @extends('layouts.user.landing-page.master')
 @section('main-style')
 <style>
-       .page-header .container {
-       padding-top: 36px;
-       padding-bottom: 36px;
-       position: relative;
-       animation: pop-in 2.5s ease-out;
-       }
-       
-       .container {
-       max-width: 1140px;
-       padding-right: 30px;
-       padding-left: 30px;
-       margin-right: auto;
-       margin-left: auto;
-       }
-       @media (min-width: 768px){
-       .page-header .container {
-       padding-top: 100px;
-       /* padding-bottom: 48px; */
-       }
-       }
-       @media (max-width: 768px){
-       .page-header .container {
-       padding-top: 100px;
-       /* padding-bottom: 48px; */
-       }
-       }
-
-       .custom-section {
-       width: 100%;
-       height: auto;
-       background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(/assets/user/landingPage/img/map.jpg) center;
-       background-size: cover;
-       overflow: hidden;
-       position: relative;
-       }
        #albums {
               width: 90%;
               margin: auto;
               padding: 60px 0 60px 0;
 
        }
+
        .picture {
               position: relative;
               height: 120px;
@@ -50,13 +16,15 @@
               box-shadow: 3px 3px 5px lightgray;
               margin-bottom: 10px;
        }
+
        .picture img {
               width: 100%;
               height: 100%;
               border-radius: 10px;
               transition: .5s;
        }
-       .picture::before{
+
+       .picture::before {
               content: "";
               position: absolute;
               top: 50%;
@@ -72,7 +40,8 @@
               transition-delay: .2s;
               z-index: 1;
        }
-       .picture::after{
+
+       .picture::after {
               content: "";
               position: absolute;
               width: 100%;
@@ -83,89 +52,86 @@
               background-color: rgba(0, 0, 0, 0.4);
               transition: .3s;
        }
-       .picture:hover::after{
+
+       .picture:hover::after {
               height: 100%;
        }
-       .picture:hover::before{
+
+       .picture:hover::before {
               margin-top: 0;
               opacity: 1;
        }
-       
-       
 </style>
 <link rel="stylesheet" href="{{asset('assets/user/landingPage/gallery/justifiedGallery.min.css')}}">
 @endsection
 @section('header')
-       <!-- ======= Header Assets ======= -->
-       @include('layouts.user.landing-page.header')
+<!-- ======= Header Assets ======= -->
+@include('layouts.user.landing-page.header')
 @endsection
 
 @section('main-content')
 
-       <!--==========================Custom Section============================-->
-       <section>
-       <div class="page-header custom-section">
-              <div class="backdrop-gradient"></div>
-              <div class="container">
-                     <div class="breadcrumb-wrap"></div>
-                            <h1 style="font-weight: bold;" class="page-title">#Album</h1>
-                            <div class="content">
-                            <p style="font-weight: bold;" class="lead">Recent Photos</p>
-                                   <p>
-                                          <!-- <a class="btn btn-primary" href="#">View All</a> -->
-                                   </p>
-                            </div>
-              </div>
-       </div>
-       </section>
+<!--==========================Custom Section============================-->
+@php $data = [
+'title' => "Album",
+'sub-title' => "Recent Photos",
+'action' => "",
+'button' => "",
+'isAuth' => 0,
+'route-name' => "",
+'button2' => ""
+]
+@endphp
+@include('layouts.user.landing-page.secondary-header', $data)
 
-       <!--==========================Album Section============================-->
-       <section id="albums" class="wow fadeInUp">
-                     <!-- <div class="section-header">
+<!--==========================Album Section============================-->
+<section id="albums" class="wow fadeInUp">
+       <!-- <div class="section-header">
                             <h2>Album</h2>
                      </div> -->
-                     @php
-                            $albumDetails = App\Models\Album::all();
-                     @endphp
-                     <div class="row">
-                            @isset($albumDetails)
-                                   @foreach ($albumDetails as $item)
-                                          <div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 md-3">
-                                                 <div  class="album">
-                                                        <div class="picture">
-                                                               @php
-                                                                      $viewURL = URL::to('gallery' . '/' . $item->id);
-                                                               @endphp
-                                                               @if($item->attachment)
-                                                                      <img src={{asset('/'. $item->attachment)}} alt="Album" class="img-fluid">
-                                                               @else
-                                                                      <img src={{asset('assets/user/landingPage/img/album.png')}} alt="Album" class="img-fluid">
-                                                               @endif
-                                                        </div>
-                                                        <div >
-                                                               <h5><a href={{$viewURL}}>{{$item->title}}</a></h5>
-                                                        </div>
-                                                 </div>
-                                          </div>
-                                   @endforeach
-                            @endisset
-                            <div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 md-3">
-                                   <div  class="album">
-                                          <div class="picture">
-                                                 <img src={{asset('assets/user/landingPage/img/album.png')}} alt="Album" class="img-fluid">
-                                          </div>
-                                          <div >
-                                                 <h5><a href={{asset('/gallery/0')}}>Others</a></h5>
-                                          </div>
-                                   </div>
+       @php
+       $albumDetails = App\Models\Album::all();
+       @endphp
+       <div class="row d-flex justify-content-center">
+              @isset($albumDetails)
+              @foreach ($albumDetails as $item)
+              <div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 md-3 text-center">
+                     <div class="album d-flex justify-content-center">
+                            <div class="picture">
+                                   @php
+                                   $viewURL = URL::to('gallery' . '/' . $item->id);
+                                   @endphp
+                                   @if($item->attachment)
+                                   <a href={{$viewURL}}><img src={{asset('/'. $item->attachment)}} alt="Album" class="img-fluid"></a>
+                                   @else
+                                   <a href={{$viewURL}}><img src={{asset('assets/user/landingPage/img/album.png')}} alt="Album" class="img-fluid"></a>
+                                   @endif
+                            </div>
+
+                     </div>
+                     <div>
+                            <h5><a href={{$viewURL}}>{{$item->title}}</a></h5>
+                     </div>
+              </div>
+              @endforeach
+              @endisset
+              <div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 md-3 text-center">
+                     <div class="album d-flex justify-content-center">
+                            <div class="picture">
+                                   <a href={{asset('/gallery/0')}}><img src={{asset('assets/user/landingPage/img/album.png')}} alt="Album" class="img-fluid"></a>
                             </div>
                      </div>
-       </section>
+                     <div>
+                            <h5><a href={{asset('/gallery/0')}}>Others</a></h5>
+                     </div>
+              </div>
+       </div>
+</section>
 @endsection
 
 @section('footer')
-       <!-- ======= Footer ======= -->
-       @include('layouts.user.landing-page.footer')
+<!-- ======= Footer ======= -->
+@include('layouts.user.landing-page.footer')
 @endsection
 
 @section('main-script')
@@ -173,9 +139,9 @@
 
 <script>
        $('#basicExample').justifiedGallery({
-       rowHeight : 130,
-       lastRow : 'nojustify',
-       margins : 3
+              rowHeight: 130,
+              lastRow: 'nojustify',
+              margins: 3
        });
 </script>
 @endsection

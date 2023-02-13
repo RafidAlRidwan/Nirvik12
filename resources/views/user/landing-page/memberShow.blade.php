@@ -11,45 +11,6 @@
         }
 </style>
 <style>
-        .page-header .container {
-                padding-top: 36px;
-                padding-bottom: 36px;
-                position: relative;
-                animation: pop-in 2.5s ease-out;
-        }
-
-        .container {
-                max-width: 1140px;
-                padding-right: 30px;
-                padding-left: 30px;
-                margin-right: auto;
-                margin-left: auto;
-        }
-
-        .custom-section {
-                width: 100%;
-                height: auto;
-                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/nirvik12/assets/user/landingPage/img/map.jpg) center;
-                background-size: cover;
-                overflow: hidden;
-                position: relative;
-        }
-
-        @media (min-width: 768px) {
-                .page-header .container {
-                        padding-top: 100px;
-                        /* padding-bottom: 48px; */
-                }
-        }
-
-        @media (max-width: 768px) {
-                .page-header .container {
-                        padding-top: 100px;
-                        /* padding-bottom: 48px; */
-                }
-        }
-</style>
-<style>
         .section-with-bg {
                 background-color: transparent;
         }
@@ -91,21 +52,18 @@
 @endsection
 @section('main-content')
 <!--==========================Custom Section============================-->
-<section>
-        <div class="page-header custom-section">
-                <div class="backdrop-gradient"></div>
-                <div class="container">
-                        <div class="breadcrumb-wrap"></div>
-                        <h2 style="color: #fff;" class="page-title">Committees Details</h1>
-                                <div class="content">
-                                        <p style="color: #fff;" class="lead">Recent Events Committee List</p>
-                                        <p>
-                                                <a class="btn btn-info" href="#">View All</a>
-                                        </p>
-                                </div>
-                </div>
-        </div>
-</section>
+@php $data = [
+'title' => "Committees Details",
+'sub-title' => "Recent Events Committee List",
+'action' => "/public/committee/view",
+'button' => "Back",
+'isAuth' => 0,
+'route-name' => "",
+'button2' => ""
+]
+@endphp
+@include('layouts.user.landing-page.secondary-header', $data)
+
 <main id="home">
         <section id="speakers-details" class="wow fadeIn">
                 <div class="container">
@@ -166,32 +124,35 @@
                                                                                         </div>
                                                                                 </div>
                                                                         </div>
-                                                                        <table class="table bg-white table-bordered table-hover collection-table" style="border: 2px solid #2f3138">
-                                                                                <thead style="background-color: #0e1b4d; color: #fff; border: 2px solid #2f3138">
-                                                                                        <tr>
-                                                                                                <th style="width: 10px; border-bottom: 2px solid #2f3138;">#</th>
-                                                                                                <th style="border-bottom: 2px solid #2f3138;">Name</th>
-                                                                                                <th style="border-bottom: 2px solid #2f3138;">Role</th>
-                                                                                                <th style="border-bottom: 2px solid #2f3138;">Balance</th>
-                                                                                        </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                        <tr>
-                                                                                                <td>1</td>
-                                                                                                <td><strong>{{$committeeDetails->userData->full_name}}</strong></td>
-                                                                                                <td><span class="badge bg-success text-white">Manager</span></td>
-                                                                                                <td>{{$committeeDetails->total_balance}}</td>
-                                                                                        </tr>
-                                                                                        @foreach ($memberDetails as $item)
-                                                                                        <tr>
-                                                                                                <td>{{$loop->iteration + 1}}</td>
-                                                                                                <td>{{$item->full_name}}</td>
-                                                                                                <td><span class="badge bg-info text-white">Member</span></td>
-                                                                                                <td>{{$item->balance}}</td>
-                                                                                        </tr>
-                                                                                        @endforeach
-                                                                                </tbody>
-                                                                        </table>
+                                                                        <div class="table-responsive">
+                                                                                <table class="table bg-white table-bordered table-hover collection-table" style="border: 2px solid #2f3138">
+                                                                                        <thead style="background-color: #0e1b4d; color: #fff; border: 2px solid #2f3138">
+                                                                                                <tr>
+                                                                                                        <th style="width: 10px; border-bottom: 2px solid #2f3138;">#</th>
+                                                                                                        <th style="border-bottom: 2px solid #2f3138;">Name</th>
+                                                                                                        <th style="border-bottom: 2px solid #2f3138;">Role</th>
+                                                                                                        <th style="border-bottom: 2px solid #2f3138;">Balance</th>
+                                                                                                </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                                <tr>
+                                                                                                        <td>1</td>
+                                                                                                        <td><strong>{{$committeeDetails->userData->full_name}}</strong></td>
+                                                                                                        <td><span class="badge bg-success text-white">Manager</span></td>
+                                                                                                        <td>{{$committeeDetails->total_balance}}</td>
+                                                                                                </tr>
+                                                                                                @foreach ($memberDetails as $item)
+                                                                                                <tr>
+                                                                                                        <td>{{$loop->iteration + 1}}</td>
+                                                                                                        <td>{{$item->full_name}}</td>
+                                                                                                        <td><span class="badge bg-info text-white">Member</span></td>
+                                                                                                        <td>{{$item->balance}}</td>
+                                                                                                </tr>
+                                                                                                @endforeach
+                                                                                        </tbody>
+                                                                                </table>
+                                                                        </div>
+
                                                                 </div>
                                                         </div>
                                                 </div>

@@ -76,7 +76,6 @@ class User extends Authenticatable
     public static function saveOrUpdate($request, $id = null)
     {
         $requestData = $request->all();
-
         if (is_null($id)) {
             $requestData['password'] = Hash::make($requestData['password']);
             $user = User::create($requestData);
@@ -90,7 +89,6 @@ class User extends Authenticatable
 
             $user->update($requestData);
         }
-
         UserDetail::saveUserInfo($request->all(), $user->id);
         MobileNumberDetail::saveMobileInfo($request->all(), $user->id);
     }

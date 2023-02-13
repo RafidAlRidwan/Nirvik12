@@ -42,7 +42,64 @@
        <!-- Preloader -->
        <link rel="stylesheet" href="{{asset('assets/user/landingPage/css/preloader.css')}}">
 
+       <!-- Alert -->
+       <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/plugins/toastr/toastr.min.css')}}">
+
+       <!-- Notification -->
+       <link rel="stylesheet" href="{{asset('assets/user/landingPage/notification/css/jquerysctipttop.css')}}">
+       <link rel="stylesheet" href="{{asset('assets/user/landingPage/notification/css/flashy.min.css')}}">
+
+       <style>
+              .page-item.active .page-link {
+                     z-index: 1;
+                     background-color: #f82249;
+                     border-color: #f82249;
+              }
+
+              .page-link {
+                     color: #f82249;
+              }
+       </style>
        @yield('main-style')
+       <style>
+              .page-header .container {
+                     padding-top: 36px;
+                     padding-bottom: 36px;
+                     position: relative;
+                     animation: pop-in 2.5s ease-out;
+              }
+
+              .container {
+                     max-width: 1140px;
+                     padding-right: 30px;
+                     padding-left: 30px;
+                     margin-right: auto;
+                     margin-left: auto;
+              }
+
+              .custom-section {
+                     width: 100%;
+                     height: auto;
+                     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/assets/user/landingPage/img/map.jpg) center;
+                     background-size: cover;
+                     overflow: hidden;
+                     position: relative;
+              }
+
+              @media (min-width: 768px) {
+                     .page-header .container {
+                            padding-top: 100px;
+                            /* padding-bottom: 48px; */
+                     }
+              }
+
+              @media (max-width: 768px) {
+                     .page-header .container {
+                            padding-top: 100px;
+                            /* padding-bottom: 48px; */
+                     }
+              }
+       </style>
        <style>
               .media-icons {
                      display: none;

@@ -70,6 +70,7 @@
 @section('main-content')
 
 <!--==========================Custom Section============================-->
+
 <section>
        <div class="page-header custom-section">
               <div class="backdrop-gradient"></div>
@@ -78,9 +79,9 @@
                      <h2 style="font-weight: bold;" class="page-title">#Events & Program Committees</h1>
                             <div class="content">
                                    <p style="font-weight: bold;" class="lead">Recent Events Committee List</p>
-                                   <p>
-                                          <!-- <a class="btn btn-info" href="#">View All</a> -->
-                                   </p>
+                                   <!-- <p>
+                                          <a class="btn btn-info" href="#">View All</a>
+                                   </p> -->
                             </div>
               </div>
        </div>

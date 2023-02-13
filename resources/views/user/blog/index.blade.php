@@ -13,44 +13,6 @@
     }
 </style>
 <style>
-    .page-header .container {
-        padding-top: 36px;
-        padding-bottom: 36px;
-        position: relative;
-        animation: pop-in 2.5s ease-out;
-    }
-
-    .container {
-        max-width: 1140px;
-        padding-right: 30px;
-        padding-left: 30px;
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    .custom-section {
-        width: 100%;
-        height: auto;
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/assets/user/landingPage/img/map.jpg) center;
-        background-size: cover;
-        overflow: hidden;
-        position: relative;
-    }
-
-    @media (min-width: 768px) {
-        .page-header .container {
-            padding-top: 100px;
-            /* padding-bottom: 48px; */
-        }
-    }
-
-    @media (max-width: 768px) {
-        .page-header .container {
-            padding-top: 100px;
-            /* padding-bottom: 48px; */
-        }
-    }
-
     .card {
         border: 1px solid #fff;
     }
@@ -78,23 +40,18 @@
 
 @section('main-content')
 <!--==========================Custom Section============================-->
-<section>
-    <div class="page-header custom-section">
-        <div class="backdrop-gradient"></div>
-        <div class="container">
-            <div class="breadcrumb-wrap"></div>
-            <h2 style="font-weight: bold;" class="page-title">#Blogs</h1>
-                <div class="content">
-                    <p style="font-weight: bold;" class="lead">Recent Blog List</p>
-                    @if(Auth::user())
-                    <p>
-                        <a href="{{route('blogCreate')}}" style="background-color: #ff4d6d; border: 1px solid #ff4d6d;" class="blog-create -btn btn-info btn-sm">Create Blog</a>
-                    </p>
-                    @endif
-                </div>
-        </div>
-    </div>
-</section>
+@php $data = [
+'title' => "Blogs",
+'sub-title' => "Recent Blog List",
+'action' => "",
+'button' => "",
+'isAuth' => Auth::user() ? 1 : 0,
+'route-name' => "blogCreate",
+'button2' => "Create Blog"
+]
+@endphp
+@include('layouts.user.landing-page.secondary-header', $data)
+
 
 <!--==========================Schedule Section============================-->
 <div id="content_area_blog">
@@ -117,8 +74,10 @@
                                 </div>
                             </div>
                             <div class="card-body px-0">
-                                <h5 class="card-title mb-2">{{$item->title}}</h5>
-                                <small class="small text-muted">{{$date}}
+                                <a class="readCount" href="{{route('blog.show', $item->id)}}" data-id="{{$item->id}}">
+                                    <h5 class="card-title mb-2">{{$item->title}}</h5>
+                                </a>
+                                <small class="small text-muted">{{$item->likeCount()}} Likes - {{$date}}
                                     <span class="px-2">-</span>
                                     <a href="#" class="text-muted">{{$item->comment ? $item->comment->count() : 0}} Comments</a>
                                 </small>
@@ -127,9 +86,27 @@
                                 ipsum. Nostrum placeat hic saepe voluptatum dicta ipsum beatae.</p> -->
                             </div>
 
-                            <div class="card-footer pb-2 text-center">
-                                <!-- <a href="{{route('blog.show', $item->id)}}" class="btn btn-outline-dark btn-sm"><i class="fa fa-thumbs-up" aria-hidden="true"></i> 10</a> -->
-                                <a href="{{route('blog.show', $item->id)}}" class="btn btn-outline-dark btn-sm readCount" data-id="{{$item->id}}">READ MORE</a>
+                            <div class="card-footer pb-2 text-center d-flex justify-content-center">
+                                @php
+                                $allLikes = $item->likes;
+                                $like = $allLikes->where('user_id', $userId);
+                                if($like->count() > 0){
+                                $status = true;
+                                }else{
+                                $status = false;
+                                }
+                                @endphp
+                                <div id="ControllerData{{$item->id}}">
+                                    @if($status)
+                                    <a style="color:#ff4d6d;" id="like{{$item->id}}" class="btn btn-outline-dark btn-sm liked" data-id="{{$item->id}}"><i style="color:#ff4d6d" class="fa fa-thumbs-up" aria-hidden="true"></i> Liked</a>
+                                    @else
+                                    <a id="unlike{{$item->id}}" class="btn btn-outline-dark btn-sm liked" data-id="{{$item->id}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</a>
+                                    @endif
+                                </div>
+                                <a style="color:#ff4d6d; display:none" id="like{{$item->id}}" class="btn btn-outline-dark btn-sm liked " data-id="{{$item->id}}"><i style="color:#ff4d6d" class="fa fa-thumbs-up" aria-hidden="true"></i> Liked</a>
+                                <a style="display:none" id="unlike{{$item->id}}" class="btn btn-outline-dark btn-sm liked" data-id="{{$item->id}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</a>
+
+                                <a href="{{route('blog.show', $item->id)}}" class="ml-1 btn btn-outline-dark btn-sm readCount" data-id="{{$item->id}}">READ MORE</a>
                             </div>
                         </div>
                     </div>
@@ -159,7 +136,7 @@
 @section('main-script')
 <script src="../../../../public/assets/blog/js/joeblog.js"></script>
 <script>
-    $(".readCount").click(function() {
+    $(document).on("click", ".readCount", function(e) {
         var blog = $(this).attr('data-id');
         $.ajax({
             url: "{{route('blog.read.count')}}",
@@ -171,6 +148,41 @@
             success: function(response) {
                 // table.draw();
                 // toastr.success('is Featured updated!');
+            },
+            error: function(response) {
+
+            },
+        });
+    });
+    $(document).on("click", ".liked", function(e) {
+        var blog = $(this).attr('data-id');
+        var user_id = "{{Auth::user() ? Auth::user()->id : 0}}";
+        if (user_id == 0) {
+            toastr.warning("Please login first!");
+            return;
+        }
+        $.ajax({
+            url: "{{route('blog.like')}}",
+            type: "POST",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "blog_id": blog,
+                "user_id": user_id
+            },
+            success: function(response) {
+                if (response.status == 1) {
+                    $("#controllerData" + blog).css("display", "none");
+                    $("#unlike" + blog).css("display", "none");
+                    $("#like" + blog).css("display", "inline-block");
+                    toastr.success("You Liked");
+                }
+                if (response.status == 0) {
+                    $("#controllerData" + blog).css("display", "none");
+                    $("#unlike" + blog).css("display", "inline-block");
+                    $("#like" + blog).css("display", "none");
+                    toastr.info("You Unliked");
+                }
+                // toastr.success("Liked");
             },
             error: function(response) {
 

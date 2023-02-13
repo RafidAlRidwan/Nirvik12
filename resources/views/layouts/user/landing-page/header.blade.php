@@ -28,20 +28,25 @@
                             <li class="{{request()->is('events') ? 'menu-active' : ''}}">
                                    <a href={{URL::to('/events')}}>Events</a>
                             </li>
-                            </li>
                             <li class="{{request()->is('blog') ? 'menu-active' : ''}} || 
                             {{request()->is('blog/*') ? 'menu-active' : ''}}">
                                    <a href={{URL::to('/blog')}}>Blogs</a>
                             </li>
+
+                            <li class="{{(request()->is('album') ? 'menu-active' : '') }} || 
+                            {{(request()->is('gallery/*') ? 'menu-active' : '')}} ">
+                                   <a href={{URL::to('/album')}}>Gallary</a>
                             </li>
-
-                            <li class="{{(request()->is('album') ? 'menu-active' : '')
-                                   || (request()->is('gallery/*') ? 'menu-active' : '')}}
-                            "><a href={{URL::to('/album')}}>Gallary</a></li>
-
+                            @if(auth()->user())
+                            <li class="{{request()->is('user/committee/*') ? 'menu-active' : ''}} || {{request()->is('user/committee') ? 'menu-active' : ''}}">
+                                   <a href="{{URL::to('user/committee/')}}" class="">Committee</a>
+                            </li>
+                            @else
                             <li class="{{request()->is('public/committee/*') ? 'menu-active' : ''}}">
                                    <a href={{URL::to('/public/committee/view')}}>Committee</a>
                             </li>
+                            @endif
+
                             @if(auth()->user() && auth()->user()->type === 3)
                             <li class="{{request()->is('user/dashboard') ? 'menu-active' : ''}}">
                                    <a href="{{URL::to('user/dashboard')}}">Class Mates</a>
@@ -49,13 +54,14 @@
                             <li class="{{request()->is('user/my-profile/*') ? 'menu-active' : ''}}">
                                    <a href="{{route('myProfile', auth()->user()->id)}}" class="">My Profile</a>
                             </li>
-
                             @endif
+
                             @if(auth()->user() && (auth()->user()->type === 1 || auth()->user()->type === 2))
                             <li>
                                    <a href="{{url('/user/dashboard')}}" class="">Admin Panel</a>
                             </li>
                             @endif
+
                             @if(auth()->user())
                             <li class="buy-tickets"><a onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();" href="{{ route('logout') }}">logout</a></li>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use URL;
 use Redirect;
 use validate;
+use App\Models\News;
 use App\Models\Gallery;
 use App\Models\Section;
 use App\Models\Committee;
@@ -13,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\CommitteeMember;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
@@ -25,11 +27,13 @@ class LandingPageController extends Controller
     }
     public function event()
     {
-        return view('user/landing-page.event');
+        $events = Event::orderBy('date', 'asc')->latest()->paginate(5);
+        return view('user/landing-page.event', compact('events'));
     }
     public function news()
     {
-        return view('user/landing-page.news');
+        $news = News::latest()->paginate(5);
+        return view('user/landing-page.news', compact('news'));
     }
     public function album()
     {

@@ -17,8 +17,7 @@
                 background-color: #fff;
                 border-color: #f82249;
         }
-</style>
-<style>
+
         .page-header .container {
                 padding-top: 36px;
                 padding-bottom: 36px;
@@ -56,8 +55,7 @@
                         /* padding-bottom: 48px; */
                 }
         }
-</style>
-<style>
+
         .section-with-bg {
                 background-color: transparent;
         }
@@ -95,6 +93,7 @@
         table.dataTable {
                 border-collapse: collapse;
         }
+
         .nice-select {
                 width: 100%;
         }
@@ -120,11 +119,11 @@
                 <div class="backdrop-gradient"></div>
                 <div class="container">
                         <div class="breadcrumb-wrap"></div>
-                        <h2 style="color: #fff;" class="page-title">Committees Details</h1>
+                        <h2 style="font-weight: bold;" class="page-title">#Committees Details</h1>
                                 <div class="content">
-                                        <p style="color: #fff;" class="lead">Recent Events Registration List</p>
+                                        <p style="font-weight: bold;" class="lead">Recent Events Registration List</p>
                                         <p>
-                                                <a class="btn btn-info" href="#">View All</a>
+                                                <a style="background-color: #ff4d6d; border: 1px solid #ff4d6d;" href="{{url('/public/committee/view')}}" class="btn btn-info btn-sm" href="#">Back</a>
                                         </p>
                                 </div>
                 </div>
@@ -247,7 +246,6 @@
         $(function() {
                 $('[data-toggle="tooltip"]').tooltip()
         });
-       
 </script>
 <!-- DATA TABLES -->
 <script src="{{asset('assets/user/landingPage/datatable/js/jquery.dataTables.min.js')}}"></script>
@@ -271,7 +269,6 @@
         });
 </script>
 <script>
-
         $(document).ready(function() {
                 window.csrfToken = '<?php echo csrf_token(); ?>';
                 var postData = {};

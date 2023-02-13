@@ -47,8 +47,6 @@ class UserController extends Controller
         }
     }
 
-
-
     public function create()
     {
         $data = User::getMasterData();

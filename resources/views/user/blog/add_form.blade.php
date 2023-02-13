@@ -21,6 +21,16 @@
     <div class="invalid-feedback">{{ $errors->first('description') }}</div>
     @endif
 </div>
+<div class="row">
+    <div class="form-group div-gap col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <label>Tags</label>
+        <select class="form-control tag" name="tags[]" multiple="multiple">
+            @foreach($tags as $item)
+            <option value={{$item->id}}>{{$item->name}}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
 
 
 

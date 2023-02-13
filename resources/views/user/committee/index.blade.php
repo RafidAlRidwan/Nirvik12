@@ -1,6 +1,10 @@
-@extends('layouts.user.user-dashboard-master')
+@extends('layouts.user.landing-page.master')
 
-@section('style')
+@section('main-style')
+<link rel="stylesheet" href="{{asset('assets/user/landingPage/datatable/css/jquery.dataTables.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/user/landingPage/datatable/css/fixedHeader.bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/user/landingPage/datatable/css/responsive.bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/user/landingPage/datatable/css/buttons.dataTables.min.css')}}">
 <link href="{{asset('assets/user/landingPage/custom-css/cus-data-table.css')}}" rel="stylesheet">
 <style>
     .btn-custom {
@@ -15,8 +19,12 @@
 
 @endsection
 
-@section('content')
-<main id="home">
+@section('header')
+<!-- ======= Header Assets ======= -->
+@include('layouts.user.landing-page.header')
+@endsection
+@section('main-content')
+<main id="home" style="padding-top: 80px;padding-bottom: 36px;position: relative;animation: pop-in 2.5s ease-out;">
     <section id="speakers-details" class="wow fadeIn">
         <div class="container">
             <div class="section-header">
@@ -63,12 +71,24 @@
     </section>
 </main>
 
-
-
-
 @endsection
 
-@section('script')
+@section('main-script')
+<script src="{{asset('assets/user/landingPage/datatable/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/dataTables.fixedHeader.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/responsive.bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/jszip.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/pdfmake.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/vfs_fonts.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/datatable/js/buttons.print.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/custom-select/js/jquery.nice-select.min.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/custom-select/js/fastclick.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/custom-select/js/prism.js')}}"></script>
+<script src="{{asset('assets/user/landingPage/js/cus-select.js')}}"></script>
 
 <script type="text/javascript">
     var app = new Vue({
@@ -194,5 +214,4 @@
     })
 </script>
 
-<script src="{{asset('assets/user/landingPage/js/cus-select.js')}}"></script>
 @endsection
