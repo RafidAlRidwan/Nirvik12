@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Intervention\Image\Facades\Image;
 use File;
+use App\Models\User;
+use App\Models\Shift;
+use App\Models\Section;
+use App\Models\MobileNumberDetail;
+use Intervention\Image\Facades\Image;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UserDetail extends Model
 {
@@ -14,6 +18,18 @@ class UserDetail extends Model
     public function sectionData()
     {
         return $this->hasOne(Section::class, 'id', 'section');
+    }
+    public function shiftData()
+    {
+        return $this->hasOne(Shift::class, 'id', 'shift');
+    }
+    public function mobile()
+    {
+        return $this->hasMany(MobileNumberDetail::class, 'user_id', 'user_id');
+    }
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
     protected $fillable = [
         'full_name', 'user_id', 'designation',

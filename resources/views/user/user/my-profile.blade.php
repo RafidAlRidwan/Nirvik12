@@ -3,11 +3,84 @@
 @section('main-style')
 <link rel="stylesheet" href="{{asset('assets/user/landingPage/profile/css/style.css')}}">
 <link rel="stylesheet" href="{{asset('assets/user/landingPage/profile/css/slick.css')}}">
+<link rel="stylesheet" href="{{ asset('assets/user/landingPage/crop/ijaboCropTool.min.css') }}">
 <style>
   .universal-h2-bckg {
     background-image: url("{{ asset('assets/user/landingPage/profile/images/double-line.svg') }}");
     background-repeat: no-repeat;
     background-position: center bottom;
+  }
+</style>
+<style>
+  .avatar-upload {
+    position: relative;
+    /* max-width: 205px; */
+    /* margin: 50px auto;  */
+
+  }
+
+  .avatar-upload .avatar-edit {
+    position: absolute;
+    right: 165px;
+    z-index: 1;
+    top: 350px;
+  }
+
+  @media (max-width: 620px) {
+    .avatar-upload .avatar-edit {
+      right: 97px;
+      top: 216px;
+    }
+  }
+
+  .avatar-upload .avatar-edit input {
+    display: none;
+  }
+
+  .avatar-upload .avatar-edit input+label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 0;
+    border-radius: 100%;
+    background: #FFFFFF;
+    border: 1px solid transparent;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    font-weight: normal;
+    transition: all 0.2s ease-in-out;
+  }
+
+  @media (max-width: 620px) {
+    .avatar-upload .avatar-edit input+label {
+      width: 35px;
+      height: 35px;
+    }
+  }
+
+  .avatar-upload .avatar-edit input+label:hover {
+    background: #f1f1f1;
+    border-color: #d6d6d6;
+  }
+
+  .avatar-upload .avatar-edit input+label:after {
+    content: "\f083";
+    font-family: 'FontAwesome';
+    color: #757575;
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+  }
+
+  @media (max-width: 620px) {
+    .avatar-upload .avatar-edit input+label:after {
+      top: 7px;
+      left: 0;
+      right: 0;
+    }
   }
 </style>
 @endsection
@@ -38,15 +111,24 @@ $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
   <section class="fh5co-about-me">
     <div class="about-me-inner site-container">
       <article class="portfolio-wrapper">
-        @if(!empty($value->attachment))
-        <div class="portfolio__img">
-          <img src="{{asset('')}}{{ ($value->attachment) }}" class="about-me__profile" alt="about me profile picture">
+        <div class="avatar-upload">
+          @if((Auth::user()->id) == $value->user_id)
+          <div class="avatar-edit">
+            <input type='file' name="file" id="imageUpload" accept=".png, .jpg, .jpeg" />
+            <label for="imageUpload" data-toggle="tooltip" data-placement="top" title="Change Profile Picture"></label>
+          </div>
+          @endif
+          @if(!empty($value->attachment))
+          <div class="portfolio__img">
+            <img id="imagePreview" src="{{asset('assets/user/landingPage/img/profilePicture')}}{{ '/'.($value->attachment) }}" class="about-me__profile" alt="about me profile picture">
+          </div>
+          @else
+          <div class="portfolio__img">
+            <img id="imagePreview" src="{{asset('assets/user/landingPage/img/profilePicture/demo.jpg')}}" class="about-me__profile" alt="about me profile picture">
+          </div>
+          @endif
         </div>
-        @else
-        <div class="portfolio__img">
-          <img src="{{asset('assets/user/landingPage/img/profilePicture/demo.jpg')}}" class="about-me__profile" alt="about me profile picture">
-        </div>
-        @endif
+
         <div class="portfolio__bottom">
           <div class="portfolio__name">
             <!-- <span>J</span> -->
@@ -75,20 +157,28 @@ $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
             <a href="">
               <h3>{{$value->full_name}}</h3>
             </a>
-            <p class="text-dark">{{$value->designation}} at {{$value->office_name}}</p>
-            <p class="text-dark">Lives in {{$value->current_city}}, Bangladesh</p>
-            <p class="text-dark">From Bogra</p>
+            <p class="text-dark"><strong>{{$value->designation}}</strong> at {{$value->office_name}}</p>
+            <p class="text-dark">Lives in <strong>{{$value->current_city}}, Bangladesh</strong></p>
+            <p class="text-dark">Mobile: <strong>{{collect($value->mobile)->implode('mobile', ',')}}</strong></p>
+            <p class="text-dark">Email: <strong>{{$value->user->email}}</strong></p>
           </div>
           <div class="about-me-single-slide">
             <h2 class="universal-h2 universal-h2-bckg">DETAILS</h2>
-            <p><span>H</span> e has work appearing or forthcoming in over a dozen venues, including Buzzy
-              Mag, The Spirit of Poe, and the British Fantasy Society journal Dark Horizons. He is also
-              CEO of a company, specializing in custom book publishing and social media marketing
-              services, have created a community for authors to learn and connect.He has work appearing or
-              forthcoming in over a dozen venues, including Buzzy Mag, The Spirit of Poe, and have created
-              a community for authors to learn and connect.</p>
-            <h4>Author</h4>
-            <p class="p-white">See me</p>
+            <p><strong>Name:</strong> {{$value->full_name}}</p>
+            <p><strong>Designation:</strong> {{$value->designation}}</p>
+            <p><strong>Office:</strong> {{$value->office_name}}</p>
+            <p><strong>Mobile:</strong> {{collect($value->mobile)->implode('mobile', ',')}}</p>
+            <p><strong>Email:</strong> {{$value->user->email}}</p>
+
+            <p><strong>Shift:</strong> {{$value->shiftData ? $value->shiftData->name : ''}}</p>
+            <p><strong>Section:</strong> {{$value->sectionData ? $value->sectionData->name : ''}}</p>
+            <p><strong>Roll:</strong> {{$value->roll_no}}</p>
+
+            <p><strong>Marital Status:</strong> {{$value->marital_status == 1 ? 'Bachelor' : 'Married'}}</p>
+
+            <p><strong>Present Address:</strong> {{$value->current_address}}</p>
+
+
           </div>
         </div>
       </div>
@@ -96,11 +186,13 @@ $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
     <div class="about-me-bckg"></div>
   </section>
 </main>
+
 @endforeach
 
 @endsection
 
 @section('main-script')
+<script src="{{ asset('assets/user/landingPage/crop/ijaboCropTool.min.js') }}"></script>
 
 <script>
   $(function() {
@@ -117,5 +209,47 @@ $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
     nextArrow: '<span class="span-arrow slick-next">></span>'
   });
 </script>
+<script>
+  $('#imageUpload').ijaboCropTool({
+    preview: '.image-previewer',
+    setRatio: 1,
+    allowedExtensions: ['jpg', 'jpeg', 'png'],
+    buttonsText: ['CROP', 'QUIT'],
+    buttonsColor: ['#30bf7d', '#ee5155', -15],
+    processUrl: '{{route("profile.image.upload")}}',
+    withCSRF: ['_token', '{{ csrf_token() }}'],
+    onSuccess: function(message, name, status) {
+      console.log(message);
+      if (status == 1) {
+        $('#imagePreview').attr('src', message);
+        toastr.success('Image Uploaded');
+
+      } else {
+        toastr.danger('Image Upload Failed!');
+      }
+    },
+    onError: function(message, status) {
+      alert(message);
+    }
+  });
+</script>
+
+<!-- <script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $('#imagePreview').attr('src', e.target.result);
+        // $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+        // $('#imagePreview').hide();
+        // $('#imagePreview').fadeIn(650);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $("#imageUpload").change(function() {
+    readURL(this);
+  });
+</script> -->
 
 @endsection

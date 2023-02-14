@@ -52,6 +52,7 @@ Route::middleware([IsUser::class])->group(function () {
     Route::post('/comment/edit', [App\Http\Controllers\User\BlogPageController::class, 'editComment'])->name('comment.edit');
     Route::post('/comment/update', [App\Http\Controllers\User\BlogPageController::class, 'updateComment'])->name('comment.update');
     Route::get('/user/my-profile', [App\Http\Controllers\User\UserController::class, 'view_my_profile'])->name('user_my_profile');
+    Route::post('/crop-image-upload', [App\Http\Controllers\User\UserController::class, 'uploadCropImage'])->name('profile.image.upload');
     Route::get('/user/create', [App\Http\Controllers\User\UserController::class, 'create']);
     Route::post('/user/store', [App\Http\Controllers\User\UserController::class, 'store']);
     Route::post('/user/getdt', [App\Http\Controllers\User\UserController::class, 'contact_datatable']);

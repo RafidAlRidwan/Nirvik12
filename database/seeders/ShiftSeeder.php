@@ -18,6 +18,8 @@ class ShiftSeeder extends Seeder
             [
                 'name' => 'Morning',
             ],
+        );
+        Shift::insert(
             [
                 'name' => 'Day',
             ],

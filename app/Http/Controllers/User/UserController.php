@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\User;
 
-use Auth;
 use Redirect;
 use validate;
 use App\Models\User;
@@ -13,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
 use Intervention\Image\Facades\Image;
@@ -265,6 +265,44 @@ class UserController extends Controller
             file_put_contents($imageName, $data);
 
             return $imageName;
+        }
+    }
+
+    public function uploadCropImage(Request $request)
+    {
+        try {
+            if ($request->has('file')) {
+
+                $folderPath = public_path('assets/user/landingPage/img/profilePicture/');
+
+                // $image_parts = explode(";base64,", $request->file);
+                // $image_type_aux = explode("image/", $image_parts[0]);
+                // $image_type = $image_type_aux[1];
+                // $image_base64 = base64_decode($image_parts[1]);
+
+                $imageName = date('Ymd') . uniqid() . '.jpg';
+
+                // $imageFullPath = $folderPath . $imageName;
+
+                // file_put_contents($imageFullPath, $image_base64);
+
+                $file = $request->file('file');
+                $upload = $file->move($folderPath, $imageName);
+
+                $userProfile = Auth::user()->userDetails;
+
+                // Remove old image
+                $image_path = $folderPath . $userProfile->attachment;
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
+
+                $userProfile->attachment = $imageName;
+                $userProfile->save();
+                return response()->json(['msg' => asset('assets/user/landingPage/img/profilePicture') . '/' . $userProfile->attachment, 'name' => '', 'status' => 1]);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['msg' => 'Crop Image Uploaded Failed', 'status' => 0]);
         }
     }
 }

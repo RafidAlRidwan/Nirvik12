@@ -19,14 +19,21 @@ class SectionSeeder extends Seeder
                 'name' => 'A',
                 'shift' => 1,
             ],
+        );
+        Section::insert(
+
             [
                 'name' => 'B',
                 'shift' => 1,
             ],
+        );
+        Section::insert(
             [
                 'name' => 'C',
                 'shift' => 2,
             ],
+        );
+        Section::insert(
             [
                 'name' => 'D',
                 'shift' => 2,

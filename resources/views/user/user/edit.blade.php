@@ -98,13 +98,13 @@
   $(document).ready(function() {
     var maxField = 1; //Input fields increment limitation
     var addButton = $('.add_button'); //Add button selector
-    var wrapper = $('.field_wrapper'); //Input field wrapper
+    var wrapper = $('.field_wrappers'); //Input field wrapper
     var x = 1; //Initial field counter is 1           
     //Once add button is clicked
     $(addButton).click(function() {
       //Check maximum number of input fields
       x++; //Increment field counter
-      var fieldHTML = '<article><div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4"><label>Mobile No</label><div class="inputMobile" style="display: flex;"><input type="number" class="custom-add" name="mobile[]" value=""/><span class="remove_button"><i class="fa fa-minus-circle"></i></span></div></div></article>'; //New input field html 
+      var fieldHTML = '<div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4"><label>Mobile No</label><div class="inputMobile" style="display: flex;"><input type="number" class="custom-add" name="mobile[]" value=""/><span class="remove_button"><i class="fa fa-minus-circle"></i></span></div></div></>'; //New input field html 
       $(wrapper).append(fieldHTML); //Add field html
 
     });
@@ -112,7 +112,7 @@
     //Once remove button is clicked
     $(wrapper).on('click', '.remove_button', function(e) {
       e.preventDefault();
-      $(this).closest('article > div').remove(); //Remove field html
+      $(this).parent().parent().remove(); //Remove field html
       flashy('<?php echo " Removed" ?>', {
         type: 'flashy__danger'
       });

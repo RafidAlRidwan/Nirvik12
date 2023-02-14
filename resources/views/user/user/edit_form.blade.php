@@ -134,42 +134,38 @@
 
     </div>
 </div>
-<div class="row">
-    <div class="field_wrapper">
-
-        @if(!isset($mobile_details))
-        <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            <label>Mobile No</label>
-            <div class="inputMobile" style="display: flex;">
-                <input type="number" class="custom-add" name="mobile[]" />
-                <span class="add_button" title="Add field"><i class="fa fa-plus"></i></span>
-            </div>
+<div class="row field_wrappers">
+    
+    @if(!$mobile_details->count() > 0)
+    <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+        <label>Mobile No</label>
+        <div class="inputMobile" style="display: flex;">
+            <input type="number" class="custom-add" name="mobile[]" />
+            <span class="add_button" title="Add field"><i class="fa fa-plus"></i></span>
         </div>
-        @endif
-
-        @foreach($mobile_details as $key => $item )
-        @if($key == 0)
-        <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-            <label>Mobile No</label>
-            <div class="inputMobile" style="display: flex;">
-                <input type="number" class="custom-add" name="mobile[]" value="{{$item->mobile}}" />
-                <span class="add_button" title="Add field"><i class="fa fa-plus"></i></span>
-            </div>
-        </div>
-        @else
-        <article>
-            <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                <label>Mobile No</label>
-                <div class="inputMobile" style="display: flex;">
-                    <input type="number" class="custom-add" name="mobile[]" value="{{$item->mobile}}" />
-                    <span class="remove_button" title="Add field"><i class="fa fa-minus-circle"></i></span>
-                </div>
-            </div>
-        </article>
-        @endif
-
-        @endforeach
     </div>
+    @endif
+
+    @foreach($mobile_details as $key => $item )
+    @if($key == 0)
+    <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+        <label>Mobile No</label>
+        <div class="inputMobile" style="display: flex;">
+            <input type="number" class="custom-add" name="mobile[]" value="{{$item->mobile}}" />
+            <span class="add_button" title="Add field"><i class="fa fa-plus"></i></span>
+        </div>
+    </div>
+    @else
+    <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+        <label>Mobile No</label>
+        <div class="inputMobile" style="display: flex;">
+            <input type="number" class="custom-add" name="mobile[]" value="{{$item->mobile}}" />
+            <span class="remove_button" title="Add field"><i class="fa fa-minus-circle"></i></span>
+        </div>
+    </div>
+    @endif
+
+    @endforeach
 </div>
 
 

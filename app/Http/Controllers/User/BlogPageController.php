@@ -244,4 +244,6 @@ class BlogPageController extends Controller
 
         return view('user.blog.blogs', compact('blogs', 'pageNo', 'userId'))->render();
     }
+
+    
 }
