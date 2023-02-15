@@ -10,6 +10,11 @@
       </div>
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
         <ol class="breadcrumb float-sm-right">
+          <div class="dropdown show mr-3">
+            <a class="btn btn-secondary" data-toggle="modal" data-target="#push_email">
+              <i class="fa fa-paper-plane" aria-hidden="true"></i> Push Email
+            </a>
+          </div>
           <button type="submit" data-toggle="modal" data-target="#add_user" class="btn btn-primary">+ Add New</button>
         </ol>
       </div>
@@ -132,10 +137,59 @@
   </div>
 </div>
 <!-- Modal Delete-->
+
+<!-- ADD Email MODAL -->
+<div class="modal fade" id="push_email" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Push Email</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {!! Form::open(['action' => ['App\Http\Controllers\Admin\UserController@sendEmail'], 'files' => true, 'class' => 'needs-validation']) !!}
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="name">Title</label>
+            <textarea class="form-control" name="title" id="title" rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Message</label>
+            <textarea class="form-control" name="message" id="message" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Select</label>
+            <select class="form-control" name="type" id="email-select" required>
+              <option value="0" selected>Select Email Type</option>
+              <option value="1">Select All Emails</option>
+              <option value="2">Manually Select Emails</option>
+            </select>
+          </div>
+          <div class="form-group multiple d-none">
+            <label>Select Manually Emails</label>
+            {!! Form::select('emails[]', $emails, null, ['data-placeholder'=>__('Search Multiple Emails') ,'multiple'=>'multiple','id'=>'emails', 'class'=>'select2', 'style'=>'width: 100%']) !!}
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+      {!! Form::close() !!}
+    </div>
+  </div>
+</div>
+<!-- END Email MODAL ADD -->
 </section>
 @endsection
 
 @section('script')
+<script>
+  //Initialize Select2 Elements
+  $('.select2').select2();
+</script>
 <script type="text/javascript">
   $(document).ready(function() {
     window.csrfToken = '<?php echo csrf_token(); ?>';
@@ -201,6 +255,33 @@
 
     var id = $(this).attr('href');
     $('#delete').val(id);
+  });
+</script>
+
+<script>
+  $('#message').summernote({
+    placeholder: '',
+    tabsize: 2,
+    height: 250
+  });
+  $("#push_email").on("hidden.bs.modal", function() {
+    $(".modal-body #title").val('');
+    $(".modal-body #message").val('');
+    $(".modal-body #email-select").val(0);
+    $('#email-select').trigger("change");
+
+  });
+  $('body').on('change', '#email-select', function() {
+    if ($(this).val() == 2) {
+      $('.multiple').removeClass('d-none');
+      $('.multiple').addClass('d-block');
+    } else if ($(this).val() == 1) {
+      $('.multiple').removeClass('d-block');
+      $('.multiple').addClass('d-none');
+    } else {
+      $('.multiple').removeClass('d-block');
+      $('.multiple').addClass('d-none');
+    }
   });
 </script>
 @endsection

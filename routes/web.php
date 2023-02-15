@@ -115,6 +115,7 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::get('/admin/user/edit/{id}', [App\Http\Controllers\Admin\UserController::class, 'edit']);
     Route::get('/admin/user/show/{id}', [App\Http\Controllers\Admin\UserController::class, 'show']);
     Route::post('/admin/user/delete', [App\Http\Controllers\Admin\UserController::class, 'destroy']);
+    Route::post('/admin/user/email', [App\Http\Controllers\Admin\UserController::class, 'sendEmail']);
     Route::put(
         '/user/update/{id}',
         [
@@ -194,3 +195,7 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::post('/admin/settings/update', [App\Http\Controllers\Admin\SettingsController::class, 'update']);
 });
 // ADMIN SECTION END
+
+Route::get("/page", function () {
+    return \View::make("admin.send-email");
+});

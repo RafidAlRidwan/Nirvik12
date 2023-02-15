@@ -7,6 +7,7 @@ use Session;
 use Redirect;
 use validate;
 use App\Models\User;
+use App\Mail\SendEmail;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use App\Models\MobileNumberDetail;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -23,7 +25,8 @@ class UserController extends Controller
     }
     public function index()
     {
-        return view('admin/user.index');
+        $emails = User::pluck('email', 'id')->toArray();
+        return view('admin/user.index', compact('emails'));
     }
 
     public function user_datatable(Request $request)
@@ -209,5 +212,38 @@ class UserController extends Controller
                 ->withErrors($e->getMessage())
                 ->withInput();
         }
+    }
+
+    public function sendEmail(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required',
+            'message' => 'required',
+            'type' => 'required',
+        ]);
+        if ($request->type == 0) {
+            return redirect()->back()->with('flashy__info', __('Please Select Email type!'));
+        }
+        if ($request->type == 1) {
+            $emails = collect(User::whereNotNull('email')->get())->map(function ($item) {
+                return $item->email;
+            })->toArray();
+        }
+        if ($request->type == 2 && !empty($request->emails)) {
+            $emails = collect(User::whereNotNull('email')->whereIn('id', $request->emails)->get())->map(function ($item) {
+                return $item->email;
+            })->toArray();
+        }
+        if ($request->type == 2 && empty($request->emails)) {
+            return redirect()->back()->with('flashy__info', __('Please Select Email'));
+        }
+
+        $details = [
+            'title' => $request->title,
+            'body' => $request->message,
+        ];
+        Mail::to($emails)->send(new SendEmail($details));
+
+        return redirect()->back()->with('flashy__success', __('Email Sent!'));
     }
 }
