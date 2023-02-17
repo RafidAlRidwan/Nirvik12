@@ -29,6 +29,7 @@
 <script src="{{asset('assets/user/landingPage/custom-select/js/jquery.nice-select.min.js')}}"></script>
 <script src="{{asset('assets/user/landingPage/custom-select/js/fastclick.js')}}"></script>
 <script src="{{asset('assets/user/landingPage/custom-select/js/prism.js')}}"></script>
+
 <!-- Preloader -->
 <script type="text/javascript">
        $(window).on('load', function() {
@@ -43,4 +44,16 @@
 <script src="{{asset('assets/admin/plugins/toastr/toastr.min.js')}}"></script>
 <!-- Notification -->
 <script src="{{asset('assets/user/landingPage/notification/js/flashy.min.js')}}"></script>
+<script type="text/javascript">
+       <?php if ($message = Session::get('flashy__info')) : ?>
+              flashy('<?php echo " $message" ?>', {
+                     type: 'flashy__info'
+              });
+       <?php endif ?>
+       <?php if ($message = Session::get('flashy__success')) : ?>
+              flashy('<?php echo " $message" ?>', {
+                     type: 'flashy__success'
+              });
+       <?php endif ?>
+</script>
 @yield('main-script')

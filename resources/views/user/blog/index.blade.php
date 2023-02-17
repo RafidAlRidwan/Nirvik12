@@ -158,7 +158,9 @@
         var blog = $(this).attr('data-id');
         var user_id = "{{Auth::user() ? Auth::user()->id : 0}}";
         if (user_id == 0) {
-            toastr.warning("Please login first!");
+            flashy('Please login first!', {
+                        type: 'flashy__danger'
+                    });
             return;
         }
         $.ajax({
@@ -174,13 +176,17 @@
                     $("#controllerData" + blog).css("display", "none");
                     $("#unlike" + blog).css("display", "none");
                     $("#like" + blog).css("display", "inline-block");
-                    toastr.success("You Liked");
+                    flashy('You Liked', {
+                        type: 'flashy__success'
+                    });
                 }
                 if (response.status == 0) {
                     $("#controllerData" + blog).css("display", "none");
                     $("#unlike" + blog).css("display", "inline-block");
                     $("#like" + blog).css("display", "none");
-                    toastr.info("You Unliked");
+                    flashy('You Unliked', {
+                        type: 'flashy__danger'
+                    });
                 }
                 // toastr.success("Liked");
             },

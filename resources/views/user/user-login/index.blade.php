@@ -117,7 +117,7 @@ $banner = $cache->where('key', 'banner')->first();
     </div>
     <div style="justify-content: center; display: flex;">
       <a class="fb" href=""><img style="width: 40px; height: 40px" src="{{asset('/assets/user/loginPage/img/fb.png')}}"></a>
-      <a class="google" href=""><img style="width: 40px; height: 40px" src="{{asset('/assets/user/loginPage/img/google.png')}}"></a>
+      <a class="google" href="{{route('auth.google')}}"><img style="width: 40px; height: 40px" src="{{asset('/assets/user/loginPage/img/google.png')}}"></a>
     </div>
 
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>404 Custom Error Page Example</title>
+    <title>404 Not Found</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <style>
@@ -20,7 +20,7 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        animation: colorSlide 15s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
+        background-color: #242f3f;
     }
 
     .container {
@@ -89,7 +89,7 @@
         transition: 0.1s;
         margin-top: 1rem;
         visibility: hidden;
-        border:none;
+        border: none;
     }
 
     .container button:hover {
@@ -103,28 +103,6 @@
 
     .container .disable {
         pointer-events: none;
-    }
-
-    @keyframes colorSlide {
-        0% {
-            background-color: #152a68;
-        }
-
-        25% {
-            background-color: royalblue;
-        }
-
-        50% {
-            background-color: seagreen;
-        }
-
-        75% {
-            background-color: tomato;
-        }
-
-        100% {
-            background-color: #152a68;
-        }
     }
 
     @keyframes fadeIn {
@@ -231,7 +209,7 @@
                 <strong><a href="{{url('/')}}" style="text-decoration: none; color:#f82249" name="button">Return To Home</a></strong>
             </div>
         </div>
-        <p id="Status">Play Now</p>
+        <p id="Status">Let's Play tic tac toe</p>
         <section class="game-pad">
             <input type="text" id="b1" readonly />
             <input type="text" id="b2" readonly />
@@ -369,7 +347,7 @@
                 elem.classList.remove('click')
                 elem.style.backgroundColor = 'rgb(232, 231, 231)'
             });
-            statusBar.innerText = "Play now"
+            statusBar.innerText = "Let's play again"
             statusBar.style.color = 'white'
             statusBar.classList.remove('status')
             restartBtn.classList.remove('active')

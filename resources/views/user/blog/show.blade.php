@@ -247,13 +247,17 @@
             var blog_id = "{{$blog->id}}";
             var user_id = "{{Auth::user() ? Auth::user()->id : 0}}";
             if (user_id == 0) {
-                toastr.warning("Please login first!");
+                flashy('Please login first!', {
+                        type: 'flashy__danger'
+                    });
                 $('#comment_body').val("");
                 return;
             }
             var comment = $.trim($("#comment_body").val());
             if (comment == "") {
-                toastr.warning("Please Comment first!");
+                flashy('Please Comment first!', {
+                        type: 'flashy__danger'
+                    });
                 $('#comment_body').val("");
                 return;
             }
@@ -299,13 +303,17 @@
             if (data.status == 1) {
                 $('#comment' + commentId).text(data.comment);
                 $('#commentEditModal').modal('hide');
-                toastr.success("Your Comment updated");
+                flashy('Your Comment updated', {
+                        type: 'flashy__success'
+                    });
                 return;
             }
             if (data.status == 2) {
                 $('#comment' + commentId).text(data.comment);
                 $('#commentEditModal').modal('hide');
-                toastr.success("Your Reply updated");
+                flashy('Your Reply updated', {
+                        type: 'flashy__success'
+                    });
                 return;
             }
 
@@ -313,7 +321,9 @@
             $('#comment_body').val("");
             $('#content_expand').html('');
             $('#content_expand').html(data);
-            toastr.success("Your Comment deleted");
+            flashy('Your Comment deleted', {
+                        type: 'flashy__success'
+                    });
         });
     });
     $("#commentEditModal").on("hidden.bs.modal", function() {
@@ -337,7 +347,9 @@
         var user_id = "{{Auth::user() ? Auth::user()->id : 0}}";
         var replyBody = $.trim($('#reply_body' + parent_id).val());
         if (replyBody == "") {
-            toastr.warning("Please Comment");
+            flashy('Please Comment', {
+                        type: 'flashy__danger'
+                    });
 
             return;
         }

@@ -81,6 +81,17 @@
       left: 0;
       right: 0;
     }
+
+    .btn-custom {
+      background-color: #2f3640;
+      color: #f82249;
+    }
+
+    .btn-custom:hover {
+      background-color: #fff;
+      border-color: #f82249;
+      color: #f82249;
+    }
   }
 </style>
 @endsection
@@ -189,17 +200,17 @@ $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
 <!-- Modal -->
 <div class="modal fade" id="facebookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
+    <div class="modal-content" style="border: none; background: black; background: linear-gradient( to right bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)); border-radius: 1rem; backdrop-filter: blur(5px);">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span style="color: #f82249; text-shadow: 0 0px 0 #fff; opacity: 1;" aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <span>Sync with Facebook for Login with Facebook?</span>
+        <span class="text-white">Sync with Facebook for Login with Facebook?</span>
       </div>
       <div class="modal-footer">
-        <button type="button" data="facebook" class="btn btn-primary btn-sm">Yes</button>
+        <button type="button" data="facebook" class="btn btn-sm border-0 btn-custom submit">Yes</button>
       </div>
     </div>
   </div>
@@ -208,17 +219,17 @@ $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
 <!-- Modal -->
 <div class="modal fade" id="googleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
+    <div class="modal-content" style="border: none; background: black; background: linear-gradient( to right bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)); border-radius: 1rem; backdrop-filter: blur(5px);">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span style="color: #f82249; text-shadow: 0 0px 0 #fff; opacity: 1;" aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <span>Sync with Gmail for Login with Gmail?</span>
+        <span class="text-white">Sync with Gmail for Login with Gmail?</span>
       </div>
       <div class="modal-footer">
-        <button type="button" data="google" class="btn btn-primary btn-sm">Yes</button>
+        <button type="button" data="google" class="btn btn-sm border-0 btn-custom submit">Yes</button>
       </div>
     </div>
   </div>
@@ -236,6 +247,16 @@ $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
   });
   $('#google').click(function() {
     $('#googleModal').modal('show');
+  });
+
+  $('.submit').click(function() {
+    var value = $(this).attr('data');
+    if (value == 'facebook') {
+      $('#facebookModal').modal('hide');
+    } else {
+      $('#googleModal').modal('hide');
+      window.location.href = '{{route("auth.google")}}';
+    }
   });
 </script>
 <script>

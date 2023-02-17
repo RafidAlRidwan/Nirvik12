@@ -5,6 +5,7 @@ use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\IsAuthUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\SocialAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,13 @@ Route::get('/public/committee/details/{id}', [App\Http\Controllers\User\LandingP
 Route::get('/public/committee/registration/{id}', [App\Http\Controllers\User\LandingPageController::class, 'registration']);
 Route::post('/public/registration/getdata/{id}', [App\Http\Controllers\User\LandingPageController::class, 'registrationDatatable']);
 Route::post('/blog/read/count', [App\Http\Controllers\User\BlogPageController::class, 'countRead'])->name('blog.read.count');
+
+// Social Sign in
+Route::get('auth/google', [SocialAuthController::class, "redirectGoogle"])->name('auth.google');
+Route::get('auth/facebook', [SocialAuthController::class, "redirectFacebook"])->name('auth.facebook');
+Route::get('auth/google/callback', [SocialAuthController::class, "callBackGoogle"]);
+Route::get('auth/facebook/callback', [SocialAuthController::class, "callBackFacebook"]);
+Route::post('store/google/user', [SocialAuthController::class, "store"])->name('store.google.user');
 
 // USER LOGIN
 Route::middleware([IsAuthUser::class])->group(function () {
