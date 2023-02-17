@@ -140,8 +140,8 @@ $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
               @if((Auth::user()->id) == $value->user_id)
               <a href={{$url}} data-toggle="tooltip" data-placement="top" title="Edit Profile"><i class="fa fa-pencil"></i></a>
               <a href={{$urlPassword}} data-toggle="tooltip" data-placement="top" title="Change Password"><i class="fa fa-key"></i></a>
-              <a href="" data-toggle="tooltip" data-placement="top" title="Sync Facebook for Social Login"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-              <a href="" data-toggle="tooltip" data-placement="top" title="Sync Google for Social Login"><i class="fa fa-google" aria-hidden="true"></i></a>
+              <a id="facebook" data-toggle="tooltip" data-placement="top" title="Sync Facebook for Social Login"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a id="google" data-toggle="tooltip" data-placement="top" title="Sync Gamil for Social Login"><i class="fa fa-google" aria-hidden="true"></i></a>
               @endif
               <!-- <a href="" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a> -->
               <!-- <a href="" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram"></i></a> -->
@@ -186,6 +186,43 @@ $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
     <div class="about-me-bckg"></div>
   </section>
 </main>
+<!-- Modal -->
+<div class="modal fade" id="facebookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span>Sync with Facebook for Login with Facebook?</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data="facebook" class="btn btn-primary btn-sm">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="googleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span>Sync with Gmail for Login with Gmail?</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data="google" class="btn btn-primary btn-sm">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 @endforeach
 
@@ -193,7 +230,14 @@ $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
 
 @section('main-script')
 <script src="{{ asset('assets/user/landingPage/crop/ijaboCropTool.min.js') }}"></script>
-
+<script>
+  $('#facebook').click(function() {
+    $('#facebookModal').modal('show');
+  });
+  $('#google').click(function() {
+    $('#googleModal').modal('show');
+  });
+</script>
 <script>
   $(function() {
     $('[data-toggle="tooltip"]').tooltip()

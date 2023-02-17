@@ -14,22 +14,22 @@
               <div class="footer-top">
                      <div class="container">
                             <div class="row">
-                            @php
-                            $cache = Cache::get('settings');
-                            $app_name = $cache->where('key', 'app_name')->first();
-                            $banner = $cache->where('key', 'banner')->first();
-                            $description = $cache->where('key', 'description')->first();
-                            $address = $cache->where('key', 'address')->first();
-                            $phone = $cache->where('key', 'phone')->first();
-                            $email = $cache->where('key', 'email')->first();
-                            @endphp
+                                   @php
+                                   $cache = Cache::get('settings');
+                                   $app_name = $cache->where('key', 'app_name')->first();
+                                   $banner = $cache->where('key', 'banner')->first();
+                                   $description = $cache->where('key', 'description')->first();
+                                   $address = $cache->where('key', 'address')->first();
+                                   $phone = $cache->where('key', 'phone')->first();
+                                   $email = $cache->where('key', 'email')->first();
+                                   @endphp
 
                                    <div class="col-lg-6 col-md-6 footer-info">
-                                          <img style="height: 100px;" src="{{asset($banner->value)}}" alt="Nirvik'12">
-                                          <p>{{$description->value}}</p>
+                                          <img style="position: relative;height: 100px;left: -24px;" src="{{asset($banner->value)}}" alt="Nirvik'12">
+                                          <p style="text-align:justify;">{{$description->value}}</p>
                                    </div>
 
-                                   <div class="col-lg-6 col-md-6 footer-contact">
+                                   <div class="col-lg-6 col-md-6 footer-contact" style="text-align:end; padding-top:25px; margin-bottom:0px ">
                                           <h4>Contact Us</h4>
                                           <p>{{$address->value}}<br>
                                                  <strong>Phone:</strong> {{$phone->value}}<br>
@@ -55,7 +55,7 @@
                             &copy; Copyright <strong>{{$app_name->value}}</strong>. All Rights Reserved
                      </div>
                      <div class="credits">
-                            Designed by <a href="www.nirvik12.com/">{{$app_name->value}} TEAM</a>
+                            Designed & Developed by <a target="_blank" style="font-weight: 600; font-size:16px;" href="https://www.linkedin.com/in/rafidalridwan/">ᖇᗩᖴᎥᗪ ᗩᒪ ᖇᎥᗪᗯᗩᑎ</a>
                      </div>
               </div>
 
