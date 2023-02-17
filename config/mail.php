@@ -39,7 +39,7 @@ return [
             'host' => 'smtp.gmail.com',
             'port' => 465,
             'encryption' => 'ssl',
-            'username' => 'yoyolidoy@gmail.com',
+            'username' => 'yoyolidoy@gmail.co',
             'password' => 'lbwavakxltjoweht',
             'timeout' => null,
             'auth_mode' => null,
