@@ -119,7 +119,7 @@ $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
   <!-- About me -->
   @foreach($user_details as $key => $value)
 
-  <section class="fh5co-about-me">
+  <section class="fh5co-about-me wow fadeInUp">
     <div class="about-me-inner site-container">
       <article class="portfolio-wrapper">
         <div class="avatar-upload">

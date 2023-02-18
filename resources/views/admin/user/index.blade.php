@@ -25,6 +25,26 @@
 <hr>
 <section class="content p-2 ">
   <div class="container-fluid">
+    <form enctype="multipart/form-data" role="form" method="POST" action="{{route('import')}}">
+      <div class="form-group">
+        <label for="exampleInputFile">File Import</label>
+        <div class="input-group">
+          <div class="custom-file">
+            <input name="excel_file" type="file" class="custom-file-input" id="exampleInputFile" required>
+            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+          </div>
+          <div class="input-group-append">
+            <button type="submit" class="input-group-text">Import</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    @if($errors->has('excel_file'))
+    <span class="text-danger">{{ $errors->first('excel_file') }}</span>
+    @endif
+    @if($errors->has('excel_file'))
+    <span class="text-danger">{{ $errors->first('excel_file') }}</span>
+    @endif
     <div class="row m-t-25 card p-3">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 

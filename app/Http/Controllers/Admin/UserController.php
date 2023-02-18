@@ -246,4 +246,66 @@ class UserController extends Controller
 
         return redirect()->back()->with('flashy__success', __('Email Sent!'));
     }
+
+    public function importPost(Request $request)
+    {
+        dd($request->all());
+        $this->validate($request, [
+            'excel_file' => 'required|mimes:csv,txt'
+        ]);
+
+        $file = $_FILES["excel_file"]["tmp_name"];
+        $fileLength = $_FILES["excel_file"]["size"];
+
+        $fileOpen = fopen($file, "r");
+        $row = 1;
+        while (($csv = fgetcsv($fileOpen, $fileLength, ",")) !== false) {
+            try {
+                if ($row !== 1) {
+                    if ($csv[0] != '' && $csv[4] != '') {
+                        $districtName = $csv[2];
+                        $districtFind = DB::table('districts')->where('name', $districtName)->first();
+
+                        if ($districtFind) {
+                            $upazilaName = $csv[3];
+                            $upazilaFind = DB::table('upazilas')->where('name', $upazilaName)->first();
+                            if ($upazilaFind === null) {
+                                $upazilaId = DB::table('upazilas')->insertGetId([
+                                    'district_id' => $districtFind->id,
+                                    'name' => $upazilaName,
+                                    'bn_name' => $upazilaName,
+                                    'url' => $upazilaName,
+                                ]);
+                            } else {
+                                $upazilaId = $upazilaFind->id;
+                            }
+
+                            // $checkDuplicate = DB::table('uddokta_locators')
+                            //     ->where('district_id', $districtFind->id)
+                            //     ->where('upazila_id', $upazilaId)
+                            //     ->where('address_english', $csv[4])
+                            //     ->where('title_english', $csv[0])->first();
+                            // if (!$checkDuplicate) {
+                            DB::table('uddokta_locators')->insert([
+                                'title_english' => $csv[0],
+                                'district_id'     => $districtFind->id,
+                                'upazila_id'    => $upazilaId,
+                                'title_bangla'    => $csv[1],
+                                'address_english'    => $csv[4],
+                                'address_bangla'    => $csv[5],
+                                'lat'    => $csv[6] != '' ? $csv[6] : 0,
+                                'lon'    => $csv[7] != '' ? $csv[7] : 0
+                            ]);
+                            // }
+                        }
+                    }
+                }
+                ++$row;
+            } catch (\Exception $e) {
+                dd($e);
+            }
+        }
+        // return redirect()->route('administrative.distributor-locator')->with('success', 'Imported Successfully');
+        return redirect()->back()->with('success', 'File has been uploaded successfully.');
+    }
 }

@@ -5,7 +5,7 @@
         <h6 class="mt-0">{{$item->userDetails ? $item->userDetails->full_name : 'Guest'}}</h6>
         <p class="mb-3" id="comment{{$item->id}}">{{$item->comment}}</p>
         <textarea cols="20" id="reply_body{{$item->id}}" rows="2" class="form-control mb-2 d-none " placeholder="Enter Your Reply Here"></textarea>
-        @if(auth()->user() && auth()->user()->id == $userId)
+        @if(auth()->user() && auth()->user()->id == $item->comment_by)
         <a data-toggle="modal" data-target="#commentEditModal" href="#" id="btn_edit{{$item->id}}" class="text-dark small font-weight-bold btn_edit" data-id="{{$item->id}}"><i class="ti-back-right"></i> <button class="btn btn-outline-dark btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i></button></a>
         @endif
         <a href="#" id="btn_reply{{$item->id}}" class="text-dark small font-weight-bold btn_reply" data-id="{{$item->id}}"><i class="ti-back-right"></i> <button class="btn btn-outline-dark btn-sm"><i class="fa fa-reply" aria-hidden="true"></i></button></a>
@@ -19,7 +19,7 @@
             <div class="media-body align-items-center">
                 <h6 class="mt-0">{{$child->userDetails ? $child->userDetails->full_name : 'Guest'}}</h6>
                 <p class="mb-3" id="comment{{$child->id}}">{{$child->comment}}</p>
-                @if(auth()->user() && auth()->user()->id == $userId)
+                @if(auth()->user() && auth()->user()->id == $child->comment_by)
                 <a href="#" id="btn_edit{{$child->id}}" class="text-dark small font-weight-bold btn_edit" data-id="{{$child->id}}"><i class="ti-back-right"></i> <button class="btn btn-outline-dark btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i></button></a>
                 @endif
             </div>

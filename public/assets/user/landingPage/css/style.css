@@ -156,12 +156,19 @@ h6 {
   right: 0;
   transition: all 0.5s;
   z-index: 997;
-  background-color: #242f3f;
+  /* background-color: #242f3f; */
+  background: black;
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+  backdrop-filter: blur(20px);
+  /* backdrop-filter: blur(10px); */
 }
 
 #header.header-scrolled,
 #header.header-fixed {
-  background: rgba(6, 12, 34, 0.98);
+  /* background: rgba(6, 12, 34, 0.98); */
+  background: black;
+  background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+  backdrop-filter: blur(20px);
   border-bottom: 2px solid rgb(248, 34, 73);
   height: 70px;
   padding: 15px 0;
@@ -381,8 +388,8 @@ h6 {
 
 #mobile-nav-toggle {
   position: fixed;
-  right: 0;
-  top: 0;
+  right: 25px;
+  top: 3px;
   z-index: 999;
   margin: 15px 15px 0 0;
   border: 0;
@@ -408,7 +415,7 @@ h6 {
   z-index: 998;
   background: rgba(6, 12, 34, 0.9);
   left: -260px;
-  width: 260px;
+  width: 200px;
   overflow-y: auto;
   transition: 0.4s;
 }
@@ -436,6 +443,10 @@ h6 {
   outline: none;
 }
 
+#mobile-nav ul li .menu-active a{
+  color: #f82249;
+}
+
 #mobile-nav ul li a:hover {
   color: #f82249;
 }
@@ -454,10 +465,6 @@ h6 {
 }
 
 #mobile-nav ul .menu-has-children i.fa-chevron-up {
-  color: #f82249;
-}
-
-#mobile-nav ul .menu-item-active {
   color: #f82249;
 }
 
@@ -1807,7 +1814,10 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 @media (max-width: 991px) {
   #header {
-    background: rgba(6, 12, 34, 0.98);
+    /* background: rgba(6, 12, 34, 0.98); */
+    background: black;
+    background: linear-gradient(to right bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+    backdrop-filter: blur(20px);
     height: 70px;
     padding: 15px 0;
     transition: all 0.5s;

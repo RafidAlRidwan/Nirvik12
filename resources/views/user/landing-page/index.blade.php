@@ -145,7 +145,7 @@
                                           <div class="speaker">
                                           </div>
 
-                                          <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title={{$value['title']}} body={{$value['description']}}>{{$value['title']}}</a></h4>
+                                          <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title="{{$value['title']}}" body={{$value['description']}}>{{$value['title']}}</a></h4>
                                           <p><i class="fa fa-map-marker"></i> {{$value['venue']}}</p>
                                    </div>
                             </div>
@@ -182,7 +182,7 @@
                                           <div class="speaker">
                                           </div>
 
-                                          <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title={{$value['title']}} body={{$value['description']}}>{{$value['title']}}</a></h4>
+                                          <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title="{{$value['title']}}" body={{$value['description']}}>{{$value['title']}}</a></h4>
                                           <p><i class="fa fa-map-marker"></i> {{$value['venue']}}</p>
                                    </div>
                             </div>
@@ -219,7 +219,7 @@
                                           <div class="speaker">
                                           </div>
 
-                                          <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title={{$value['title']}} body={{$value['description']}}>{{$value['title']}}</a></h4>
+                                          <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title="{{$value['title']}}" body={{$value['description']}}>{{$value['title']}}</a></h4>
                                           <p><i class="fa fa-map-marker"></i> {{$value['venue']}}</p>
                                    </div>
                             </div>
@@ -281,14 +281,14 @@
 <section>
        <div class="modal fade" id="event-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
-                     <div class="modal-content">
+                     <div class="modal-content" style="border: none; background: black; background: linear-gradient( to right bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)); border-radius: 1rem; backdrop-filter: blur(5px);">
                             <div class="modal-header">
-                                   <h5 class="modal-title text-bold title" id="exampleModalLabel"></h5>
+                                   <h5 class="modal-title text-bold text-white title" id="exampleModalLabel"></h5>
                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
+                                          <span style="color: #f82249; text-shadow: 0 0px 0 #fff; opacity: 1;" aria-hidden="true">&times;</span>
                                    </button>
                             </div>
-                            <div class="modal-body body">
+                            <div class="modal-body body text-white">
 
                             </div>
                      </div>

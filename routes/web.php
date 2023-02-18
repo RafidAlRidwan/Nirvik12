@@ -131,6 +131,7 @@ Route::middleware([CheckAdmin::class])->group(function () {
             'uses' => 'App\Http\Controllers\Admin\UserController@update'
         ]
     );
+    Route::post('/admin/user/import', [App\Http\Controllers\Admin\UserController::class, 'importPost'])->name('import');
 
     // News MANAGEMENT
     Route::get('/admin/news/setting', [App\Http\Controllers\Admin\NewsController::class, 'index'])->name('news_index');;
@@ -203,7 +204,3 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::post('/admin/settings/update', [App\Http\Controllers\Admin\SettingsController::class, 'update']);
 });
 // ADMIN SECTION END
-
-Route::get("/page", function () {
-    return \View::make("admin.send-email");
-});
