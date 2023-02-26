@@ -63,13 +63,13 @@
                             @endif
 
                             @if(auth()->user())
-                            <li class="buy-tickets"><a onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();" href="{{ route('logout') }}">logout</a></li>
+                            <span class="buy-tickets"><a onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();" href="{{ route('logout') }}">logout</a></span>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                    @csrf
                             </form>
                             @else
-                            <li class="buy-tickets"><a href="{{URL::to('user/login')}}">Login</a></li>
+                            <span class="buy-tickets"><a href="{{URL::to('user/login')}}">Login</a></span>
                             @endif
                             <!-- @if(Session::has('userName'))
                             

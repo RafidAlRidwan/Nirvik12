@@ -26,6 +26,7 @@
 <section class="content p-2 ">
   <div class="container-fluid">
     <form enctype="multipart/form-data" role="form" method="POST" action="{{route('import')}}">
+      {!! Form::open(['action' => ['App\Http\Controllers\Admin\UserController@importPost'], 'files' => true, 'class' => 'needs-validation']) !!}
       <div class="form-group">
         <label for="exampleInputFile">File Import</label>
         <div class="input-group">
@@ -38,50 +39,50 @@
           </div>
         </div>
       </div>
-    </form>
-    @if($errors->has('excel_file'))
-    <span class="text-danger">{{ $errors->first('excel_file') }}</span>
-    @endif
-    @if($errors->has('excel_file'))
-    <span class="text-danger">{{ $errors->first('excel_file') }}</span>
-    @endif
-    <div class="row m-t-25 card p-3">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      {!! Form::close() !!}
+      @if($errors->has('excel_file'))
+      <span class="text-danger">{{ $errors->first('excel_file') }}</span>
+      @endif
+      @if($errors->has('excel_file'))
+      <span class="text-danger">{{ $errors->first('excel_file') }}</span>
+      @endif
+      <div class="row m-t-25 card p-3">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
 
-        <table id="index_datatable" class="table table-bordered table-striped table-hover">
-          <thead style="color:#fff; background: #4ed2c5;">
-            <tr>
-              <th>Serial</th>
-              <th>Profile Picture</th>
-              <th>User Name</th>
-              <th>Name</th>
-              <th>Current City</th>
-              <th>Section</th>
-              <th>Shift</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
+          <table id="index_datatable" class="table table-bordered table-striped table-hover">
+            <thead style="color:#fff; background: #4ed2c5;">
+              <tr>
+                <th>Serial</th>
+                <th>Profile Picture</th>
+                <th>User Name</th>
+                <th>Name</th>
+                <th>Current City</th>
+                <th>Section</th>
+                <th>Shift</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
 
 
 
-          </tbody>
-          <tfoot>
-            <tr>
-              <th>Serial</th>
-              <th>Profile Picture</th>
-              <th>User Name</th>
-              <th>Name</th>
-              <th>Current City</th>
-              <th>Section</th>
-              <th>Shift</th>
-              <th>Action</th>
-            </tr>
-          </tfoot>
-        </table>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>Serial</th>
+                <th>Profile Picture</th>
+                <th>User Name</th>
+                <th>Name</th>
+                <th>Current City</th>
+                <th>Section</th>
+                <th>Shift</th>
+                <th>Action</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
-    </div>
   </div>
 </section>
 
