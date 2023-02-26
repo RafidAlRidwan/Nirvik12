@@ -418,6 +418,7 @@ h6 {
   width: 200px;
   overflow-y: auto;
   transition: 0.4s;
+  border-right: 1px solid #f82249;
 }
 
 #mobile-nav ul {
@@ -443,11 +444,15 @@ h6 {
   outline: none;
 }
 
-#mobile-nav ul li .menu-active a{
-  color: #f82249;
+#mobile-nav .menu-active a {
+  color: #f82249 !important;
 }
 
 #mobile-nav ul li a:hover {
+  color: #f82249;
+}
+
+#mobile-nav ul li a:focus {
   color: #f82249;
 }
 
@@ -743,7 +748,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------------------------------------*/
 
 #about {
-  background: url("/nirvik12/assets/user/landingPage/img/about-bg2.jpg") center;
+  background: url("/assets/user/landingPage/img/about-bg2.jpg") center;
   background-size: cover;
   overflow: hidden;
   position: relative;
@@ -1028,7 +1033,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #venue .venue-info {
-  background: url("/nirvik12/assets/user/landingPage/img/venue-info-bg.jpg") top center no-repeat;
+  background: url("/assets/user/landingPage/img/venue-info-bg.jpg") top center no-repeat;
   background-size: cover;
   position: relative;
   padding-top: 60px;
@@ -1288,7 +1293,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #subscribe {
   padding: 60px;
-  background: url(/nirvik12/assets/user/landingPage/img/subscribe-bg.jpg) center center no-repeat;
+  background: url(/assets/user/landingPage/img/subscribe-bg.jpg) center center no-repeat;
   background-size: cover;
   overflow: hidden;
   position: relative;
@@ -1528,8 +1533,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #footer .footer-top {
-  background: #040919;
+  background: #101522;
   padding: 60px 0 30px 0;
+  border-bottom: 2px solid #f82249;
 }
 
 #footer .footer-top .footer-info {
@@ -1938,6 +1944,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   @media (max-width: 767px) {
     #schedule .nav-tabs a {
       padding: 8px 50px;
+      margin: 2px;
     }
   }
 
@@ -1950,6 +1957,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   @media (max-width: 480px) {
     #schedule .nav-tabs a {
       padding: 8px 30px;
+      margin: 2px;
     }
   }
 

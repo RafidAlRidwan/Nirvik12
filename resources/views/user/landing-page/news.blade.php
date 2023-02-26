@@ -35,7 +35,7 @@
                                    @foreach ($news as $item)
                                    <li>
                                           <a data-toggle="collapse" class="collapsed" href="#faq{{$item->id}}">{{$item->heading}}<i class="fa fa-minus-circle"></i></a>
-                                          <div id="faq{{$item->id}}" class="collapse" data-parent="#faq-list">
+                                          <div style="text-align: justify;" id="faq{{$item->id}}" class="collapse" data-parent="#faq-list">
                                                  {!!$item->body!!}
                                           </div>
                                    </li>

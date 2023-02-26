@@ -7,7 +7,7 @@
               @endphp
 
               <div id="logo" class="pull-left">
-                     <a href="/" class="scrollto"><img src="{{asset($banner->value)}}" alt="" title=""></a>
+                     <a href="{{url('/')}}" class="scrollto"><img src="{{asset($banner->value)}}" alt="" title=""></a>
               </div>
               @php
               $newsDetails = App\Models\News::orderBy('created_at', 'desc')->get();

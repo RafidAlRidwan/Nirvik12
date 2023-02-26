@@ -47,7 +47,7 @@
                      <h2 style="color: #f82249">About Nirvik'12</h2>
               </div>
               <div class="row">
-                     <div class="col-lg-12" style="justify-content: center;">
+                     <div class="col-lg-12" style="justify-content: center; text-align:justify">
                             @php
                             $about = App\Models\About::where('id' , 1)->first();
                             @endphp
@@ -73,7 +73,7 @@
                                    @foreach ($newsDetails as $item)
                                    <li>
                                           <a data-toggle="collapse" class="collapsed" href="#faq{{$item->id}}">{{$item->heading}}<i class="fa fa-minus-circle"></i></a>
-                                          <div id="faq{{$item->id}}" class="collapse" data-parent="#faq-list">
+                                          <div style="text-align:justify" id="faq{{$item->id}}" class="collapse" data-parent="#faq-list">
                                                  {!!$item->body!!}
                                           </div>
                                    </li>
@@ -274,6 +274,12 @@
                                    <img src="{{asset('assets/user/landingPage/img/supporters/4.png')}}" class="img-fluid" alt="">
                             </div>
                      </div>
+                     <div class="col-lg-3 col-md-4 col-xs-6">
+                            <div class="supporter-logo">
+                                   <img src="{{asset('assets/user/landingPage/img/supporters/4.png')}}" class="img-fluid" alt="">
+                            </div>
+                     </div>
+                     
               </div>
        </div>
 </section>
