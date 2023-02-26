@@ -1,7 +1,7 @@
 <!--==========================Footer============================-->
 <div class="animation-area">
-       <footer id="footer">
 
+       <footer id="footer">
               <ul class="box-area">
                      <li><img src={{asset('assets/user/landingPage/img/box1.png')}} width="80" height="80" style="border-radius: 50%" /></li>
                      <li><img src={{asset('assets/user/landingPage/img/box1.png')}} width="30" height="30" style="border-radius: 50%" /></li>
@@ -49,7 +49,6 @@
                             </div>
                      </div>
               </div>
-
               <div class="container">
                      <div class="copyright">
                             &copy; Copyright <strong>{{$app_name->value}}</strong>. All Rights Reserved
@@ -58,6 +57,6 @@
                             Designed & Developed by <a target="_blank" style="font-weight: 600; font-size:16px;" href="https://www.linkedin.com/in/rafidalridwan/">ᖇᗩᖴᎥᗪ ᗩᒪ ᖇᎥᗪᗯᗩᑎ</a>
                      </div>
               </div>
-
        </footer>
+
 </div>
