@@ -311,6 +311,40 @@ h6 {
 
 .nav-menu>li>a:before {
   content: "";
+  width: 0;
+  height: 2px;
+  background-color: #f82249;
+  position: absolute;
+  top: 90%;
+  left: 0;
+  transition: all 0.5s;
+}
+
+.nav-menu>li>a:after {
+  content: "";
+  width: 0;
+  height: 2px;
+  background-color: #f82249;
+  position: absolute;
+  top: 90%;
+  right: 0;
+  transition: all 0.5s;
+}
+
+.nav-menu>li>a:hover:before,
+.nav-menu .menu-active>a:before {
+  width: 50%;
+  transform: translateX(100%);
+}
+
+.nav-menu>li>a:hover:after,
+.nav-menu .menu-active>a:after {
+  width: 50%;
+  transform: translateX(-100%);
+}
+
+/* .nav-menu>li>a:before {
+  content: "";
   position: absolute;
   width: 0;
   height: 2px;
@@ -326,9 +360,9 @@ h6 {
 .nav-menu .menu-active>a:before {
   visibility: visible;
   width: 100%;
-}
+} */
 
-.nav-menu li.buy-tickets a {
+.nav-menu span.buy-tickets a {
   color: #fff;
   background: #none;
   padding: 7px 22px;
@@ -342,14 +376,14 @@ h6 {
   font-size: 13px;
 }
 
-.nav-menu li.buy-tickets a:hover {
+.nav-menu span.buy-tickets a:hover {
   background: none;
   background: #f82249;
   box-shadow: 0 0 10px #f82249, 0 0 40px #f82249, 0 0 80px #f82249;
 }
 
-.nav-menu li.buy-tickets:hover a:before,
-.nav-menu li.buy-tickets.menu-active a:before {
+.nav-menu span.buy-tickets:hover a:before,
+.nav-menu span.buy-tickets.menu-active a:before {
   visibility: hidden;
 }
 
@@ -432,7 +466,23 @@ h6 {
   margin: 20px;
 }
 
+#mobile-nav ul span {
+  position: relative;
+  margin: 20px;
+}
+
 #mobile-nav ul li a {
+  color: #fff;
+  font-size: 17px;
+  overflow: hidden;
+  padding: 0px 22px 10px 15px;
+  position: relative;
+  text-decoration: none;
+  width: 100%;
+  display: initial;
+  outline: none;
+}
+#mobile-nav ul span a {
   color: #fff;
   font-size: 17px;
   overflow: hidden;
