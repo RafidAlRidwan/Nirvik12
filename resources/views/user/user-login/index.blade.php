@@ -47,6 +47,28 @@
     animation: fadeInDown 1s;
   }
 
+  .icon-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background-color: #000;
+    color: white;
+    font-size: 1.2em;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-bottom-left-radius: 1rem;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .icon-close:hover {
+    background-color: #f82249;
+    transition: 0.3s;
+  }
+
   @keyframes fadeInDown {
     0% {
       opacity: 0;
@@ -101,6 +123,7 @@ $banner = $cache->where('key', 'banner')->first();
 @endphp
 <div class="login-content">
   <div class="form-box">
+    <a href="{{url('/')}}"><span><i class="fa fa-times icon-close" aria-hidden="true"></i></span></a>
     {{Form::open(array('url' => 'login' , 'class' => 'box', 'method' => 'POST'))}}
     <img class="anm" src="{{asset('assets/user/loginPage/img/bzs.png')}}">
     <!-- <h3 class="title">নির্ভীক '১২</h3> -->
