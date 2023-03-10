@@ -162,6 +162,44 @@ class UserController extends Controller
         die();
     }
 
+    public function loadUserData(Request $request)
+    {
+        $users = User::with('userDetails')
+            ->where('type', 3)
+            ->orderBy('created_at', 'ASC');
+
+        if ($request->has('search') && $request->filled('search')) {
+            $search = $request->input('search');
+            $users = $users->whereHas('userDetails', function ($q) use ($search) {
+                $q->where('user_details.full_name', 'like', '%' . $search . '%');
+            });
+        }
+        if ($request->has('section') && $request->filled('section')) {
+            $section = $request->input('section');
+            $users = $users->whereHas('userDetails', function ($q) use ($section) {
+                $q->where('user_details.section', $section);
+            });
+        }
+        if ($request->has('shift') && $request->filled('shift')) {
+            $shift = $request->input('shift');
+            $users = $users->whereHas('userDetails', function ($q) use ($shift) {
+                $q->where('user_details.shift', $shift);
+            });
+        }
+
+        $perPage = 6;
+        $pageNo = $request->has('page') ? $request->page : 1;
+        if ($pageNo == 1) {
+            $skip = 0;
+        } else {
+            $skip = $perPage * $pageNo - 1;
+        }
+
+        $users = $users->skip($skip)->take($perPage)->paginate($perPage)->appends(request()->input());
+
+        return view('user.user.user-list', compact('users'))->render();
+    }
+
     public function show($id)
     {
         $user = User::findOrFail($id);

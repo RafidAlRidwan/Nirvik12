@@ -63,6 +63,7 @@ Route::middleware([IsUser::class])->group(function () {
     Route::post('/crop-image-upload', [App\Http\Controllers\User\UserController::class, 'uploadCropImage'])->name('profile.image.upload');
     Route::get('/user/create', [App\Http\Controllers\User\UserController::class, 'create']);
     Route::post('/user/store', [App\Http\Controllers\User\UserController::class, 'store']);
+    Route::get('/user/getdata', [App\Http\Controllers\User\UserController::class, 'loadUserData'])->name('load.data');
     Route::post('/user/getdt', [App\Http\Controllers\User\UserController::class, 'contact_datatable']);
     Route::get('/user/my-profile/edit/{id}', [App\Http\Controllers\User\UserController::class, 'edit'])->name('profile.edit');
     Route::get('/user/my-profile/edit-password/{id}', [App\Http\Controllers\User\UserController::class, 'edit_password']);

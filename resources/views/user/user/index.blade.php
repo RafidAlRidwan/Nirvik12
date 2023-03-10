@@ -22,11 +22,9 @@
         padding: 0px 0;
     }
 </style>
-<link rel="stylesheet" href="{{asset('assets/user/landingPage/datatable/css/jquery.dataTables.min.css')}}">
-<link rel="stylesheet" href="{{asset('assets/user/landingPage/datatable/css/fixedHeader.bootstrap.min.css')}}">
-<link rel="stylesheet" href="{{asset('assets/user/landingPage/datatable/css/responsive.bootstrap.min.css')}}">
-<link rel="stylesheet" href="{{asset('assets/user/landingPage/datatable/css/buttons.dataTables.min.css')}}">
-<link rel="stylesheet" href="{{asset('assets/user/landingPage/custom-css/cus-data-table.css')}}">
+<link rel="stylesheet" href="{{asset('assets/user/landingPage/custom-select/css/style.css')}}">
+
+<link rel="stylesheet" href="{{asset('assets/user/landingPage/custom-css/custom-select-field.css')}}">
 
 @endsection
 @section('header')
@@ -43,78 +41,104 @@
             </div>
 
             <div id="app">
-                <div class="box">
+                <div class="boxes">
                     <div class="row">
+                        <div class="col-lg-3 col-md-5 col-12">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-3">
 
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-
-                            <div class="containerr">
-                                <div class="search_wrap search_wrap_4 mb-2">
-                                    <div class="search_box">
-                                        <div class="btn btn_common">
-                                            <i class="fa fa-search"></i>
+                                <div class="containerr">
+                                    <div class="search_wrap search_wrap_4 mb-2">
+                                        <div class="search_box">
+                                            <div class="btn btn_common">
+                                                <i class="fa fa-search"></i>
+                                            </div>
+                                            <input type="text" name="search" id="search" class="input" placeholder="Search..." autocomplete="off">
                                         </div>
-                                        <input type="text" name="search" v-on:keyup="changeName" id="search" class="input" placeholder="Search..." autocomplete="off">
                                     </div>
                                 </div>
+
                             </div>
 
-                        </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-
-                            <div class="select-box">
-                                <div v-on:click="sectionChange" class="options-container">
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="all" name="platform" value="0" />
-                                        <label for="all">Select All Section</label>
-                                    </div>
-                                    @foreach($section_all as $item)
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="{{$item -> name}}" name="platform" value="{{$item -> name}}" />
-                                        <label for="youtube">{{$item -> name}}</label>
-                                    </div>
+                                <select id="section" class="wide mb-3" aria-label="Default select example">
+                                    <option value="0" selected>Select Section</option>
+                                    @foreach ($section_all as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach
-                                </div>
+                                </select>
 
-                                <div class="selected">
-                                    Select Section
-                                </div>
-
-                                <div class="search-box">
-                                    <input type="text" placeholder="Start Typing..." />
-                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
-
-                            <div class="select-box">
-                                <div v-on:click="shiftChange" class="options-container">
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="all" name="platform" value="0" />
-                                        <label for="all">Select All Shift</label>
-                                    </div>
-                                    @foreach($shift_all as $item)
-                                    <div class="option">
-                                        <input type="radio" class="radio" id="{{$item -> name}}" name="platform" value="{{$item -> name}}" />
-                                        <label for="youtube">{{$item -> name}}</label>
-                                    </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <select id="shift" class="wide mb-3" aria-label="Default select example">
+                                    <option value="0" selected>Select Shift</option>
+                                    @foreach ($shift_all as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach
-                                </div>
-
-                                <div class="selected2">
-                                    Select Shift
-                                </div>
-
-                                <div class="search-box">
-                                    <input type="text" placeholder="Start Typing..." />
-                                </div>
+                                </select>
                             </div>
+
+                            <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-3">
+
+                                <div class="select-box">
+                                    <div v-on:click="sectionChange" class="options-container sectionChange">
+                                        <div class="option">
+                                            <input type="radio" class="radio" id="all" name="platform" value="0" />
+                                            <label for="all">Select All Section</label>
+                                        </div>
+                                        @foreach($section_all as $item)
+                                        <div class="option">
+                                            <input type="radio" class="radio" id="{{$item -> name}}" name="platform" value="{{$item -> name}}" />
+                                            <label for="youtube">{{$item -> name}}</label>
+                                        </div>
+                                        @endforeach
+                                    </div>
+
+                                    <div class="selected">
+                                        Select Section
+                                    </div>
+
+                                    <div class="search-box">
+                                        <input type="text" placeholder="Start Typing..." />
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-3">
+
+                                <div class="select-box">
+                                    <div v-on:click="shiftChange" class="options-container">
+                                        <div class="option">
+                                            <input type="radio" class="radio" id="all" name="platform" value="0" />
+                                            <label for="all">Select All Shift</label>
+                                        </div>
+                                        @foreach($shift_all as $item)
+                                        <div class="option">
+                                            <input type="radio" class="radio" id="{{$item -> name}}" name="platform" value="{{$item -> name}}" />
+                                            <label for="youtube">{{$item -> name}}</label>
+                                        </div>
+                                        @endforeach
+                                    </div>
+
+                                    <div class="selected2">
+                                        Select Shift
+                                    </div>
+
+                                    <div class="search-box">
+                                        <input type="text" placeholder="Start Typing..." />
+                                    </div>
+                                </div>
+                            </div> -->
                         </div>
+                        <div class="col-lg-9 col-md-8 col-12" id="content_area">
+
+                        </div>
+
+
                     </div>
 
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                             <table id="index_datatable" class="table table-hover">
                                 <thead>
@@ -146,8 +170,7 @@
                                 </tfoot>
                             </table>
                         </div>
-                    </div>
-
+                    </div> -->
 
                 </div>
             </div>
@@ -158,156 +181,15 @@
 @endsection
 
 @section('main-script')
-<script src="{{asset('assets/user/landingPage/datatable/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('assets/user/landingPage/datatable/js/dataTables.bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/user/landingPage/datatable/js/dataTables.fixedHeader.min.js')}}"></script>
-<script src="{{asset('assets/user/landingPage/datatable/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{asset('assets/user/landingPage/datatable/js/responsive.bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/user/landingPage/datatable/js/dataTables.buttons.min.js')}}"></script>
-<script src="{{asset('assets/user/landingPage/datatable/js/jszip.min.js')}}"></script>
-<script src="{{asset('assets/user/landingPage/datatable/js/pdfmake.min.js')}}"></script>
-<script src="{{asset('assets/user/landingPage/datatable/js/vfs_fonts.js')}}"></script>
-<script src="{{asset('assets/user/landingPage/datatable/js/buttons.html5.min.js')}}"></script>
-<script src="{{asset('assets/user/landingPage/datatable/js/buttons.print.min.js')}}"></script>
+<!-- CUSTOM SELECT -->
 <script src="{{asset('assets/user/landingPage/custom-select/js/jquery.nice-select.min.js')}}"></script>
 <script src="{{asset('assets/user/landingPage/custom-select/js/fastclick.js')}}"></script>
 <script src="{{asset('assets/user/landingPage/custom-select/js/prism.js')}}"></script>
-<script src="{{asset('assets/user/landingPage/js/cus-select.js')}}"></script>
-
-<script type="text/javascript">
-    var app = new Vue({
-        el: '#app',
-        created: function() {
-            $(document).ready(function() {
-                window.csrfToken = '<?php echo csrf_token(); ?>';
-                var postData = {};
-                postData._token = window.csrfToken;
-
-                var table = $('#index_datatable').DataTable({
-                    "responsive": true,
-                    "processing": true,
-                    "serverSide": true,
-                    "dom": 'Bfrtip',
-                    "lengthMenu": [
-                        [10, 25, 50, 100, 200, 250],
-                        ['10 rows', '25 rows', '50 rows', '100 rows', '200 rows', '250 rows']
-                    ],
-                    "buttons": ['pageLength'],
-                    // "buttons": ['pageLength', 'copy', 'csv', 'excel', 'pdf', 'print'],
-                    "ajax": {
-                        "url": "{{URL::to('/user/getdt')}}",
-                        "type": "POST",
-                        "data": function(d) {
-                            $.extend(d, postData);
-                            var dt_params = $('#index_datatable').data('dt_params');
-                            if (dt_params) {
-                                $.extend(d, dt_params);
-                            }
-                        }
-                    },
-                    "destroy": true,
-                    "columns": [{
-                            "data": "pp"
-                        },
-                        {
-                            "data": "name"
-                        },
-                        {
-                            "data": "mobile"
-                        },
-                        {
-                            "data": "city"
-                        },
-                        {
-                            "data": "section"
-                        },
-                        {
-                            "data": "shift"
-                        },
-                        {
-                            "data": "action"
-                        },
-
-
-                    ]
-                });
-
-                new $.fn.dataTable.FixedHeader(table);
-            });
-
-
-        },
-        methods: {
-            sectionChange: function(evt) {
-                var previousFilter = $('#index_datatable').data('dt_params');
-                var filterables = {};
-                if (previousFilter != undefined) {
-                    filterables = $('#index_datatable').data('dt_params');
-                }
-
-                var sectionSelected = $(".selected").text();
-                if (sectionSelected != "") {
-                    filterables.section = sectionSelected;
-                } else {
-                    filterables.section = 0;
-                }
-                $('#index_datatable').data('dt_params', filterables);
-                $('#index_datatable').DataTable().draw();
-            },
-
-            shiftChange: function(evt) {
-                var previousFilter = $('#index_datatable').data('dt_params');
-                var filterables = {};
-                if (previousFilter != undefined) {
-                    filterables = $('#index_datatable').data('dt_params');
-                }
-
-                var shiftSelected = $(".selected2").text();
-                if (shiftSelected != "") {
-                    filterables.shift = shiftSelected;
-                } else {
-                    filterables.shift = 0;
-                }
-                $('#index_datatable').data('dt_params', filterables);
-                $('#index_datatable').DataTable().draw();
-            },
-
-            changeName: function(evt) {
-
-                var previousFilter = $('#index_datatable').data('dt_params');
-                var filterables = {};
-                if (previousFilter != undefined) {
-                    filterables = $('#index_datatable').data('dt_params');
-                }
-
-                var nameSelected = $("#search").val();
-                if (nameSelected != "") {
-                    filterables.name = nameSelected;
-                } else {
-                    filterables.name = 0;
-                }
-                $('#index_datatable').data('dt_params', filterables);
-                $('#index_datatable').DataTable().draw();
-            }
-        }
-
-
-
-    })
-</script>
-<script type="text/javascript">
-    /* custom button event print */
-    // $(document).on('click', '#btnPrint', function(){
-    //    $(".buttons-print")[0].click(); //trigger the click event
-    // });
-    // $('#index_datatable')
-    //     .on( 'processing.dt', function ( e, settings, processing ) {
-    //         $('#processingIndicator').css( 'display', processingg ? 'block' : 'none' );
-    //     } )
-    //     .dataTable();
-    // $(document).on('click', '#btnReset', function(){
-    //             location.reload(true);
-    //         });
+<script>
+    $(document).ready(function() {
+        $('select:not(.ignore)').niceSelect();
+        FastClick.attach(document.body);
+    });
 </script>
 
 <script>
@@ -475,6 +357,95 @@
         p.y = nt * nt * nt * p0.y + 3 * nt * nt * t * c0.y + 3 * nt * t * t * c1.y + t * t * t * p1.y;
 
         return p;
+    }
+</script>
+
+<script>
+    getItems();
+
+    $('#search').on("keyup change", function(e) {
+        e.preventDefault();
+        var search = $(this).val();
+        getItems(search, null, null, null);
+    })
+
+    $("#section").on('change', function(e) {
+        e.preventDefault()
+        var section = $(this).val();
+        if (section == 0) {
+            getItems(null, null, null, null);
+        } else {
+            getItems(null, section, null, null, );
+        }
+    });
+
+    $("#shift").on('change', function(e) {
+        e.preventDefault()
+        var shift = $(this).val();
+        if (shift == 0) {
+            getItems(null, null, null, null);
+        } else {
+            getItems(null, null, shift, null, );
+        }
+    });
+
+    $(document).on("click", ".page-link", function(e) {
+        e.preventDefault();
+        var page = $(this).attr("data-page");
+        getItems(null, null, null, page);
+    });
+
+    function getItems(search = null, section = null, shift = null, page = null) {
+        // $('.loading').show();
+        var search = $('#search').val();
+        if (search !== null) {
+            var search = search;
+        } else {
+            var search = null;
+        }
+
+        var section = $('#section').val();
+        if (section !== null) {
+            if (section == 0) {
+                var section = null;
+            } else {
+                var section = section;
+            }
+        } else {
+            var section = null;
+        }
+
+        var shift = $('#shift').val();
+        if (shift !== null) {
+            if (shift == 0) {
+                var shift = null;
+            } else {
+                var shift = shift;
+            }
+        } else {
+            var shift = null;
+        }
+
+        let url = '{{ route("load.data") }}';
+        $.ajax({
+                url: url,
+                type: "get",
+                data: {
+                    search,
+                    section,
+                    shift,
+                    page
+                },
+            })
+            .done(function(response) {
+                // $('.loading').hide();
+                $('#content_area').html(response);
+            })
+            .fail(function(jqXHR, ajaxOptions, thrownError) {
+                // $('.loading').hide();
+                alert('server not responding...');
+                $('#content_area').empty();
+            });
     }
 </script>
 @endsection
