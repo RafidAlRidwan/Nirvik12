@@ -79,57 +79,7 @@
                                 </select>
                             </div>
 
-                            <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-3">
-
-                                <div class="select-box">
-                                    <div v-on:click="sectionChange" class="options-container sectionChange">
-                                        <div class="option">
-                                            <input type="radio" class="radio" id="all" name="platform" value="0" />
-                                            <label for="all">Select All Section</label>
-                                        </div>
-                                        @foreach($section_all as $item)
-                                        <div class="option">
-                                            <input type="radio" class="radio" id="{{$item -> name}}" name="platform" value="{{$item -> name}}" />
-                                            <label for="youtube">{{$item -> name}}</label>
-                                        </div>
-                                        @endforeach
-                                    </div>
-
-                                    <div class="selected">
-                                        Select Section
-                                    </div>
-
-                                    <div class="search-box">
-                                        <input type="text" placeholder="Start Typing..." />
-                                    </div>
-                                </div>
-                            </div> -->
-
-                            <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-3">
-
-                                <div class="select-box">
-                                    <div v-on:click="shiftChange" class="options-container">
-                                        <div class="option">
-                                            <input type="radio" class="radio" id="all" name="platform" value="0" />
-                                            <label for="all">Select All Shift</label>
-                                        </div>
-                                        @foreach($shift_all as $item)
-                                        <div class="option">
-                                            <input type="radio" class="radio" id="{{$item -> name}}" name="platform" value="{{$item -> name}}" />
-                                            <label for="youtube">{{$item -> name}}</label>
-                                        </div>
-                                        @endforeach
-                                    </div>
-
-                                    <div class="selected2">
-                                        Select Shift
-                                    </div>
-
-                                    <div class="search-box">
-                                        <input type="text" placeholder="Start Typing..." />
-                                    </div>
-                                </div>
-                            </div> -->
+                            
                         </div>
                         <div class="col-lg-9 col-md-8 col-12" id="content_area">
 
@@ -137,40 +87,6 @@
 
 
                     </div>
-
-                    <!-- <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <table id="index_datatable" class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Profile Picture</th>
-                                        <th>Name</th>
-                                        <th>Mobile Number</th>
-                                        <th>Current City</th>
-                                        <th>Section</th>
-                                        <th>Shift</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-
-
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Profile Picture</th>
-                                        <th>Name</th>
-                                        <th>Mobile Number</th>
-                                        <th>Current City</th>
-                                        <th>Section</th>
-                                        <th>Shift</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </div> -->
 
                 </div>
             </div>

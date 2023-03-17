@@ -53,10 +53,15 @@ class CommitteeController extends Controller
         foreach ($product_data_list as $item) {
 
             $editURL = URL::to('admin/committee/edit' . '/' . $item->id);
-            $viewURL = URL::to('admin/committee/view' . '/' . $item->id);
+            if ($item->type == 1) {
+                $viewURL = URL::to('admin/committee/view' . '/' . $item->id);
+            } else {
+                $viewURL = URL::to('admin/committee/view-others' . '/' . $item->id);
+            }
 
             $data['data'][$sl]['serial'] = $serial;
             $data['data'][$sl]['name'] = $item->name ?? "";
+            $data['data'][$sl]['type'] = $item->type == 1 ? '<span class="badge badge-primary">Ifter Mahfil</span>' : '<span class="badge badge-info">Other</span>';
             $data['data'][$sl]['event'] = $item->eventData->title ?? "";
             $data['data'][$sl]['manager'] = $item->userData->full_name ?? "";
             $data['data'][$sl]['action'] = "<a class='committee_setting' href='$viewURL'><i class='fa fa-cogs' style='font-size:14px; ''></i> </a>
@@ -74,8 +79,7 @@ class CommitteeController extends Controller
 
     public function store(Request $request)
     {
-        try 
-            {
+        try {
             $this->validate($request, [
                 'event_id' => ['required'],
                 // 'name' => ['required|unique:committees'],
@@ -87,14 +91,13 @@ class CommitteeController extends Controller
             DB::commit();
             Session::flash('flashy__success', __('Saved Successfully!'));
             return Redirect::route('committee_index');
-            } catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             // Redirect to edit mode.
             return Redirect::route('committee_index')
                 ->withErrors($e->getMessage())
                 ->withInput($request->all);
         }
-            
     }
 
     public function edit($id)
@@ -103,14 +106,13 @@ class CommitteeController extends Controller
         $data = $committee->getMasterData($committee);
         $data['committee'] = $committee;
         $data['members'] = $committee->getMemberData($committee);
-        
+
         return view('admin/committee.edit', $data);
     }
 
     public function update(Request $request)
     {
-        try 
-            {
+        try {
             $id = $request->id;
             $this->validate($request, [
                 'event_id' => ['required'],
@@ -121,46 +123,45 @@ class CommitteeController extends Controller
             Committee::saveOrUpdate($request, $id);
             Session::flash('flashy__success', __('Updated Successfully!'));
             return Redirect::route('committee_index');
-            } catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             // Redirect to edit mode.
             return Redirect::route('committee_index')
                 ->withErrors($e->getMessage())
                 ->withInput($request->all);
-        }   
-            
+        }
     }
 
     public function show($id)
     {
         // Member Table Values
         $memberDetails = CommitteeMember::select('committee_members.*', 'user_details.full_name')
-        ->leftJoin('user_details', 'user_details.user_id', '=', 'committee_members.user_id')
-        ->where('committee_members.committee_id', $id)
-        ->get();
+            ->leftJoin('user_details', 'user_details.user_id', '=', 'committee_members.user_id')
+            ->where('committee_members.committee_id', $id)
+            ->get();
         $data['memberDetails'] = $memberDetails;
         $data['committeeDetails'] = Committee::with('userData')->findOrFail($id);
 
         // Add Collection Values
         $manager_array = Committee::query()
-        ->leftJoin('user_details', 'committees.manager_id', '=', 'user_details.user_id')
-        ->where('committees.id', $id)
-        ->select(
-            DB::raw("CONCAT(user_details.full_name, ' (Manager)') AS name"),
-            'user_details.user_id'
+            ->leftJoin('user_details', 'committees.manager_id', '=', 'user_details.user_id')
+            ->where('committees.id', $id)
+            ->select(
+                DB::raw("CONCAT(user_details.full_name, ' (Manager)') AS name"),
+                'user_details.user_id'
             )
-        ->get();
+            ->get();
         $manager_id = $manager_array->pluck('name', 'user_id')->toArray();
-        
+
         $member_ids = CommitteeMember::query()
-        ->leftJoin('user_details', 'committee_members.user_id', '=', 'user_details.user_id')
-        ->where('committee_members.committee_id', $id)
-        ->pluck(
-            'user_details.full_name',
-            'user_details.user_id'
+            ->leftJoin('user_details', 'committee_members.user_id', '=', 'user_details.user_id')
+            ->where('committee_members.committee_id', $id)
+            ->pluck(
+                'user_details.full_name',
+                'user_details.user_id'
             )
-        ->toArray();
-        $data['comiittee_members']= ($manager_id + $member_ids);
+            ->toArray();
+        $data['comiittee_members'] = ($manager_id + $member_ids);
 
         $sql = DB::select("
         SELECT (
@@ -184,14 +185,29 @@ class CommitteeController extends Controller
             WHERE collection_histories.user_id IS NULL
             AND users.type = 3
             AND user_details.full_name != 'null' ");
-        
-        $array=array_map(function($item){
-            return (array) $item;
-        },$sql);
 
-        $data['user']= collect($array)->pluck('name', 'id')->toArray();
+        $array = array_map(function ($item) {
+            return (array) $item;
+        }, $sql);
+
+        $data['user'] = collect($array)->pluck('name', 'id')->toArray();
 
         return view('admin/committee.view', $data);
+    }
+
+    public function showOthers($id)
+    {
+        // Member Table Values
+        $memberDetails = CommitteeMember::select('committee_members.*', 'user_details.full_name')
+            ->leftJoin('user_details', 'user_details.user_id', '=', 'committee_members.user_id')
+            ->where('committee_members.committee_id', $id)
+            ->get();
+        $data['memberDetails'] = $memberDetails;
+        $data['committeeDetails'] = Committee::with('userData')->findOrFail($id);
+
+        
+
+        return view('admin/committee.view-others', $data);
     }
 
     public function destroy(Request $request)

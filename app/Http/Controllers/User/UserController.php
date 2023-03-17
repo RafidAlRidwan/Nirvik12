@@ -313,33 +313,25 @@ class UserController extends Controller
 
                 $folderPath = public_path('assets/user/landingPage/img/profilePicture/');
 
-                // $image_parts = explode(";base64,", $request->file);
-                // $image_type_aux = explode("image/", $image_parts[0]);
-                // $image_type = $image_type_aux[1];
-                // $image_base64 = base64_decode($image_parts[1]);
-
-                $imageName = date('Ymd') . uniqid() . '.jpg';
-
-                // $imageFullPath = $folderPath . $imageName;
-
-                // file_put_contents($imageFullPath, $image_base64);
-
                 $file = $request->file('file');
-                $upload = $file->move($folderPath, $imageName);
+                $new_image_name = date('Ymd') . uniqid() . '.jpg';
+                $resize_upload = Image::make($file->path())
+                    ->save($folderPath . $new_image_name, 60);
 
                 $userProfile = Auth::user()->userDetails;
 
                 // Remove old image
-                $image_path = $folderPath . $userProfile->attachment;
-                if (file_exists($image_path)) {
-                    unlink($image_path);
-                }
+                // $image_path = $folderPath . $userProfile->attachment;
+                // if (file_exists($image_path)) {
+                //     unlink($image_path);
+                // }
 
-                $userProfile->attachment = $imageName;
+                $userProfile->attachment = $new_image_name;
                 $userProfile->save();
                 return response()->json(['msg' => asset('assets/user/landingPage/img/profilePicture') . '/' . $userProfile->attachment, 'name' => '', 'status' => 1]);
             }
         } catch (\Exception $e) {
+            dd($e);
             return response()->json(['msg' => 'Crop Image Uploaded Failed', 'status' => 0]);
         }
     }

@@ -47,7 +47,7 @@
                      <h2 style="color: #f82249">About Nirvik'12</h2>
               </div>
               <div class="row">
-                     <div class="col-lg-12" style="justify-content: center; text-align:justify">
+                     <div class="col-lg-12" style="justify-content: center; text-align:justify;">
                             @php
                             $about = App\Models\About::where('id' , 1)->first();
                             @endphp
@@ -279,7 +279,7 @@
                                    <img src="{{asset('assets/user/landingPage/img/supporters/4.png')}}" class="img-fluid" alt="">
                             </div>
                      </div>
-                     
+
               </div>
        </div>
 </section>

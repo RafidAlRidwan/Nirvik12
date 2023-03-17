@@ -19,7 +19,7 @@ class BlogPageController extends Controller
 {
     public function index()
     {
-        $top2Blogs = Blog::orderBy('created_at', 'DESC')->latest()->limit(2)->get();
+        $top2Blogs = Blog::orderBy('created_at', 'DESC')->latest()->limit(3)->get();
         $userId = Auth::user() ? Auth::user()->id  : '0';
         return view('user/blog.index', compact('top2Blogs', 'userId'));
     }
@@ -237,7 +237,7 @@ class BlogPageController extends Controller
         if ($pageNo == 1) {
             $pageNo = 2;
         }
-        $total = $pageNo * 2;
+        $total = $pageNo * 3;
 
         $blogs = Blog::take($total)->orderBy('created_at', 'DESC')->get();
         $userId = Auth::user() ? Auth::user()->id  : '0';

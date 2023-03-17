@@ -4,19 +4,7 @@
 @include('layouts.user.landing-page.header')
 @endsection
 @section('main-style')
-<link rel="stylesheet" href="../../../../public/assets/blog/css/joe.blog.css">
 <style>
-    .card-footer {
-        padding: 0.75rem 1.25rem;
-        background-color: #fff;
-        border-top: 1px solid #fff;
-    }
-</style>
-<style>
-    .card {
-        border: 1px solid #fff;
-    }
-
     .card:hover {
         -webkit-box-shadow: 0px 0px 25px -5px #000000;
         box-shadow: 0px 0px 25px -5px #000000;
@@ -24,16 +12,133 @@
         transition: .3s;
     }
 
-    .blog-create:hover {
-        color: #000000
+    button {
+        background: #f5f5f5;
+        padding: 15px 20px;
+        border: none;
+        cursor: pointer;
     }
 
-    .w-100 {
-        width: 60% !important;
+    .card {
+        width: 100%;
+        border-radius: 5px;
+        box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        height: 100%;
+        position: relative;
+        margin-top: 20px;
+        overflow: hidden;
     }
 
-    .hhh-100 {
-        height: 60% !important;
+    .image {
+        overflow: hidden;
+    }
+
+    .card__img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        -o-object-fit: cover;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .card__body {
+        padding: 20px;
+        background: #fff;
+        margin-top: -4px;
+        border-radius: 0 0 5px 5px;
+    }
+
+    .card__title {
+        margin: 0;
+        font-size: 1em;
+        font-weight: normal;
+    }
+
+    .card__title i {
+        color: #339AF0;
+        margin-right: 5px;
+        font-size: 1.1em;
+    }
+
+    .card__desc {
+        margin-top: 20px;
+        font-size: 1em;
+    }
+
+    .card__desc>span>i {
+        color: #339AF0;
+        margin-right: 5px;
+    }
+
+    .card__desc__room,
+    .card__desc__bed {
+        margin-right: 20px;
+        font-size: 1em;
+    }
+
+    .card__desc__price {
+        font-size: 1em;
+        /* font-weight: bold; */
+        /* float: right;
+        text-align: right; */
+    }
+
+    .card__desc__price--small {
+        font-size: 0.8em;
+    }
+
+    .card__buttons {
+        display: flex;
+        transform-origin: top;
+        transform: scaleY(0);
+        width: 100%;
+        position: absolute;
+        box-shadow: 0px 10px 20px -5px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+        transition: transform 0.2s ease-out;
+    }
+
+    .card__buttons--gray,
+    .card__buttons--primary {
+        width: 50%;
+        display: inline-block;
+    }
+
+    .card__buttons--primary {
+        background: #339AF0;
+        color: white;
+    }
+
+    .card:hover .card__body {
+        border-radius: 0;
+    }
+
+    .card:hover .card__img {
+        transform: scale(1.2);
+        -webkit-transition: .5s ease-in-out;
+        transition: .5s ease-in-out;
+    }
+
+    .card:hover .card__buttons {
+        transform: scaleY(1);
+        transition: transform 0.2s ease-in;
+    }
+
+    .card:hover .card__buttons--gray {
+        border-radius: 0 0 0 5px;
+    }
+
+    .card:hover .card__buttons--gray:hover {
+        background: #e5e5e5;
+    }
+
+    .card:hover .card__buttons--primary {
+        border-radius: 0 0 5px 0;
+    }
+
+    .card:hover .card__buttons--primary:hover {
+        background: #008cff;
     }
 </style>
 @endsection
@@ -57,77 +162,63 @@
 <div id="content_area_blog">
     <div class="container wow fadeInUp p-5">
 
-        <div class="page-container">
-            <div class="page-content">
-
-                <hr>
-                <div class="row d-flex justify-content-center">
-                    @foreach ($top2Blogs as $item)
-                    @php
-                    $date = date('d F Y', strtotime($item->created_at));
-                    @endphp
-                    <div class="col-lg-6" style="padding-left:40px; padding-right:40px;">
-                        <div class="card text-center mb-5">
-                            <div class="card-header p-0">
-                                <div class="blog-media">
-                                    <img src="{{asset($item->attachment)}}" alt="" height="250" width="250">
-                                </div>
-                            </div>
-                            <div class="card-body px-0">
-                                <a class="readCount" href="{{route('blog.show', $item->id)}}" data-id="{{$item->id}}">
-                                    <h5 class="card-title mb-2">{{$item->title}}</h5>
-                                </a>
-                                <small class="small text-muted">{{$item->likeCount()}} Likes - {{$date}}
-                                    <span class="px-2">-</span>
-                                    <a href="#" class="text-muted">{{$item->comment ? $item->comment->count() : 0}} Comments</a>
-                                </small>
-                                <!-- <p class="my-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos saepe
-                                dolores et nostrum porro odit reprehenderit animi, est ratione fugit aspernatur
-                                ipsum. Nostrum placeat hic saepe voluptatum dicta ipsum beatae.</p> -->
-                            </div>
-
-                            <div class="card-footer pb-2 text-center d-flex justify-content-center">
-                                @php
-                                $allLikes = $item->likes;
-                                $like = $allLikes->where('user_id', $userId);
-                                if($like->count() > 0){
-                                $status = true;
-                                }else{
-                                $status = false;
-                                }
-                                @endphp
-                                <div id="ControllerData{{$item->id}}">
-                                    @if($status)
-                                    <a style="color:#ff4d6d;" id="like{{$item->id}}" class="btn btn-outline-dark btn-sm liked" data-id="{{$item->id}}"><i style="color:#ff4d6d" class="fa fa-thumbs-up" aria-hidden="true"></i> Liked</a>
-                                    @else
-                                    <a id="unlike{{$item->id}}" class="btn btn-outline-dark btn-sm liked" data-id="{{$item->id}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</a>
-                                    @endif
-                                </div>
-                                <a style="color:#ff4d6d; display:none" id="like{{$item->id}}" class="btn btn-outline-dark btn-sm liked " data-id="{{$item->id}}"><i style="color:#ff4d6d" class="fa fa-thumbs-up" aria-hidden="true"></i> Liked</a>
-                                <a style="display:none" id="unlike{{$item->id}}" class="btn btn-outline-dark btn-sm liked" data-id="{{$item->id}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</a>
-
-                                <a href="{{route('blog.show', $item->id)}}" class="ml-1 btn btn-outline-dark btn-sm readCount" data-id="{{$item->id}}">READ MORE</a>
-                            </div>
+        <hr>
+        <div class="row d-flex justify-content-between">
+            @foreach ($top2Blogs as $item)
+            @php
+            $date = date('d F, Y', strtotime($item->created_at));
+            @endphp
+            <div class="col-xl-4 col-md-4 col-lg-4 col-sm-12 col-xs-12 mb-3">
+                <div class="card" id="list1" onmouseenter="showButton('list1')" onmouseleave="hideButton('list1')">
+                    <div class="image"><img src="{{asset($item->attachment)}}" alt="" class="card__img"></div>
+                    <div class="card__body text-center">
+                        <a class="readCount" href="{{route('blog.show', $item->id)}}" data-id="{{$item->id}}">
+                            <h3 class="card__title"><i class="fa fa-map-marker-alt"></i> {{$item->title}}</h3>
+                        </a>
+                        <div class="card__desc">
+                            <span class="card__desc__room">{{$item->likeCount()}} Likes</span>
+                            <span class="card__desc__bed"> - {{$item->comment ? $item->comment->count() : 0}} Comments</span>
+                            <span class="card__desc__price">Posted on: {{$date}}</span>
                         </div>
                     </div>
-                    @endforeach
+                    <div class="card__buttons">
+
+                        @php
+                        $allLikes = $item->likes;
+                        $like = $allLikes->where('user_id', $userId);
+                        if($like->count() > 0){
+                        $status = true;
+                        }else{
+                        $status = false;
+                        }
+                        @endphp
+
+                        @if($status)
+                        <button style="width: 50%;" id="like{{$item->id}}" class="card__buttons--gray btn liked default{{$item->id}}" data-id="{{$item->id}}"><i style="color:#ff4d6d" class="fa fa-thumbs-up" aria-hidden="true"></i> Liked</button>
+                        @else
+                        <button style="width: 50%;" id="unlike{{$item->id}}" class="card__buttons--gray btn liked default{{$item->id}}" data-id="{{$item->id}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</button>
+                        @endif
+                        <button style="color:#ff4d6d; display:none; width: 50%;" id="like{{$item->id}}" class="card__buttons--gray btn liked" data-id="{{$item->id}}"><i style="color:#ff4d6d" class="fa fa-thumbs-up" aria-hidden="true"></i> Liked</button>
+                        <button style="display:none; width: 50%;" id="unlike{{$item->id}}" class="card__buttons--gray btn liked" data-id="{{$item->id}}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like</button>
+                        <button class="card__buttons--primary btn readCount" data-id="{{$item->id}}"><a style="color:white" href="{{route('blog.show', $item->id)}}">READ MORE</a></button>
+                    </div>
                 </div>
-                @php
-                $blog = App\Models\Blog::all();
-                $totalBlog = $blog->count();
-                $currentBlog = $top2Blogs->count();
-                @endphp
-                @if(!($totalBlog == $currentBlog))
-                <div class="d-flex justify-content-center">
-                    <button id="view-blogs" data-id=1 style="background-color: #ff4d6d; border: 1px solid #ff4d6d;" class="btn btn-primary my-4 btn-sm">Load More</button>
-                </div>
-                @endif
             </div>
-
+            @endforeach
         </div>
+        @php
+        $blog = App\Models\Blog::all();
+        $totalBlog = $blog->count();
+        $currentBlog = $top2Blogs->count();
+        @endphp
+        @if(!($totalBlog == $currentBlog))
+        <div class="d-flex justify-content-center">
+            <button id="view-blogs" data-id=1 style="background-color: #ff4d6d; border: 1px solid #ff4d6d;" class="btn btn-primary my-4 btn-sm">Load More</button>
+        </div>
+        @endif
     </div>
-</div>
 
+</div>
 @endsection
 @section('footer')
 <!-- ======= Footer ======= -->
@@ -159,8 +250,8 @@
         var user_id = "{{Auth::user() ? Auth::user()->id : 0}}";
         if (user_id == 0) {
             flashy('Please login first!', {
-                        type: 'flashy__danger'
-                    });
+                type: 'flashy__danger'
+            });
             return;
         }
         $.ajax({
@@ -173,7 +264,7 @@
             },
             success: function(response) {
                 if (response.status == 1) {
-                    $("#controllerData" + blog).css("display", "none");
+                    $(".default" + blog).css("display", "none");
                     $("#unlike" + blog).css("display", "none");
                     $("#like" + blog).css("display", "inline-block");
                     flashy('You Liked', {
@@ -181,7 +272,7 @@
                     });
                 }
                 if (response.status == 0) {
-                    $("#controllerData" + blog).css("display", "none");
+                    $(".default" + blog).css("display", "none");
                     $("#unlike" + blog).css("display", "inline-block");
                     $("#like" + blog).css("display", "none");
                     flashy('You Unliked', {

@@ -12,6 +12,7 @@ class Committee extends Model
     protected $fillable = [
         'name',
         'event_id',
+        'type',
         'manager_id',
         'total_balance',
         'total_expense',
@@ -53,16 +54,17 @@ class Committee extends Model
             ON sections.id = user_details.section
             WHERE users.type = 3
             AND user_details.full_name != 'null' ");
-        
-        $array=array_map(function($item){
+
+        $array = array_map(function ($item) {
             return (array) $item;
-        },$sql);
+        }, $sql);
         $data['user'] = collect($array)->pluck('name', 'id');
         $data['events'] = Event::whereDate('date', '>=', date('Y-m-d'))->pluck('title', 'id');
         return $data;
     }
 
-    public static function getMemberData($committee){
+    public static function getMemberData($committee)
+    {
         $members = $committee->memberData;
         $data = $members->pluck('user_id');
         return $data;
@@ -78,46 +80,45 @@ class Committee extends Model
             $committee->update($requestData);
         }
 
-        if($requestData['member_id'] > 0){
-            
+        if ($requestData['member_id'] > 0) {
+
             // Add / Update
             $memberData = collect($requestData['member_id'])
-            ->map(function ($value) use ($committee) {
-                $item = [];
-                $memberId = CommitteeMember::where('user_id', $value)
-                ->where('committee_id', $committee->id)->first();
-                $item['id'] = $memberId ? $memberId['id'] : null;
-                $item['committee_id'] = $committee->id;
-                $item['user_id'] = $value;
-                return $item;
-            })->toArray();
+                ->map(function ($value) use ($committee) {
+                    $item = [];
+                    $memberId = CommitteeMember::where('user_id', $value)
+                        ->where('committee_id', $committee->id)->first();
+                    $item['id'] = $memberId ? $memberId['id'] : null;
+                    $item['committee_id'] = $committee->id;
+                    $item['user_id'] = $value;
+                    return $item;
+                })->toArray();
 
             $array = collect($memberData)
-            ->map(function ($value) {
-                $member = CommitteeMember::findOrNew($value['id']);
-                $member['committee_id'] = $value['committee_id'];
-                $member['user_id'] = $value['user_id'];
-                $member->save();
-                return $member;
-            })->toArray();
+                ->map(function ($value) {
+                    $member = CommitteeMember::findOrNew($value['id']);
+                    $member['committee_id'] = $value['committee_id'];
+                    $member['user_id'] = $value['user_id'];
+                    $member->save();
+                    return $member;
+                })->toArray();
 
             //  Delete
-            if($array[0]['id'] !== null)
-            {
+            if ($array[0]['id'] !== null) {
                 $delete_members = [];
                 $member = $requestData['member_id'] ?? [];
                 $model = new CommitteeMember;
-                
+
                 $ids = collect($member)->map(function ($value) use ($model, $committee) {
-                            $item =  $model->where('committee_id', $committee->id)->where('user_id', $value)->first();
-                            return $item->id;
-                    })->toArray();
-                
+                    $item =  $model->where('committee_id', $committee->id)->where('user_id', $value)->first();
+                    return $item->id;
+                })->toArray();
+
                 $member_with_ids = collect($ids)->map(function ($value) {
-                        $item =  [];
-                        $item['id'] = $value;
-                        return $item;
-                    })->toArray();
+                    $item =  [];
+                    $item['id'] = $value;
+                    return $item;
+                })->toArray();
 
                 $members = CommitteeMember::where('committee_id', $committee->id)->get();
                 $delete_members = collect($members)
@@ -126,12 +127,9 @@ class Committee extends Model
                             $deleteMember = CommitteeMember::where('id', $value['id'])->first();
                             $deleteMember->delete();
                         }
-                    return $value;
-                });
+                        return $value;
+                    });
             }
         }
     }
-
-
 }
-

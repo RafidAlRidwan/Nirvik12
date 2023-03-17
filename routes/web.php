@@ -34,6 +34,7 @@ Route::get('/public/committee/view', [App\Http\Controllers\User\LandingPageContr
 Route::get('/gallery/{id}', [App\Http\Controllers\User\LandingPageController::class, 'gallery'])->name('galleryPage');
 Route::post('/public/committee/getdata', [App\Http\Controllers\User\LandingPageController::class, 'datatable']);
 Route::get('/public/committee/details/{id}', [App\Http\Controllers\User\LandingPageController::class, 'show']);
+Route::get('/public/committee/others/{id}', [App\Http\Controllers\User\LandingPageController::class, 'others']);
 Route::get('/public/committee/registration/{id}', [App\Http\Controllers\User\LandingPageController::class, 'registration']);
 Route::post('/public/registration/getdata/{id}', [App\Http\Controllers\User\LandingPageController::class, 'registrationDatatable']);
 Route::post('/blog/read/count', [App\Http\Controllers\User\BlogPageController::class, 'countRead'])->name('blog.read.count');
@@ -85,6 +86,7 @@ Route::middleware([IsUser::class])->group(function () {
     Route::get('/user/committee', [App\Http\Controllers\User\CommitteeController::class, 'index']);
     Route::post('/user/committee/getdata', [App\Http\Controllers\User\CommitteeController::class, 'datatable']);
     Route::get('/user/committee/memberView/{id}', [App\Http\Controllers\User\CommitteeController::class, 'memberShow']);
+    Route::get('/user/committee/others/{id}', [App\Http\Controllers\User\CommitteeController::class, 'others']);
     Route::get('/user/committee/collectionView/{id}', [App\Http\Controllers\User\CommitteeController::class, 'collectionShow']);
     Route::get('/user/committee/expenseView/{id}', [App\Http\Controllers\User\CommitteeController::class, 'expenseShow']);
     Route::get('/user/committee/fundTransferView/{id}', [App\Http\Controllers\User\CommitteeController::class, 'fundTransferShow']);
@@ -187,6 +189,7 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::post('/admin/committee/destroy', 'App\Http\Controllers\Admin\CommitteeController@destroy');
     Route::get('/admin/committee/getUserData/{id}', [App\Http\Controllers\Admin\CommitteeController::class, 'getUserIds']);
     Route::get('/admin/committee/view/{id}', [App\Http\Controllers\Admin\CommitteeController::class, 'show']);
+    Route::get('/admin/committee/view-others/{id}', [App\Http\Controllers\Admin\CommitteeController::class, 'showOthers']);
 
     // COLLECTION MANAGEMENT
     Route::post('/admin/collection/store', 'App\Http\Controllers\Admin\CollectionController@store');

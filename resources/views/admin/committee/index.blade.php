@@ -26,6 +26,7 @@
             <tr>
               <th>Serial</th>
               <th>Committee Name</th>
+              <th>Committee Type</th>
               <th>Event</th>
               <th>Manager</th>
               <th>Action</th>
@@ -38,6 +39,7 @@
             <tr>
               <th>Serial</th>
               <th>Committee Name</th>
+              <th>Committee Type</th>
               <th>Event</th>
               <th>Manager</th>
               <th>Action</th>
@@ -119,6 +121,9 @@
           "data": "name"
         },
         {
+          "data": "type"
+        },
+        {
           "data": "event"
         },
         {
@@ -140,6 +145,5 @@
     var id = $(this).attr('href');
     $('#committee_delete_id').val(id);
   });
-
 </script>
 @endsection

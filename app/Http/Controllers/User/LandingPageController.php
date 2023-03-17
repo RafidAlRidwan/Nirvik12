@@ -72,7 +72,11 @@ class LandingPageController extends Controller
             $members = CommitteeMember::where('committee_id', $item->id)->get();
 
             $count_member = count($members);
-            $viewURL = URL::to('public/committee/details' . '/' . $item->id);
+            if ($item->type == 1) {
+                $viewURL = URL::to('public/committee/details' . '/' . $item->id);
+            } else {
+                $viewURL = URL::to('public/committee/others' . '/' . $item->id);
+            }
 
             $data['data'][$sl]['serial'] = $serial;
             $data['data'][$sl]['event_name'] = $item->eventData->title ?? "";
@@ -197,6 +201,17 @@ class LandingPageController extends Controller
         $data['registrationCount'] = count($registration);
         $data['totalCollection'] = $total_member_collection + $manager_collection;
         return view('user/landing-page.memberShow', $data);
+    }
+    public function others($id)
+    {
+        // Member Table Values
+        $memberDetails = CommitteeMember::select('committee_members.*', 'user_details.full_name')
+            ->leftJoin('user_details', 'user_details.user_id', '=', 'committee_members.user_id')
+            ->where('committee_members.committee_id', $id)
+            ->get();
+        $data['memberDetails'] = $memberDetails;
+        $data['committeeDetails'] = Committee::with('userData')->findOrFail($id);
+        return view('user/landing-page.others', $data);
     }
     public function registration($id)
     {
