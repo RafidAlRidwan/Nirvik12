@@ -7,7 +7,7 @@
 
 @section('main-content')
 <!--==========================Cover Page Section============================-->
-<section class="home">
+<section class="home" style="background-attachment: fixed !important;">
        <div class="media-icons">
               <a href="https://www.facebook.com/groups/138718299513425"><i class="fa fa-facebook"></i></a>
               <a href="#"><i class="fa fa-instagram"></i></a>
@@ -98,7 +98,7 @@
        </div>
 </section>
 <!--==========================Event Section============================-->
-<section id="schedule" class="section-with-bg">
+<section id="schedule" class="section-with-bg" style="background-attachment:fixed !important;background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('/assets/user/landingPage/img/about-bg2.jpg') center center no-repeat; background-size: cover;">
        <div class="container wow fadeInUp">
               <div class="section-header">
                      <h2>Event & Program Schedule</h2>
@@ -246,41 +246,24 @@
 <!--==========================Sponsors Section============================-->
 <section id="supporters" class="section-with-bg wow ">
        <div class="container">
+              @php
+              $sponsorDetails = App\Models\Sponsor::orderBy('created_at','desc')->latest()->take(5)->get();
+              @endphp
+              @if((count($sponsorDetails) > 0))
               <div class="section-header">
                      <h2>Sponsors</h2>
               </div>
               <div style="justify-content: center" class="row no-gutters supporters-wrap clearfix">
 
+                     @foreach ($sponsorDetails as $item)
                      <div class="col-lg-3 col-md-4 col-xs-6">
                             <div class="supporter-logo">
-                                   <img src="{{asset('assets/user/landingPage/img/supporters/1.png')}}" class="img-fluid" alt="">
+                                   <img src="{{asset($item->attachment)}}" class="img-fluid" alt="">
                             </div>
                      </div>
-
-                     <div class="col-lg-3 col-md-4 col-xs-6">
-                            <div class="supporter-logo">
-                                   <img src="{{asset('assets/user/landingPage/img/supporters/2.png')}}" class="img-fluid" alt="">
-                            </div>
-                     </div>
-
-                     <div class="col-lg-3 col-md-4 col-xs-6">
-                            <div class="supporter-logo">
-                                   <img src="{{asset('assets/user/landingPage/img/supporters/3.png')}}" class="img-fluid" alt="">
-                            </div>
-                     </div>
-
-                     <div class="col-lg-3 col-md-4 col-xs-6">
-                            <div class="supporter-logo">
-                                   <img src="{{asset('assets/user/landingPage/img/supporters/4.png')}}" class="img-fluid" alt="">
-                            </div>
-                     </div>
-                     <div class="col-lg-3 col-md-4 col-xs-6">
-                            <div class="supporter-logo">
-                                   <img src="{{asset('assets/user/landingPage/img/supporters/4.png')}}" class="img-fluid" alt="">
-                            </div>
-                     </div>
-
+                     @endforeach
               </div>
+              @endif
        </div>
 </section>
 <!--==========================Modal============================-->

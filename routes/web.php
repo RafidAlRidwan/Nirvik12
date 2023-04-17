@@ -4,6 +4,7 @@ use App\Http\Middleware\IsUser;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\IsAuthUser;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\SocialAuthController;
 
@@ -143,6 +144,7 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::post('/admin/news/update', 'App\Http\Controllers\Admin\NewsController@update');
     Route::get('/admin/news/show/{id}', [App\Http\Controllers\Admin\NewsController::class, 'show']);
     Route::post('/admin/news/destroy', 'App\Http\Controllers\Admin\NewsController@destroy');
+    Route::post('/admin/news/getEditdata', [App\Http\Controllers\Admin\NewsController::class, 'getEditData'])->name('news.edit.data');
 
     // Event MANAGEMENT
     Route::get('/admin/event/setting', [App\Http\Controllers\Admin\EventController::class, 'index'])->name('event_index');
@@ -202,9 +204,29 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::post('/admin/collection/fundDestroy', 'App\Http\Controllers\Admin\CollectionController@fundDestroy');
     Route::post('/admin/collection/expenseStore', 'App\Http\Controllers\Admin\CollectionController@expenseStore');
 
+    // Sponsor MANAGEMENT
+    Route::get('/admin/sponsor/setting', [App\Http\Controllers\Admin\SponsorController::class, 'index'])->name('sponsor_index');
+    Route::get('/admin/sponsor/create', [App\Http\Controllers\Admin\SponsorController::class, 'create']);
+    Route::post('/admin/sponsor/store', 'App\Http\Controllers\Admin\SponsorController@store');
+    Route::post('/admin/sponsor/getdata', [App\Http\Controllers\Admin\SponsorController::class, 'sponsor_datatable']);
+    Route::post('/admin/sponsor/destroy', 'App\Http\Controllers\Admin\SponsorController@destroy');
+
+    // Blog MANAGEMENT
+    Route::get('/admin/blog/setting', [App\Http\Controllers\Admin\BlogController::class, 'index'])->name('blog_index');
+    Route::post('/admin/blog/getdata', [App\Http\Controllers\Admin\BlogController::class, 'blog_datatable']);
+    Route::get('/admin/blog/view/{id}', [App\Http\Controllers\Admin\BlogController::class, 'show']);
+    Route::post('/admin/blog/destroy', 'App\Http\Controllers\Admin\BlogController@destroy');
+    Route::post('/admin/blog/modify-status', [App\Http\Controllers\Admin\BlogController::class, 'modifyStatus'])->name('blog.status.modify');
+    
+
+    Route::get('/user/sync', [App\Http\Controllers\Admin\UserController::class, 'insertData']);
 
     // Settings
     Route::get('/admin/settings', [App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('setting_index');
     Route::post('/admin/settings/update', [App\Http\Controllers\Admin\SettingsController::class, 'update']);
 });
 // ADMIN SECTION END
+
+Route::get("/email", function () {
+    return View::make("admin.send-email");
+});

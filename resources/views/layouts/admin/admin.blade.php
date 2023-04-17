@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Admin | Dashboard</title>
+  <link href="{{asset('assets/user/loginPage/img/bzs.png')}}" rel="icon">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="{{asset('assets/admin/fonts/font.css')}}">
@@ -254,11 +255,11 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{URL::to('/admin/committee/setting')}}" class="nav-link
-            {{request()->is('admin/committee/*') ? 'active' : ''}}">
-              <i class="nav-icon fa fa-podcast"></i>
+            <a href="{{URL::to('/admin/cover-page/setting')}}" class="nav-link 
+            {{request()->is('admin/cover-page/*') ? 'active' : ''}}">
+              <i class="nav-icon fa fa-desktop"></i>
               <p>
-                Committee Setup
+                Cover Page Settings
               </p>
             </a>
           </li>
@@ -272,6 +273,15 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{URL::to('/admin/blog/setting')}}" class="nav-link
+            {{request()->is('admin/blog/setting') ? 'active' : ''}}">
+              <i class="nav-icon fa fa-rss-square" aria-hidden="true"></i>
+              <p>
+                Blog Settings
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{URL::to('/admin/news/setting')}}" class="nav-link 
             {{request()->is('admin/news/*') ? 'active' : ''}}">
               <i class="nav-icon far fa-newspaper"></i>
@@ -280,7 +290,6 @@
               </p>
             </a>
           </li>
-
           <li class="nav-item">
             <a href="{{URL::to('/admin/event/setting')}}" class="nav-link
             {{request()->is('admin/event/*') ? 'active' : ''}}">
@@ -290,7 +299,15 @@
               </p>
             </a>
           </li>
-
+          <li class="nav-item">
+            <a href="{{URL::to('/admin/committee/setting')}}" class="nav-link
+            {{request()->is('admin/committee/*') ? 'active' : ''}}">
+              <i class="nav-icon fa fa-podcast"></i>
+              <p>
+                Committee Setup
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="{{URL::to('/admin/album/setting')}}" class="nav-link 
             {{request()->is('admin/album/*') ? 'active' : ''}}">
@@ -310,13 +327,12 @@
               </p>
             </a>
           </li>
-
           <li class="nav-item">
-            <a href="{{URL::to('/admin/cover-page/setting')}}" class="nav-link 
-            {{request()->is('admin/cover-page/*') ? 'active' : ''}}">
-              <i class="nav-icon fa fa-desktop"></i>
+            <a href="{{URL::to('/admin/sponsor/setting')}}" class="nav-link 
+            {{request()->is('admin/sponsor/*') ? 'active' : ''}}">
+              <i class="nav-icon fa fa-hourglass"></i>
               <p>
-                Cover Page Settings
+                Sponsor Settings
               </p>
             </a>
           </li>

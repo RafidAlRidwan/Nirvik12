@@ -109,10 +109,10 @@
           <div class="form-group">
             <label for="status">Status</label>
             <?php
-              $status =[
-              0=>'Inactive',
-              1=>'Active'
-              ]
+            $status = [
+              0 => 'Inactive',
+              1 => 'Active'
+            ]
             ?>
             {!! Form::select('status', $status, null, ['class' => 'form-control', 'id' =>'status_data' ]) !!}
           </div>
@@ -226,20 +226,34 @@
   });
 
   // RESET MODAL
-  $('#news_edit_modal').on('hidden.bs.modal', function () {
-      $(this).find('form').trigger('reset');
+  $('#news_edit_modal').on('hidden.bs.modal', function() {
+    $(this).find('form').trigger('reset');
   })
 
   // Update News
   $('#index_datatable').on('click', '.news_edit', function() {
-    var heading = $(this).attr('heading');
-    var body = $(this).attr('body');
     var active = $(this).attr('status_val');
     var id = $(this).attr('href');
-    $('#heading').val(heading);
-    $('#summernote2').summernote('code', body);
-    $('#status_data').val(active);
-    $('#news_id').val(id);
+
+    $.ajax({
+      url: "{{route('news.edit.data')}}",
+      type: "POST",
+      data: {
+        "_token": "{{ csrf_token() }}",
+        "news_id": id
+      },
+      success: function(response) {
+        $('#heading').val(response.data.heading);
+        $('#summernote2').summernote('code', response.data.body);
+        $('#status_data').val(active);
+        $('#news_id').val(id);
+      },
+      error: function(response) {
+
+      },
+    });
+
+
 
   });
 
@@ -248,6 +262,5 @@
     var id = $(this).attr('href');
     $('#news_delete_id').val(id);
   });
-
 </script>
 @endsection

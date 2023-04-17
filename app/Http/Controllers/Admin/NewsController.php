@@ -57,12 +57,12 @@ class NewsController extends Controller
                 $status = '';
             }
             $viewURL = URL::to('admin/news/show' . '/' . $item->id);
-            
+
             $data['data'][$sl]['serial'] = $serial;
             $data['data'][$sl]['heading'] = $item->heading ?? "";
             $data['data'][$sl]['body'] = $item->body ?? "";
             $data['data'][$sl]['status'] = "<span style='font-size:11px;' class='$class'>$status</span>";
-            $data['data'][$sl]['action'] = "<a class='news_edit' href='$item->id' data-toggle='modal' data-target='#news_edit_modal' heading=' $item->heading' body='$item->body' status_val='$item->status'><i class='fa fa-edit' style='font-size:14px; ''></i></a>
+            $data['data'][$sl]['action'] = "<a class='news_edit' href='$item->id' data-toggle='modal' data-target='#news_edit_modal' status_val='$item->status'><i class='fa fa-edit' style='font-size:14px;'></i></a>
                 |
                 <a href='$viewURL'><i class='fa fa-eye' style='font-size:14px; ''></i></a>
                 | <a class='news_delete' href='$item->id' data-toggle='modal' data-target='#news_delete_modal' style='border: none; background: none;' > <i class='fa fa-trash'></i> </a>";
@@ -141,5 +141,12 @@ class NewsController extends Controller
                 ->withErrors($e->getMessage())
                 ->withInput();
         }
+    }
+
+    public function getEditData(Request $request)
+    {
+        $news = News::find($request->news_id);
+
+        return response()->json(['data' => $news]);
     }
 }

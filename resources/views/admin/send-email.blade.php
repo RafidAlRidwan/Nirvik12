@@ -68,7 +68,8 @@
             <tr>
               <td style="padding:40px 30px 30px 30px;text-align:center;font-size:1.5em;font-weight:bold;">
                 <a href="http://dopplerhealth.com/" style="text-decoration:none;">
-                  <img width="1870" style="width:2170px;max-width:50%;height:auto;border:none;text-decoration:none;color:#ffffff;" src="{{asset('assets/user/landingPage/img/logoB.png')}}">
+                  <img width="1870" style="width:2170px;max-width:50%;height:auto;border:none;text-decoration:none;color:#ffffff;" src="https://i.postimg.cc/9z7K491H/logoB.png">
+                  <!-- <img width="1870" style="width:2170px;max-width:50%;height:auto;border:none;text-decoration:none;color:#ffffff;" src="{{asset('assets/user/landingPage/img/logoB.png')}}"> -->
                 </a>
               </td>
             </tr>
@@ -80,7 +81,8 @@
 
                 <br>
                 <br>
-                <p style="padding: 0; margin:0">আন্তরিক শুভেচ্ছা,</p>
+                <p style="padding: 0; margin:0">Thank You!</p>
+                <p style="padding: 0; margin:0">Warm Regards,</p>
                 <p style="padding: 0; margin:0">নির্ভীক'১২ Team</p>
 
               </td>
@@ -89,15 +91,15 @@
               <td style="padding:30px;text-align:center;font-size: 0.75em;background-color:#ffeada;color:#384049;border: 1em solid #fff;">
                 <p style="margin:0 0 0.75em 0;line-height: 0;">
                   <!--      Facebook logo            -->
-                  <a href="https://www.facebook.com/groups/138718299513425" style="display:inline-block; text-decoration:none; margin: 0 5px;">
+                  <!-- <a href="https://www.facebook.com/groups/138718299513425" style="display:inline-block; text-decoration:none; margin: 0 5px;">
                     <img src="{{asset('/assets/user/loginPage/img/fb.png')}}" width="30px" height="30px">
-                  </a>
+                  </a> -->
                 </p>
                 <p style="margin:0;font-size:.75rem;line-height:1.5em;text-align: center;">
-                  নির্ভীক'১২, SSC' ব্যাচ ১২, বগুড়া জিলা স্কুল, বগুড়া, বাংলাদেশ
+                  নির্ভীক'১২, SSC'১২, বগুড়া জিলা স্কুল, বগুড়া, বাংলাদেশ
                   <br>
                 </p>
-                <img style="width:2170px;max-width:15%;height:auto;border:none;text-decoration:none;color:#ffffff;" src="{{asset('assets/user/landingPage/img/logoB.png')}}">
+                <img style="width:2170px;max-width:15%;height:auto;border:none;text-decoration:none;color:#ffffff;" src="https://i.postimg.cc/9z7K491H/logoB.png">
 
               </td>
             </tr>

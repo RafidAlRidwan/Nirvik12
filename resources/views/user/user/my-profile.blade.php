@@ -184,6 +184,7 @@ $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
             <p><strong>Shift:</strong> {{$value->shiftData ? $value->shiftData->name : ''}}</p>
             <p><strong>Section:</strong> {{$value->sectionData ? $value->sectionData->name : ''}}</p>
             <p><strong>Roll:</strong> {{$value->roll_no}}</p>
+            <p><strong>Blood Group:</strong> {{$value->blood_group}}</p>
 
             <p><strong>Marital Status:</strong> {{$value->marital_status == 1 ? 'Bachelor' : 'Married'}}</p>
 

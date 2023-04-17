@@ -11,7 +11,7 @@
        <meta name="csrf-token" content="{{ csrf_token() }}">
 
        <!-- Favicons -->
-       <link href="{{asset('assets/user/landingPage/img/favicon.png')}}" rel="icon">
+       <link href="{{asset('assets/user/loginPage/img/bzs.png')}}" rel="icon">
        <link href="{{asset('assets/user/landingPage/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
        <!-- Google Fonts -->
@@ -48,6 +48,9 @@
        <!-- Notification -->
        <link rel="stylesheet" href="{{asset('assets/user/landingPage/notification/css/jquerysctipttop.css')}}">
        <link rel="stylesheet" href="{{asset('assets/user/landingPage/notification/css/flashy.min.css')}}">
+
+       <!-- Bangla Font -->
+       <link href="https://fonts.maateen.me/charukola-ultra-light/font.css" rel="stylesheet">
 
        <style>
               .page-item.active .page-link {

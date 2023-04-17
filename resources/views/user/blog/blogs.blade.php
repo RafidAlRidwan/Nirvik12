@@ -15,8 +15,8 @@
                         <h3 class="card__title"><i class="fa fa-map-marker-alt"></i> {{$item->title}}</h3>
                     </a>
                     <div class="card__desc">
-                        <span class="card__desc__room">{{$item->likeCount()}} Likes</span>
-                        <span class="card__desc__bed"> - {{$item->comment ? $item->comment->count() : 0}} Comments</span>
+                        <span class="card__desc__room">{{$item->likeCount()}} Likes - </span>
+                        <span class="card__desc__bed">{{$item->comment ? $item->comment->count() : 0}} Comments - </span>
                         <span class="card__desc__price">Posted on: {{$date}}</span>
                     </div>
                 </div>

@@ -9,7 +9,7 @@
         -webkit-box-shadow: 0px 0px 25px -5px #000000;
         box-shadow: 0px 0px 25px -5px #000000;
         transform: scale(1.01);
-        transition: .3s;
+        transition: .5s;
     }
 
     .loadMore button {
@@ -73,7 +73,7 @@
 
     .blog .card__desc__room,
     .blog .card__desc__bed {
-        margin-right: 20px;
+        /* margin-right: 20px; */
         font-size: 1em;
     }
 
@@ -161,7 +161,9 @@
 <!--==========================Schedule Section============================-->
 <div class="blog" id="content_area_blog">
     <div class="container wow fadeInUp p-5">
-
+        <div class="section-header">
+            <h2>Blogs</h2>
+        </div>
         <hr>
         <div class="row d-flex justify-content-between">
             @foreach ($top2Blogs as $item)
@@ -176,8 +178,8 @@
                             <h3 class="card__title"><i class="fa fa-map-marker-alt"></i> {{$item->title}}</h3>
                         </a>
                         <div class="card__desc">
-                            <span class="card__desc__room">{{$item->likeCount()}} Likes</span>
-                            <span class="card__desc__bed"> - {{$item->comment ? $item->comment->count() : 0}} Comments</span>
+                            <span class="card__desc__room">{{$item->likeCount()}} Likes - </span>
+                            <span class="card__desc__bed">{{$item->comment ? $item->comment->count() : 0}} Comments - </span>
                             <span class="card__desc__price">Posted on: {{$date}}</span>
                         </div>
                     </div>

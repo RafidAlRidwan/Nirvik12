@@ -85,6 +85,16 @@
         @endif
 
     </div>
+    <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+        <label>Blood Group</label>
+        <div class="inputBox">
+            {!! Form::text('blood_group', $user_details->blood_group, [($errors->has('blood_group') ? 'is-invalid' : ''), 'autocomplete' => 'off', 'required']) !!}
+        </div>
+        @if ($errors->has('blood_group'))
+        <div class="invalid-feedback">{{ $errors->first('blood_group') }}</div>
+        @endif
+
+    </div>
 
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
 
@@ -135,7 +145,7 @@
     </div>
 </div>
 <div class="row field_wrappers">
-    
+
     @if(!$mobile_details->count() > 0)
     <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <label>Mobile No</label>

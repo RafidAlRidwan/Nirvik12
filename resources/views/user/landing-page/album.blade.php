@@ -86,9 +86,9 @@
 
 <!--==========================Album Section============================-->
 <section id="albums" class="wow fadeInUp">
-       <!-- <div class="section-header">
-                            <h2>Album</h2>
-                     </div> -->
+       <div class="section-header">
+              <h2>Album</h2>
+       </div>
        @php
        $albumDetails = App\Models\Album::all();
        @endphp

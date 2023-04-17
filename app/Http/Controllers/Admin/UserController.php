@@ -8,6 +8,7 @@ use Redirect;
 use validate;
 use App\Models\User;
 use App\Mail\SendEmail;
+use App\Models\Section;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use App\Models\MobileNumberDetail;
@@ -307,5 +308,48 @@ class UserController extends Controller
         }
         // return redirect()->route('administrative.distributor-locator')->with('success', 'Imported Successfully');
         return redirect()->back()->with('success', 'File has been uploaded successfully.');
+    }
+
+    public function insertData()
+    {
+        $section = Section::all();
+        foreach ($section as $item) {
+            for ($start = 1; $start <= 70; $start++) {
+                if ($item->id == 1) {
+                    $shift = 1;
+                    $prefix = 'a';
+                }
+                if ($item->id == 2) {
+                    $shift = 1;
+                    $prefix = 'b';
+                }
+                if ($item->id == 3) {
+                    $shift = 2;
+                    $prefix = 'c';
+                }
+                if ($item->id == 4) {
+                    $shift = 2;
+                    $prefix = 'd';
+                }
+                $user = new User;
+                $userData = [];
+                $userData['name'] = $prefix . $start;
+                $userData['email'] = $prefix . $start . '@gmail.com';
+                $userData['password'] = bcrypt('1234');
+                $userData['type'] = 3;
+                $user = $user->create($userData);
+
+                $details = new UserDetail;
+                $details->user_id = $user->id;
+                $details->full_name = $user->name;
+                $details->email = $user->email;
+                $details->section = $item->id;
+                $details->shift = $shift;
+                $details->roll_no = $start;
+                $details->save();
+            }
+        }
+
+        return back();
     }
 }

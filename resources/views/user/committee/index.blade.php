@@ -16,7 +16,46 @@
         border-color: #f82249;
     }
 </style>
+<style>
+    .page-header .container {
+        padding-top: 36px;
+        padding-bottom: 36px;
+        position: relative;
+        animation: pop-in 2.5s ease-out;
+    }
 
+    .container {
+        max-width: 1140px;
+        padding-right: 30px;
+        padding-left: 30px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .custom-section {
+        width: 100%;
+        height: auto;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/assets/user/landingPage/img/map.jpg) center;
+        /* background: #e6fbf6; */
+        background-size: cover;
+        overflow: hidden;
+        position: relative;
+    }
+
+    @media (min-width: 768px) {
+        .page-header .container {
+            padding-top: 100px;
+            /* padding-bottom: 48px; */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .page-header .container {
+            padding-top: 100px;
+            /* padding-bottom: 48px; */
+        }
+    }
+</style>
 @endsection
 
 @section('header')
@@ -24,52 +63,67 @@
 @include('layouts.user.landing-page.header')
 @endsection
 @section('main-content')
-<main id="home" style="padding-top: 80px;padding-bottom: 36px;position: relative;animation: pop-in 2.5s ease-out;">
-    <section id="speakers-details" class="wow fadeIn">
+<!--==========================Custom Section============================-->
+
+<section>
+    <div class="page-header custom-section">
+        <div class="backdrop-gradient"></div>
         <div class="container">
-            <div class="section-header">
-                <h2>Event Committees</h2>
-            </div>
-            <div id="app">
-                <div class="box">
-                    <div class="row">
+            <div class="breadcrumb-wrap"></div>
+            <h2 style="font-weight: bold;" class="page-title">#Events & Program Committees</h1>
+                <div class="content">
+                    <p style="font-weight: bold;" class="lead">Recent Events Committee List</p>
+                    <!-- <p>
+                                          <a class="btn btn-info" href="#">View All</a>
+                                   </p> -->
+                </div>
+        </div>
+    </div>
+</section>
+<section id="schedule" class="wow fadeUp">
+    <div class="container">
+        <div class="section-header">
+            <h2>Event Committees</h2>
+        </div>
+        <div id="app">
+            <div class="box">
+                <div class="row">
 
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
-                            <table id="index_datatable" class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Serial</th>
-                                        <th>Event</th>
-                                        <th>Committee Name</th>
-                                        <th>Manager</th>
-                                        <th>Total Member</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                        <table id="index_datatable" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Serial</th>
+                                    <th>Event</th>
+                                    <th>Committee Name</th>
+                                    <th>Manager</th>
+                                    <th>Total Member</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
 
 
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Serial</th>
-                                        <th>Event</th>
-                                        <th>Committee Name</th>
-                                        <th>Manager</th>
-                                        <th>Total Member</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Serial</th>
+                                    <th>Event</th>
+                                    <th>Committee Name</th>
+                                    <th>Manager</th>
+                                    <th>Total Member</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
+
                 </div>
             </div>
-    </section>
-</main>
+        </div>
+</section>
 
 @endsection
 

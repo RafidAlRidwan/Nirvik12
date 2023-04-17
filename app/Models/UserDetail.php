@@ -58,6 +58,7 @@ class UserDetail extends Model
             $input->section = $inputData['section'];
             $input->shift = $inputData['shift'];
             $input->roll_no = $inputData['roll_no'];
+            $input->blood_group = $inputData['blood_group'];
             $input->religion = $inputData['religion'];
             if ($inputData['marital_status'] == 1) {
                 $input->marital_status = $inputData['marital_status'];
@@ -111,6 +112,7 @@ class UserDetail extends Model
                 'section' => $inputData['section'] ?? NULL,
                 'shift' => $inputData['shift'] ?? NULL,
                 'roll_no' => $inputData['roll_no'] ?? NULL,
+                'blood_group' => $inputData['blood_group'] ?? NULL,
                 'religion' => $inputData['religion'] ?? NULL,
                 'marital_status' => $inputData['marital_status'] ?? NULL,
                 'spouse_name' => $inputData['spouse_name'] ?? NULL,

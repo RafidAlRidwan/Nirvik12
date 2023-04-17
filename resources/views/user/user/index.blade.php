@@ -43,7 +43,7 @@
             <div id="app">
                 <div class="boxes">
                     <div class="row">
-                        <div class="col-lg-3 col-md-5 col-12">
+                        <div class="col-lg-3 col-md-5 col-12 fixme">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-3">
 
                                 <div class="containerr">
@@ -79,7 +79,7 @@
                                 </select>
                             </div>
 
-                            
+
                         </div>
                         <div class="col-lg-9 col-md-8 col-12" id="content_area">
 
@@ -278,11 +278,17 @@
 
 <script>
     getItems();
-
+    $(".btn_common").click(function(e) {
+        e.preventDefault();
+        var search = $('#search').val();
+        getItems(search, null, null, null);
+    })
     $('#search').on("keyup change", function(e) {
         e.preventDefault();
-        var search = $(this).val();
-        getItems(search, null, null, null);
+        var search = $('#search').val();
+        if (search == '') {
+            getItems(search, null, null, null);
+        }
     })
 
     $("#section").on('change', function(e) {
@@ -355,6 +361,8 @@
             })
             .done(function(response) {
                 // $('.loading').hide();
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
                 $('#content_area').html(response);
             })
             .fail(function(jqXHR, ajaxOptions, thrownError) {

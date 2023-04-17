@@ -39,8 +39,8 @@ return [
             'host' => 'smtp.gmail.com',
             'port' => 465,
             'encryption' => 'ssl',
-            'username' => 'yoyolidoy@gmail.co',
-            'password' => 'lbwavakxltjoweht',
+            'username' => 'nirvik12.bzs12@gmail.com',
+            'password' => 'kelbbucfpnvxljye',
             'timeout' => null,
             'auth_mode' => null,
         ],
@@ -84,7 +84,7 @@ return [
     */
 
     'from' => [
-        'address' => 'nirvik12@gmail.com',
+        'address' => 'nirvik12.bzs12@gmail.com',
         'name' => "নির্ভীক'১২",
     ],
 

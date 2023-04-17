@@ -57,6 +57,7 @@
                             Designed & Developed by <a target="_blank" style="font-weight: 500; font-size:16px;" href="https://www.linkedin.com/in/rafidalridwan/">ᖇᗩᖴᎥᗪ ᗩᒪ ᖇᎥᗪᗯᗩᑎ</a>
                      </div>
               </div>
+
        </footer>
 
 </div>

@@ -2,8 +2,13 @@
 <html>
 
 <head>
-  <title>Login</title>
+  @php
+  $cache = Cache::get('settings');
+  $app_name = $cache->where('key', 'app_name')->first();
+  @endphp
+  <title>{{$app_name->value}}</title>
   <link rel="stylesheet" type="text/css" href="{{asset('assets/user/loginPage/css/style.css')}}">
+  <link href="{{asset('assets/user/loginPage/img/bzs.png')}}" rel="icon">
   <!-- Google Fonts -->
   <link href="{{asset('assets/user/landingPage/css/googleFont.css')}}" rel="stylesheet">
   <!-- Notification -->

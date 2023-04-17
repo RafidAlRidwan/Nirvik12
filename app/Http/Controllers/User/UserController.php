@@ -164,15 +164,21 @@ class UserController extends Controller
 
     public function loadUserData(Request $request)
     {
-        $users = User::with('userDetails')
+        $users = User::with('userDetails', 'mobileNumberDetails')
             ->where('type', 3)
-            ->orderBy('created_at', 'ASC');
+            ->orderBy('id', 'ASC');
 
         if ($request->has('search') && $request->filled('search')) {
             $search = $request->input('search');
             $users = $users->whereHas('userDetails', function ($q) use ($search) {
-                $q->where('user_details.full_name', 'like', '%' . $search . '%');
-            });
+                $q->where('user_details.full_name', 'like', '%' . $search . '%')
+                    ->orWhere('user_details.blood_group', 'like', '%' . $search . '%')
+                    ->orWhere('user_details.roll_no', 'like', '%' . $search . '%')
+                    ->orWhere('user_details.email', 'like', '%' . $search . '%');
+            })
+                ->orWhereHas('mobileNumberDetails', function ($q) use ($search) {
+                    $q->where('mobile_number_details.mobile', 'like', '%' . $search . '%');
+                });
         }
         if ($request->has('section') && $request->filled('section')) {
             $section = $request->input('section');
@@ -331,7 +337,6 @@ class UserController extends Controller
                 return response()->json(['msg' => asset('assets/user/landingPage/img/profilePicture') . '/' . $userProfile->attachment, 'name' => '', 'status' => 1]);
             }
         } catch (\Exception $e) {
-            dd($e);
             return response()->json(['msg' => 'Crop Image Uploaded Failed', 'status' => 0]);
         }
     }
