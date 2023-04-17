@@ -39,7 +39,7 @@ return [
             'host' => 'smtp.gmail.com',
             'port' => 465,
             'encryption' => 'ssl',
-            'username' => 'nirvik12.bzs12@gmail.com',
+            'username' => 'nirvik12.bzs12@gmail.comm',
             'password' => 'kelbbucfpnvxljye',
             'timeout' => null,
             'auth_mode' => null,
