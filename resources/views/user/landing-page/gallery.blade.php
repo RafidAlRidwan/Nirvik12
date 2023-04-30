@@ -1,5 +1,6 @@
 @extends('layouts.user.landing-page.master')
 @section('main-style')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.css" integrity="sha512-nNlU0WK2QfKsuEmdcTwkeh+lhGs6uyOxuUs+n+0oXSYDok5qy0EI0lt01ZynHq6+p/tbgpZ7P+yUb+r71wqdXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
        .page-header .container {
               padding-top: 36px;
@@ -43,6 +44,14 @@
        img:hover {
               transform: scale(1.1);
        }
+
+       .fancybox-button--share {
+              display: none;
+       }
+
+       .fancybox-button--thumbs {
+              display: none;
+       }
 </style>
 <link rel="stylesheet" href="{{asset('assets/user/landingPage/gallery/justifiedGallery.min.css')}}">
 @endsection
@@ -77,13 +86,15 @@
               <div id="basicExample" class="d-flex justify-content-center">
                      @isset($gallery)
                      @foreach ($gallery as $item)
-                     <a href="{{asset($item->attachment)}}" target=”_blank”>
-                            <img style="transition: 0.3s" alt="Photo" src="{{asset($item->attachment)}}" />
+                     <a data-fancybox="gallery" data-caption="{{$item->title ?? ''}}" data-src="{{asset($item->attachment)}}">
+                            <img style="transition: 0.3s" src="{{asset($item->attachment)}}" />
                      </a>
                      @endforeach
                      @endisset
 
               </div>
+
+
 
        </div>
 </section>
@@ -96,12 +107,26 @@
 
 @section('main-script')
 <script src="{{asset('assets/user/landingPage/gallery/jquery.justifiedGallery.min.js')}}"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
        $('#basicExample').justifiedGallery({
               rowHeight: 130,
               lastRow: 'nojustify',
               margins: 3
+       });
+       // Fancybox Configuration
+
+       $('[data-fancybox="gallery"]').fancybox({
+              buttons: [
+                     "slideShow",
+                     "thumbs",
+                     "zoom",
+                     "fullScreen",
+                     "share",
+                     "close"
+              ],
+              loop: false,
+              protect: true
        });
 </script>
 @endsection

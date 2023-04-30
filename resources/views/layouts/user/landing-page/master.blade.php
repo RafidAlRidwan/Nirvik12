@@ -4,34 +4,9 @@
 <!-- ======= Header Assets ======= -->
 @include('layouts.user.landing-page.header-assets')
 <style>
-       /*animation*/
-       .loading {
-              /* background: rgba(255, 255, 255, 0.1); */
-              background: rgba(0, 0, 0, 0);
-              backdrop-filter: blur(20px);
-       }
-
-       svg {
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              right: 50%;
-              transform: translate(-50%, -50%);
-
-       }
-
-       .path {
-              animation: draw 2.5s infinite;
-              animation-timing-function: linear;
-       }
-
-       @keyframes draw {
-              0% {}
-
-              100% {
-                     stroke-dashoffset: 0;
-                     stroke-opacity: 1;
-              }
+       .single-funfact-wrap:hover {
+              transform: scale(1.15);
+              transition: transform 0.3s;
        }
 </style>
 
@@ -91,7 +66,7 @@
                      </svg>
 
               </div>
-              <!-- Preloader -->
+              <!-- END Preloader -->
               <main id="main">
                      @yield('main-content')
               </main>
@@ -108,7 +83,8 @@
                      e.preventDefault();
 
               });
-       </script> -->
+       </scrip> -->
+
 </body>
 
 </html>

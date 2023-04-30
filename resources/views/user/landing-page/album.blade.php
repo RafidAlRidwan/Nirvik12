@@ -24,7 +24,7 @@
               transition: .5s;
        }
 
-       .picture::before {
+       /* .picture::before {
               content: "";
               position: absolute;
               top: 50%;
@@ -55,11 +55,16 @@
 
        .picture:hover::after {
               height: 100%;
-       }
+       }*/
 
-       .picture:hover::before {
-              margin-top: 0;
-              opacity: 1;
+       .picture:hover {
+              transform: scale(1.1);
+              transition: 0.5s;
+              box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12),
+                     0 2px 2px rgba(0, 0, 0, 0.12),
+                     0 4px 4px rgba(0, 0, 0, 0.12),
+                     0 8px 8px rgba(0, 0, 0, 0.12),
+                     0 16px 16px rgba(0, 0, 0, 0.12);
        }
 </style>
 <link rel="stylesheet" href="{{asset('assets/user/landingPage/gallery/justifiedGallery.min.css')}}">
@@ -118,7 +123,7 @@
               <div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 md-3 text-center">
                      <div class="album d-flex justify-content-center">
                             <div class="picture">
-                                   <a href={{asset('/gallery/0')}}><img src={{asset('assets/user/landingPage/img/album.png')}} alt="Album" class="img-fluid"></a>
+                                   <a href="{{asset('/gallery/0')}}" href="#"><img src={{asset('assets/user/landingPage/img/album.png')}} alt="Album" class="img-fluid"></a>
                             </div>
                      </div>
                      <div>
@@ -142,6 +147,12 @@
               rowHeight: 130,
               lastRow: 'nojustify',
               margins: 3
+       });
+</script>
+<script>
+       $("goto").click(function() {
+              var url = $(this).attr('value');
+              window.location.href = url;
        });
 </script>
 @endsection

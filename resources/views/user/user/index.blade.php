@@ -21,6 +21,7 @@
     #speakers-details {
         padding: 0px 0;
     }
+
 </style>
 <link rel="stylesheet" href="{{asset('assets/user/landingPage/custom-select/css/style.css')}}">
 
@@ -39,7 +40,6 @@
                 <canvas id="celebration"></canvas>
                 <h2>List of Mates</h2>
             </div>
-
             <div id="app">
                 <div class="boxes">
                     <div class="row">
@@ -360,7 +360,6 @@
                 },
             })
             .done(function(response) {
-                // $('.loading').hide();
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
                 $('#content_area').html(response);

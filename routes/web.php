@@ -100,6 +100,8 @@ Route::middleware([IsUser::class])->group(function () {
     Route::post('/user/image/upload', 'App\Http\Controllers\User\UserController@imageUpload');
     Route::get('/user/collection/getBalance/{userId?}/{committeeId?}', [App\Http\Controllers\User\CommitteeController::class, 'getBalanceData']);
     Route::post('/user/collection/transfer', 'App\Http\Controllers\User\CommitteeController@transfer');
+    Route::get('/user/donate', 'App\Http\Controllers\User\DonateController@index');
+    Route::post('/user/donate/store', [App\Http\Controllers\User\DonateController::class, 'store'])->name('store.donor');
 });
 // USER SECTION END
 
@@ -145,6 +147,7 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::get('/admin/news/show/{id}', [App\Http\Controllers\Admin\NewsController::class, 'show']);
     Route::post('/admin/news/destroy', 'App\Http\Controllers\Admin\NewsController@destroy');
     Route::post('/admin/news/getEditdata', [App\Http\Controllers\Admin\NewsController::class, 'getEditData'])->name('news.edit.data');
+    Route::post('/admin/trending/news/store', 'App\Http\Controllers\Admin\NewsController@updateTrendingNews');
 
     // Event MANAGEMENT
     Route::get('/admin/event/setting', [App\Http\Controllers\Admin\EventController::class, 'index'])->name('event_index');
@@ -217,7 +220,24 @@ Route::middleware([CheckAdmin::class])->group(function () {
     Route::get('/admin/blog/view/{id}', [App\Http\Controllers\Admin\BlogController::class, 'show']);
     Route::post('/admin/blog/destroy', 'App\Http\Controllers\Admin\BlogController@destroy');
     Route::post('/admin/blog/modify-status', [App\Http\Controllers\Admin\BlogController::class, 'modifyStatus'])->name('blog.status.modify');
-    
+
+    // Donate MANAGEMENT
+    Route::get('/admin/donate/setting', [App\Http\Controllers\Admin\DonateController::class, 'index'])->name('donate_index');
+    Route::get('/admin/donate/edit/{donate}', [App\Http\Controllers\Admin\DonateController::class, 'edit']);
+    Route::post('/admin/donate/update', 'App\Http\Controllers\Admin\DonateController@update');
+    Route::post('/admin/donate/getdata', [App\Http\Controllers\Admin\DonateController::class, 'donate_datatable']);
+    Route::post('/admin/donate/destroy', 'App\Http\Controllers\Admin\DonateController@destroy');
+    Route::post('/admin/donate/modify-status', [App\Http\Controllers\Admin\DonateController::class, 'modifyStatus'])->name('donate.status.modify');
+
+    // Responsiblity Section MANAGEMENT
+    Route::get('/admin/responsiblity-section/setting', [App\Http\Controllers\Admin\ResponsiblityController::class, 'index'])->name('responsiblity_index');
+    Route::get('/admin/responsiblity-section/create', [App\Http\Controllers\Admin\ResponsiblityController::class, 'create']);
+    Route::post('/admin/responsiblity-section/store', 'App\Http\Controllers\Admin\ResponsiblityController@store');
+    Route::post('/admin/responsiblity-section/getdata', [App\Http\Controllers\Admin\ResponsiblityController::class, 'responsiblity_datatable']);
+    Route::get('/admin/responsiblity-section/edit/{id}', [App\Http\Controllers\Admin\ResponsiblityController::class, 'edit']);
+    Route::post('/admin/responsiblity-section/update', 'App\Http\Controllers\Admin\ResponsiblityController@update');
+    Route::get('/admin/responsiblity-section/show/{id}', [App\Http\Controllers\Admin\ResponsiblityController::class, 'show']);
+    Route::post('/admin/responsiblity-section/destroy', 'App\Http\Controllers\Admin\ResponsiblityController@destroy');
 
     Route::get('/user/sync', [App\Http\Controllers\Admin\UserController::class, 'insertData']);
 

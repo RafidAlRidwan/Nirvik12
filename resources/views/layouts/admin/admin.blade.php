@@ -328,6 +328,24 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{URL::to('/admin/responsiblity-section/setting')}}" class="nav-link 
+            {{request()->is('admin/responsiblity-section/*') ? 'active' : ''}}">
+              <i class="nav-icon fa fa-crosshairs" aria-hidden="true"></i>
+              <p>
+                Responsiblity Settings
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{URL::to('/admin/donate/setting')}}" class="nav-link 
+            {{request()->is('admin/donate/*') ? 'active' : ''}}">
+              <i class="nav-icon fa fa-retweet" aria-hidden="true"></i>
+              <p>
+                Donation Settings
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{URL::to('/admin/sponsor/setting')}}" class="nav-link 
             {{request()->is('admin/sponsor/*') ? 'active' : ''}}">
               <i class="nav-icon fa fa-hourglass"></i>

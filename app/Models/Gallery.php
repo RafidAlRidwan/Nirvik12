@@ -22,7 +22,7 @@ class Gallery extends Model
         $requestData = $request->all();
 
         if (is_null($id)) {
-            
+
             if (!empty($requestData['attachment'])) {
                 $image = $requestData['attachment'];
                 $unique_date = date_timestamp_get(date_create());
@@ -30,7 +30,7 @@ class Gallery extends Model
                 $path = ('assets/user/landingPage/img/gallery/');
                 $image_resize = Image::make($image->getRealPath());
                 // $image_resize->resize(800, 600);
-                $main_path = $path.$filename;
+                $main_path = $path . $filename;
                 $image_resize->save($main_path);
                 $requestData['attachment'] = $main_path ?? NULL;
             }
@@ -38,7 +38,7 @@ class Gallery extends Model
         } else {
 
             $gallery = Gallery::findOrFail($id);
-            $image_path = $gallery->attachment; 
+            $image_path = $gallery->attachment;
             if (file_exists($image_path)) {
                 unlink($image_path);
             }
@@ -49,7 +49,7 @@ class Gallery extends Model
                 $path = ('assets/user/landingPage/img/gallery/');
                 $image_resize = Image::make($image->getRealPath());
                 $image_resize->resize(800, 600);
-                $main_path = $path.$filename;
+                $main_path = $path . $filename;
                 $image_resize->save($main_path);
                 $requestData['attachment'] = $main_path ?? NULL;
             }
@@ -59,5 +59,11 @@ class Gallery extends Model
     public function albumDetails()
     {
         return $this->hasOne(Album::class, 'id', 'album_id');
+    }
+
+    public static function countAllPhotos()
+    {
+        $data = self::get();
+        return count($data);
     }
 }

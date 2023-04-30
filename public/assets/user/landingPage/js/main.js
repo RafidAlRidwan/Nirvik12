@@ -144,4 +144,13 @@ jQuery(document).ready(function( $ ) {
 
 // custom code
 
+$(window).scroll(function() {
+  if ($(this).scrollTop() > 100) {
+    $('.ticker-wrapper-h').fadeOut('slow');
+  } else {
+    $('.ticker-wrapper-h').fadeIn('slow');
+  }
 });
+
+});
+

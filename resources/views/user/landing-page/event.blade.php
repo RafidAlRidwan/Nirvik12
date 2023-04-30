@@ -49,8 +49,9 @@
                             <div class="speaker">
                             </div>
 
-                            <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title="{{$value['title']}}" body={{$value['description']}}>{{$value['title']}}</a></h4>
-                            <p><i class="fa fa-map-marker"></i> {{$value['venue']}}</p>
+                            <h4>{{$value['title']}}</h4>
+                            <p style="margin-bottom: 5px;"><i class="fa fa-map-marker"></i> {{$value['venue']}}</p>
+                            <button class="btn btn-sm btn-primary eventData" style="background-color: #f82249; border:none" data-toggle='modal' data-target='#event-details' title="{{$value['title']}}" body={{$value['description']}}>Details</button>
                      </div>
               </div>
               @endforeach

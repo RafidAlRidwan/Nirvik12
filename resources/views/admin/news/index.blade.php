@@ -16,7 +16,23 @@
     </div>
   </div>
 </div>
+<section class="content p-2">
+  {!! Form::open(['action' => ['App\Http\Controllers\Admin\NewsController@updateTrendingNews'], 'files' => true, 'class' => 'needs-validation']) !!}
+  <div class="card container-fluid">
+    <div class="card-body">
+      <input type="hidden" name="id" value="{{$news->id ?? ''}}">
+      <div class="form-group">
+        <label for="exampleSelectBorder">Trending News</label>
+        <textarea name="news" class="form-control" rows="3">{{$news->news ?? ''}}</textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </div>
 
+  {!! Form::close() !!}
+</section>
 <section class="content p-2">
   <div class="container-fluid">
     <div class="row m-t-25 card p-3">

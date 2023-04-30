@@ -40,9 +40,21 @@
               </div>
        </div>
 </section>
+
+<!--========================== Trending News Section ==========================-->
+@if(!empty($news->news))
+<div class="ticker-wrapper-h">
+       <div class="heading">Trending Now</div>
+
+       <ul class="news-ticker-h">
+              <li><a href="">{{$news->news}}</a></li>
+       </ul>
+</div>
+@endif
+
 <!--==========================About Section============================-->
 <section id="about">
-       <div class="container">
+       <div class="container wow fadeInUp">
               <div class="section-header">
                      <h2 style="color: #f82249">About Nirvik'12</h2>
               </div>
@@ -101,137 +113,72 @@
 <section id="schedule" class="section-with-bg" style="background-attachment:fixed !important;background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('/assets/user/landingPage/img/about-bg2.jpg') center center no-repeat; background-size: cover;">
        <div class="container wow fadeInUp">
               <div class="section-header">
-                     <h2>Event & Program Schedule</h2>
+                     <h2>Upcoming Events</h2>
               </div>
-              @php
-              $current_month = date('F');
-              $next_month_1 = date('F', strtotime('first day of +1 month'));
-              $next_month_2 = date('F', strtotime('first day of +2 month'));
-              @endphp
-              <ul class="nav nav-tabs" role="tablist">
-                     <li class="nav-item">
-                            <a class="nav-link active" href="#day-1" role="tab" data-toggle="tab">{{$current_month}}</a>
-                     </li>
-                     <li class="nav-item">
-                            <a class="nav-link" href="#day-2" role="tab" data-toggle="tab">{{$next_month_1}}</a>
-                     </li>
-                     <li class="nav-item">
-                            <a class="nav-link" href="#day-3" role="tab" data-toggle="tab">{{$next_month_2}}</a>
-                     </li>
-              </ul>
+              <!-- Custom Events -->
+              <div id="kagepisuceng" class="kagepisuceng">
 
-              <div class="tab-content row justify-content-center">
-
-                     <!-- Schdule Day 1 -->
-                     <div role="tabpanel" class="col-lg-9 tab-pane fade show active" id="day-1">
+                     <div class="kagepisuceng__items">
                             @php
-                            $current_date = date('m');
-                            $events = App\Models\Event::whereMonth('date', $current_date)->latest()->take(5)->get();
+                            $current_date = date("Y-m-d");
+                            $events = App\Models\Event::whereDate('date', '>=', $current_date)->orderBy('date', 'ASC')->take(5)->get();
                             @endphp
 
-                            @isset($events)
-                            @foreach ($events as $value)
-                            @php
-                            $day1 = date('d', strtotime($value['date']));
-                            $month1 = date('M', strtotime($value['date']));
-                            @endphp
-                            <div class="row schedule-item">
-                                   <div class="date col-md-2">
-                                          <time datetime="23th feb">
-                                                 <span>{{$day1}}</span><span>{{$month1}}</span>
-                                          </time>
-                                   </div>
-                                   <div class="col-md-10">
-                                          <div class="speaker">
-                                          </div>
 
-                                          <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title="{{$value['title']}}" body={{$value['description']}}>{{$value['title']}}</a></h4>
-                                          <p><i class="fa fa-map-marker"></i> {{$value['venue']}}</p>
-                                   </div>
-                            </div>
-                            @endforeach
-                            @endisset
-                            <a style="text-align: center;" class="text-danger pt-1 mb-0 {{ isset($events) && !$events->isEmpty() ? "d-none" : "" }}" id="notice-tools-technology-info" role="notice">
-                                   <i class="icon-info22 mr-1" aria-hidden="true"></i> {!! __("No Events found!") !!}
-                            </a>
-
-                     </div>
-                     <!-- End Schdule Day 1 -->
-
-                     <!-- Schdule Day 2 -->
-                     <div role="tabpanel" class="col-lg-9  tab-pane fade" id="day-2">
+                            <ol class="kagepisuceng__indicators">
+                                   @foreach ($events as $ev)
+                                   <li class="kagepisuceng__indicator {{$loop->iteration == 1 ?  'kagepisuceng__indicator_active' : ''}} " data-slide-to="{{$loop->iteration - 1}}"></li>
+                                   @endforeach
+                            </ol>
+                            @foreach ($events as $event)
 
                             @php
-                            $current_date2 = date('m', strtotime('first day of +1 month'));
-                            $events2 = App\Models\Event::whereMonth('date', $current_date2)->get();
-                            @endphp
+                            $day = date('d', strtotime($event['date']));
+                            $month = date('M', strtotime($event['date']));
 
-                            @isset($events2)
-                            @foreach ($events2 as $value)
-                            @php
-                            $day2 = date('d', strtotime($value['date']));
-                            $month2 = date('M', strtotime($value['date']));
+                            $now = time();
+                            $target_date = strtotime($event['date']);
+                            $datediff = $target_date - $now;
+                            $day_count = round($datediff / (60 * 60 * 24));
                             @endphp
-                            <div class="row schedule-item">
-                                   <div class="date col-md-2">
-                                          <time datetime="23th feb">
-                                                 <span>{{$day2}}</span><span>{{$month2}}</span>
-                                          </time>
-                                   </div>
-                                   <div class="col-md-10">
-                                          <div class="speaker">
-                                          </div>
+                            <div class="kagepisuceng__item kagepisuceng__item_1 {{$loop->iteration == 1 ? 'kagepisuceng__item_active' : ''}} ">
+                                   <div class="kagepisuceng__item_inner">
+                                          <span class="kagepisuceng__item_img">
+                                                 <div class="date col-md-2">
+                                                        <time datetime="23th feb" style="border: 2px solid black;padding: 5px;">
+                                                               <span>{{$day}}</span><span>{{$month}}</span>
+                                                        </time>
+                                                 </div>
+                                          </span>
+                                          <span class="kagepisuceng__item_testimonial">
+                                                 <span class="kagepisuceng__item_text" style="align-items: center;display: flex;font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;">
+                                                        <div id="countdown" style="color: #000;text-align: center;">
+                                                               @if($loop->iteration == 1)
+                                                               <ul style="margin-bottom: 0rem">
+                                                                      <li style="display: inline-block;font-size: 12px;list-style-type: none;padding: 1em;text-transform: uppercase;"><span style="display: block;font-size: 19px; color:#fff" id="days"></span><strong>days</strong></li>
+                                                                      <li style="display: inline-block;font-size: 12px;list-style-type: none;padding: 1em;text-transform: uppercase;"><span style="display: block;font-size: 19px; color:#fff" id="hours"></span><strong>Hr</strong></li>
+                                                                      <li style="display: inline-block;font-size: 12px;list-style-type: none;padding: 1em;text-transform: uppercase;"><span style="display: block;font-size: 19px; color:#fff" id="minutes"></span><strong>Min</strong></li>
+                                                                      <li style="display: inline-block;font-size: 12px;list-style-type: none;padding: 1em;text-transform: uppercase;"><span style="display: block;font-size: 19px; color:#fff" id="seconds"></span><strong>Sec</strong></li>
+                                                               </ul>
+                                                               @else
+                                                               <span class="kagepisuceng__item_name" style="padding-left:0.7em;margin-bottom:5px"><strong>{{$day_count}}</strong> Days Remaining</span>
+                                                               @endif
+                                                        </div>
+                                                 </span>
+                                                 <span class="kagepisuceng__item_name" style="font-weight:800px !important;padding-left: 0.6em; color: #fff;"><strong>{{$event['title']}}</strong></span>
+                                                 <span class="kagepisuceng__item_post" style="padding-left: 0.7em;  color: #fff;">
+                                                        <p style="margin-bottom: 0px;"><i class="fa fa-map-marker"></i> {{$event['venue']}}</p>
+                                                 </span>
 
-                                          <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title="{{$value['title']}}" body={{$value['description']}}>{{$value['title']}}</a></h4>
-                                          <p><i class="fa fa-map-marker"></i> {{$value['venue']}}</p>
+                                          </span>
                                    </div>
                             </div>
                             @endforeach
-                            @endisset
-                            <a style="text-align: center;" class="text-danger pt-1 mb-0 {{ isset($events2) && !$events2->isEmpty() ? "d-none" : "" }}" id="notice-tools-technology-info" role="notice">
-                                   <i class="icon-info22 mr-1" aria-hidden="true"></i> {!! __("No Events found!") !!}
-                            </a>
-
                      </div>
-                     <!-- End Schdule Day 2 -->
-
-                     <!-- Schdule Day 3 -->
-                     <div role="tabpanel" class="col-lg-9  tab-pane fade" id="day-3">
-
-                            @php
-                            $current_date3 = date('m', strtotime('first day of +2 month'));
-                            $events3 = App\Models\Event::whereMonth('date', $current_date3)->get();
-                            @endphp
-
-                            @isset($events3)
-                            @foreach ($events3 as $value)
-                            @php
-                            $day3 = date('d', strtotime($value['date']));
-                            $month3 = date('M', strtotime($value['date']));
-                            @endphp
-                            <div class="row schedule-item">
-                                   <div class="date col-md-2">
-                                          <time datetime="23th feb">
-                                                 <span>{{$day3}}</span><span>{{$month3}}</span>
-                                          </time>
-                                   </div>
-                                   <div class="col-md-10">
-                                          <div class="speaker">
-                                          </div>
-
-                                          <h4><a href="#" class="eventData" data-toggle='modal' data-target='#event-details' title="{{$value['title']}}" body={{$value['description']}}>{{$value['title']}}</a></h4>
-                                          <p><i class="fa fa-map-marker"></i> {{$value['venue']}}</p>
-                                   </div>
-                            </div>
-                            @endforeach
-                            @endisset
-                            <a style="text-align: center;" class="text-danger pt-1 mb-0 {{ isset($events3) && !$events3->isEmpty() ? "d-none" : "" }}" id="notice-tools-technology-info" role="notice">
-                                   <i class="icon-info22 mr-1" aria-hidden="true"></i> {!! __("No Events found!") !!}
-                            </a>
-                     </div>
-                     <!-- End Schdule Day 3 -->
-
+                     <a class="kagepisuceng__control kagepisuceng__control_prev" href="#" role="button"></a>
+                     <a class="kagepisuceng__control kagepisuceng__control_next" href="#" role="button"></a>
               </div>
+
               <div class="d-flex justify-content-center mt-2">
                      <p class="readMore">
                             <a style="color: rgba(202, 206, 221, 0.8);" href={{URL::to('/events')}}>
@@ -240,6 +187,100 @@
                      </p>
               </div>
 
+       </div>
+</section>
+
+<!--================Responsibility=================-->
+<section id="responsibility-area" class="section-padding pt-5">
+       <div class="container">
+              <!--== Section Title Start ==-->
+              <div class="section-header">
+                     <h2>Our Responsiblity</h2>
+              </div>
+              <!--== Section Title End ==-->
+
+              <!--== Responsibility Content Wrapper ==-->
+              <div class="row" style="text-align: center!important; padding-bottom: 50px">
+                     @php
+                     $resposiblity = App\Models\ResponsiblitySection::orderBy('id', 'ASC')->take(4)->get();
+                     @endphp
+                     <!--== Single Responsibility Start ==-->
+                     @foreach ($resposiblity as $res)
+                     <div class="col-lg-3 col-sm-6">
+                            <div class="single-responsibility">
+                                   <img src="{{asset($res->file)}}" alt="Responsibility">
+                                   <h4>{{$res->title}}</h4>
+                                   <p>{{$res->short_description}}</p>
+                            </div>
+                     </div>
+                     @endforeach
+
+                     <!--== Single Responsibility End ==-->
+              </div>
+              <!--== Responsibility Content Wrapper ==-->
+       </div>
+</section>
+
+<!--================Fun Fact================-->
+<section id="funfact-area" style="background-attachment:fixed !important;background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('/assets/user/landingPage/img/about-bg2.jpg') center center no-repeat; background-size: cover;">
+       <div class=" container-fluid">
+              <div class="row text-center">
+                     <!--== Single FunFact Start ==-->
+                     <div class="col-lg-3 col-sm-6">
+                            <div class="single-funfact-wrap">
+                                   <div class="funfact-icon">
+                                          <img src="assets/user/landingPage/img/fun-fact/user.svg" alt="Funfact">
+                                   </div>
+                                   <div class="funfact-info">
+                                          <h5 class="funfact-count" style="color: #fff;">{{App\Models\User::countAllUsers()}}</h5>
+                                          <p style="font-size: 20px;">Members</p>
+                                   </div>
+                            </div>
+                     </div>
+                     <!--== Single FunFact End ==-->
+
+                     <!--== Single FunFact Start ==-->
+                     <div class="col-lg-3 col-sm-6">
+                            <div class="single-funfact-wrap">
+                                   <div class="funfact-icon">
+                                          <img src="assets/user/landingPage/img/fun-fact/picture.svg" alt="Funfact">
+                                   </div>
+                                   <div class="funfact-info">
+                                          <h5 class="funfact-count" style="color: #fff;">{{App\Models\Gallery::countAllPhotos()}}</h5>
+                                          <p style="font-size: 20px;">Photos</p>
+                                   </div>
+                            </div>
+                     </div>
+                     <!--== Single FunFact End ==-->
+
+                     <!--== Single FunFact Start ==-->
+                     <div class="col-lg-3 col-sm-6">
+                            <div class="single-funfact-wrap">
+                                   <div class="funfact-icon">
+                                          <img src="assets/user/landingPage/img/fun-fact/event.svg" alt="Funfact">
+                                   </div>
+                                   <div class="funfact-info">
+                                          <h5><span class="funfact-count" style="color: #fff;">{{App\Models\Event::countAllEvents()}}</span></h5>
+                                          <p style="font-size: 20px;">Events</p>
+                                   </div>
+                            </div>
+                     </div>
+                     <!--== Single FunFact End ==-->
+
+                     <!--== Single FunFact Start ==-->
+                     <div class="col-lg-3 col-sm-6">
+                            <div class="single-funfact-wrap">
+                                   <div class="funfact-icon">
+                                          <img src="assets/user/landingPage/img/fun-fact/medal.svg" alt="Funfact">
+                                   </div>
+                                   <div class="funfact-info">
+                                          <h5><span class="funfact-count" style="color: #fff;">5</span></h5>
+                                          <p style="font-size: 20px;">Awards</p>
+                                   </div>
+                            </div>
+                     </div>
+                     <!--== Single FunFact End ==-->
+              </div>
        </div>
 </section>
 
@@ -266,6 +307,7 @@
               @endif
        </div>
 </section>
+
 <!--==========================Modal============================-->
 <section>
        <div class="modal fade" id="event-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

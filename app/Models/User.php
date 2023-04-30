@@ -127,4 +127,10 @@ class User extends Authenticatable
 
         return $data['user'];
     }
+
+    public static function countAllUsers()
+    {
+        $user = self::where('type', 3)->get();
+        return count($user);
+    }
 }

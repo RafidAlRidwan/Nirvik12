@@ -33,10 +33,6 @@
                                    <a href={{URL::to('/blog')}}>Blogs</a>
                             </li>
 
-                            <li class="{{(request()->is('album') ? 'menu-active' : '') }} || 
-                            {{(request()->is('gallery/*') ? 'menu-active' : '')}} ">
-                                   <a href={{URL::to('/album')}}>Gallary</a>
-                            </li>
                             @if(auth()->user())
                             <li class="{{request()->is('user/committee/*') ? 'menu-active' : ''}} || {{request()->is('user/committee') ? 'menu-active' : ''}}">
                                    <a href="{{URL::to('user/committee/')}}" class="">Committee</a>
@@ -48,11 +44,18 @@
                             @endif
 
                             @if(auth()->user() && auth()->user()->type === 3)
+                            <li class="{{(request()->is('album') ? 'menu-active' : '') }} || 
+                            {{(request()->is('gallery/*') ? 'menu-active' : '')}} ">
+                                   <a href={{URL::to('/album')}}>Gallary</a>
+                            </li>
                             <li class="{{request()->is('user/dashboard') ? 'menu-active' : ''}}">
                                    <a href="{{URL::to('user/dashboard')}}">Class Mates</a>
                             </li>
                             <li class="{{request()->is('user/my-profile/*') ? 'menu-active' : ''}}">
                                    <a href="{{route('myProfile', auth()->user()->id)}}" class="">My Profile</a>
+                            </li>
+                            <li class="{{request()->is('user/donate') ? 'menu-active' : ''}}">
+                                   <a href="{{URL::to('user/donate')}}">Donate</a>
                             </li>
                             @endif
 

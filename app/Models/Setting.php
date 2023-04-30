@@ -82,6 +82,34 @@ class Setting extends Model
                 $email->save();
             }
 
+            // Bkash
+            $bkash = $setting->where('key', 'bkash')->first();
+            if($bkash){
+                $bkash->value = $request->bkash;
+                $bkash->save();
+            }
+
+            // Nagad
+            $nagad = $setting->where('key', 'nagad')->first();
+            if($nagad){
+                $nagad->value = $request->nagad;
+                $nagad->save();
+            }
+
+            // Rocket
+            $rocket = $setting->where('key', 'rocket')->first();
+            if($rocket){
+                $rocket->value = $request->rocket;
+                $rocket->save();
+            }
+
+            // Help Line
+            $help_line = $setting->where('key', 'help_line')->first();
+            if($help_line){
+                $help_line->value = $request->help_line;
+                $help_line->save();
+            }
+
             Cache::flush();
             Cache::rememberForever('settings', function () {
                 return DB::table('settings')->get();

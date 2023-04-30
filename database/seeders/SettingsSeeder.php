@@ -24,6 +24,10 @@ class SettingsSeeder extends Seeder
             ['key' => 'address','value' => "Bogura Zilla School, Bogura"],
             ['key' => 'phone','value' => "017xxxxxxxx"],
             ['key' => 'email','value' => "ask@nirvik12.com"],
+            ['key' => 'bkash','value' => ""],
+            ['key' => 'nagad','value' => ""],
+            ['key' => 'rocket','value' => ""],
+            ['key' => 'help_line','value' => ""],
         ];
         Setting::insert($data);
     }

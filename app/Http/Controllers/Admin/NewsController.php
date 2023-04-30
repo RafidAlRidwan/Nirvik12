@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Section;
-use App\Models\News;
+use DB;
 use URL;
+use Auth;
 use Session;
 use Redirect;
 use validate;
-use Auth;
-use DB;
+use App\Models\News;
+use App\Models\Section;
+use App\Models\TrendingNews;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class NewsController extends Controller
 {
@@ -21,7 +22,8 @@ class NewsController extends Controller
     }
     public function index()
     {
-        return view('admin/news.index');
+        $news = TrendingNews::get()->first();
+        return view('admin/news.index', compact('news'));
     }
 
     public function news_datatable(Request $request)
@@ -148,5 +150,12 @@ class NewsController extends Controller
         $news = News::find($request->news_id);
 
         return response()->json(['data' => $news]);
+    }
+
+    public function updateTrendingNews(Request $request)
+    {
+        TrendingNews::updateOrCreate(['id' => $request->id], ['news' => $request->news]);
+        Session::flash('flashy__success', __('Saved Successfully!'));
+        return redirect()->back();
     }
 }

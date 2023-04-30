@@ -30,4 +30,9 @@ class Event extends Model
             $event->update($requestData);
         }
     }
+    public static function countAllEvents()
+    {
+        $data = self::get();
+        return count($data);
+    }
 }

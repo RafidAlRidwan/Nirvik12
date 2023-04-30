@@ -15,6 +15,7 @@ use App\Models\CommitteeMember;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\TrendingNews;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
@@ -23,11 +24,16 @@ class LandingPageController extends Controller
 {
     public function index()
     {
-        return view('user/landing-page.index');
+        $news = TrendingNews::get()->first();
+        $current_date = date("Y-m-d");
+        $events = Event::whereDate('date', '>=', $current_date)->orderBy('date', 'asc')->first();
+        $eventDate = $events['date'];
+        return view('user/landing-page.index', compact('news', 'eventDate'));
     }
     public function event()
     {
-        $events = Event::orderBy('date', 'asc')->latest()->paginate(5);
+        $current_date = date("Y-m-d");
+        $events = Event::whereDate('date', '>=', $current_date)->orderBy('date', 'asc')->latest()->paginate(5);
         return view('user/landing-page.event', compact('events'));
     }
     public function news()
@@ -35,6 +41,7 @@ class LandingPageController extends Controller
         $news = News::latest()->paginate(5);
         return view('user/landing-page.news', compact('news'));
     }
+
     public function album()
     {
         return view('user/landing-page.album');
