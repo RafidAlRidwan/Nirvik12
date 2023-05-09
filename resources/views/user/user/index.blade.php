@@ -21,7 +21,6 @@
     #speakers-details {
         padding: 0px 0;
     }
-
 </style>
 <link rel="stylesheet" href="{{asset('assets/user/landingPage/custom-select/css/style.css')}}">
 
@@ -278,17 +277,14 @@
 
 <script>
     getItems();
-    $(".btn_common").click(function(e) {
-        e.preventDefault();
-        var search = $('#search').val();
-        getItems(search, null, null, null);
-    })
+    // $(".btn_common").click(function(e) {
+    //     e.preventDefault();
+    //     var search = $('#search').val();
+    //     getItems(search, null, null, null);
+    // })
     $('#search').on("keyup change", function(e) {
         e.preventDefault();
-        var search = $('#search').val();
-        if (search == '') {
-            getItems(search, null, null, null);
-        }
+        getItems(null, null, null, null);
     })
 
     $("#section").on('change', function(e) {

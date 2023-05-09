@@ -28,6 +28,7 @@
         position: relative;
         margin-top: 20px;
         overflow: hidden;
+        transition: all 0.5s ease 0s;
     }
 
     .blog .image {
@@ -40,6 +41,7 @@
         object-fit: cover;
         -o-object-fit: cover;
         border-radius: 5px 5px 0 0;
+        transition: all 0.5s ease 0s;
     }
 
     .blog .card__body {
@@ -117,7 +119,7 @@
     .blog .card:hover .card__img {
         transform: scale(1.2);
         -webkit-transition: .5s ease-in-out;
-        transition: .5s ease-in-out;
+        /* transition: .5s ease-in-out; */
     }
 
     .blog .card:hover .card__buttons {

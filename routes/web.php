@@ -26,6 +26,7 @@ Route::get('/', [App\Http\Controllers\User\LandingPageController::class, 'index'
 Route::get('/events', [App\Http\Controllers\User\LandingPageController::class, 'event'])->name('eventPage');
 Route::get('/news', [App\Http\Controllers\User\LandingPageController::class, 'news'])->name('newsPage');
 Route::get('/album', [App\Http\Controllers\User\LandingPageController::class, 'album'])->name('albumPage');
+Route::get('/album/create', [App\Http\Controllers\User\LandingPageController::class, 'albumCreate'])->name('albumCreate');
 Route::get('/blog', [App\Http\Controllers\User\BlogPageController::class, 'index'])->name('blog');
 Route::get('/blog/create', [App\Http\Controllers\User\BlogPageController::class, 'create'])->name('blogCreate');
 Route::get('/blog/edit/{blog}', [App\Http\Controllers\User\BlogPageController::class, 'edit'])->name('blogEdit');
@@ -81,6 +82,15 @@ Route::middleware([IsUser::class])->group(function () {
         [
             'as'   => 'user.update_password',
             'uses' => 'App\Http\Controllers\User\UserController@update_password'
+        ]
+    );
+    Route::get('/user/my-profile/edit-testimonial/{id}', [App\Http\Controllers\User\UserController::class, 'edit_testimonial']);
+
+    Route::post(
+        '/user/my-profile/update_testimonial',
+        [
+            'as'   => 'user.update_testimonial',
+            'uses' => 'App\Http\Controllers\User\UserController@update_testimonial'
         ]
     );
     Route::get('/user/my-profile/show/{id}', [App\Http\Controllers\User\UserController::class, 'show'])->name('myProfile');

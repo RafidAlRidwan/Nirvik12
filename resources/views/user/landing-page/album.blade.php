@@ -15,6 +15,7 @@
               border-radius: 10px;
               box-shadow: 3px 3px 5px lightgray;
               margin-bottom: 10px;
+              transition: all 0.5s ease 0s;
        }
 
        .picture img {
@@ -80,8 +81,8 @@
 @php $data = [
 'title' => "Album",
 'sub-title' => "Recent Photos",
-'action' => "",
-'button' => "",
+'action' => "/album/create",
+'button' => "Create Album",
 'isAuth' => 0,
 'route-name' => "",
 'button2' => ""

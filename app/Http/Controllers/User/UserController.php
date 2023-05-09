@@ -239,10 +239,15 @@ class UserController extends Controller
 
         return view('user/user.edit-password', $data);
     }
+    public function edit_testimonial($id)
+    {
+        $user = User::findOrFail($id);
+        $data['user_details'] = $user->userDetails()->first();
+        return view('user/user.testimonial', $data);
+    }
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         try {
 
             $this->validate($request, [
@@ -339,5 +344,18 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return response()->json(['msg' => 'Crop Image Uploaded Failed', 'status' => 0]);
         }
+    }
+
+    public function update_testimonial(Request $request)
+    {
+        $this->validate($request, [
+            'comments' => 'required|max:180|min:160',
+        ]);
+        $user = UserDetail::where('user_id', $request->id)->first();
+
+        $user->comments = $request->comments;
+        $user->save();
+        Session::flash('flashy__success', __('Successfully Done!'));
+        return redirect()->route('landingPage');
     }
 }

@@ -109,7 +109,6 @@
               }
        </style>
        <link href="{{asset('assets/user/landingPage/css/april-custom.css')}}" rel="stylesheet">
-
        <!-- =======================================================
        Theme Name: TheEvent
        Theme URL: https://bootstrapmade.com/theevent-conference-event-bootstrap-template/

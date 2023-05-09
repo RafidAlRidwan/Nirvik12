@@ -26,7 +26,7 @@ class LandingPageController extends Controller
     {
         $news = TrendingNews::get()->first();
         $current_date = date("Y-m-d");
-        $events = Event::whereDate('date', '>=', $current_date)->orderBy('date', 'asc')->first();
+        $events = Event::whereDate('date', '>', $current_date)->orderBy('date', 'asc')->first();
         $eventDate = $events['date'];
         return view('user/landing-page.index', compact('news', 'eventDate'));
     }
@@ -239,5 +239,9 @@ class LandingPageController extends Controller
         $data['registrationCount'] = count($registration);
         $data['totalCollection'] = $total_member_collection + $manager_collection;
         return view('user/landing-page.registrationShow', $data);
+    }
+    public function albumCreate()
+    {
+        dd('coming soon...');
     }
 }

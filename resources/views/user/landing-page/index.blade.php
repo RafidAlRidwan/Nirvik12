@@ -283,7 +283,41 @@
               </div>
        </div>
 </section>
+<!-- TESTIMONIALS -->
+<section class="testimonials pt-5">
+       <div class="container wow fadeInUp">
+              <div class="section-header">
+                     <h2>What we says</h2>
+              </div>
+              <div class="row">
+                     <div class="col-sm-12">
+                            <div id="customers-testimonials" class="owl-carousel">
 
+                                   <!--TESTIMONIAL 1 -->
+                                   @php
+                                   $testi = App\Models\UserDetail::whereNotNull('comments')->orderBy('id', 'ASC')->get();
+                                   @endphp
+                                   @foreach ($testi as $test)
+                                   <div class="item">
+                                          <div class="shadow-effect">
+                                                 @if(!empty($test->attachment))
+                                                 <img class="img-circle" src="{{asset('assets/user/landingPage/img/profilePicture/'.$test->attachment)}}" alt="">
+                                                 @else
+                                                 <img class="img-circle" src="{{asset('assets/user/landingPage/img/profilePicture/demo.jpg')}}" alt="">
+                                                 @endif
+                                                 <p>{{$test->comments}}</p>
+                                          </div>
+                                          <div class="testimonial-name">{{$test->full_name}}</div>
+                                   </div>
+                                   @endforeach
+
+                                   <!--END OF TESTIMONIAL 1 -->
+                            </div>
+                     </div>
+              </div>
+       </div>
+</section>
+<!-- END OF TESTIMONIALS -->
 <!--==========================Sponsors Section============================-->
 <section id="supporters" class="section-with-bg wow ">
        <div class="container">
@@ -307,7 +341,35 @@
               @endif
        </div>
 </section>
+<section class="wow fadeInUp mt-5">
+       <div class="container">
+              <div class="section-header">
+                     <h2>Google Map</h2>
+              </div>
+       </div>
+       <div class="mapouter">
+              <div class="gmap_canvas"><iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Bogra Zilla School&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://capcuttemplate.org/">Capcut Template</a></div>
+              <style>
+                     .mapouter {
+                            position: relative;
+                            text-align: right;
+                            width: 100%;
+                            height: 400px;
+                     }
 
+                     .gmap_canvas {
+                            overflow: hidden;
+                            background: none !important;
+                            width: 100%;
+                            height: 400px;
+                     }
+
+                     .gmap_iframe {
+                            height: 400px !important;
+                     }
+              </style>
+       </div>
+</section>
 <!--==========================Modal============================-->
 <section>
        <div class="modal fade" id="event-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -343,6 +405,35 @@
               $('.title').text(title);
               $('.body').text(bodyData);
 
+       });
+
+       /*================================================================= 
+</script>
+<script>
+       jQuery(document).ready(function($) {
+              "use strict";
+              //  TESTIMONIALS CAROUSEL HOOK
+              $('#customers-testimonials').owlCarousel({
+                     loop: true,
+                     center: true,
+                     items: 3,
+                     margin: 0,
+                     autoplay: true,
+                     dots: false,
+                     autoplayTimeout: 8500,
+                     smartSpeed: 450,
+                     responsive: {
+                            0: {
+                                   items: 1
+                            },
+                            768: {
+                                   items: 2
+                            },
+                            1170: {
+                                   items: 3
+                            }
+                     }
+              });
        });
 </script>
 @endsection

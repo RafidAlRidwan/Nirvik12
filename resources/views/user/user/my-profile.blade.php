@@ -103,6 +103,7 @@
 @php
 $url = URL::to('/user/my-profile/edit'.'/'.Auth::user()->id);
 $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
+$urlTestimonial = URL::to('/user/my-profile/edit-testimonial'.'/'.Auth::user()->id);
 @endphp
 <main id="home" style="padding-top: 80px;padding-bottom: 36px;position: relative;animation: pop-in 2.5s ease-out;">
 
@@ -153,6 +154,7 @@ $urlPassword = URL::to('/user/my-profile/edit-password'.'/'.Auth::user()->id);
               <a href={{$urlPassword}} data-toggle="tooltip" data-placement="top" title="Change Password"><i class="fa fa-key"></i></a>
               <a id="facebook" data-toggle="tooltip" data-placement="top" title="Sync Facebook for Social Login"><i class="fa fa-facebook" aria-hidden="true"></i></a>
               <a id="google" data-toggle="tooltip" data-placement="top" title="Sync Gamil for Social Login"><i class="fa fa-google" aria-hidden="true"></i></a>
+              <a href="{{$urlTestimonial}}" id="testi" data-toggle="tooltip" data-placement="top" title="Testimonial"><i class="fa fa-commenting" aria-hidden="true"></i></a>
               @endif
               <!-- <a href="" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a> -->
               <!-- <a href="" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="fa fa-instagram"></i></a> -->
