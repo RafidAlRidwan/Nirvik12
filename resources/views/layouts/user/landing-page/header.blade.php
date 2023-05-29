@@ -18,11 +18,19 @@
                                    <a href={{URL::to('/')}}>Home</a>
                             </li>
 
-                            <li><a href="#about">About</a></li>
+                            <li>
+                                   <a href="#about">About</a>
+                            </li>
 
                             <li class="{{request()->is('news') ? 'menu-active' : ''}}">
                                    <!-- <a href={{URL::to('/news')}}>News <span class="icon-button-badge">{{count($newsDetails)}}</span></a> -->
-                                   <a href={{URL::to('/news')}}>News</a>
+                                   <!-- <a href={{URL::to('/news')}}>News</a>
+                                   <ul>
+                                          <li><a href="#">Gallery: carousel</a></li>
+                                          <li><a href="#">Gallery: images</a></li>
+                                          <li><a href="#">Gallery: animations</a></li>
+                                          <li><a href="#">Gallery: videos</a></li>
+                                   </ul> -->
                             </li>
 
                             <li class="{{request()->is('events') ? 'menu-active' : ''}}">

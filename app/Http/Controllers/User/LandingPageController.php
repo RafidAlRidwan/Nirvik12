@@ -6,16 +6,17 @@ use URL;
 use Redirect;
 use validate;
 use App\Models\News;
+use App\Models\Event;
 use App\Models\Gallery;
 use App\Models\Section;
 use App\Models\Committee;
+use App\Models\SenderMsg;
 use App\Models\Collection;
+use App\Models\TrendingNews;
 use Illuminate\Http\Request;
 use App\Models\CommitteeMember;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Event;
-use App\Models\TrendingNews;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
@@ -243,5 +244,17 @@ class LandingPageController extends Controller
     public function albumCreate()
     {
         dd('coming soon...');
+    }
+
+    public function storeMessage(Request $request)
+    {
+        $sender_msg = SenderMsg::where('browser_id', $request->userAgent())->get();
+        if ($sender_msg->count() >= 4) {
+            return response()->json(['status' => 0]);
+        }
+        $requestData = $request->all();
+        $requestData['browser_id'] = $request->userAgent();
+        SenderMsg::create($requestData);
+        return response()->json(['status' => 1]);
     }
 }

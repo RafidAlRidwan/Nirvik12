@@ -318,6 +318,57 @@
        </div>
 </section>
 <!-- END OF TESTIMONIALS -->
+<!-- GET IN TOUCH -->
+<section class="pt-5" style="background-attachment:fixed !important;background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('/assets/user/landingPage/img/about-bg2.jpg') center center no-repeat; background-size: cover;">
+       <div class="section-header">
+              <h2>GET IN TOUCH</h2>
+       </div>
+       <section id="contact">
+              <div class="contact-box">
+                     <div class="contact-links">
+                            <div class="mapouter">
+                                   <div class="gmap_canvas"><iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Bogra Zilla School&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://capcuttemplate.org/">Capcut Template</a></div>
+                                   <style>
+                                          .mapouter {
+                                                 position: relative;
+                                                 text-align: right;
+                                                 width: 100%;
+                                                 height: 400px;
+                                          }
+
+                                          .gmap_canvas {
+                                                 overflow: hidden;
+                                                 background: none !important;
+                                                 width: 100%;
+                                                 height: 400px;
+                                          }
+
+                                          .gmap_iframe {
+                                                 height: 400px !important;
+                                          }
+                                   </style>
+                            </div>
+                     </div>
+                     <div class="contact-form-wrapper">
+                            <form>
+                                   <div class="form-item">
+                                          <input type="text" id="sender_name" autocomplete="false" name="sender" required>
+                                          <label>Name:</label>
+                                   </div>
+                                   <div class="form-item">
+                                          <input type="email" id="sender_email" autocomplete="false" name="email" required>
+                                          <label>Email:</label>
+                                   </div>
+                                   <div class="form-item">
+                                          <textarea class="" id="sender_msg" autocomplete="false" name="message" required></textarea>
+                                          <label>Message:</label>
+                                   </div>
+                                   <button class="submit-btn" id="sender_submit">Send</button>
+                            </form>
+                     </div>
+              </div>
+       </section>
+</section>
 <!--==========================Sponsors Section============================-->
 <section id="supporters" class="section-with-bg wow ">
        <div class="container">
@@ -339,35 +390,6 @@
                      @endforeach
               </div>
               @endif
-       </div>
-</section>
-<section class="wow fadeInUp mt-5">
-       <div class="container">
-              <div class="section-header">
-                     <h2>Google Map</h2>
-              </div>
-       </div>
-       <div class="mapouter">
-              <div class="gmap_canvas"><iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Bogra Zilla School&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://capcuttemplate.org/">Capcut Template</a></div>
-              <style>
-                     .mapouter {
-                            position: relative;
-                            text-align: right;
-                            width: 100%;
-                            height: 400px;
-                     }
-
-                     .gmap_canvas {
-                            overflow: hidden;
-                            background: none !important;
-                            width: 100%;
-                            height: 400px;
-                     }
-
-                     .gmap_iframe {
-                            height: 400px !important;
-                     }
-              </style>
        </div>
 </section>
 <!--==========================Modal============================-->
@@ -406,8 +428,6 @@
               $('.body').text(bodyData);
 
        });
-
-       /*================================================================= 
 </script>
 <script>
        jQuery(document).ready(function($) {
@@ -433,6 +453,60 @@
                                    items: 3
                             }
                      }
+              });
+       });
+</script>
+<script>
+       $('#sender_submit').click(function(e) {
+              e.preventDefault();
+              var name = $('#sender_name').val();
+              var email = $('#sender_email').val();
+              var msg = $('#sender_msg').val();
+
+              function validateEmail(email) {
+                     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                     return regex.test(email);
+              }
+              if (name == '' || email == '' || msg == '') {
+                     flashy('Please fill the form!', {
+                            type: 'flashy__danger'
+                     });
+                     return;
+              }
+              if (!validateEmail(email)) {
+                     flashy('Email format invalid!', {
+                            type: 'flashy__danger'
+                     });
+                     return;
+              }
+              $.ajax({
+                     url: "{{route('sender.msg')}}",
+                     type: "POST",
+                     data: {
+                            "_token": "{{ csrf_token() }}",
+                            "name": name,
+                            "email": email,
+                            "msg": msg,
+                     },
+                     success: function(response) {
+                            if (response.status == 1) {
+                                   $('#sender_name').val('');
+                                   $('#sender_email').val('');
+                                   $('#sender_msg').val('');
+                                   flashy('Message sent!', {
+                                          type: 'flashy__success'
+                                   });
+                            }
+                            if (response.status == 0) {
+                                   flashy('Maximum limit exceeded', {
+                                          type: 'flashy__danger'
+                                   });
+                            }
+                            // toastr.success("Liked");
+                     },
+                     error: function(response) {
+
+                     },
               });
        });
 </script>

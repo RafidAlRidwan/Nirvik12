@@ -14,7 +14,6 @@ class AddCommentsColumnInUserDetailsTable extends Migration
     public function up()
     {
         Schema::table('user_details', function (Blueprint $table) {
-            $table->longText('comments')->nullable()->after('blood_group');
         });
     }
 

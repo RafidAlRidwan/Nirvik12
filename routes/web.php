@@ -40,6 +40,7 @@ Route::get('/public/committee/others/{id}', [App\Http\Controllers\User\LandingPa
 Route::get('/public/committee/registration/{id}', [App\Http\Controllers\User\LandingPageController::class, 'registration']);
 Route::post('/public/registration/getdata/{id}', [App\Http\Controllers\User\LandingPageController::class, 'registrationDatatable']);
 Route::post('/blog/read/count', [App\Http\Controllers\User\BlogPageController::class, 'countRead'])->name('blog.read.count');
+Route::post('/sender-msg', [App\Http\Controllers\User\LandingPageController::class, 'storeMessage'])->name('sender.msg');
 
 // Social Sign in
 Route::get('auth/google', [SocialAuthController::class, "redirectGoogle"])->name('auth.google');

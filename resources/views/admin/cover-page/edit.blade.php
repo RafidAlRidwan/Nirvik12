@@ -60,7 +60,6 @@
             <div class="div-gap col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <label>Cover Photo</label>
                 <div class="tower-file">
-                    <input type="hidden" name="image" id="image" value={{$coverPage->attachment}}/>
                     <input type="file" id="demoInput5" name="attachment" />
                     <label for="demoInput5" class="update-button btn btn-primary">
                         <span class=" mdi mdi-upload"></span>Select Files

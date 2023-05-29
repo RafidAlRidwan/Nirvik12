@@ -39,7 +39,7 @@ class CoverPageController extends Controller
     {
         try {
             $this->validate($request, [
-                'attachment' => ['required']
+                // 'attachment' => ['required']
             ]);
             DB::beginTransaction();
             $coverPage = CoverPage::saveOrUpdate($request);
@@ -74,7 +74,7 @@ class CoverPageController extends Controller
         try {
             $id = $request->id;
             $this->validate($request, [
-                'image' => ['required'],
+                // 'image' => ['required'],
             ]);
             DB::beginTransaction();
             CoverPage::saveOrUpdate($request, $id);
